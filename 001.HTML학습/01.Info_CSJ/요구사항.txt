@@ -3,7 +3,7 @@
  - 페이지구성: 
     (1) 메인페이지
     (2) 정치페이지
-    경제페이지
+    (3) 경제페이지
     (4) 사회페이지
     (5) IT/과학페이지
     (6) TV/연예페이지
@@ -33,3 +33,5 @@ https://n.news.naver.com/mnews/article/417/0000938561?sid=101
 https://n.news.naver.com/mnews/article/421/0006958864?sid=102
 TV/연예페이지
 https://entertain.naver.com/ranking/read?oid=311&aid=0001621328
+
+

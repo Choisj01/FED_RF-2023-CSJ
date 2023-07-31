@@ -1,0 +1,15 @@
+@charset "utf-8";
+/* 메인페이지용 CSS -sub.css*/
+
+/* 공통외부 CSS 합치기 */
+@import url(./common.css);
+
+/* 서브타이틀 */
+h2.stit{
+    color: #12ab0d;
+    font-size: 38px;
+    font-weight: normal;
+    font-family: ;
+    text-align: center;
+    text-shadow: none;
+}

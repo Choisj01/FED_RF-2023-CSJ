@@ -62,7 +62,7 @@
             /* 메인이미지 */
             .cimg {
                 width: 100%;
-                margin: 0%
+                margin: 0%;
                 /* w100p */
             }
 
@@ -72,25 +72,42 @@
             }
             /* 타이틀 */
             #top h1 {
-                    color: #f5f5f5;
-                    font-size: 40px;
-                    font-family: "궁서";
-                }
+                color: #f5f5f5;
+                font-size: 40px;
+                font-family: "궁서";
+                text-shadow: 6px 2px #000,3px 3px blue;
+            }
             /* 메뉴링크  */
             #gnb a {
-                      color: white;
-                      text-decoration: none;
-                      font-size: 20px;
-                      font-family: '궁서';
-                    }   
-        
+                color: white;
+                text-decoration: none;   /* tdn */
+                font-size: 20px;  /* fs  */   
+                font-family: "돋움체"; /* ff */
+                vertical-align: -4px; /* va */
+                
+            }
+            /* 
+                vertical-align : 인라인 요소간 세로정렬
+                값- top/botto/middle,baseline/수치
+                */
+
+            /*  가상 클래스 : hover 마우스오버시 */
+            #gnb a:hover{
+                color: blueviolet;
+                /* 글자데코 : 윗줄 물결모양 */
+                text-decoration: underline;
+                text-decoration-style: wavy;
+
+            }
+            /* 로고이미지  */
+            #gnb img {
+                vertical-align: -3px;
+            }
 
             /* 2. 메인영역 */
             #cont {
                 margin: 20px auto;
             }
-
-            
         </style>
     </head>
     <body>
@@ -103,7 +120,7 @@
             <nav id="gnb">
                 <a href="index.html">
                     <!-- 상대경로 -->
-                    <img src="./images/logo.png" alt="네이버로고" style="width: 50px" />
+                    <img src="./images/logo.png" alt="네이버로고" style="width: 24px" />
                     <!-- style속성으로 CSS를 셋팅하는 방법은 인라인방식이라고 함! -->
 
                     <!-- 절대상대경로 -->
@@ -111,10 +128,8 @@
                     <!--절대경로 -->
                     <!-- <img src="https://t1.daumcdn.net/daumtop_chanel/op/20200723055344399.png" alt="네이버로고"> -->
                 </a>
-                <a href="sub1.html">정치</a>
-                <a href="sub1.html">경제</a>
-                <a href="sub1.html">사회</a>
-                <a href="sub1.html">IT/과학</a>
+                <a href="sub1.html">정치</a>| <a href="sub1.html">경제</a>| <a href="sub1.html">사회</a>|
+                <a href="sub1.html">IT/과학</a>|
                 <a href="sub1.html">TV/연예</a>
             </nav>
         </header>

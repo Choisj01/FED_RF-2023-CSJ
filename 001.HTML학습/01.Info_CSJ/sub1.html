@@ -5,19 +5,18 @@
         <!-- 뷰포트 : 모바일에서 실제픽셀로 변환 -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>네이버 요약뉴스-정치</title>
-        <!-- css인터널방식  코딩영역-->
         <!-- 서브용 외부css 불러오기 -->
         <link rel="stylesheet" href="./css/sub.css">
 
     </head>
-    </head>
     <body>
-    <!-- 1. 상단영역: 제목,메뉴  -->
+        <!-- 1. 상단영역: 제목,메뉴  -->
     <header id="top" class="bx">
         <!-- 1-1. 제목 -->
     <h1>네이버 요약뉴스</h1>    
     <!-- GNB(Global Navigation Bar) -->
     <nav id="gnb">
+        <a href="index.html">
         <!-- 상대경로 -->
         <img src="./images/logo.png" alt="네이버로고" style="width: 24px" />
         <!-- style속성으로 CSS를 셋팅하는 방법은 인라인방식이라고 함! -->
@@ -27,35 +26,64 @@
         <!-- 절대경로 -->
         <!-- <img src="https://t1.daumcdn.net/daumtop_chanel/op/20200723055344399.png" alt="네이버로고"> -->
     </a>
-    <a href="sub1.html">정치뉴스</a> | <a href="sub2.html">경제</a> | <a href="sub3.html">사회</a> |
+    <a href="sub1.html">정치</a> | <a href="sub2.html">경제</a> | <a href="sub3.html">사회</a> |
     <a href="sub4.html">정치</a> |
     <a href="sub5.html">TV/연예</a>
-</nav>
+    </nav>
 </header>
     <!-- 2. 메인영역: 컨텐츠 -->
     <main id="cont" class="bx">
     <!-- 서브타이틀 -->
-    <h2 class="stit">정치</h2>    
+    <h2 class="stit">정치 뉴스</h2>    
     <!-- 2-2. 언론사로고 -->
-    <div class="prlogo"></div>
+    <div class="prlogo">
+        <img src="./images/prlogo1.png" alt="한국경제TV">
+    </div>
     <!-- 2-3. 기사제목 -->
-    <h3 class="atit"></h3>
+    <h3 class="atit">정부, 日 독도 영유권 주장 항의…총괄공사대리 초치</h3>
     <!-- 2-4. 기사사진 -->
     <figure class="afig">
         <!-- 이미지 -->
+        <img src="images/afig1.jpg" alt="독도사진">
         <!-- 이미지 설명 -->
-    <figcaption></figcaption>
+    <figcaption>독도사진(사진=연합뉴스)</figcaption>
 </figure>
+
+<!-- 
+                [ figure 요소 ]
+                - 이미지나 표를 포함하는 박스요소
+                - 이미지설명은 내부 요소인 figcaption을 사용함
+                (설명이 있을 경우에만 사용)
+             -->
+
 <!--2-5.기사내용 -->
 <section class="acont">
+    <p>정부는 28일 일본이 올해 방위백서를 통해 또 다시 독도 영유권 주장한 것과 관련 주한일본대사관 총괄공사대리를 초치해 항의했다.</p>
+
+<p>외교부는 대변인 논평에서 "일본 정부가 이날 발표한 방위백서를 통해 역사적·지리적·국제법적으로 명백한 우리 고유의 영토인 독도에 대한 부당한 영유권 주장을 되풀이한 데 대해 강력히 항의한다"며 이같이 밝혔다.</p>
+
+<p>그러면서 "일본 정부는 독도에 대한 부당한 주장을 반복하는 것이 미래지향적 한일 관계 구축에 어떠한 도움도 되지 않는다는 점을 분명히 자각해야 할 것"이라고 강조했다.</p>
+
+<p>또 "정부는 일본 정부의 부당한 주장이 대한민국 고유 영토인 독도에 대한 우리 주권에 어떠한 영향도 미치지 못한다는 것을 재차 분명히 한다"며 "독도에 대한 일본의 어떠한 도발에 대해서도 단호히 대응해 나갈 것"이라고 말했다.</p>
+
+<p>서민정 외교부 아시아태평양국장은 이날 오전 서울 종로구 외교부 청사로 야마모토 몬도 주한 일본대사관 총괄공사대리(정무공사)를 초치해 항의했다. 현재 주한 일본대사관 총괄공사가 한국에 부재중이어서 정무공사를 총괄공사대리 자격으로 부른 것으로 전해졌다.</p>
+일본 정부는 앞서 이날 기시다 후미오 총리 주재로 열린 각의(국무회의)에서 2023년도 방위백서를 채택했다.
+
+<p>일본은 올해 백서에서도 "우리나라(일본) 고유 영토인 북방영토(쿠릴 4개 섬의 일본식 표현)와 다케시마(竹島·일본이 주장하는 독도의 명칭) 영토 문제가 여전히 미해결 상태로 존재한다"고 언급해 19년째 독도 영유권에 대한 억지 주장을 반복했다.</p>
 </section>
+
+<!-- 
+    [p 요소 : 문단(paragraph)] 
+    -문단을 구분하기 위한 요소
+    -주의: 내부에 div와 같은 block요소를 넣을 수 없다!
+-->
+
 <!-- 2-6. 기자정보 -->
-<div class="rpt"></div>
+<div class="rpt">김현경 기자 khkkim@wowtv.co.kr</div>
 <!-- 2-7. 기사원문 -->
 <h5>
-    <a href=" "></a>
+    <a href="https://n.news.naver.com/mnews/article/215/0001116262?sid=100" target="_blank">기사원문</a>
 </h5>
-
 
 
         </main>

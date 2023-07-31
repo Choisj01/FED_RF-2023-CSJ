@@ -9,24 +9,41 @@
         <style>
             /* css영역 내 주석문 */
 
+            /* 웹폰트 CDN(content delivery network) */
+            @import url("https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Dongle:wght@300;400&family=Nanum+Myeongjo&family=Stylish&display=swap");
+            
+
             /* 
-            [모든 요소 공통 디자인 요소 : 박스 모델 ]
+            웹폰트 font-family 이름
+            font-family: 'Bagel Fat One', cursive;
+            font-family: 'Dongle', sans-serif;
+            font-family: 'Nanum Myeongjo', serif;
+            font-family: 'Stylish', sans-serif; 
+            */
+
+              /* @import url(주소)
+              -외부css를 불러올때 사용하는 형식
+              -외부css 파일을 하나로 합칠때 많이 사용함 */
+
+
+
+            /* [모든 요소 공통 디자인 요소 : 박스 모델 ]
             1. 크기 : width 가로, heigh 세로
             2. 경계선 : border
             3. 내부여백 : padding
             4. 외부여백 : margin
             (여백공통방햘: top, bottom, left, right)
+            */
+
+            /* __________________________________ */
 
 
-            __________________________________
-
-
-             [css 속성 셋팅 속성]
+             /* [css 속성 셋팅 속성]
              선택자{
                 속성값:값;
-             }
+             } */
              
-             [css 선택자 ]
+             /* [css 선택자 ]
              1. 타입선택자 : 태그명(div,p,a 등)
              2. 아이디 선택자 : #아이디명
              3. 클래스 선택자 : .클래스명
@@ -35,13 +52,13 @@
              6. 종속선택자 : 요소명#아이디명 / 요소명.클래스명
              (div.mymy ->div인데 클래스가 mymy)
 
-             */
+             */ 
             /* 레이아웃 박스 공통 디자인 */
             .bx {
                 /* 크기 : w800 -> 가로크기 */
                 width: 800px;
                 /* 외곽선 : bd -> 두께 종류 색상 */
-                border: 4px double skyblue;
+                border: 20px double skyblue;
                 /* 패딩 */
                 padding: 20px;
                 /* 마진 : 마영오! 씨를 무대중앙으로 모시겠습니다!(외우기)*/
@@ -73,18 +90,33 @@
             /* 타이틀 */
             #top h1 {
                 color: #f5f5f5;
-                font-size: 40px;
-                font-family: "궁서";
-                text-shadow: 6px 2px #000,3px 3px blue;
+                font-size: 60px;
+                font-family: 'Bagel Fat One', cursive;
+                font-weight: normal; /* fwn 글자두께 기본 */
+                text-shadow: 6px 2px #000, 3px 3px blue;
+
+
+                /* 
+                font-family 글씨체 
+                값-콤마로 구분하영 우선순위 적용함
+                (상위체가 없으면 하위체를 적용,이도없으면
+                브라우저 기본체로 표시)
+                 */
+       
+                /* 
+                         text-shadow: 글자 그림자(TS)
+                         값 - x축 y축 블러 (경계흐림) 
+                         -> 콤마로 다중 그림자 사용가능
+                */
+                text-shadow: hoff voff blur #36343485;
             }
             /* 메뉴링크  */
             #gnb a {
                 color: white;
-                text-decoration: none;   /* tdn */
-                font-size: 20px;  /* fs  */   
-                font-family: "돋움체"; /* ff */
+                text-decoration: none; /* tdn */
+                font-size: 20px; /* fs  */
+                font-family: 'Stylish', sans-serif; /* ff */
                 vertical-align: -4px; /* va */
-                
             }
             /* 
                 vertical-align : 인라인 요소간 세로정렬
@@ -92,12 +124,15 @@
                 */
 
             /*  가상 클래스 : hover 마우스오버시 */
-            #gnb a:hover{
+
+            /*  a+a는 앞에 a 요소가 있는 형제 a요소를 선택
+            결과적으로 첫번째 a요소가 선택되지 않는다!  */
+
+            #gnb a+a:hover {
                 color: blueviolet;
                 /* 글자데코 : 윗줄 물결모양 */
                 text-decoration: underline;
                 text-decoration-style: wavy;
-
             }
             /* 로고이미지  */
             #gnb img {
@@ -106,8 +141,26 @@
 
             /* 2. 메인영역 */
             #cont {
-                margin: 20px auto;
+                margin: 15px auto;
+                padding: 20px auto;
             }
+
+            /*  3. 하단영역 */
+            #info{
+                background-color: whitesmoke;
+            }
+
+            /* 회사주소 */
+            #info address{
+                /* 기본글자 이탤릭 스타일 없애기 */
+                font-style: normal;
+                font-family: 'Dongle', sans-serif;
+                font-size: 20px
+            }
+            
+
+
+
         </style>
     </head>
     <body>

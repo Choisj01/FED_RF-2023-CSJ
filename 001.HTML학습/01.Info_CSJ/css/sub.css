@@ -83,6 +83,13 @@ h2.st1{ background-image: url(../images/afig1.jpg);
 h2.st2{
     background-image: url(../images/afig2-1.jpg);
 }
+
+/* 사회 배경이미지 */
+h2.st3{
+    background-image: url(../images/afig3.jpg);
+    color: #79afe4;
+}
+
 /* it/과학 배경이미지 */
 h2.st4{ 
     /* 배경이미지 */
@@ -134,14 +141,22 @@ h2.st5{
 
 /* 기사 문단 */
 .acont p{
-    font-size: 17px;
+    font-size: 18px;
     color: #303038;
     /* 자간 : LS */
-    letter-spacing: 2px;
+    letter-spacing: 3px;
     /* 단어간격 :ws */
-    word-spacing: 1px;
+    word-spacing: 0px;
     /* 양쪽 정렬 : taj */
     text-align: justify;
+
+    /* 줄간격 */
+    line-height: 2.1px;
+    /* 글자 라인간 간격을 조정함
+    기본적으로 숫자만 쓰면 배수(글자 높이값에 대한 배수)
+    단위를 쓰면 단위에 맞게 줄간격 조정됨
+    -> 줄간격의 응용은 버튼 등 글자를 세로 중앙에 오게 할때 박스높이값만큼 준다! */
+
 }
 
 /* 유튜브 동영상 박스 */
@@ -162,4 +177,36 @@ h2.st5{
     height: 100%;
 }
 
+/* 기사원문 */
+.alink{
+    
+    text-align: right;
+}
+.alink a{
+    /* 디자인 적용을 위한 */
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+    border: 1px solid darkcyan;
+    border-radius: 50%; /* 원형 */
+    /* 줄간격으로 세로 글자 중앙
+    - 높이값과 같은 */
+    line-height: 100px;
+    /* 가로 정렬 중앙 */
+    text-align: center;
+
+    /* a 요소 기본 글자색 변경, 밑줄없앰 */
+    color: #000;
+    text-decoration: none;
+    
+    background-color: aqua;
+
+}
+/* 마우스 오버시 변경 */
+.alink a:hover{
+    color: hotpink;
+    background-color: #79afe4;
+    box-shadow: 0 0 10px 5px darkblue;
+
+}
                 

@@ -5,7 +5,7 @@
 @import url(./common.css);
 
 /* 서브타이틀 */
-h2.stit{
+h2 .stit{
     color: #12ab0d;
     font-size: 38px;
     font-weight: normal;
@@ -48,7 +48,7 @@ h2.stit{
     /* 배경이미지 */
     background-image: url(../images/afig4-1.jpg);  
     color: aqua;
-    
+
 
 
 }

@@ -12,4 +12,28 @@ h2.stit{
     font-family: 'Stylish', sans-serif;
     text-align: center;
     text-shadow: none;
+    outline: 3px solid darkblue;
+    padding: 40px;
+
+    /* 배경넣기 : 한번에 쓰기 */
+    background: url(../images/afig4-1.jpg) no-repeat center/cover;
+    /* background: 색이반고윙/크;
+    배경색 이미지 반복 고정 위치/크기
+     */
+    
+    
+    /* 배경넣기 : 속성별 쓰기 */
+    /* 배경이미지 */
+    background-image: url(../images/afig4-1.jpg);
+    /* 반복 이미지 */
+    background-repeat: no-repeat;
+    /* 배경위치 : 가로, 세로 */
+    background-position: center ;
+    /* 배경크기 : 가로, 세로(cover - 박스채우기) */
+    background-size: cover;
+
+
+
 }
+
+/* / */

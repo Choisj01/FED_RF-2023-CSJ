@@ -23,17 +23,39 @@ h2.stit{
     
     
     /* 배경넣기 : 속성별 쓰기 */
-    /* 배경이미지 */
-    background-image: url(../images/afig4-1.jpg);
     /* 반복 이미지 */
     background-repeat: no-repeat;
     /* 배경위치 : 가로, 세로 */
     background-position: center ;
     /* 배경크기 : 가로, 세로(cover - 박스채우기) */
     background-size: cover;
+    
+    
+    
+}
+/* 정치 배경이미지 */
+/* .st1의 적용 우선순위를 높이기 위해 부모요소를 바꿔줌! */
+#cont .st1{ 
+    /* 배경이미지 */
+    background-image: url(../images/afig1.jpg);
+    /* 배경위치변경 (세로 y축) */
+    background-position: -40p;
+    color: aqua;
 
+}
+/* it/과학 배경이미지 */
+#cont .st4{ 
+    /* 배경이미지 */
+    background-image: url(../images/afig4-1.jpg);  
+    color: aqua;
+    
 
 
 }
 
-/* / */
+
+
+
+          
+
+                

@@ -146,12 +146,12 @@ h2.st5{
     /* 자간 : LS */
     letter-spacing: 3px;
     /* 단어간격 :ws */
-    word-spacing: 0px;
+    word-spacing: 2px;
     /* 양쪽 정렬 : taj */
     text-align: justify;
 
     /* 줄간격 */
-    line-height: 2.1px;
+    line-height: 25px;
     /* 글자 라인간 간격을 조정함
     기본적으로 숫자만 쓰면 배수(글자 높이값에 대한 배수)
     단위를 쓰면 단위에 맞게 줄간격 조정됨

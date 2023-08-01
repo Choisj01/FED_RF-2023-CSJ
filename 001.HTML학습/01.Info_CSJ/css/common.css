@@ -53,7 +53,7 @@
                 
              */ 
              /* 기본 요소의 초기화 */
-            html,body,h1,h2{
+            html,body,h1,h2,figure{
                 margin: 0;
                 padding: 0;
             }

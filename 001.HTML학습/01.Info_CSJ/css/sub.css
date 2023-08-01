@@ -4,6 +4,11 @@
 /* 공통외부 CSS 합치기 */
 @import url(./common.css);
 
+/* 서브페이지 공통 글자 설정 */
+#cont{
+    font-family: 'Stylish', sans-serif; 
+}
+
 /* 서브타이틀 */
 h2.stit{
     color: #12ab0d;
@@ -68,14 +73,18 @@ h2.stit{
 }
 /* 정치 배경이미지 */
 /* .st1의 적용 우선순위를 높이기 위해 부모요소를 바꿔줌! */
-#cont .st1{ background-image: url(../images/afig1.jpg);
+h2.st1{ background-image: url(../images/afig1.jpg);
     /* 배경위치변경 (세로 y축) */
     background-position: -40p;
     color: aqua;
 
 }
+/* 경제 배경이미지 */
+h2.st2{
+    background-image: url(../images/afig2-1.jpg);
+}
 /* it/과학 배경이미지 */
-#cont .st4{ 
+h2.st4{ 
     /* 배경이미지 */
     background-image: url(../images/afig4-1.jpg);  
     color: aqua;
@@ -83,14 +92,74 @@ h2.stit{
 
 }
 /* TV/연예 배경이미지 */
-#cont .st5{
+h2.st5{
     /* 배경이미지 */
     background-image: url(../images/);
 }
 
 
+/* 언로사 로고 */
+.prlogo img{
+    height: 32px
+}
 
 
-          
+/* 
+이미지는 기본 비율을 가지고 있어서 
+가로, 세로 중 한쪽만 크기를 주면 
+나머지 방향은 자동으로 비율을 유지함!
+가로, 세로를 다주면 비율이 깨짐!
+*/
+
+
+/* 기사타이틀 */
+.atit{
+    font-size: 30px;
+}
+
+
+/* 기사 이미지 박스 */
+.afig{
+    margin-bottom: 40px;
+}
+.afig img{
+    width: 100%;
+}
+/* 기사 이미지 설명 */
+.afig figcaption{
+    font-size: 15px;
+    text-align: center;
+    color: #767676;
+}
+
+/* 기사 문단 */
+.acont p{
+    font-size: 17px;
+    color: #303038;
+    /* 자간 : LS */
+    letter-spacing: 2px;
+    /* 단어간격 :ws */
+    word-spacing: 1px;
+    /* 양쪽 정렬 : taj */
+    text-align: justify;
+}
+
+/* 유튜브 동영상 박스 */
+.mvbx{
+    height: 550px;
+
+    /* 
+    div 와 같은 block 요소는 
+    width 설정을 하지 않으면
+    width:auto 로 자동설정됨.
+    이는 싸고 있는 박스 컨텐트 영역을
+    자동으로 채워준다!
+     */
+}
+.mvbx iframe{
+    border: none;
+    width: 100%;
+    height: 100%;
+}
 
                 

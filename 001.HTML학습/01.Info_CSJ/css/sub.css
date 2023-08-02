@@ -207,7 +207,23 @@ h2.st5{
 
 /* 인용블록 영역 */
 .bqbx{
-    
+    padding: 20px 0;
+    margin: 20px 0;
+    border-top: 2px dashed #ccc;
+    border-bottom: 2px dashed #ccc;
+}
+.bqbx blockquote{
+    padding: 15px;
+    line-height: 2;
+    font-size: 15px;
+
+}
+
+/* 인용블록 이미지 */
+.bqbx img{
+    float: right;
+    border-radius: 5px;
+    margin-left: 20px;
 }
 /* article 제목공통 */
 .atbx h5{
@@ -217,10 +233,24 @@ h2.st5{
     padding: 20px 20px;
     display: inline-block;
     border-radius: 20px;
-    box-shadow: inset 0 0 5px #00000078;
+    box-shadow: inset 0 0 5px rgb(0 0 0 / 55%);
     font-size: 20px;
     color: #333;
     margin: 0;
+}
+
+/* 주해박스 */
+.desc{
+    border-top: 2px dashed #ccc;
+    border-bottom: 2px dashed #ccc;
+    padding: 20px;
+    font-size: 15px;
+    line-height: 2;
+
+}
+
+.desc{
+    padding: 15px 0;
 }
 
 /* 기사원문 */

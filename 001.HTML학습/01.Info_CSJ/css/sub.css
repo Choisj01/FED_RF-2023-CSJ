@@ -134,14 +134,14 @@ h2.st5{
 }
 /* 기사 이미지 설명 */
 .afig figcaption{
-    font-size: 15px;
+    font-size: 17px;
     text-align: center;
     color: #767676;
 }
 
 /* 기사 문단 */
 .acont p{
-    font-size: 18px;
+    font-size: 20px;
     color: #303038;
     /* 자간 : LS */
     letter-spacing: 3px;

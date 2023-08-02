@@ -117,16 +117,36 @@
             -> 위치값의 가로는 left, 세로는 center가 기본값이다!
             ->위치나 크기의 특정값을 쓰지 않으면 기본값이 적용된다!
             ->위치값을 0을 쓰면 기본값인 left center가 적용됨 
+            ->위치값을 %로 쓰면 설정 박스의 % 위치를 중심으로 이미지 배치
+            
             작성예) 
             background: 
             url(./폴더명/파일명) no-repeat(이미지반복여부) center(위치)/(슬래쉬 필수)400px(크기) ,(뒤에 콤마를 넣어 배경 추가 후 반복여부 위치 크기 등을 추가할 수도 있음 ,(콤마로 연결 후 마지막은 꼭 ; 표시로 끝낼 것))
             */
-            background: 
-            url(./imgs/dc1.png) no-repeat center/400px, /* 배경이미지1 */
-            url(./imgs/dc2.png) no-repeat right top/auto 150px, /* 배경이미지2 */
-            url(./imgs/dc3.png) no-repeat left bottom/300px, /* 배경이미지3 */
-            url(./imgs/dc4.png) no-repeat right/300px, /* 배경이미지4 */
-            url(./imgs/bg_mainvisual.jpg) no-repeat 0/50%; /* 배경이미지5 */
+            
+            background:
+             /* 도깨비 이름  */
+            url(./imgs/d01.png) no-repeat 50% 60%/150px, 
+            /* 도깨비  */
+            url(./imgs/dc1.png) no-repeat center/400px,
+            /* 지은탁 이름 */
+            url(./imgs/d022.png) no-repeat 91% 14%/150px,
+            /* 지은탁 */
+            url(./imgs/dc2.png) no-repeat right top/auto 150px,
+            /* 저승사자 이름 */
+            url(./imgs/d033.png) no-repeat 11% 100%/150px,      
+            /* 저승사자 */
+            url(./imgs/dc3.png) no-repeat left bottom/300px,
+            /* 써니 이름 */
+            url(./imgs/d044.png) no-repeat 90% 60%/150px,  
+            /* 써니 */
+            url(./imgs/dc4.png) no-repeat right/300px, 
+            /* 포스터 */
+            url(./imgs/bg_mainvisual.jpg) no-repeat 0/50%,
+             /* 배경꽃 */
+             url(./imgs/eachBG.jpg) no-repeat 50% top/40% 100%;
+            
+        
         }
         
 

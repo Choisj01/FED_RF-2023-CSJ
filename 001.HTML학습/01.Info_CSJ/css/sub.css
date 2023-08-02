@@ -188,7 +188,7 @@ h2.st5{
     display: inline-block;
     width: 100px;
     height: 100px;
-    border: 1px solid darkcyan;
+    border: 1px solid lightblue;
     border-radius: 50%; /* 원형 */
     /* 줄간격으로 세로 글자 중앙
     - 높이값과 같은 */
@@ -200,14 +200,14 @@ h2.st5{
     color: #000;
     text-decoration: none;
     
-    background-color: aqua;
+    background-color: lightblue;
 
 }
 /* 마우스 오버시 변경 */
 .alink a:hover{
     color: hotpink;
     background-color: #79afe4;
-    box-shadow: 0 0 10px 5px darkblue;
+    box-shadow: 0 0 10px 5px hotpink;
 
 }
                 

@@ -11,8 +11,8 @@
 
 /* 서브타이틀 */
 h2.stit{
-    color: #12ab0d;
-    font-size: 40px;
+    color: darkblue;
+    font-size: 38px;
     font-weight: normal;
     font-family: 'Stylish', sans-serif;
     text-align: center;
@@ -76,7 +76,7 @@ h2.stit{
 h2.st1{ background-image: url(../images/afig1.jpg);
     /* 배경위치변경 (세로 y축) */
     background-position: -40p;
-    color: aqua;
+    color: darkblue;
 
 }
 /* 경제 배경이미지 */
@@ -87,7 +87,7 @@ h2.st2{
 /* 사회 배경이미지 */
 h2.st3{
     background-image: url(../images/afig3.jpg);
-    color: #79afe4;
+    color: red;
 }
 
 /* it/과학 배경이미지 */
@@ -102,6 +102,7 @@ h2.st4{
 h2.st5{
     /* 배경이미지 */
     background-image: url(../images/afig5.jpg);
+    color: blueviolet;
 }
 
 

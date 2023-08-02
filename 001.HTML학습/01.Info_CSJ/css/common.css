@@ -75,7 +75,7 @@
 
 
                 /* 외곽선 : bd -> 두께 종류 색상 */
-                border: 4px dashed rgb(177, 233, 255);
+                border: 7px dashed rgb(177, 233, 255);
                 /* 패딩 */
                 padding: 20px;
                 /* 마진 : 마영오! 씨를 무대중앙으로 모시겠습니다!(외우기)*/
@@ -162,7 +162,7 @@
             결과적으로 첫번째 a요소가 선택되지 않는다!  */
 
             #gnb a+a:hover {
-                color: blueviolet;
+                color: rgb(163, 86, 236);
                 /* 글자데코 : 윗줄 물결모양 */
                 text-decoration: underline;
                 text-decoration-style: wavy;
@@ -195,14 +195,14 @@
             span.utxt{
                 text-decoration: underline; /*  tdu */
                 text-decoration-style: dotted; /* tds */
-                text-decoration-color: red;
+                text-decoration-color: blue;
             }
             /* 종속선택자로 같은 이름의 클래스인데 
             다른 디자인으로 변경하여 세팅하기 */
             b.utxt{
                 text-decoration: underline;
                 text-decoration-style: dotted;
-                text-decoration-color: red;
+                text-decoration-color: blue;
             }
 
             

@@ -160,6 +160,19 @@ h2.st5{
 
 }
 
+/* 강조 em요소 디자인변경 */
+.acont p em{
+    /* 이탤릭 해제 */
+    font-style: normal;
+
+    /* 글자색 변경 */
+    color: darkmagenta;
+    /* 글자 두껍게 */
+    font-weight: bold;
+    /* 글자 그림자 설정 */
+    text-shadow: 2px 2px 2px #00ccff;
+}
+
 /* 유튜브 동영상 박스 */
 .mvbx{
     height: 550px;

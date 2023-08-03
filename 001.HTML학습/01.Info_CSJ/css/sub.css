@@ -333,7 +333,7 @@ h2.st5{
 /* 작품 이미지 */
 .work img{
     border: 15px ridge goldenrod;
-    /* ridge - 액자틀 모양 */
+/* ridge - 액자틀 모양 */
     box-shadow: 0 0 20px #00000087;
 }
 
@@ -400,4 +400,21 @@ h2.st5{
 -필수속성 : content
 -이미지는 url() 사용!
  */
-                
+
+ /* 분야별 뉴스 */
+ .snews dt{
+    font-family: 'Dongle', sans-serif;
+    font-size: 30px;
+    background-color: lightskyblue;
+    display: inline-block;
+    padding: 5px;
+    border-radius: 20px;
+    border: 3px dashed gray;
+    margin-top: 10px;
+ }
+
+ /* dd앞에 가상요소로 블릿 넣기 */
+ .snews dd::before{
+    content: '📣';
+}
+

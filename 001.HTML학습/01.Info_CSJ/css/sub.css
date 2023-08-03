@@ -334,7 +334,7 @@ h2.st5{
 .work img{
     border: 15px ridge goldenrod;
     /* ridge - 액자틀 모양 */
-    box-shadow: 0 0 15px #00000087;
+    box-shadow: 0 0 20px #00000087;
 }
 
 /* 작품명 */
@@ -348,7 +348,6 @@ h2.st5{
 .work figcaption cite{
     font-style: normal;
     color: darkmagenta;
-}
 }
 
 /* 뉴스 파트 공통 class */

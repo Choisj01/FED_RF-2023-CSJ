@@ -382,6 +382,26 @@ h2.st5{
     padding: 10px;
 }
 
+/* 한줄 말줄임표시하기 공통처리 */
+.nbx li, .nbx dd, .nbx td{
+    /* 1. 줄바꿈 방지 */
+    white-space: nowrap;
+    /* 2. 넘치는 컨텐츠 숨기기 oh */
+    overflow: hidden;
+    /* 3. 넘치는 글자 말줄임표시 tv */
+    text-overflow: ellipsis; 
+    /* 
+       추가) 여러말 줄일때 말줄임은 아래 3가지 추가
+        -display: -webkit-box;
+        -webkit-line-clamp: 라인수; 
+        -webkit-box-orient: vertical;
+
+        단, 박스 높이값을 글자가 보일만큼 조절해야함
+        ->>> white-space: nowrap; 없음!!
+        */
+
+}
+
 /* 주요 뉴스 ul */
 .cnews ul li::before{
     content: '🔔';
@@ -401,6 +421,17 @@ h2.st5{
 -이미지는 url() 사용!
  */
 
+ /* 주요뉴스 li별 글자색 바꾸기 */
+ .cnews li:first-child a{
+    color: red;
+ }
+ .cnews li:nth-child(2) a{
+    color: green;
+ }
+ .cnews li:last-child a{
+    color: blue;
+ }
+
  /* 분야별 뉴스 */
  .snews dt{
     font-family: 'Dongle', sans-serif;
@@ -417,4 +448,36 @@ h2.st5{
  .snews dd::before{
     content: '📣';
 }
+
+/* 분야별 뉴스 dt별 글자색, 배경색 변경하기 */
+.snews dt:first-of-type{
+    color: #333;
+    background-color: rgb(255, 255, 255);
+    border-color: #79afe4;
+}
+
+.snews dt:nth-of-type(2){
+    color: #333;
+    background-color: rgb(255, 255, 255);
+    border-color: #79afe4;
+
+}
+.snews dt:last-of-type{
+    color: #333;
+    background-color: rgb(255, 255, 255);
+    border-color: #79afe4;
+}
+
+/* 
+   [ 자식요소 선택 가상클래스 : 자식요소 종류가 같아야함! ]
+    요소:first-child -> 첫번째 자식요소
+    요소:nth-child(n) -> n번째 자식요소
+    요소:last-child -> 마지막째 자식요소
+   [ 여러종류가 섞여 있을 경우 형제 선택하기 ]
+    요소:first-of-type -> 같은 요소 중 첫번째
+    요소:nth-of-type(n) -> 같은 요소 중 n번째
+    요소:last-of-type -> 같은 요소 중 마지막째 
+    
+    (단, n은 1부터)  */
+
 

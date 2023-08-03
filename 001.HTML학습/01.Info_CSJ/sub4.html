@@ -152,29 +152,29 @@
    -->
    <!-- <bdo dir="rtl">우리나라대한민국만세</bdo> -->
 
-   <!-- 주요 뉴스 : ul 
-  [ 순서없는 리스트 : ul ]
-                unordered list 
-                (참고: 블릿옵션
-                https://www.w3schools.com/tags/tryit.asp?filename=tryhtml_ul_type_css)
-
-                [ 순서있는 리스트 : ol ]
-                ordered list
-                (참고: 순서표시옵션
-                https://www.w3schools.com/tags/tryit.asp?filename=tryhtml_ol_type_all_css)
-                - start 속성 : 시작번호
-                - reverse 속성 : 일련번호를 거꾸로 진행
-
-                [ul/ol 공통사항]
-                - 하위필수요소: li (개별리스트)
-                - 주의: 하위에 li이외의 블록요소나 그 어떤요소도
-                쓸 수 없다!!!
-              -->
-
-              
+   <!-- [ 순서없는 리스트 : ul ]
+         unordered list 
+         (참고: 블릿옵션
+         https://www.w3schools.com/tags/tryit.asp?filename=tryhtml_ul_type_css)
+ 
+         [ 순서있는 리스트 : ol ]
+         ordered list
+         (참고: 순서표시옵션
+         https://www.w3schools.com/tags/tryit.asp?filename=tryhtml_ol_type_all_css)
+         - start 속성 : 시작번호
+         - reverse 속성 : 일련번호를 거꾸로 진행
+ 
+         [ul/ol 공통사항]
+         - 하위필수요소: li (개별리스트)
+         - 주의: 하위에 li이외의 블록요소나 그 어떤요소도
+         쓸 수 없다!!! -->
+   
+   
+  <!-- 주요 뉴스 : ul -->            
    <article class="cnews">
         <h3>주요뉴스</h3>
-      <ul>
+      <!-- <ul style="list-style-type: square;"> -->
+        <ul>
         <li>
           <a href="http://www.inews24.com/view/1614390" target="_blank">[단독] "돈 있어도 못 산다"… 삼성 제습기, 재고도 동나자 판매중단</a>
         </li>
@@ -186,6 +186,122 @@
         </li>
       </ul>
    </article>
+
+   <!-- 랭킹뉴스 : ol -->
+   <article class="rnews">
+    <h3>랭킹뉴스</h3>
+    <!-- <ol style="list-style-type: upper-roman;" start="3" reversed> -->
+      <ol>
+      <li>
+        <a href="https://n.news.naver.com/mnews/ranking/article/031/0000763243?ntype=RANKING">"도대체 머릿 속에 뭐가 들었어?" 주호민 자폐아들이 들은 말</a>
+      </li>
+      <li>
+        <a href="https://n.news.naver.com/mnews/ranking/article/031/0000763265?ntype=RANKING">"우리가 더 덥다" 쿠팡 물류센터 파업에 뿔난 야외 근로자들</a>
+      </li>
+      <li>
+        <a href="https://n.news.naver.com/mnews/ranking/article/031/0000763264?ntype=RANKING">[단독] 시도 때도 없이 오르는 명품…버버리 8일 인상</a>
+      </li>
+    </ol>
+   </article>
+
+   <!--  [ 용어정의리스트 : dl ]
+               
+                dl > dt + dd
+                ___________________
+
+                dl : 용어리스트
+                (defines the description list)
+                dt : 용어정의
+                (defines the term)
+                dd : 용어설명
+                (description each term)
+                _____________________
+                주의 - dl은 반드시 자식요소로 dt와 dd를
+                한번이상 사용해야한다!
+                또주의 - dt와 dd는 형제다! dt>dd 아니다!!! -->
+
+        <!-- 분야별 뉴스 : dl -->
+        <article class="snew">
+          <h3>분야별뉴스</h3>
+          <dl>
+            <dt>경제</dt>
+            <dd>
+              <a href="https://n.news.naver.com/mnews/article/018/0005543154?sid=101" target="_blank">美신용등급 강등 패닉은 없었다…나스닥 2.18%↓[뉴욕증시]</a>
+            </dd>
+            <dd>
+              <a href="https://n.news.naver.com/mnews/article/009/0005167641?sid=101" target="_blank">DL이앤씨, 국내 건설사 최초 레드닷 어워드 ‘브랜드 가이드라인&디자인 전</a>
+            </dd>
+            <dt>사회</dt>
+            <dd>
+              <a href="https://n.news.naver.com/mnews/article/018/0005543009?sid=102" target="_blank">잼버리 첫날 400명 온열질환 호소…조직위 “안정적 대응”</a>
+            </dd>
+            <dd>
+              <a href="https://n.news.naver.com/mnews/article/057/0001760303?sid=102" target="_blank">"우리 애 옷 좀 빨아"...유치원 교사도 학부모 '갑질'에 눈물</a>
+            </dd>
+            <dt>TV/연예</dt>
+            <dd>
+              <a href="https://entertain.naver.com/read?oid=433&aid=0000095603&cid=1073787" target="_blank">[단독] 지수♥안보현, 공식커플 탄생…"우린 지금, 알아가는 과정"</a>
+            </dd>
+            <dd>
+              <a href="https://entertain.naver.com/read?oid=311&aid=0001623468&cid=1073787" target="_blank">'맛녀석' 김준현→김민경 하차, 유민상 탓?…"음모론 제기, 아이러니" [엑's 인터뷰②]</a>
+            </dd>
+          </dl>
+        </article>
+
+        <!--   [ 테이블 요소 : table ]
+                table > tbody > tr > td
+
+                -> tbody는 안써도 브라우저가 그려준다!
+                -> 직계자식으로 선택할 경우
+                table > tr 로 선택하면 적용되지 않는
+                이유가 바로 이것이다!!!(주의!)
+                ___________________
+
+                table : 테이블 박스 부모요소
+                tr : 테이블 행요소(table row)
+                td : 테이블 데이터요소(table data)  
+              -->
+
+              <!-- 사진뉴스  -->
+              <article class="pnews">
+                <h3>사진뉴스</h3>
+                <!-- 3행 3열 구성 테이블 -->
+                <table>
+                  <tr>
+                    <td>1</td>
+                    <td>
+                      <a href="https://n.news.naver.com/mnews/ranking/article/437/0000353805?ntype=RANKING&sid=001" target="_blank">방향 튼 태풍 카눈, 어디로?…한반도 '열기' 밀어올려 더 덥다</a>
+                    </td>
+                    <td>
+                      <a href="https://n.news.naver.com/mnews/ranking/article/437/0000353805?ntype=RANKING&sid=001" target="_blank">
+                        <img src="./images/pnews.jpg" alt="사진뉴스1" /></a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>2</td>
+                    <td>
+                      <a href="https://n.news.naver.com/mnews/ranking/article/449/0000254727?ntype=RANKING&sid=001" target="_blank">[단독]흉기로 어머니 찔러 살해한 10대 남성 검거</a>
+                    </td>
+                    <td>
+                      <a href="https://n.news.naver.com/mnews/ranking/article/449/0000254727?ntype=RANKING&sid=001" target="_blank">
+                        <img src="./images/pnews2.jpg" alt="사진뉴스2" /></a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>3</td>
+                    <td>
+                      <a href="https://n.news.naver.com/mnews/ranking/article/014/0005051637?ntype=RANKING&sid=001" target="_blank">주호민 고소할 만했다?.."싫어 죽겠어, 진짜 밉상" 특수 …</a>
+                    </td>
+                    <td>
+                      <a href="https://n.news.naver.com/mnews/ranking/article/014/0005051637?ntype=RANKING&sid=001" target="_blank">
+                        <img src="./images/pnews3.jpg" alt="사진뉴스3" />
+                      </a>
+                    </td>
+                  </tr>
+                </table>
+              </article>
+             
+
 
 </main>
         <!-- 3. 하단영역 : 회사정보 -->

@@ -454,18 +454,21 @@ h2.st5{
     color: #333;
     background-color: rgb(255, 255, 255);
     border-color: #79afe4;
+    border-radius: 100%;
 }
 
 .snews dt:nth-of-type(2){
     color: #333;
     background-color: rgb(255, 255, 255);
     border-color: #79afe4;
+    border-radius: 100%;
 
 }
 .snews dt:last-of-type{
     color: #333;
     background-color: rgb(255, 255, 255);
     border-color: #79afe4;
+    border-radius: 100%;
 }
 
 /* 

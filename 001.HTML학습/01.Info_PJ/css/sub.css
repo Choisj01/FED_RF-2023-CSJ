@@ -52,6 +52,8 @@ h2.stit{
     background-size: cover;
 
     margin-bottom: 30px;
+    background-position: -40p;
+    
     
 
     /* 박스그림자 */
@@ -73,36 +75,36 @@ h2.stit{
 }
 /* 정치 배경이미지 */
 /* .st1의 적용 우선순위를 높이기 위해 부모요소를 바꿔줌! */
-h2.st1{ background-image: url(../images/afig1.jpg);
+h2.st1{ background-image: url(../images/afig1-1.jpg);
     /* 배경위치변경 (세로 y축) */
-    background-position: -40p;
-    color: darkblue;
+    color: rgb(116, 116, 119);
 
 }
 /* 경제 배경이미지 */
 h2.st2{
-    background-image: url(../images/afig2-1.jpg);
+    background-image: url(../images/afig2-3.jpg);
+    color: rgb(208, 208, 214);
 }
 
 /* 사회 배경이미지 */
 h2.st3{
-    background-image: url(../images/afig3.jpg);
-    color: red;
+    background-image: url(../images/afig3-1.jpg);
+    color: rgb(241, 6, 171);
 }
 
 /* it/과학 배경이미지 */
 h2.st4{ 
     /* 배경이미지 */
-    background-image: url(../images/afig4-1.jpg);  
-    color: aqua;
+    background-image: url(../images/afig4-3.jpg);  
+    color: rgb(252, 38, 145);
 
 
 }
 /* TV/연예 배경이미지 */
 h2.st5{
     /* 배경이미지 */
-    background-image: url(../images/afig5.jpg);
-    color: blueviolet;
+    background-image: url(../images/afig5-4.jpg);
+    color: rgb(147, 253, 26);
 }
 
 

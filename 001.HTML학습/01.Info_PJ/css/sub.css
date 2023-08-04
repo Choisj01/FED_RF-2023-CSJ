@@ -476,6 +476,7 @@ h2.st5{
     요소:first-child -> 첫번째 자식요소
     요소:nth-child(n) -> n번째 자식요소
     요소:last-child -> 마지막째 자식요소
+
    [ 여러종류가 섞여 있을 경우 형제 선택하기 ]
     요소:first-of-type -> 같은 요소 중 첫번째
     요소:nth-of-type(n) -> 같은 요소 중 n번째
@@ -483,4 +484,25 @@ h2.st5{
     
     (단, n은 1부터)  */
 
+/* 사진 뉴스 박스 */
+/* 타이틀 */
+.pnews h3{
+    /* 배경이미지 그라데이션 없앰 */
+    background-image: none;
+    /* 중앙정렬 */
+    text-align: center;
+}
 
+/* 가상요소로 사진기 아이콘 넣기 */
+.pnews h3::before{
+    content: '📸';
+    vertical-align: -2px;
+    font-size: 40px;
+    margin-right: 10px;
+}
+.pnews h3::after{
+    content: '📷';
+    vertical-align: -2px;
+    font-size: 40px;
+    margin-left: 10px;
+}

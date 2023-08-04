@@ -211,6 +211,7 @@ h2.st5{
     margin: 20px 0;
     border-top: 2px dashed #ccc;
     border-bottom: 2px dashed #ccc;
+    font-size: 15px;
 }
 .bqbx blockquote{
     padding: 15px;
@@ -280,9 +281,9 @@ h2.st5{
 }
 /* 마우스 오버시 변경 */
 .alink a:hover{
-    color: hotpink;
-    background-color: #79afe4;
-    box-shadow: 0 0 10px 5px hotpink;
+    color: rgb(51, 55, 55);
+    background-color: #00ddfa;
+    box-shadow: 0 0 10px 5px rgb(83, 92, 128);
 
 }
 
@@ -390,8 +391,11 @@ h2.st5{
     overflow: hidden;
     /* 3. 넘치는 글자 말줄임표시 tv */
     text-overflow: ellipsis; 
+    
     /* 
-       추가) 여러말 줄일때 말줄임은 아래 3가지 추가
+    추가) 여러말 줄일때 말줄임은 아래와 같음
+        overflow: hidden;
+        text-overflow: ellipsis; 
         -display: -webkit-box;
         -webkit-line-clamp: 라인수; 
         -webkit-box-orient: vertical;
@@ -509,6 +513,13 @@ h2.st5{
 
 /* 사진뉴스 테이블 */
 .pnews table{
+    /* 최대 가로크기 지정 maw */
+    max-width: 500px;
+
+    /* 테이블은 기본적으로 내용만큼 가로크기를 가지며 
+    부모박스의 크기보다 크기가 작아질 경우 그 크기에 맞춰진다! */
+
+
     /* 테이블 중앙 - 마영오!  */
     margin: 0 auto;
 
@@ -531,7 +542,7 @@ h2.st5{
     height: 84px;
     /* 텍스트 중앙 tac */
     text-align: center;
-    /* 배경색 */
+    /* 배경색 bgc */
     background-color: lightskyblue
 }
 
@@ -546,6 +557,8 @@ h2.st5{
 /* 세번쨰 td */
 .pnews td:last-child{
     background-color: #e4e4e4;
+    /* 오른쪽 패딩 */
+    padding-right: 0 7px;
 }
 
 /* 사진뉴스 이미지 */
@@ -558,13 +571,25 @@ h2.st5{
 
 }
 
-/* 말줄임 처리하기(2줄 처리) */
+/* 기사타이틀 처리박스 */
 .pnews td div{
-    overflow: hidden;
+    
+    /* 말줄임 처리하기(2줄 처리) */  
+    overflow: hidden; 
     text-overflow: ellipsis;
     display: -webkit-box;
-    -webkit-line-clamp: 2; 
+    -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
+
+    /* 줄간격 변경 */
+    line-height: 1.7;
 }
+
+/* 앞에 tr이 있는 tr만 하위 td에 디자인을 줌  */
+.pnews tr+tr td{
+    /* 사이 구분선 bdt */
+    border-top: 2px solid lightskyblue;
+}
+
 
 

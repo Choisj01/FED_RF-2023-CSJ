@@ -123,18 +123,21 @@
         /* dd전체 before적용하기 */
         dd::before{
             content: '😀';
+            margin-right: 10px;
         }
 
         
         /* 출연배우의 dd부터 아이콘변경 */
         dt:nth-of-type(2)~dd::before{
             content: '🕴';
+            margin-right: 10px;
         }
         
         
         /* 아티스트의 dd부터 아이콘변경 */
         dt:nth-of-type(3)~dd::before{
             content: '🎧';
+            margin-right: 10px;
         }
         
 
@@ -180,7 +183,7 @@
         첫번째 글자(b태그), 첫번째 줄(span)변경 */
         .story p:nth-of-type(1)::first-letter{
             font-size: 50px;
-            color: hotpink;
+            color: rgb(255, 105, 180);
             font-weight: bold;
         }
         

@@ -47,7 +47,6 @@ html,body{
     max-width: 1000px;
 
 }
-
 /* 테이블 제목 - 기본 중앙정렬 되어있음 */
 #drama caption{
     font-size: 35px;
@@ -56,13 +55,12 @@ html,body{
     padding: 50px 0 20px;
     /* 패딩: 위 양쪽 아래 */
 }
-
 /* td와 th 패딩 */
 #drama td, #drama th{
     padding: 8px 10px;
 }
 /* td에 밑줄넣기 */
-#drama td{
+#drama tbody td{
     border-bottom: 1px solid #ccc;
 }
 /* th에 윗줄, 아랫줄 두꺼운 보더넣기 */
@@ -75,3 +73,32 @@ html,body{
 #drama tbody tr:last-child td{
     border-bottom: 2px solid #555;
 }
+/* 짝수번째 tbody tr의 td에 배경색 넣기 */
+#drama tbody tr:nth-child(even) td{
+    background-color: #dfdfdf;
+}
+
+/* 하단부분(tfoot) */
+#drama tfoot td{
+    text-align: center;
+    padding: 45px 0;
+}
+/* 링크 a 공통변경 */
+#drama a{
+    color: #222;
+    text-decoration: none;
+}
+/* 드라마명 a 오버시 */
+#drama tbody a:hover{
+    color: hotpink;
+    text-decoration: underline;
+    text-decoration-style: wavy;
+}
+#drama tfoot a:hover{
+    color: darkgreen;
+    text-decoration: overline;
+    text-decoration-style: double;
+}
+
+
+

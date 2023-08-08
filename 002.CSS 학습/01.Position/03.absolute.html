@@ -84,7 +84,12 @@
 
                 4. 앱솔루트끼리는 서로 겹친다!
 
-                
+                5. 앱솔루트는 부모자격박스가 overflow: hidden;으로
+                셋팅되었을 떄 부모자격이 있어야만 숨겨진다!
+
+                6. 
+
+
 
                 
                 
@@ -225,6 +230,20 @@
             width: 92px;
             height: 115px;
             border: 10px ridge goldenrod;
+            margin: 100px auto;
+            
+            /* 박스를 원형으로 만들기 */
+            border-radius: 50%;
+
+            /* 넘치는 이미지숨기기 */
+            overflow: hidden;
+
+            /* 박스의 자식으로 앱솔루트가 있을때
+            overflow: hidden; 은 부모자격이 있는 박스에만
+            숨길 수 있다!! */
+            position: relative;
+            
+
         }
 
         .absimg img{
@@ -274,7 +293,7 @@
     </div>
 
     <!-- 앱솔루트끼리는 서로 겹친다!  -->
-    <div class="absimg">
+    <div class="absimg" title="앱솔루트끼리는 겹친다!">
         <img src="./images/ab3.jpg" alt="토르">
         <img src="./images/ab4.jpg" alt="닥스">
     </div>

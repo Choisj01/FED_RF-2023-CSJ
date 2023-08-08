@@ -95,7 +95,7 @@ html5문법으로 읽을 준비를 한다!
 예) <body><h1></h1></body>
 -> h1요소의 부모는 body다. body요소의 자식은 h1이다.
 
-7. html 주석 (단축키 ctrl+/ )
+7. html 주석 (단축키 ctrl+/ , alt+shift+a)
 - 출력되지 않는 구간표시
 <!-- 주석내용 -->
 

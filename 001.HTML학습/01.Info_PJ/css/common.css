@@ -2,19 +2,33 @@
 /* 맨위에 utf-8 인코딩 표시 필수! */
 
 
-            /* css영역 내 주석문 */
+/* css영역 내 주석문 */
 
-            /* 웹폰트 CDN(Content Delivery Network) */
-            @import url("https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Dongle:wght@300;400&family=Nanum+Myeongjo&family=Stylish&display=swap");
+/* 웹폰트 CDN(Content Delivery Network) */
+@import url("https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Dongle:wght@300;400&family=Nanum+Myeongjo&family=Stylish&display=swap");
+
+
+/* 
+웹폰트 font-family 이름
+font-family: 'Bagel Fat One', cursive;
+font-family: 'Dongle', sans-serif;
+font-family: 'Nanum Myeongjo', serif;
+font-family: 'Stylish', sans-serif; 
+*/
+
+/* font-family: 'Bagel Fat One', cursive;
+font-family: 'Cute Font', cursive;
+font-family: 'Gowun Dodum', sans-serif;
+font-family: 'Gugi', cursive;
+font-family: 'Moirai One', cursive;
+font-family: 'Nanum Gothic', sans-serif;
+font-family: 'Noto Sans KR', sans-serif;
+font-family: 'Poor Story', cursive; */
+/* 
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Cute+Font&family=Gowun+Dodum&family=Gugi&family=Moirai+One&family=Nanum+Gothic&family=Noto+Sans+KR&family=Poor+Story&display=swap');
+</style> */
             
-
-            /* 
-            웹폰트 font-family 이름
-            font-family: 'Bagel Fat One', cursive;
-            font-family: 'Dongle', sans-serif;
-            font-family: 'Nanum Myeongjo', serif;
-            font-family: 'Stylish', sans-serif; 
-            */
 
               /* @import url(주소)
               -외부css를 불러올때 사용하는 형식
@@ -47,12 +61,14 @@
              (div.mymy ->div인데 클래스가 mymy)
              7. 형제선택자: 요소+요소 (a+a)
                ->앞의 요소가 있는 형제요소를 선택
-             8. 그룹선택자: 선택자,선택 (html,body,p)
+             8. 그룹선택자: 선택자,선택자 (html,body,p)
                 ->여러요소를 동시에 선택함
 
                 
              */ 
-             /* 기본 요소의 초기화 */
+             /* 기본 요소의 초기화 
+             -기존에 기본셋팅값 중 마진/패딩 초기화 */
+
             html, 
             body, 
             h1, 
@@ -155,9 +171,10 @@
             #gnb a {
                 color: white;
                 text-decoration: none; /* tdn */
-                font-size: 20px; /* fs  */
+                font-size: 20px; /* fz  */
                 font-family: 'Stylish', sans-serif; /* ff */
-                vertical-align: -4px; /* va */
+                vertical-align: -4px; /* va-4 */
+                text-shadow: 1px 1px 1px #000;
             }
             /* 
                 vertical-align : 인라인 요소간 세로정렬

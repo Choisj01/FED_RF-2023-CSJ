@@ -29,6 +29,16 @@ body *{
     outline: 2px dashed yellow;
 }
 
+/* 공통 클래스 */
+
+/* 메탈배경 클래스 */
+.metal1{
+    background: url(../images/metal01.jpg) no-repeat center/cover;
+}
+.metal2{
+    background: url(../images/metal02.jpg) no-repeat center/cover;
+}
+
 /******************************* 1. 상단영역 *******************************/
 /* 1-1.로고 /
 /* 1-2.링크 타이틀 /
@@ -61,6 +71,8 @@ body *{
     background: url(../images/metal01.jpg) no-repeat center/cover;
     /* 둥근모서리 */
     border-radius: 120px 120px 60% 60%;
+    /* .body보다 위 */
+    z-index: 1;
 }
 /* 가상요소로 머리에 가발씌우기 */
 .head::after{
@@ -98,7 +110,8 @@ body *{
 }
 
 /* 머리 하위요소 공통 */
-.head>div{
+.head>div,
+.body>div{
     position: absolute;
     /* 모든 직계하위요소는 앱솔루트 */
 }
@@ -188,9 +201,46 @@ body *{
 }
 
 /* 2-1-2.몸통 */
+
+.body{
+    position: relative;
+    /* 부모자격 - 하위직계 자식 div 앱솔루트 */
+    width: 250px;
+    height: 400px;
+    /* 무대중앙 - 마영오! */
+    margin: 0 auto;
+    margin-top: 50px;
+}
+
+
+/* 목 */ 
+.neck{
+    top: -49px;
+    left: calc(50% - 25px);
+    /* left: calc(50% - 50px/2); */
+
+    /* 중앙보내기 원리
+    부모박스의 50% 보내고 
+    자신크기의 절반 빼기 
+    자신크기는 left는 width
+    top은 height 이다! */
+
+    width: 50px;
+    height: 60px;
+    border-radius: 20px;
+}
+/* 왼팔  */
+/* 오른팔  */
+/* 왼다리  */
+/* 오른다리  */
+/* 왼어깨  */
+/* 오른어깨  */
+/* TV  */
+
+
+
+
+
 /* 2-2.로봇설명박스 */
 /******************************* 3.하단영역 *******************************/
 /* 3-1.회사정보 */
-
-
-

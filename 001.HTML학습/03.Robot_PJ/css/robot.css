@@ -64,13 +64,13 @@ body *{
     position: relative;
     /* 부모자격 - 하위 앱솔루트 자식들 */
     width: 240px;
-    height: 250px;
+    height: 257px;
     /* 무대중앙 마영오! */
     margin: 0 auto;
     /* 메탈배경 */
     background: url(../images/metal01.jpg) no-repeat center/cover;
     /* 둥근모서리 */
-    border-radius: 120px 120px 60% 60%;
+    border-radius: 135px 143px 62% 62%;
     /* .body보다 위 */
     z-index: 1;
 }
@@ -160,8 +160,8 @@ body *{
 /* 입 */
 .mouth{
     /* 위치 */
-    left: 60px;
-    bottom: 6px;
+    left: 58px;
+    bottom: 12px;
     
     /* 크기 */
     width: 130px;
@@ -206,7 +206,7 @@ body *{
     position: relative;
     /* 부모자격 - 하위직계 자식 div 앱솔루트 */
     width: 250px;
-    height: 400px;
+    height: 350px;
     /* 무대중앙 - 마영오! */
     margin: 0 auto;
     margin-top: 50px;
@@ -216,8 +216,8 @@ body *{
 /* 목 */ 
 .neck{
     top: -49px;
-    left: calc(50% - 25px);
-    /* left: calc(50% - 50px/2); */
+    left: calc(50% - 24px);
+    /* left: calc(50% - 48px/2); */
 
     /* 중앙보내기 원리
     부모박스의 50% 보내고 
@@ -225,16 +225,67 @@ body *{
     자신크기는 left는 width
     top은 height 이다! */
 
-    width: 50px;
+    width: 48px;
     height: 60px;
     border-radius: 20px;
 }
+/* 팔 공통 */
+.arm{
+    width: 50px;
+    height: 200px;
+}
+
 /* 왼팔  */
+.arm1{
+    left: -50px;
+}
 /* 오른팔  */
+.arm2{
+    right: -50px;
+}
+
+/* 다리 공통 */
+.leg{
+    top: 100%;
+    /* 부모박스 높이만큼 나감!
+    아랫쪽 바깥에 위치! */
+    width: 80px;
+    height: 250px;
+}
 /* 왼다리  */
+.leg1{
+    left: 0;
+}
+
 /* 오른다리  */
+.leg2{
+    right: 0;
+}
+/* 어깨공통 */
+.shdr{
+    top: -15px;
+    width: 80px;
+    height: 80px;
+}
 /* 왼어깨  */
+.shdr1{
+    left: -65px;
+    border-radius: 50% 0 0 50%;
+    
+    /* 
+    [ 둥근모서리 값설정
+    1. 1개 - 네방향
+    2. 2개 - 왼위 오른아래/ 오른위 왼아래
+    3. 3개 - 왼위/ 오른위 왼아래/ 오른아래
+    4. 4개 - 왼위/ 오른 위/ 오른 아래/ 왼아래
+    */
+}
 /* 오른어깨  */
+.shdr2{
+    right: -65px;
+    border-radius: 0 50% 50% 0;
+
+}
 /* TV  */
 
 

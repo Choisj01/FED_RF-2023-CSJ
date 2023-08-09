@@ -69,14 +69,14 @@ body *{
     /* 마치 div를 넣은것 같다~! */
     position: absolute;
     /* 앱솔루트 요소 */
-    top: -108px;
-    left: -128px;
+    top: -98px;
+    left: -83px;
     /* 부모는? .head */
-    width: 510px;
-    height: 465px;
+    width: 405px;
+    height: 450px;
 
     /* 배경 */
-    background: url(../images/newhair2.png) no-repeat 0/ 100% 100%;
+    background: url(../images/newhair1.png) no-repeat 0/ 100% 100%;
 
 }
 

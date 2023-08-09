@@ -54,13 +54,32 @@ body *{
     position: relative;
     /* 부모자격 - 하위 앱솔루트 자식들 */
     width: 250px;
-    height: 250px;
+    height: 245px;
     /* 무대중앙 마영오! */
     margin: 0 auto;
     /* 메탈배경 */
     background: url(../images/metal01.jpg) no-repeat center/cover;
+    /* 둥근모서리 */
+    border-radius: 80px 80px 140px 140px;
+}
+/* 가상요소로 머리에 가발씌우기 */
+.head::after{
+    content: '';
+    display: block;
+    /* 마치 div를 넣은것 같다~! */
+    position: absolute;
+    /* 앱솔루트 요소 */
+    top: -108px;
+    left: -128px;
+    /* 부모는? .head */
+    width: 510px;
+    height: 465px;
+
+    /* 배경 */
+    background: url(../images/newhair2.png) no-repeat 0/ 100% 100%;
 
 }
+
 /* 머리 하위요소 공통 */
 .head>div{
     position: absolute;
@@ -99,9 +118,10 @@ body *{
     /* 위치 */
     top: 101px;
     left: 95px;
+    
     /* 크기 */
-    width: 60px;
-    height: 71px;
+    width: 58px;
+    height: 70px;
     border-radius: 25px;
     /* 배경 */
     background: 
@@ -110,16 +130,46 @@ body *{
 /* 입 */
 .mouth{
     /* 위치 */
-    left: 53px;
-    bottom: 4px;
+    left: 60px;
+    bottom: 6px;
+    
     /* 크기 */
-    width: 144px;
-    height: 68px;
+    width: 130px;
+    height: 60px;
     /* 배경 */
     background: 
     url(../images/mouth.png) no-repeat 0/ 100% 100%;
+}
+/* 귀 공통 */
+.ear{
+    /* 위치 */
+    top: 100px;
+
+    /* 크기 */
+    width: 50px;
+    height: 80px;
+    /* 배경 */
+    background: 
+    url(../images/metal02.jpg) no-repeat center/cover;
+}
+/* 왼귀 */
+.ear1{
+    /* 개별위치 왼쪽바깥 */
+    left: -50px;
+    /* 둥근모서리 : 왼쪽위, 왼쪽아래 */
+    border-radius: 20px 0 0 20px;
+
 
 }
+/* 오른귀 */
+.ear2{
+    /* 개별위치 오른쪽바깥 */
+    right: -50px;
+    /* 둥근모서리 : 오른쪽위, 오른쪽쪽아래 */
+    border-radius: 0 20px 20px 0;
+
+}
+
 /* 2-1-2.몸통 */
 /* 2-2.로봇설명박스 */
 /******************************* 3.하단영역 *******************************/

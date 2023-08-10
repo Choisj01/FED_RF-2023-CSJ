@@ -159,7 +159,7 @@
             /* width: auto는 싸고 있는 박스를 
             채우기 떄문에 가로크기가 내부적으로 설정됨!
             그래서 % 가 적용됨! */
-            
+
             /* 크기변경 */
             width: 400px;
             height: 400px;
@@ -189,8 +189,16 @@
             height: 10px;
             /* 배경색변경 */
             background-color: royalblue;
-            /* 트랜지션 원본(양방향/돌아올때) */
-            
+            /* 트랜지션 원본(돌아올때) */
+            transition: left 3s ease-in-out 7s,
+             /* left는 3초간 처음과 끝에 천천히 7초 기다림 */
+            width 2s ease-out 5s,
+            /* width는 2초간 끝에 천천히 5초 기다림 */
+            height 1s ease-in 4s,
+            /* height는 1초간 처음에 천천히 4초 기다림 */
+            background-color 3s linear 1s;
+            /* 배경색은 3초간 등속도로 1초 기다림 */
+
             
         }
         /* 체크박스가 체크되면 그 다음 형제요소를 변경하여
@@ -202,8 +210,17 @@
             width: 500px;
             height: 300px;
             /* 배경색변경 */
-            background-color: olivedrab;
+            background-color: hotpink;
             
+            /* 트랜지션 원본(진행할 때) */
+            transition: left 3s ease-in-out 1s,
+             /* left는 3초간 처음과 끝에 천천히 1초 기다림 */
+            width 2s ease-out 4s,
+            /* width는 2초간 끝에 천천히 4초 기다림 */
+            height 1s ease-in 6s,
+            /* height는 1초간 처음에 천천히 6초 기다림 */
+            background-color 3s linear 7s;
+            /* 배경색은 3초간 등속도로 7초 기다림 */
         }
 
 

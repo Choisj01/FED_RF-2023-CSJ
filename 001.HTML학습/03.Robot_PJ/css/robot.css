@@ -43,7 +43,7 @@ body *{
 /* 1-1.로고 */
 .logo{
     /* 픽스드 포지션 */
-    /* position: fixed; */
+    position: fixed;
     /* 화면 중앙이동! */
     top: calc(50% - 200px/2);
     left: calc(50% - 200px/2);

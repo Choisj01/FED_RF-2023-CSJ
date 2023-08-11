@@ -21,7 +21,7 @@ html,body,h1,h2,h3,ul,ol{
 body{
 
     /* 전체 배경이미지 */
-    background: url(../images/bg.jpg) no-repeat fixed top/cover;
+    background: #000 url(../images/bg.jpg) no-repeat fixed top/cover;
 }
 
 /* 공사중 표시 */
@@ -81,8 +81,9 @@ body *{
     z-index: 99;
     /* 가장 위! */
 
-
     }
+
+
 /* 1-2.링크 타이틀 /
 /* 1-3.탑이동버튼 */
 /******************************* 2. 메인영역 *******************************/
@@ -96,9 +97,17 @@ body *{
 }
 /* 2-1.로봇박스 */
 .box-robot{
+
+    position: fixed;
+    width: 100%;
     /* 패딩: 위, 양쪽, 아래 */
     padding: 200px 0 520px;
+    /* 마진탑 */
     /* margin-top: 30px; */
+
+    /* 처음에 트랜스폼 변경설정 */
+   transform: translate(67%,-117%) scale(0.2);
+
 
 }
 /*2-1-1.머리 */
@@ -303,7 +312,10 @@ body *{
     width: 50px;
     height: 200px;
     border-radius: 20%;
+    /* 팔 트랜스폼 회전축 변경 */
+    transform-origin: left top;
 }
+
 /* 가상요소로 팔관절만들기 */
 .arm::after{
     content: '';
@@ -391,7 +403,10 @@ body *{
     width: 80px;
     height: 250px;
     border-radius: 20%;
+    /* 애니를 위한 트랜스폼 기준축 변경 */
+    transform-origin: top;
 }
+
 /* 가상요소로 다리 관절만들기 */
 .leg::after{
     content: '';
@@ -467,6 +482,7 @@ body *{
 /* 왼다리  */
 .leg1{
     left: 10px;
+    
 }
 
 /* 오른다리  */
@@ -519,8 +535,8 @@ body *{
 .screen{
     /* 위치 */
     position: absolute;
-    top: 27px;
-    left: 12px;
+    top: 20px;
+    left: 9px;
     /* 부모는? .tv */
     /* 크기 */
     width: 126px;

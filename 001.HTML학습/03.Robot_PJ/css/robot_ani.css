@@ -215,9 +215,9 @@ _________________________________________________________
     right: -45px; /* 위치조정 */
     animation: 
     /* 팔들기 */
-    right-arm-ani-01 .3s ease-in 9s forwards,
+    right-arm-ani-01 .4s ease-in 10s forwards,
     /* 팔 흔들기 */
-    right-arm-ani-02 .3s ease-in 9.5s infinite alternate;
+    right-arm-ani-02 .4s ease-in 10.4s infinite alternate;
 }
  
 /* 오른팔 애니3 호출 : .arm2 span */
@@ -226,7 +226,7 @@ _________________________________________________________
  
     /* 팔 흔들기3 */
     animation: 
-    right-arm-ani-03 .3s ease-in 9.5s infinite alternate;
+    right-arm-ani-03 .4s ease-in 10s infinite alternate;
 }
 /* 오른팔 애니3 호출 : .arm2 span */
 .arm2 span::after{
@@ -234,8 +234,20 @@ _________________________________________________________
  
     /* 팔 흔들기3 */
     animation: 
-    right-arm-ani-03 .3s ease-in 9.5s infinite alternate;
+    right-arm-ani-03 .4s ease-in 10.4s infinite alternate;
+}
+
+/* 입나불나불 애니 */
+@keyframes mouth-ani {
+    to{
+        transform: scale(.7);
+    }
+}
+/* 입애니 호출 */
+.mouth{
+    animation: mouth-ani .03s linear 10.8s infinite alternate;
 }
  
+
 
  

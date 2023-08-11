@@ -519,7 +519,7 @@ body *{
     top: 8%;
     left: 50%;
     /* left 방향 중앙이동 */
-    transform: translateX(-50%);
+    transform: translateX(-50%) scale(3);
     width: 176px;
     height: 143px;
     border: 2px solid #2f2c57;
@@ -529,6 +529,8 @@ body *{
     /* 배경이미지 */
     background: url(../images/tv.jpg) 
     no-repeat 0/102%;
+
+    z-index: 10;
 }
     
 /* 스크린 */
@@ -559,11 +561,10 @@ body *{
     width: 130px;
     height: 90px;
 
+    /* 아이프레임 기본 보더 없앰 */
+    border: none;
+
 }
-
-
-
-
 
 /* 2-2.로봇설명박스 */
 /******************************* 3.하단영역 *******************************/

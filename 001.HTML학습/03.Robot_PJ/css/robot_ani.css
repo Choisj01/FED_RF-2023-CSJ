@@ -140,13 +140,13 @@ _________________________________________________________
 /* 왼팔 애니1 키프레임 */
 @keyframes left-arm-ani-01 {
     to{
-        transform: rotate(45deg);
+        transform: rotate(23deg);
     }
 }
 /* 왼팔 애니2 키프레임 */
 @keyframes left-arm-ani-02 {
     to{
-        transform: rotate(-80deg);
+        transform: rotate(-70deg);
     }
     
 }
@@ -178,25 +178,25 @@ _________________________________________________________
 /* 오른팔 애니1 키프레임 : 올리기 */
 @keyframes right-arm-ani-01 {
     to{
-        transform: rotate(45deg);
+        transform: rotate(-136deg);
     }
 }
 /* 오른팔 애니2 키프레임 : 흔들기 */
 @keyframes right-arm-ani-02 {
     from{
-        transform: rotate(-136deg);
+        transform: rotate(-135deg);
     }
     to{
-        transform: rotate(-156deg);
+        transform: rotate(-150deg);
     }
 }
-/* 오른팔 애니3 키프레임 : 흔들기 */
+/* 오른팔 애니3 키프레임 : 흔들기2 */
 @keyframes right-arm-ani-03 {
     from{
         transform: rotate(0deg);
     }
     to{
-        transform: rotate(10deg);
+        transform: rotate(-15deg);
     }
 }
 /* 오른팔 애니4 키프레임 : 손목흔들기 */

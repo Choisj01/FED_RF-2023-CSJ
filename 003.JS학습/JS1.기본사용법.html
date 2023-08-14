@@ -150,7 +150,49 @@ _____________________________________________________________________
 
         -DOM(Document Object Model(모델은 인터페이스를 의미함) 웹문서 객체 모델)    
                 : 웹문서에 있는 각 문서로 접근할 수 있는 방법을 제공하는
-                언어중립적 인터페이스다! 
+                언어중립적 인터페이스다! *
+                
+     ________________________________________________________________________________________           
+
+      [ JS 기본요소 선택법 ]
+       1. 아이디 선택법: 
+       getElementById(아이디명)
+
+       get Element By Id
+       가져와 요소를 아이디로!
+       -> 아이디는 유일하므로 선택즉시
+       바로 접근가능함!
+
+       
+       2. 클래스 선택법:
+       getElementsByClassName(클래스명)
+
+       get Elements By Class Name
+      가져와 요소들을 클래스명으로!
+      ->클래스는 여러번 사용가능하므로 선택 후
+      순번을 반드시 선택해야 구체적인 요소에 접근가능함!
+
+      ->순번선택방법: item(순번) / [순번]
+            document.getElementsByClassName(클래스명).item(순번)
+            
+            document.getElementsByClassName(클래스명).item[순번]
+       
+        
+        
+            3. 태크 선택법:
+       getElementsByTagName(태그명)
+
+          get Elements By Tag Name
+         가져와 요소들을 태그명으로!
+         ->태그는 여러번 사용가능하므로 선택 후
+         순번을 반드시 선택해야 구체적인 요소에 접근가능함!
+
+         ->순번선택방법: item(순번) / [순번]
+           document.getElementsByTagName(태그명).item(순번)
+            
+           document.getElementsByTagName(태그명).item[순번]
+
+
 
 
 
@@ -175,10 +217,23 @@ _____________________________________________________________________
                 // 1. 함수호출확인!
                 console.log('보여줘호출!');
 
-                // 2. html 넣기
+                // 2. html 넣기 ///////////////////
+                // 변경대상 : #name
                 // innerhtml 속성 이용!
                 // 문서.가져와아이디로(아이디명)
-                document.getElementById('name').innerHTML = '<img src="./images/kim.png" alt="김비서가 왜그럴까?">';
+                document.getElementById('name')
+                .innerHTML = '<img src="./images/kim.png" alt="김비서가 왜그럴까?">';
+
+                // 3. css변경하기//////////////////////
+                // 변경대상 : .pbox
+                // css변경 객체 : style.속성명
+                // 모든 스타일속성명은 변수형으로 정의됨!
+                // 예) font-size -> fontSize
+                // -를 빼고 시작문자를 대문자로 쓰면된다!
+
+                document.getElementsByClassName('pbox').item(0)
+                .style.background ='url(./images/kimbs.jpg) no-repeat center/cover';
+
 
             } /////////////////// 보여줘 함수 //////////////////
 
@@ -196,17 +251,22 @@ _____________________________________________________________________
             margin: 0;
 
             width: 600px;
-            height: 400px;
+            height: 600px;
+            padding-top: 200px;
+            
             /* 글자 */
-            line-height: 150px;
+            line-height: 100px;
             font-size: 40px;
             text-align: center;
+            
             /* 줄바꿈 방지 */
             white-space: nowrap;
 
             border: 4px solid purple;
             /* 보더박스: 보더,패딩포함 */
             box-sizing: border-box;
+
+            /* background: url(./images/kimbs.jpg) no-repeat center/cover; */
 
         }
 

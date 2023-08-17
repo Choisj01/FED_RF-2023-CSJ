@@ -116,7 +116,7 @@ body{
     /* 패딩: 위, 양쪽, 아래 */
     padding: 200px 0 520px;
     /* 마진탑 */
-    margin-top: -187px;
+    /* margin-top: -187px; */
 
     /* 처음에 트랜스폼 변경설정 */
    transform: translate(25%,-15%) scale(0.2);

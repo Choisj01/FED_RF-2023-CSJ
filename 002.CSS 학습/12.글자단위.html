@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <!-- 모바일 뷰포트필수! -->
+    <!-- meta:vp -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>글자단위</title>
     <style>
         /* 
@@ -68,6 +70,7 @@
          */
 
          html{
+            font-size: 16px;
             
             /* 기본글자크기가 16px이라고 해 놓고 왜?
             여기에 글자크기를 셋팅하는가?
@@ -83,6 +86,7 @@
 
          /* 32px */
          .f1{
+            font-size: 2em;
             
             /* 
                 상속된px * 배수 = 몇px
@@ -98,12 +102,14 @@
 
          /* 24px */
          .f2{
-            
+            font-size: 0.75em;
+
             /* 0.75em = 24px / 32px */
          }
 
          /* 14px */
          .f3{
+            font-size: .58em;
             
             /* 0.58em = 14px / 24px */
          }
@@ -112,6 +118,7 @@
 
          /* 32px */
          .rf1{
+            font-size: 2rem;
             
             /* rem = 원하는px / html의px
                   = 32px / 16px = 2rem */
@@ -119,13 +126,14 @@
 
          /* 24px */
          .rf2{
-            
+            font-size: 1.5rem;
             /* rem = 원하는px / html의px
                   = 24px / 16px = 1.5rem */
          }
 
          /* 14px */
          .rf3{
+            font-size: 0.87rem;
             
             /* rem = 원하는px / html의px
                   = 14px / 16px = 0.87rem */
@@ -135,16 +143,19 @@
          /* % 단위 -> em단위 * 100 */
          /* 32px */
          .pf1{
+            font-size: 200%;
             
             /* 2em * 100 = 200% */
          }
          /* 24px */
          .pf2{
+            font-size: 75%;
             
             /* 0.75em * 100 = 75% */
          }
          /* 16px */
          .pf3{
+            font-size: 58%;
             
             /* 0.58em * 100 = 58% */
          }
@@ -154,6 +165,9 @@
          @media screen and (max-width:1000px) {
             /* root인 html만 글자크기를 변경하면
             하위의 모든 상대단위 글자는 한번에 변경된다! */
+            html{
+               font-size: 40px;
+            }
             
          }
 
@@ -161,6 +175,9 @@
          @media screen and (max-width:800px) {
             /* 부모를 기준한 상대단위는 부모요소만 변경하면
             별도로 그 부분만 상대적으로 변경된다! */
+            .f1{
+               font-size: 30px;
+            }
             
          }
 

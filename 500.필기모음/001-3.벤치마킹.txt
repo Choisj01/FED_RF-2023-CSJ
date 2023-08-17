@@ -28,6 +28,17 @@ https://cyclopsclub.com/
 5) 특정영역에 마우스 포인터 모양변경하기(쉐도잉PJ)
 6) 전체메뉴 등장 애니메이션 (네비게이션 유형에서 해봄)
 
+3. 전쟁특집 사이트
+https://investigation.rollingstone.com/dj-photo-war-crimes-bosnia/
+
+1) 마우스 포인터 움직임에 따른 이미지 등 요소 
+약간씩 같은 방향으로 움직이기
+-> mousemove 이벤트 사용
+
+2) 글자중앙에서 생성되어 등장하기!(해볼예정)
+
+
+
 
 
 

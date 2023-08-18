@@ -32,43 +32,60 @@
             console.log('입력된값:',score);
 
             
-        // 4. 메시지 만들기 ///////////
-        // 점수에 따른 메시지를 if문으로 작성한다!
-        // if(true(1))/false(0)){코드}
-        // if문의 소괄호안이 true일떄 코드가 실행됨!
-
-
-        // 메시지 변수
-        var message;
-
-        // if문을 셋트로 작성시 구간처리 불필요!
-        if(score >= 90){
-            message='매우잘함';
+             // 4. 메시지 만들기 ///////////
+             // 점수에 따른 메시지를 if문으로 작성한다!
+             // if(true(1))/false(0)){코드}
+             // if문의 소괄호안이 true일떄 코드가 실행됨!
+     
+     
+             // 메시지 변수
+             var message;
+             // 글자색 변수
+             var fontColor;
+     
+             // if문을 셋트로 작성시 구간처리 불필요!
+             if(score >= 90){
+                 message='매우잘함';
+                 fontColor = 'blue';
+             }   //// if ////////// 
+             else if(score >= 80){
+                 message='잘함';
+                 fontColor = 'green';
+             }
+             else if(score >= 70){
+                 message='보통';
+                 fontColor = 'purple';
+             }
+             else if(score >= 60){
+                 message='노력요함';
+                 fontColor = 'orange';
+             }
+             else{
+                 message='재시험';
+                 fontColor = 'red';
+             }
+             // 메시지 완성하기: 평가결과는 어쩌구...
+             message = '평가결과는 ' + message;
+     
+             console.log('결과:',message,fontColor);
             
-        }   //// if ////////// 
-        else if(score >= 80){
-            message='잘함';
-        }
-        else if(score >= 70){
-            message='보통';
-        }
-        else if(score >= 60){
-            message='노력요함';
-        }
-        else{
-            message='재시험';
-        }
+     
+             // if문을 따로 작성하면 적용범위를 줘야함!
+             // if(score >= 80){
+             //     message='';
+     
+             // }   //// if ////////// 
+     
+             // 5. 메시지 출력하기////////
+             // 출력대상: #jexp -> jexp변수
+             jexp.innerText = message;
+     
+             // 6. 출력글자색 변경하기! //////////
+             // 출력대상:  #jexp -> jexp변수 
+             jexp.style.color = fontColor;
+     
 
-        console.log('결과:',message);
-       
-
-        // if문을 따로 작성하면 적용범위를 줘야함!
-        // if(score >= 80){
-        //     message='';
-
-        // }   //// if ////////// 
-
-
+        
         } /////////////// jumsu 함수 //////////////////////////
         /////////////////////////////////////////////////////////
 
@@ -147,7 +164,23 @@
         <h2 class="tit">if문 연습</h2>
         <h3 id="jexp">평가출력</h3>
         <label for="jumsu">점수입력:</label>
-        <input type="text" id="jumsu" placeholder="점수를 입력하세요!" maxlength="3" />
+        <input type="text" id="jumsu" placeholder="점수를 입력하세요!" maxlength="3" 
+        onkeypress="if(event.keyCode==13)jumsu()"/>
+        <!-- onkeypress="if(event.keycode == 13)jumsu()" -->
+        <!-- 
+        [ onkeypress 이벤트 속성 ]
+        -> 키보드를 치면 발생하는 이벤트 속성
+        if조건문
+        조건식 : event.keyCode === 13
+        -> 키보드의 키코드가 13번이냐? 엔터키 눌렀냐?
+        -> 엔터키의 키코드는 13번이다!
+        -> true이면 jumsu() 라는 함수를 호출해라!
+        -> event 브라우저 내장객체: 이벤트관련 객체
+
+        참고) 키코드 참조: 아스키코드 
+        (리턴키는 carriage return)
+        https://www.w3schools.com/charsets/ref_html_ascii.asp
+        -->
         
 
         <!-- 버튼클릭시 클릭이벤트 속성과 미리만든 함수를 연결한다! -->

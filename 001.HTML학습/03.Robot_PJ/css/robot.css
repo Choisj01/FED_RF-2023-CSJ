@@ -101,6 +101,9 @@ body{
     border-radius: 50%;
     border: 5px outset white;
     background-color: #ccc;
+
+    /* 위치 상위 */
+    z-index: 10;
 }
 
 /* 버튼 a요소 */
@@ -116,6 +119,16 @@ body{
     font: 30px/90px 'Black Ops one';
     /* 줄간격은 높이값 100px- 보더 10px -> 90px */
     text-decoration: none;
+}
+
+/* 버튼 마우스 오버시  */
+.btn-top:hover{
+    background-color: #ff0;
+    border-style: outset;
+}
+/* 버튼 오버시 글자색 */
+.btn-top:hover a{
+    color: red;
 }
 
 
@@ -661,8 +674,8 @@ body{
 .link-title::after{
     content: '';
     position: absolute;
-    bottom: -86px;
-    left: 31px;
+    bottom: -3.8vw;
+    left: 10vw;
     transform: rotate(22deg);
 
     /* 삼각형만들기 필수! 
@@ -670,9 +683,9 @@ body{
     -가로, 세로값 0 */
     width: 0;
     height: 0;
-    border-left: 38px solid transparent;
-    border-right: 42px solid transparent;
-    border-top: 135px solid rgb(0, 155, 252);
+    border-left: 10vw solid transparent;
+    border-right: 10vw solid transparent;
+    border-top: 10vw solid rgb(0, 155, 252);
 }
 /* 마우스 오버시 배경색 변경 */
 .link-title:hover{

@@ -660,7 +660,7 @@ body{
     background-color: #fff;
     padding: 5vw 3vw;
     border-radius: 50%;
-    border: 10px dashed rgb(0, 155, 252);
+    border: 1vw dashed rgb(0, 155, 252);
     text-decoration: none;
     
     /* 처음에 안보임 */
@@ -674,22 +674,24 @@ body{
 .link-title::after{
     content: '';
     position: absolute;
-    bottom: -3.8vw;
-    left: 10vw;
-    transform: rotate(22deg);
+    bottom: -1.8vw;
+    left: 0vw;
+    transform: rotate(32deg);
 
     /* 삼각형만들기 필수! 
     - 양쪽방향 보더를 투명으로 한쪽방향 보더에 색 
     -가로, 세로값 0 */
-    width: 0;
+    width: 0px;
     height: 0;
-    border-left: 10vw solid transparent;
-    border-right: 10vw solid transparent;
-    border-top: 10vw solid rgb(0, 155, 252);
+    border-left: -8vw solid transparent;
+    border-right: 4vw solid transparent;
+    border-top: 6vw solid rgb(0, 155, 252);
 }
 /* 마우스 오버시 배경색 변경 */
 .link-title:hover{
-    background-image: radial-gradient(rgba(255, 255, 255, 0.603) 50%, rgba(173, 216, 230, 0.712) 60%);
+    background-image: 
+    radial-gradient(rgba(255, 255, 255, 0.603) 50%, rgba(173, 216, 230, 0.712) 60%);
+    color: #fff;
 }
 
 /********************************************************
@@ -859,7 +861,7 @@ body{
     color: #fff;
     /* 글자크기 : 30px , 글자체 'Black Ops One' */
     font: 3rem 'Black Ops One';
-    /* 글자그림자 2px 2px blur #000 */
+    /* 글자그림자 2px 2px #000 */
     box-shadow: 2px 2px 2px #000;   
 
     /* 배경색 검정색 반투명 0.5 */
@@ -882,7 +884,7 @@ body{
     border-radius: 50%;
     background: pink url(../images/robot_03.png) no-repeat;
     /* 배경에 개별적으로 넣어주는 순서가 밑에 와야 알맞게 나옴! */
-    background-position: -6px 0;
+    background-position: -7px 2px;
     background-size: 50px;
 
     /* 인라인 요소간 세로정렬 */

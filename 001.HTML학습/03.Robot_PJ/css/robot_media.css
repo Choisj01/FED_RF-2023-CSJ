@@ -20,9 +20,8 @@
         column-count: 1;
     }
 }
-/* 500px 이하 미디어쿼리 끝 */
 
-/* a버튼 요소 */
+/* 1-2. 탑이동버튼 */
 .btn-top{
     bottom: 20px;
     right: 20px;
@@ -30,3 +29,10 @@
     height: 80px;
 }
 
+/* a버튼 요소 */
+.btn-top a{
+    font-size: 22px;
+    line-height: 70px;
+}
+
+/* 500px 이하 미디어쿼리 끝 */

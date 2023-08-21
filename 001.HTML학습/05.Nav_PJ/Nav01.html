@@ -3,59 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>
-        1. 가로네비 서브별 드롭다운 세로형</title>
+    <title>1. 가로네비 서브별 드롭다운 세로형</title>
+        <style>
+            html,body,h1{
+                margin: 0;
+                padding: 0;
+            }
+        
+            h1{
+                text-align: center;
+                padding: 20px;
+            }
+        
+            body{
+                color: #fff;
+                background: #0c144e url(./images/nav1bg.png) no-repeat fixed center/cover;
+            }
+        
+            /* ul,ol 초기화 : 3無 */
+            ul,ol{
+                margin: 0;
+                padding: 0;
+                list-style: none;
+            }
+            /* 클리어 설정 가상요소 */
+            ul::after,ol::after{
+                content: '';
+                display: block;
+                clear: both;
+            }
+        
+            /* 네비게이션 박스 */
+            .gnb li{    
+                float: left;
+                /* 나는 왼쪽, 너는 오른쪽으로 올라와! - 흘러감 */
+            }
+        
+            /* 네비게이션 링크  */
+            .gnb a{
+                color: #FFF;
+        
+                text-decoration: none;
+                /* 글자 밑줄 - text-decoration */
+                font-size: 2vw;
+            }
+        
+        </style>
 </head>
-<style>
-    html,body,h1{
-        margin: 0;
-        padding: 0;
-    }
-
-    h1{
-        text-align: center;
-        padding: 20px;
-    }
-
-    body{
-        color: #fff;
-        background: #0c144e url(./images/nav1bg.png) no-repeat fixed center/cover;
-    }
-
-    /* ul,ol 초기화 : 3無 */
-    ul,ol{
-        margin: 0;
-        padding: 0;
-        list-style: none;
-    }
-    /* 클리어 설정 가상요소 */
-    ul::after,ol::after{
-        content: '';
-        display: block;
-        clear: both;
-    }
-
-    /* 네비게이션 박스 */
-    .gnb li{    
-        float: left;
-        /* 나는 왼쪽, 너는 오른쪽으로 올라와! - 흘러감 */
-    }
-
-    /* 네비게이션 링크  */
-    .gnb a{
-        color: #FFF;
-
-        text-decoration: none;
-        /* 글자 밑줄 - text-decoration */
-        font-size: 2vw;
-    }
-
-</style>
 
 <body>
 
-    <h1>
-        1. 가로네비 서브별 드롭다운 세로형</h1>
+    <h1>1. 가로네비 서브별 드롭다운 세로형</h1>
+    
         <!-- 상단영역 -->
         <header class="top-aria">
             <!-- 로고박스 -->

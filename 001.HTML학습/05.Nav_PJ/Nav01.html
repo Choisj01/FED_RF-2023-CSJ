@@ -49,7 +49,11 @@
             .logo {
                 line-height: 80px;
             }
-
+            /* 로고이미지 */
+            .logo img{
+                width: min(173px,14vw);
+            }
+            
             .gnb {
                 padding: 0 min(100px, 8vw);
             }
@@ -86,9 +90,11 @@
             /* 서브메뉴 */
             .sub-menu{
                 position: absolute;
-                width: 200px;
-                border-radius: 10px;
-                background-color: rgba(18, 18, 18, 0.7);
+                width: min(200px,18vw);
+                border-radius: 15px;
+                background-color: rgba(34, 21, 121, 0.7);
+                /* 박스글로우 효과 */
+                box-shadow: inset 0 0 5px lightblue;
             }
             /* 서브메뉴 li */
             .sub-menu li{
@@ -99,8 +105,21 @@
 
             /* 서브메뉴 a */
             .sub-menu a{
+                display: block;
+                width: 100%;
+                height: 100%;
+                padding: 0;
                 line-height: 40px;
-                font-size: min(14px,1.4vw);
+                font-size: min(16px,1.4vw);
+                /* 반투명 */
+                opacity: 0.5;;
+                /* 트랜지션 */
+                transition: .3s;
+            }
+            /* 서브오버시 효과 */
+            .sub-menu a:hover{
+                opacity: 1;
+                transform: scale(1.1);
             }
         </style>
     </head>

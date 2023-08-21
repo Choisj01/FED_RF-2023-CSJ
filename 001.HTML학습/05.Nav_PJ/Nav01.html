@@ -106,15 +106,8 @@
                 transition: 0.4s ease-in-out;
             }
             
-            /* 서브메뉴 li */
-            .sub-menu li{
-                /* width: 100%; */
-                /* float 설정이 있어도 한줄에 하나씩 옴!
-                - float 설정이 없으면 안줘도 됨!!  */
-                
-                text-align: center;
-            }
-            /* 상위메뉴 li에 마우스 오버시 서브메뉴 보이기 애니! */
+         
+            /* 상위메뉴 li에 마우스 오버시 서브메뉴 보이기 애니 공통(투명도) */
             .gnb>ul>li:hover .sub-menu{
                 height: calc(40px*5);
                 /* height: auto; 
@@ -125,16 +118,24 @@
             }
 
             /* 서브메뉴뵬 개수로 높이값 차등설정 */
-            .gnb>ul>li.m5:nth-child(1):hover .sub-menu{
+            .gnb>ul>li.m5:hover .sub-menu{
                 height: calc(40px*5);
             }
-            .gnb>ul>li.m2:nth-child(2):hover .sub-menu{
+            .gnb>ul>li.m3:hover .sub-menu{
                 height: calc(40px*3);
             }
-            .gnb>ul>li.m1:nth-child(2):hover .sub-menu{
+            .gnb>ul>li.m1:hover .sub-menu{
                 height: 40px;
             }
 
+               /* 서브메뉴 li */
+               .sub-menu li{
+                /* width: 100%; */
+                /* float 설정이 있어도 한줄에 하나씩 옴!
+                - float 설정이 없으면 안줘도 됨!!  */
+                
+                text-align: center;
+            }
             
             /* 서브메뉴 a */
             .sub-menu a{
@@ -150,6 +151,7 @@
                 /* 트랜지션 */
                 transition: .3s;
             }
+
             /* 서브오버시 효과 */
             .sub-menu a:hover{
                 opacity: 1;
@@ -187,6 +189,7 @@
                     <ul>
                         <li class="m5">
                             <a href="#">Vision Processor</a>
+                            <!-- 서브메뉴 -->
                             <div class="sub-menu">
                                 <ol>
                                     <li>
@@ -209,6 +212,7 @@
                         </li>
                         <li class="m3">
                             <a href="#">ADAS Processor</a>
+                            <!-- 서브메뉴 -->
                             <div class="sub-menu">
                                 <ol>
                                     <li>
@@ -226,6 +230,7 @@
                         </li>
                         <li class="m1">
                             <a href="#">AHD™</a>
+                            <!-- 서브메뉴 -->
                             <div class="sub-menu">
                                 <ol>
                                     <li>
@@ -236,6 +241,7 @@
                         </li>
                         <li class="m1">
                             <a href="#">News</a>
+                            <!-- 서브메뉴 -->
                             <div class="sub-menu">
                                 <ol>
                                     <li>
@@ -246,6 +252,7 @@
                         </li>
                         <li class="m3">
                             <a href="#">About Us</a>
+                            <!-- 서브메뉴 -->
                             <div class="sub-menu">
                                 <ol>
                                     <li>
@@ -262,6 +269,7 @@
                         </li>
                         <li class="m1">
                             <a href="#">Career </a>
+                            <!-- 서브메뉴 -->
                             <div class="sub-menu">
                                 <ol>
                                     <li>

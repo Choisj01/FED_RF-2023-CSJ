@@ -58,7 +58,10 @@
                 padding: 0 min(100px, 8vw);
             }
             /* 네비게이션 박스 */
-            .gnb li {
+            /* 최상위 직계 li만 적용! */
+            .gnb>ul>li {
+                position: relative;
+                /* 부모자격 - .sub-menu */
                 float: left;
                 /* 나는 왼쪽, 너는 오른쪽으로 올라와! - 흘러감 */
             }
@@ -87,7 +90,9 @@
                 margin: 0 auto;
             }
 
-            /* 서브메뉴 */
+            /* 서브메뉴 
+            - 높이값 0으로 숨길박스에 보더나 패딩이 있으면
+            완전히 숨길 수 없다!!따라서 보더,패딩은 없어야 함!!! */
             .sub-menu{
                 position: absolute;
                 width: min(200px,18vw);
@@ -98,8 +103,10 @@
             }
             /* 서브메뉴 li */
             .sub-menu li{
-                width: 100%;
-                /* float 설정이 있어도 한줄에 하나씩 옴!  */
+                /* width: 100%; */
+                /* float 설정이 있어도 한줄에 하나씩 옴!
+                - float 설정이 없으면 안줘도 됨!!  */
+                
                 text-align: center;
             }
 
@@ -111,8 +118,9 @@
                 padding: 0;
                 line-height: 40px;
                 font-size: min(16px,1.4vw);
+                font-weight: bold;
                 /* 반투명 */
-                opacity: 0.5;;
+                opacity: 0.8;;
                 /* 트랜지션 */
                 transition: .3s;
             }

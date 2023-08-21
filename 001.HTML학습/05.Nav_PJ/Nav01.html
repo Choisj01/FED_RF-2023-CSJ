@@ -79,28 +79,33 @@
                 line-height: 80px;
             }
 
-            /* 메인영역 */
-            .main-aria {
-                max-width: 1000px;
-                min-height: 600px;
-                line-height: 600px;
-                text-align: center;
-                font-size: 2.5vw;
-                border: 10px dashed lightgreen;
-                margin: 0 auto;
-            }
-
+            
             /* 서브메뉴 
             - 높이값 0으로 숨길박스에 보더나 패딩이 있으면
             완전히 숨길 수 없다!!따라서 보더,패딩은 없어야 함!!! */
             .sub-menu{
                 position: absolute;
+                left: 50%;
+                /* 가로방향 메뉴 정중앙 이동 */
+                transform: translateX(-50%);
+                
                 width: min(200px,18vw);
                 border-radius: 15px;
                 background-color: rgba(34, 21, 121, 0.7);
                 /* 박스글로우 효과 */
                 box-shadow: inset 0 0 5px lightblue;
+                
+                /* 숨기기 높이값 0 */
+                height: 0;
+                /* 넘치는 요소 숨기기  */
+                overflow: hidden;
+                /* 투명하게 */
+                opacity: 0;
+                
+                /* 트랜지션 */
+                transition: 0.4s ease-in-out;
             }
+            
             /* 서브메뉴 li */
             .sub-menu li{
                 /* width: 100%; */
@@ -109,7 +114,28 @@
                 
                 text-align: center;
             }
+            /* 상위메뉴 li에 마우스 오버시 서브메뉴 보이기 애니! */
+            .gnb>ul>li:hover .sub-menu{
+                height: calc(40px*5);
+                /* height: auto; 
+                - 자동높이값은 애니메이션 불가! */
 
+                /* 투명도 복구 */
+                opacity: 1;
+            }
+
+            /* 서브메뉴뵬 개수로 높이값 차등설정 */
+            .gnb>ul>li.m5:nth-child(1):hover .sub-menu{
+                height: calc(40px*5);
+            }
+            .gnb>ul>li.m2:nth-child(2):hover .sub-menu{
+                height: calc(40px*3);
+            }
+            .gnb>ul>li.m1:nth-child(2):hover .sub-menu{
+                height: 40px;
+            }
+
+            
             /* 서브메뉴 a */
             .sub-menu a{
                 display: block;
@@ -128,6 +154,16 @@
             .sub-menu a:hover{
                 opacity: 1;
                 transform: scale(1.1);
+            }
+            /* 메인영역 */
+            .main-aria {
+                max-width: 1000px;
+                min-height: 600px;
+                line-height: 600px;
+                text-align: center;
+                font-size: 2.5vw;
+                border: 10px dashed lightgreen;
+                margin: 100px auto;
             }
         </style>
     </head>
@@ -149,7 +185,7 @@
                 <!-- 네비게이션 박스 -->
                 <nav class="gnb">
                     <ul>
-                        <li>
+                        <li class="m5">
                             <a href="#">Vision Processor</a>
                             <div class="sub-menu">
                                 <ol>
@@ -171,20 +207,68 @@
                                 </ol>
                             </div>
                         </li>
-                        <li>
+                        <li class="m3">
                             <a href="#">ADAS Processor</a>
+                            <div class="sub-menu">
+                                <ol>
+                                    <li>
+                                        <a href="#">RVC</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">In-cabin</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">FVC</a>
+                                    </li>
+                                    
+                                </ol>
+                            </div>
                         </li>
-                        <li>
+                        <li class="m1">
                             <a href="#">AHD™</a>
+                            <div class="sub-menu">
+                                <ol>
+                                    <li>
+                                        <a href="#">RVC</a>
+                                    </li>
+                                </ol>
+                            </div>
                         </li>
-                        <li>
+                        <li class="m1">
                             <a href="#">News</a>
+                            <div class="sub-menu">
+                                <ol>
+                                    <li>
+                                        <a href="#">RVC</a>
+                                    </li>
+                                </ol>
+                            </div>
                         </li>
-                        <li>
+                        <li class="m3">
                             <a href="#">About Us</a>
+                            <div class="sub-menu">
+                                <ol>
+                                    <li>
+                                        <a href="#">RVC</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">In-cabin</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">FVC</a>
+                                    </li>
+                                </ol>
+                            </div>
                         </li>
-                        <li>
+                        <li class="m1">
                             <a href="#">Career </a>
+                            <div class="sub-menu">
+                                <ol>
+                                    <li>
+                                        <a href="#">RVC</a>
+                                    </li>
+                                </ol>
+                            </div>
                         </li>
                     </ul>
                 </nav>

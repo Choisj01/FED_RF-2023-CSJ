@@ -40,7 +40,68 @@
                 font-size: 42px;
             }
         </style>
-        
+
+        <!-- JS 코딩구역 -->
+        <script>
+            // 이벤트까지 JS에서 걸어주면 코드가 분리된다!
+
+            // html 요소를 선택할 경우 실행순서가 중요함
+            // html 본문 요소가 모두 로딩된 후에 선택해야함!
+            // 로딩 후 선택법:
+            /***************************************************
+              html 요소를 선택할 경우 실행순서가 중요함
+              html 본문 요소가 모두 로딩된 후에 선택해야함!
+              로딩 후 선택법: 
+
+              1. Script 코드를 body 태그 하단에 위치
+              2. 로딩 구역을 만들어준다!
+              window.addEventListener('load',함수);
+              -> 대상 : 전체브라우저 window객체
+              -> 이벤트 : 
+                (1) load : 전체요소가 모두 로딩 후 발생
+                (2) DOMContentLoaded : html요소만 다 그려지면 발생
+                -> 위의 2가지 중 실행 시점은 2번이 더 빠르다!
+
+              [ 이벤트 함수연결 내장함수 ]
+              대상요소.addEventListener(이벤트명,함수)
+              -> 이벤트 발생시 함수와 연결하는 기능을 가진 JS내장함수
+
+
+
+             ******************************************************/
+
+            //  로딩구역 만들기
+            // 선택요소.window.addEventListener(이벤트,함수)
+            // window.addEventListener('load',loadFn);
+            window.addEventListener('DOMContentLoaded',loadFn);
+
+            function loadFn(){
+                // 1. 호출확인
+                console.log('로딩완료');
+
+                // 2. 버튼요소 선택
+                var btns = document.querySelectorAll(".btns");
+    
+                console.log("버튼들:", btns);
+
+                // 3. 이벤트 설정하기
+                btns[0].onclick = changeImg;
+
+            } /////////////////// loadFn 함수 ///////////////////////
+
+            /*********************************************************
+
+                함수명 : changeImg
+                기능 : 메인이미지 src변경하기
+
+             *********************************************************/
+            function changeImg(){
+                // 1. 호출확인
+                console.log('변경!!!');
+            }
+
+
+        </script>
     </head>
 
     <body>

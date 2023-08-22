@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>if문 연습</title>
+        <title>2.switch case문 연습</title>
         <!-- 웹폰트 CDN -->
         <link href="https://fonts.googleapis.com/css?family=Audiowide&amp;display=swap" rel="stylesheet" />
         <style>
@@ -61,10 +61,6 @@
                 (1) load : 전체요소가 모두 로딩 후 발생
                 (2) DOMContentLoaded : html요소만 다 그려지면 발생
                 -> 위의 2가지 중 실행 시점은 2번이 더 빠르다!
-
-              3. 외부JS 호출시 defer 키워드 사용!  
-               <script src='외부JS경로' defer>
-                    -html 요소 로딩 후 외부 js를 실행함!
 
               [ 이벤트 함수연결 내장함수 ]
               대상요소.addEventListener(이벤트명,함수)
@@ -139,20 +135,41 @@
                 // 이미지 src변수
                 var isrc;
 
-                // 4. 이미지 src속성값 만들기(if문분기)
-                if(btnTxt=='포스터'){
-                    isrc = './images/ala1.jpg';
+                // 4. 이미지 src속성값 만들기(switch문분기)
+                switch(btnTxt){
+                    case "포스터":isrc='./images/ala1.jpg';
+                    break;
+                } 
+                switch(btnTxt){
+                    case '장면1':isrc='./images/ala1.jpg';
+                    break;
+                } 
+                switch(btnTxt){
+                    case '장면2':isrc='./images/ala1.jpg';
+                    break;
+                } 
+                switch(btnTxt){
+                    case '장면3':isrc='./images/ala1.jpg';
+                    break;
+                } //////////////// switch case //////////////////////
 
-                }
-                else if(btnTxt=='장면1'){
-                    isrc='./images/ala2.jpg';
-                }
-                else if(btnTxt=='장면2'){
-                    isrc='./images/ala3.jpg';
-                }
-                else if(btnTxt=='장면3'){
-                    isrc='./images/ala4.jpg';
-                }
+
+
+
+
+                // if(btnTxt=='포스터'){
+                //     isrc = './images/ala1.jpg';
+
+                // }
+                // else if(btnTxt=='장면1'){
+                //     isrc='./images/ala2.jpg';
+                // }
+                // else if(btnTxt=='장면2'){
+                //     isrc='./images/ala3.jpg';
+                // }
+                // else if(btnTxt=='장면3'){
+                //     isrc='./images/ala4.jpg';
+                // }
 
                 // 참고 : if문 조건식에서 비교연산자를 할당연산자로 쓰면 무조건 true처리 됨!
 

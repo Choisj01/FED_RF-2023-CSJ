@@ -128,7 +128,7 @@ ol::after,
 }
 
 /* 상위메뉴 li에 오버시 밑줄 */
-.line-ani > li:hover a ::after {
+.line-ani > li:hover a::after {
     width: 100%;
     margin-left: 0%;
     /* 트랜지션 : 오버시엔 왼쪽 마진값은 무애니! (애니를 하지 말아라!) */
@@ -136,7 +136,7 @@ ol::after,
 }
 
 /* 서브메뉴 
-- 높이값 0으로 숨길박스에 보더나 패딩이 있으면
+- 높이값 0으로 숨길때 숨길박스에 보더나 패딩이 있으면
 완전히 숨길 수 없다!!따라서 보더,패딩은 없어야 함!!! */
 .sub-menu {
     position: absolute;
@@ -203,7 +203,7 @@ ol::after,
     height: 100%;
     padding: 0;
     line-height: 40px;
-    font-size: min(16px, 1.4vw);
+    font-size: min(16px, 1.6vw);
     font-weight: bold;
     /* 반투명 */
     opacity: 0.8;

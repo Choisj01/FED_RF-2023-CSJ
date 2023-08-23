@@ -306,14 +306,80 @@
                 display: flex;
                 /* 플렉스 랩핑 박스 */
                 flex-wrap: wrap;
+                /* 진행방향 정렬 중앙 : jcc */
+                justify-content: center;
+                /* 수직방향 정렬(여러줄) : ac */
+                align-content: space-evenly;
+
+                /* 
+                    [ align-content 속성 ]
+
+                    - 진행방향의 수직으로 정렬
+                    - 진행방향의 수직으로 여러줄이므로 content!
+
+                    1) flex-start : 처음위치(기본값)
+                    2) flex-end : 끝위치
+                    3) center : 중앙
+                    4) space-between : 
+                        아이템요소 양쪽끝에 붙고 사이간격 일정
+                    5) space-around : 
+                        아이템요소 양쪽간격 일정
+                    6) space-evenly : 
+                        아이템요소 양쪽과 사이간격 일정 (evenly는 짝수라는 의미가 있음)
+                    7) stretch :
+                        높이값이 auto인 경우 등분할 늘려주기!
+                
+                */
 
             }
             .t6 li{
                 /* 작아질때 크기유지 */
                 flex-shrink: 0;
-                margin: 0 22px;
+                margin: 0 15px;
             }
 
+            /* 마진없이 플렉스랩핑 박스 줄바꿈하기! */
+            .t7{
+                top: 10px;
+                /* 기존 left값 해제 */
+                left:auto;
+                /* right 기준 새로 셋팅 */
+                right: 10px;
+                width: 400px;
+                height: 250px;
+                /* 트랜스폼 해제 */
+                transform: none;
+
+                /* 플렉스 박스 */
+                display: flex;
+                /* 플렉스 랩핑 박스
+                -> 자식요소에 flex-shrink:0
+                  으로 설정값을 변경하지 않아도 
+                  자동으로 변환된다! */
+                flex-wrap: wrap;
+                /* 진행방향 정렬 중앙 : jcc */
+                justify-content: space-around;
+                /* 수직방향 정렬(여러줄) : ac */
+                align-content: center;
+
+            }
+
+            /* 줄바꿈 요소 디자인 */
+            .t7 li.brk{
+                /* width: 100%; */
+                flex-basis: 100%;
+                /* flex-basis는 width와 동일하지만
+                   flex에서만 사용가능한 가로크기 속성임. */
+
+                /* 기존디자인 변경 */
+                height: 0;   
+                border: none;
+
+                /* 사이간격 조정 */
+                margin-top: 40px;
+            }
+
+            
 
         </style>
     </head>
@@ -392,7 +458,28 @@
                 <li>O</li>
                 <li>T</li>
                 <li>T</li>
-                <li>E</li>            
+                <li>E</li>   
+            </ol>            
+
+            <!-- 타이틀 박스 7  -->
+            <ol class="tit t7">
+
+                <li>L</li>
+                <li>O</li>
+                <li>T</li>
+                <li>T</li>
+                <li>E</li>
+
+                <!-- 줄바꿈할 요소추가 -->
+                <li class="brk"></li>
+
+                <li>W</li>
+                <li>O</li>
+                <li>R</li>
+                <li>L</li>
+                <li>D</li>  
+            </ol>           
+           
 
             </ol>
         </div>

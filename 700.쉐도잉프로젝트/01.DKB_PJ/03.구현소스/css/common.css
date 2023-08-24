@@ -10,6 +10,12 @@
 .header .partbox{
     height: 120px;
 }
+/* 1-1. 로고박스 */
+.header__logo img{
+    margin-top: 40px;
+    width: 126px;
+    
+}
 
 /***************************** 2. 메인영역 : .group-part *****************/
 #main{

@@ -64,6 +64,10 @@ https://dezea.digital/showcase
 2) 메뉴 열고 닫을때, 메뉴사이 오버시 경계선 휘어지기
 -> jS 실험실에서 해보자!
 
+7. lefruitstudio
+https://lefruitstudio.fr/en
+-> 전체메뉴에서 글자 위 오버시 이미지 따라다니는 것
+JS실험실에서 하자!
 
 
 

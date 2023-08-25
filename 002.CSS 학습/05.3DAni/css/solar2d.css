@@ -68,7 +68,7 @@ body{
 
 /* 타이틀 */
 .tit {
-    position: relative;
+    position: relative; */
     z-index: 1;
     /* 행성들보다 위 */
 

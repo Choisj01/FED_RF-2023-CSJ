@@ -13,9 +13,22 @@
 <style>
 html,
 body,
-h1,h2,h3,h4,h5,ul,ol,li {
+h1,h2,h3,h4,h5,h6 {
     margin: 0;
     padding: 0;
+}
+
+body{
+    color: #fff;
+    background: #fff;
+
+    
+}
+
+ol,ul{
+    margin: 0;
+    padding: 0;
+    list-style: none;
 }
 
 h1.logo{
@@ -27,15 +40,15 @@ h1.logo{
 .inbox{
     max-width: 1650px;
     margin: 0 auto;
-    /* outline: 2px dashed lime; */
+    outline: 2px dashed lime;
 }
 
-h1.logo img{
+.logo img{
     position: relative;
-    width: 44px;
-    height: 48px;
-    left: 100px;
-    top: 15px;
+    width: 58px;
+    height: 47px;
+    left: 103px;
+    top: 27px;
 }
 
 </style>
@@ -45,6 +58,7 @@ h1.logo img{
     <header id="top-aria">
         <div class="in-box clb">
             <div class="part-box co12">
+                <!-- 로고박스 -->
                 <h1 class="logo">
                     <a href="#">
                         <img src="./shackshack/ssimages/sslogo.PNG" alt="쉑쉑로고">
@@ -52,6 +66,25 @@ h1.logo img{
                 </h1>
             </div>
         </div>
+        <div class="part-box col-8">
+        <!-- 네비게이션 박스 -->
+        <nav class="gnb">
+            <ul class="line-ani">
+                <li class="menu1">
+                    <a href="#">브랜드스토리</a>
+                </li>
+                <li class="menu2">
+                    <a href="#">메뉴</a>
+                </li>
+                <li class="menu3">
+                    <a href="#">매장안내</a>
+                </li>
+                <li class="menu4">
+                    <a href="#">뉴스</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
 
     </header>
     <main>

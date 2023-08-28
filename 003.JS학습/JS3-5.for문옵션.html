@@ -37,8 +37,9 @@
 
                 // 2.이벤트 셋팅하기
                 // for(시;한;증){}
+
                 // 한계값을 위한 버튼 개수
-                let cnt = btns.length
+                let cnt = btns.length;
 
                 for(let i=0;i<cnt;i++){
                     // console.log('순번 :',i);
@@ -55,7 +56,7 @@
                     // console.log('나야나!',this);
     
                     // 1. 클릭된 버튼의 요소데이터 읽기
-                    let txt = this.innerTEXT;
+                    let txt = this.innerText;
                     
                     // 2. 이미지 넣을 대상 선정 /////////
                     // 클릭된 버튼요소의 부모는?
@@ -79,7 +80,7 @@
                     for(let i=1;i<=10;i++){
                         // console.log('이미지순번:',i);
 
-                        
+
                     // [조건에 따른 for문 옵션]
                     // 4-1. 4번과 7번빼고 돌리기
                     if(i==4||i==7) {continue;}
@@ -136,7 +137,7 @@
 
         <div>
             <h2>2~4,9빼고 돌리기</h2>
-            <button>for문옵션연습3</button>
+            <button>for문옵션연습1</button>
             <br /><br />
             <div class="forCls"></div>
         </div>

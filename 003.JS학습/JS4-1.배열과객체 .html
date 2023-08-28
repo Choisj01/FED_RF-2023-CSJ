@@ -47,7 +47,7 @@
 
         /*********************************
           
-           함수명: loadFN
+           함수명: loadFn
            기능 : 로딩 후 실행함수
          
         *********************************/
@@ -449,8 +449,8 @@
             
             ************************************************************************/
 
-            // 자신만의 Object
-            const csj_obj = {};
+            // 자신만의 Object -> 변경가능하도록 let으로 변경할 것!
+            let csj_obj = {};
 
             // 오브젝트 형만 만들고 객체내용은 아래에서!
             // 1. 영화제목
@@ -511,24 +511,101 @@
             // 최초호출!!!
             showMovieInfo();
 
-            /************************************** 
+        
+            // 초이스버튼 링크 걸기
+
+            // 대상선정 : .choice button
+            let choice = document.querySelectorAll(".choice button");
+            console.log('초이스:',choice);
+
+
+            // 초이스 개수
+            let choice_cnt = choice.length;
+
+            // for문으로 버튼들을 click이벤트 설정함!
+            // for(시;한;증){코드}
+            for(let i=0;i<choice_cnt;i++){
+                choice[i].onclick = function(){
+                    // 1. 버튼 텍스트
+                    let btxt = this.innerText;
+                    console.log('난누구?',btxt);
+
+                    // 할당전 이전 영화객체
+                    console.log("이전객체:",csj_obj);
+
+
+                    // 2. 버튼텍스트에 해당하는 객체를 기존객체에 덮어쓰기
+                    switch(btxt){
+                        case "조은초이스":csj_obj = zoe_obj; 
+                        break;
+                        case "석호초이스":csj_obj = tom_obj; 
+                        break;
+                        case "동엽초이스":csj_obj = nick_obj; 
+                        break;
+                        case "용진초이스":csj_obj = shin_Obj; 
+                        break;
+                        case "혜경초이스":csj_obj = hg_obj; 
+                        break;
+                        case "서진초이스":csj_obj = seo_obj; 
+                        break;
+                        case "정현초이스":csj_obj = jh_obj; 
+                        break;
+                        case "민정초이스":csj_obj = kmj_obj; 
+                        break;
+                        case "경은초이스":csj_obj = lke_obj; 
+                        break;
+                        case "주현초이스":csj_obj = an_obj; 
+                        break;
+                        case "윤민초이스":csj_obj = kimyoonmin_obj; 
+                        break;
+                        case "지민초이스":csj_obj = cake_obj; 
+                        break;
+                        case "승준초이스":csj_obj = Moon_Obj; 
+                        break;
+                        case "진구초이스":csj_obj = tonyFilm; 
+                        break;
+                        case "승환초이스":csj_obj = yu_obj; 
+                        break;
+                        case "내우초이스":csj_obj = naewoo_Obj; 
+                        break;
+
+                    } ////// switch case ////////////////
+
+                    // 할당 후 영화객체
+                    console.log('이후객체:',csj_obj);
+
+                    // 3. 객체 셋팅함수 호출!
+                    showMovieInfo();
+                }; /////////////// click 이벤트 함수 ////////////////
+            } ///////////////////// for문 /////////////////
+              /////////////////////////////////////////////
+
+            //   초이스 줄간격 조정
+            target[6].style.lineHeight = '20px';
+
+        }  ////////////////////// loadFn 함수 //////////////////////////
+           /////////////////////////////////////////////////////////
+
+               /************************************** 
                 함수명 : playMovie
                 기능 : 영화 예고편 화면띄우기
             ******************************************/
-            function playMovie(mcode){  // mcode - 영화 아이디
+            function playMovie(mcode){  
+                // mcode - 영화 아이디
                 // 함수호출 및 전달값 확인
                 console.log('난 진짜야~!',mcode);
 
                 // 1.동영상 박스 대상선정 : #mvbox
-                let mvbox = document.querySelector('mvbox');
+                let mvbox = document.querySelector('#mvbox');
+
                 // 2. 영화박스 아이프레임넣기
-                mvbox.innerHTML = `
+                mvbox.innerHTML =`
                     <div id="mv">
-                        <!-- 유투브 아이프레임 -->
-                        <iframe width="100%" height="100%" src="https://www.youtube.com/embed/${mcode}?autoplay1" allow="autoplay;"></iframe>
-                        <!-- 닫기 버튼 -->
+                        <!--유튜브 아이프레임-->
+                        <iframe width="100%" height="100%" src="https://www.youtube.com/embed/${mcode}?autoplay=1" allow="autoplay"></iframe>
+                        <!--닫기버튼-->
                         <button class="cbtn">×</button>
-                        </div>
+                    </div>
                 `;
 
                 // 3. 삽입된 동영상 박스 css설정하기
@@ -536,8 +613,8 @@
 
                 let css = mv.style;
 
-                css.position = fixed;
-                css.top = '50%';
+                css.position = "fixed";
+                css.top = '%50';
                 css.left = '50%';
                 css.transform = 'translate(-50%,-50%)';
                 css.width = '700px';
@@ -581,47 +658,9 @@
                      // 동영상 배경 암전효과
                      document.body.classList.add('on');
 
-
-
-
-
             }  /////////////////// platMovie 함수 //////////////////////
             //////////////////////////////////////////////////////////////////
 
-            // 초이스버튼 링크 걸기
-
-            // 대상선정 : .choice button
-            let choice = querySelectorAll('.choice button');
-            console.log('초이스:',choice);
-
-
-            // 초이스 개수
-            let choice_cnt = choice.length;
-            // for문으로 버튼들을 click이벤트 설정함!
-            // for(시;한;증){코드}
-            for(let i=0;i<choice_cnt;i++){
-                choice[i].onclick = function(){
-                    // 1. 버튼 텍스트
-                    let btxt = this.innerText;
-                    console.log('난누구?',btxt);
-
-                    // 할당전 이전 영화객체
-                    console.log('csj_obj');
-
-                    // 2. 버튼텍스트에 해당하는 객체를 기존객체에 덮어쓰기
-                    switch(btxt){
-                        case "조은초이스":
-                            csj_obj 
-                    }
-
-                    // 3. 객체 셋팅함수 호출!
-                    showMovieInfo();
-                };
-            } ///////////////////// for문 /////////////////
-              /////////////////////////////////////////////
-
-        }  ////////////////////// loadFn 함수 //////////////////////////
-           /////////////////////////////////////////////////////////
 
         </script>
         
@@ -638,19 +677,23 @@
         <div class="cont"></div>
         <div class="cont choice">
             <!-- 영화초이스 버튼박스 -->
-            <button>초이스</button>
-            <button>초이스</button>
-            <button>초이스</button>
-            <button>초이스</button>
-            <button>초이스</button>
-            <button>초이스</button> <br>
-            <button>초이스</button>
-            <button>초이스</button>
-            <button>초이스</button>
-            <button>초이스</button>
-            <button>초이스</button>
-            <button>초이스</button> <br>
-         
+            <button>조은초이스</button>
+            <button>석호초이스</button>
+            <button>동엽초이스</button>
+            <button>용진초이스</button>
+            <button>혜경초이스</button>
+            <button>서진초이스</button> <br>
+            <button>정현초이스</button>
+            <button>민정초이스</button>
+            <button>경은초이스</button>
+            <button>주현초이스</button>
+            <button>윤민초이스</button>
+            <button>지민초이스</button> <br>
+            <button>승준초이스</button>
+            <button>진구초이스</button>
+            <button>승환초이스</button>
+            <button>내우초이스</button>
+            
 
         </div>
 

@@ -1,0 +1,62 @@
+@charset "utf-8";
+/* 1차 개인프로젝트 PJ : 메인페이지 CSS - main.css */
+
+/* 리셋,공통 외부 CSS 합치기(merging) */
+@import url(./reset.css);
+@import url(./core.css);
+@import url(./common.css);
+
+/* 공사중 표시 */
+body *{
+    outline: 2px dashed #ccc;
+}
+body>div>*{
+    outline-color: red;
+}
+
+/*********************** 2. 메인페이지 배너영역 *********************/
+#banner{
+    background: url(../shackshack/ssimages/ssbanner1.PNG) no-repeat center/auto 100%;
+    background: url(../shackshack/ssimages/ssbanner2.PNG) no-repeat center/auto 100%;
+    background: url(../shackshack/ssimages/ssbanner3.PNG) no-repeat center/auto 100%;
+
+}
+
+.banner .partbox{
+    height: 530px;
+}
+
+/* 3. 간단한 메뉴 소개영역 */
+/* 4. 브랜드 스토리 영역 */
+/* 5. 뉴스 영역 */
+/* 6. 하단 영역 */
+
+
+
+
+/***************************** 4. 메인영역 : .group-part *****************/
+#main{
+    background-color: lightyellow;
+}
+/* 간단한 메뉴 소개영역 */
+.main .group-part-01 .partbox{
+    height: 455px;
+}
+/* 브랜드 스토리 영역 */
+.main .group-part-02 .partbox{
+    height: 298px;
+}
+/* 뉴스영역 */
+.main .group-part-03 .partbox{
+    height: 300px;
+}
+
+
+/* 대표이미지 파트 */
+.main .group-part-04 .partbox{
+    height: 542px;
+}
+/* 최신동영상파트 */
+.main .group-part-05 .partbox{
+    height: 376px;
+}

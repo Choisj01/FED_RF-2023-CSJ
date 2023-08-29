@@ -1,90 +1,152 @@
 <!DOCTYPE html>
 <html lang="Kor">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>개인프로젝트_SHAKESHACK</title>
-</head>
-<!-- JS 구역 -->
-<script>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>개인프로젝트_SHAKESHACK</title>
+    </head>
     
-</script>
-<!-- CSS구역 -->
-<style>
-html,
-body,
-h1,h2,h3,h4,h5,h6 {
-    margin: 0;
-    padding: 0;
-}
+    <!-- CSS구역 -->
+    <style>
 
+        /* 초기화 */
+        html,
+        body,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            margin: 0;
+            padding: 0;
+        }
 
+        
+        ol,
+        ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
 
-ol,ul{
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
+        /* 공사중 표시 */
+        body * {
+            outline: 2px dashed red;
+        }
 
-/* 공통 클래스  */
-/* 속박스 */
-.inbox{
-    max-width: 1650px;
-    margin: 0 auto;
-    outline: 2px dashed lime;
-}
+        /* 12 그리드 클래스 : 한줄에 합이 12컬럼이 되도록 셋팅! */
+        .col-1 {
+            width: 8.33%;
+        }
+        .col-2 {
+            width: 16.66%;
+        }
+        .col-3 {
+            width: 25%;
+        }
+        .col-4 {
+            width: 33.33%;
+        }
+        .col-5 {
+            width: 41.66%;
+        }
+        .col-6 {
+            width: 50%;
+        }
+        .col-7 {
+            width: 58.33%;
+        }
+        .col-8 {
+            width: 66.66%;
+        }
+        .col-9 {
+            width: 75%;
+        }
+        .col-10 {
+            width: 83.33%;
+        }
+        .col-11 {
+            width: 91.66%;
+        }
+        .col-12 {
+            width: 100%;
+        }
 
-.logo img{
-    position: relative;
-    width: 58px;
-    height: 47px;
-    left: 103px;
-    top: 27px;
-}
+        /* 공통 클래스  */
+        /* 속박스 */
+        .inbox {
+            max-width: 1650px;
+            margin: 0 auto;
+            outline: 2px dashed lime;
+        }
 
-</style>
-<body>
-    
-    
-    <header id="top-aria">
-        <div class="in-box clb">
-            <div class="part-box co12">
-                <!-- 로고박스 -->
-                <h1 class="logo">
-                    <a href="#">
-                        <img src="./shackshack/ssimages/sslogo.PNG" alt="쉑쉑로고">
-                    </a>
-                </h1>
+        /* 네비게이션 링크 상위 a  */
+        .gnb > ul > li > a {
+            display: block;
+
+            /* 글자 밑줄 - text-decoration */
+            font-size: min(18px, 1.7vw);
+            /* min 글자 18픽셀과 2vw중 최소값까진 유지되어라! */
+            /* vw(뷰포트 가로단위) 보이는 화면 크기에 따라 유동적으로 크기가 줄도록하는 단위 */
+            padding: 0 min(32px, 1.4vw);
+            /* line-height: 80px; */
+        }
+
+        .logo img {
+            position: relative;
+            width: 58px;
+            height: 47px;
+            left: 103px;
+            top: 27px;
+        }
+
+        section{
+            width: 1628px;
+            height: 528px;
+        }
+    </style>
+
+    <!-- JS 구역 -->
+    <script></script>
+
+    <body>
+        <header id="top-aria">
+            <div class="in-box clb">
+                <div class="part-box co1-2">
+                    <!-- 로고박스 -->
+                    <h1 class="logo">
+                        <a href="#">
+                            <img src="./shackshack/ssimages/sslogo.PNG" alt="쉑쉑로고" />
+                        </a>
+                    </h1>
+                </div>
             </div>
-        </div>
-        <div class="part-box col-8">
-        <!-- 네비게이션 박스 -->
-        <nav class="gnb">
-            <ul class="line-ani">
-                <li class="menu1">
-                    <a href="#">브랜드스토리</a>
-                </li>
-                <li class="menu2">
-                    <a href="#">메뉴</a>
-                </li>
-                <li class="menu3">
-                    <a href="#">매장안내</a>
-                </li>
-                <li class="menu4">
-                    <a href="#">뉴스</a>
-                </li>
-            </ul>
-        </nav>
-    </div>
-
-    </header>
-    <main>
-
-    </main>
-    <footer>
-
-    </footer>
-    
-    
-</body>
+            <div class="part-box col-4">
+                <!-- 네비게이션 박스 -->
+                <nav class="gnb">
+                    <ul class="line-ani">
+                        <li class="menu1">
+                            <a href="#">브랜드스토리</a>
+                        </li>
+                        <li class="menu2">
+                            <a href="#">메뉴</a>
+                        </li>
+                        <li class="menu3">
+                            <a href="#">매장안내</a>
+                        </li>
+                        <li class="menu4">
+                            <a href="#">뉴스</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+        <main>
+            콘텐츠 영역
+        </main>
+        <footer id="info">
+            하단영역
+        </footer>
+    </body>
 </html>

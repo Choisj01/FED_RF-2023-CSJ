@@ -1,5 +1,28 @@
 // 영화 초이스 객체 ////// object.js
 
+ // 자신만의 Object -> 변경가능하도록 let으로 변경할 것!
+ let sj_obj = {};
+
+ // 오브젝트 형만 만들고 객체내용은 아래에서!
+ // 1. 영화제목
+ sj_obj.title = "가디언즈오브갤럭시vol.3";
+ // 2. 감독
+ sj_obj.director = "제임스건";
+ // 3. 배우
+ sj_obj.actor = "크리스프랫,조샐다나";
+ // 4. 영화장르
+ sj_obj.genre = "SF코미디어드벤처";
+ // 5. 관람가
+ sj_obj.ratings = "12세";
+ // 6. 예고편
+ sj_obj.trailer = function () {
+     console.log("예고편:", "XyHr-s3MfCQ");
+
+     // 플레이어함수 호출!!
+     playMovie("XyHr-s3MfCQ");
+ }; ////////////// trailer 함수 ////////////////////
+
+
 // 자신만의 오브젝트! - 이조은
 const zoe_obj = {};
 // 오브젝트 형만 만들고 객체내용은 아래에서!

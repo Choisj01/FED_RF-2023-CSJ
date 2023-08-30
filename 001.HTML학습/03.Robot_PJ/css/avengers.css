@@ -112,22 +112,49 @@ body *{
     width: 320px;
     top: 50%;
     right: 110%;
-    transform: translateY(-50%);
-    font-size: 1.8rem; /* px로 변경하면 18px과 동일함 */
-    padding: 2rem;
-    line-height: 1.7;
+    transform: translateY(25%);
+    /* transform: translateY(-50%); */
+    font-size: 1.4rem; /* px로 변경하면 18px과 동일함 */
+    line-height: 1.6;
     background-color: rgb(51 53 48 / 51%);
     border-radius: 15px;
     text-shadow: 1px 1px 1px #000;
+
+     /* 숨기기 설정 */
+     height: 0;
+     overflow: hidden;
+
+     /* 트랜지션 */
+     transition: .4s ease-in-out;
+}
+
+/* 상위박스 .hero 오버시 설명 보이기 */
+.hero:hover .txt{
+    height: 200px;
+    transform: translateY(-50%);
+
+}
+ /* 패딩과 보더는 하위박스에 주고 완전히 숨기기 */
+.txt>div{
+    padding: 2rem;
 }
 
 /* 설명박스 위치변경 위치오른쪽 클래스 */
 .txt.right{
     right: auto;
     left: 110%;
-    
+
+   
     
 }
+
+/* 캐릭터 타이틀 */
+.txt h3{
+    font-size: 2.5rem;
+    text-align: center;
+    color: aqua;
+}
+
 
 /* .hero 순서별 위치값 셋팅 */
 .hero:nth-child(1){

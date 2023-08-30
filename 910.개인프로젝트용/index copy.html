@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1차 개인프로젝트_SHAKESHACK</title>
+</head>
+<!-- JS -->
+<script></script>
+<!-- css -->
+<style>
+/* 기본 초기화 */
+html,
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+ul,
+ol,
+dl,
+dt,
+dd,
+p,
+figure,
+figcaption {
+    margin: 0;
+    padding: 0;
+}
+
+/* ul, ol 순번, 블릿없앰 */
+ul,ol{
+    list-style: none;
+}
+
+/* a 요소 리셋 */
+a{
+    color: #222;
+    text-decoration: none; 
+}
+
+/* heading 요소 글자크기 */
+h1,h2,h3,h4,h5,h6{
+    font-size: 100%;
+    /* 박스 디자인시 글자크기로 인한 
+    영향을 없애기 위한 초기화!! */
+}
+/* 공통 글자체 */
+
+
+/* 공사중 표시  */
+body *{
+    border: 3px dashed red ;
+}
+
+html{
+    font-size: 10px;
+}
+
+#header{
+    height: 7.7rem;
+    
+}
+nav.gnb{
+    
+    top: 0;
+    left: 0;
+}
+
+#banner{
+    height: 45rem;
+}
+
+#ss-menu{
+    height: 45rem;
+}
+
+#brand-story{
+    height: 45rem;
+}
+
+#news{
+    height: 45rem;
+}
+
+#footer{
+    height: 7.7rem;
+}
+
+li {
+    padding: 35px 86px;
+    margin: 0 75px;
+
+}
+
+nav>ul{
+    display: flex;
+    justify-content: flex-end;
+}
+
+nav>ul>li>a{
+    text-decoration: none;
+    font-size: 1.5rem;
+    
+}
+
+section>img{
+    position: relative;
+    width: 1889px;
+    height: 855px;
+}
+
+</style>
+<body>
+    <div id="header">
+        <nav class="gnb">
+            <ul>
+                <li><a href="#">브랜드 스토리</a></li>
+                <li><a href="#">메뉴</a></li>
+                <li><a href="#">위치안내</a></li>
+                <li><a href="#">뉴스</a></li>
+            </ul>
+        </nav>
+        
+    </div>
+    <div id="banner">배너
+        <section class="banner inbox">
+            <img src="./shackshack/ssimages/ssbanner1.PNG" alt="">
+        </section>
+    </div>
+    <div id="ss-menu">메뉴</div>
+    <div id="brand-story">브랜드스토리</div>
+    <div id="news">뉴스</div>
+    <div id="footer">하단</div>
+
+
+
+
+
+
+</body>
+</html>

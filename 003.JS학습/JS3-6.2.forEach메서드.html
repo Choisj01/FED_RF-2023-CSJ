@@ -31,18 +31,23 @@
 
                 console.log('대상:',btns);
                 // 2. 버튼 클릭이벤트 설정
-                for(let x of btns){
-                    // x 는 버튼 각 요소
-                    // console.log('x,너는 누구?',x);
+                // forEach메서드 사용!
+                btns.forEach(ele=>{
+
+
+              
+               
+                    // ele 는 버튼 각 요소
+                    console.log('ele,너는 누구?',ele);
 
                     // 각 버튼에 클릭이벤트 함수 설정
-                    x.onclick = () => {
+                    ele.onclick = () => {
                         // console.log('나야나',x);
                         // this를 사용말고 x를 사용하자!!!
 
                         // 1. 버튼 텍스트 가져오기
                         // -> 버튼에 따른 배열데이터 선택위해!
-                        let btxt = x.innerText;
+                        let btxt = ele.innerText;
                         // console.log('버튼명:',btxt);
 
                         // 2. 버튼별 데이터 분기
@@ -64,30 +69,61 @@
 
                         // 3. 각 데이터 매칭하여 요소에 넣기
                         // 변경대상 : .minfo -> minfo변수
+                        // forEach 메서드 사용!
+                        mv_info.forEach((val,idx)=>
+                        minfo[idx].innerText = val);
+                         /////////////////// forEach 축약버전 //////////////// 
+                        
+                        
+                        
+                        
+                        
+                        // mv_info.forEach((val,idx)=>{
+                        //     console.log('전달값:',val,idx);
+                        //     minfo[idx].innerText = val;
+                        // }); /////////////////// forEach ////////////////
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                         // for of문을 사용하여 배열순회!
                         // 변경대사의 순번을 변수로 처리함!
 
                         // 변경대상순번
-                        let seq = 0;
+                //         let seq = 0;
 
-                        for(let y of mv_info){
-                            // console.log('배열순회:',y);
-                            // 대상에 순서대로 넣는다!
-                            minfo[seq].innerText = y;  /* seq 시퀀스(순서번호)를 의미함!! */
+                //         for(let y of mv_info){
+                //             // console.log('배열순회:',y);
+                //             // 대상에 순서대로 넣는다!
+                //             minfo[seq].innerText = y;  /* seq 시퀀스(순서번호)를 의미함!! */
 
-                            // 변경대상 순번증가
-                            seq++;
+                //             // 변경대상 순번증가
+                //             seq++;
 
-                        } ////////////// for of문 ////////////////
+                //         } ////////////// for of문 ////////////////
 
 
 
                     }; //////////////// click이벤트 함수 ///////////
 
-                } //////////////// for of ///////////////
+
+                }); //////////////// forEach 메서드 ///////////////
 
 
             } /////////////////// loadFn 함수 ////////////
+
 
             /************************************ 
                 [ 배열과 컬렉션을 위한 forEach() ]

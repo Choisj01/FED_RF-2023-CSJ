@@ -31,9 +31,34 @@
                     // x 는 버튼 각 요소
                     // console.log('x,너는 누구?',x);
 
+                    // 각 버튼에 클릭이벤트 함수 설정
                     x.onclick = () => {
-                        console.log('나야나');
-                    };
+                        // console.log('나야나',x);
+                        // this를 사용말고 x를 사용하자!!!
+
+                        // 1. 버튼 텍스트 가져오기
+                        // -> 버튼에 따른 배열데이터 선택위해!
+                        let btxt = x.innerText;
+                        // console.log('버튼명:',btxt);
+
+                        // 2. 버튼별 데이터 분기
+                        let mv_info;
+                        switch(btxt){
+                            case "조제":
+                                mv_info = mv1;
+                                break;
+                            case "원더 우먼 1984":
+                                mv_info = mv2;
+                                break;
+                            case "도굴":
+                                mv_info = mv3;
+                                break;
+                        } ///////////// sitch case ////////
+
+                        // 데이터 확인 
+                        console.log('데이터:',mv_info);
+
+                    }; //////////////// 클릭이벤트 함수 ///////////
 
                 } //////////////// for of ///////////////
 

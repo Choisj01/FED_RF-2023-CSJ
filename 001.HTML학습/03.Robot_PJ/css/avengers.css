@@ -33,10 +33,10 @@ body{
     color: #fff;
 }
 
-/* 공사중표시 */
+/* 공사중표시
 body *{
     outline: 2px dashed yellow;
-}
+} */
 
 /********************* 공통클래스 ************************/
 /* 페이지 클래스 */
@@ -104,7 +104,10 @@ body *{
     */
     
     border-radius: 50%;
+    /* 박스 글로우 */
+    box-shadow: 0 0 20px 10px lime;
 }
+
 
 /* 어벤져스 설명박스 */
 .txt {
@@ -130,7 +133,7 @@ body *{
 
 /* 상위박스 .hero 오버시 설명 보이기 */
 .hero:hover .txt{
-    height: 200px;
+    height: 220px;
     transform: translateY(-50%);
 
 }

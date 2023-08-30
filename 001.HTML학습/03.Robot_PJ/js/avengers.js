@@ -28,13 +28,14 @@ for (let x in character) {
     // 변수 x는 객체의 속성이다!
     // 객체값은 객체변수[x]
     // console.log(x,'/',character[x]);
+
     // num이 3이상일떄는 .txt에 .right를 추가함!
 
     hcode += `
     <!-- ${num}. ${x} -->
     <div class="hero">
         <!-- 이미지 -->
-        <img src="./ab_img/${character[x]['이미지명'].png}" alt="${x}">
+        <img src="./ab_img/${character[x]['이미지명']}.png" alt="${x}">
         <!-- 소개글박스 -->
         <article class="txt${num>=3?' right':''}">
             <div>

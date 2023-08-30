@@ -50,10 +50,10 @@ h1,h2,h3,h4,h5,h6{
 body *{
     outline: 2px dashed #777;
 }
-/* header, main, footer {
+body>div>*{
     outline-color: red;
-    display: block;
-} */
+}
+
 
 /* 상단 스타일 */
 header{
@@ -90,11 +90,16 @@ footer{
 
         
     </header>
+    <!-- 메인영역 -->
     <main>
-        
+        <div class="banner"></div>
+        <div class="main-menu"></div>
+        <div class="brand-story"></div>
+        <div class="news"></div>
     </main>
+    <!-- 하단영역 -->
     <footer>
-        
+        <div class="footer-logo"></div>
     </footer>
 </body>
 </html>

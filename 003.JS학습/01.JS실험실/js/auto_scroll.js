@@ -18,6 +18,8 @@
 // 1. 전역변수 설정하기
 // 1-1. 페이지 변수
 let pg_num = 0; 
+// 1-2. 휠 상태변수
+let sts_wheel = 0;
 
 // 2. 이벤트 등록하기////////////////////////////////
 // 대상: window
@@ -33,12 +35,34 @@ window.addEventListener('wheel',wheelFn); /* addEventListener - 이벤트 등록
 function wheelFn(e){ //e - 이벤트 전달변수(자동)
     // 함수호출확인!
     console.log('휠~~~!');
+    
+    // 0. 광휠 금지 설정 //////
+    if(sts_wheel) return; // 여기서 나감!
+    sts_wheel = 1; // 잠금!
+    setTimeout(()=>{sts_wheel=0},800);
+    // 0.8초 후 잠금 해제!!
+    
+    // 함수호출확인!
+    console.log('휠작동~~~!');
+
 
     // 1. 휠 방향에 따른 페이지 변수 변경하기
     // 휠방향은 wheelDelta로 알아냄!
     let delta = e.wheelDelta;
     console.log('휠델타:',delta);
+    
+    
+    // 음수(-)는 아랫방향, 양수(+) 윗방향.
+    if(delta<0) pg_num++;
+    else pg_num--;
 
+    // 한계수 체크(양끝 페이지 고정!)
+    if(pg_num<0) pg_num=0;
+    if(pg_num>6) pg_num=6;
+
+
+    // 전체 페이지번호 확인
+    console.log('페이지번호:',pg_num);
 
     // 2. 페이지 이동하기
     // scrollTo(x축위치,y축위치)
@@ -46,8 +70,6 @@ function wheelFn(e){ //e - 이벤트 전달변수(자동)
     // 스크롤애니메이션은 html{scroll-behavior:smooth}로 처리
     // 화면단위로 이동하므로 윈도우 높이값을 기본값으로 처리
     // window.innerHeight ->  window 높이값 구해온다!
-    if(delta<0) pg_num++;
-    else pg_num--;
 
     window.scrollTo(0,window.innerHeight*pg_num);
 } //////////////////// wheelFn 함수 //////////////

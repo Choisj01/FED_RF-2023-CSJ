@@ -1,152 +1,144 @@
 <!DOCTYPE html>
-<html lang="Kor">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>개인프로젝트_SHAKESHACK</title>
-    </head>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1차 개인프로젝트_SHAKESHACK</title>
+</head>
+<style>
+
+/* 기본 초기화 */
+html,
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+ul,
+ol,
+dl,
+dt,
+dd,
+p,
+figure,
+figcaption {
+    margin: 0;
+    padding: 0;
+}
+
+/* ul, ol 순번, 블릿없앰 */
+ul,ol{
+    list-style: none;
+}
+
+/* a 요소 리셋 */
+a{
+    color: #222;
+    text-decoration: none; 
+}
+
+/* heading 요소 글자크기 */
+/* h1,h2,h3,h4,h5,h6{
+    font-size: 100%; */
+    /* 박스 디자인시 글자크기로 인한 
+    영향을 없애기 위한 초기화!! */
+/* } */
+
+/* 공사중 표시 */
+body *{
+    outline: 2px dashed #777;
+}
+
+/* ul,ol 초기화 : 3無 */
+ul,
+ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+/* a 요소 공통 */
+a {
+    color: #222;
+
+    text-decoration: none;
+  }
+
+  body>div,body>div>*{
+    outline: 2px dashed blue;
+  }
+
+  /* 12 그리드 클래스 : 한줄에 합이 12컬럼이 되도록 셋팅! */
+  .col-1 {width: 8.33%;}
+    .col-2 {width: 16.66%;}
+    .col-3 {width: 25%;}
+    .col-4 {width: 33.33%;}
+    .col-5 {width: 41.66%;}
+    .col-6 {width: 50%;}
+    .col-7 {width: 58.33%;}
+    .col-8 {width: 66.66%;}
+    .col-9 {width: 75%;}
+    .col-10 {width: 83.33%;}
+    .col-11 {width: 91.66%;}
+    .col-12 {width: 100%;}
     
-    <!-- CSS구역 -->
-    <style>
+.logo img{
+    width: 100px;
+    height: 90px;
 
-        /* 초기화 */
-        html,
-        body,
-        h1,
-        h2,
-        h3,
-        h4,
-        h5,
-        h6 {
-            margin: 0;
-            padding: 0;
-        }
+}
 
-        
-        ol,
-        ul {
-            margin: 0;
-            padding: 0;
-            list-style: none;
-        }
+</style>
+<!-- js구역 -->
+<script></script>
 
-        /* 공사중 표시 */
-        body * {
-            outline: 2px dashed red;
-        }
+<body>
+    <!-- 상단영역 -->
+    <header class="top-aria">
+      <div class="inbox">
+          <div class="part-box">
+              <!-- 로고박스 -->
+              <h1 class="logo">
+                  <a href="#">
+                      <img src="./shackshack/ssimages/sslogo.PNG" alt="쉑쉑로고" />
+                  </a>
+              </h1>
+          </div>              
+          <div class="part-box">
+          <!-- 네비게이션 박스 -->
+          <nav class="gnb">
+              <ul class="top-menu">
+                  <li class="menu m1">
+                      <a href="#">Our value</a>
+                  </li>
+                  <li class="menu m2">
+                      <a href="#">Menu</a>
+                  </li>
+                  <li class="menu m3">
+                      <a href="#">Locations</a>
+                  </li>
+                  <li class="menu m4">
+                      <a href="#">News</a>
+                  </li>
+      <!-- 주문하기, 사이트맵 버튼 -->
+      <div class="part-box">
+          <ul class="last-menu">
+              <li>
+                  <a href="#">주문하기</a>
+              </li>
+              <li>
+                  <a href="">사이트맵
 
-        /* 12 그리드 클래스 : 한줄에 합이 12컬럼이 되도록 셋팅! */
-        .col-1 {
-            width: 8.33%;
-        }
-        .col-2 {
-            width: 16.66%;
-        }
-        .col-3 {
-            width: 25%;
-        }
-        .col-4 {
-            width: 33.33%;
-        }
-        .col-5 {
-            width: 41.66%;
-        }
-        .col-6 {
-            width: 50%;
-        }
-        .col-7 {
-            width: 58.33%;
-        }
-        .col-8 {
-            width: 66.66%;
-        }
-        .col-9 {
-            width: 75%;
-        }
-        .col-10 {
-            width: 83.33%;
-        }
-        .col-11 {
-            width: 91.66%;
-        }
-        .col-12 {
-            width: 100%;
-        }
+                  </a>
+                
+              </li>
+          </ul>
 
-        /* 공통 클래스  */
-        /* 속박스 */
-        .inbox {
-            max-width: 1650px;
-            margin: 0 auto;
-            outline: 2px dashed lime;
-        }
-
-        /* 네비게이션 링크 상위 a  */
-        .gnb > ul > li > a {
-            display: block;
-
-            /* 글자 밑줄 - text-decoration */
-            font-size: min(18px, 1.7vw);
-            /* min 글자 18픽셀과 2vw중 최소값까진 유지되어라! */
-            /* vw(뷰포트 가로단위) 보이는 화면 크기에 따라 유동적으로 크기가 줄도록하는 단위 */
-            padding: 0 min(32px, 1.4vw);
-            /* line-height: 80px; */
-        }
-
-        .logo img {
-            position: relative;
-            width: 58px;
-            height: 47px;
-            left: 103px;
-            top: 27px;
-        }
-
-        section{
-            width: 1628px;
-            height: 528px;
-        }
-    </style>
-
-    <!-- JS 구역 -->
-    <script></script>
-
-    <body>
-        <header id="top-aria">
-            <div class="in-box clb">
-                <div class="part-box co1-2">
-                    <!-- 로고박스 -->
-                    <h1 class="logo">
-                        <a href="#">
-                            <img src="./shackshack/ssimages/sslogo.PNG" alt="쉑쉑로고" />
-                        </a>
-                    </h1>
-                </div>
-            </div>
-            <div class="part-box col-4">
-                <!-- 네비게이션 박스 -->
-                <nav class="gnb">
-                    <ul class="line-ani">
-                        <li class="menu1">
-                            <a href="#">브랜드스토리</a>
-                        </li>
-                        <li class="menu2">
-                            <a href="#">메뉴</a>
-                        </li>
-                        <li class="menu3">
-                            <a href="#">매장안내</a>
-                        </li>
-                        <li class="menu4">
-                            <a href="#">뉴스</a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-        </header>
-        <main>
-            콘텐츠 영역
-        </main>
-        <footer id="info">
-            하단영역
-        </footer>
-    </body>
+      </div>
+  </header>
+  
+  
+</body>
 </html>

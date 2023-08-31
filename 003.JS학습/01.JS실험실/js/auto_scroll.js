@@ -44,7 +44,7 @@ function wheelFn(e){ //e - 이벤트 전달변수(자동)
     // 0. 광휠 금지 설정 //////
     if(sts_wheel) return; // 여기서 나감!
     sts_wheel = 1; // 잠금!
-    setTimeout(()=>{sts_wheel=0},800);
+    setTimeout(()=>{sts_wheel=0},500);
     // 0.8초 후 잠금 해제!!
     
     // 함수호출확인!

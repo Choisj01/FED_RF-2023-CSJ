@@ -50,56 +50,31 @@ h1,h2,h3,h4,h5,h6{
 body *{
     outline: 2px dashed #777;
 }
-body>div>*{
-    outline-color: red;
-}
-
-
-/* 상단 스타일 */
-header{
-    background: lightyellow;
-    height: 150px;
-}
-main{
-    background: lightcoral;
-    min-height: 700px;
-}
-footer{
-    background: lightgray;
-    height: 150px;
-}
 
 
 </style>
+<!-- js구역 -->
+<script></script>
 <body>
-    <header>
-        <!-- 상단 로고 -->
-        <div class="top logo"></div>
-        <!-- 상단 네비게이션 바 -->
-        <div class="top nav-menu"></div>
-        <ul>
-            <li>브랜드 스토리</li>
-            <li>메뉴</li>
-            <li>위치안내</li>
-            <li>뉴스</li>
-        </ul>
-        <ul>
-            <li>주문하기</li>
-            <li>전체메뉴 탭</li>         
-        </ul>
-
+    <!-- 1. 상단영역 고정 -->
+  <div id="header">
+    <header class="inbox">
         
     </header>
-    <!-- 메인영역 -->
-    <main>
-        <div class="banner"></div>
-        <div class="main-menu"></div>
-        <div class="brand-story"></div>
-        <div class="news"></div>
-    </main>
-    <!-- 하단영역 -->
-    <footer>
-        <div class="footer-logo"></div>
+  </div>
+  <!-- 2. 콘텐츠 영역 -->
+  <div id="main">
+    <section>
+        <div class="inbox">
+
+        </div>
+    </section>
+  </div>
+  <div class="footer">
+    <footer class="footer-info">
+        
     </footer>
+  </div>
+  
 </body>
 </html>

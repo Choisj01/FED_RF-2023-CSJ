@@ -7,41 +7,111 @@
 @import url(./common.css);
 
 /* 공사중 표시 */
-body *{
+body * {
     outline: 2px dashed #ccc;
 }
-body>div>*{
+body > div > * {
     outline-color: red;
 }
 
 /*********************** 2. 캐릭터 소개 *********************/
-#banner{
+#banner {
     background: url(../images/bg_mainvisual2.jpg) no-repeat center/auto 100%;
 }
 
-.banner .partbox{
-    /* height: 530px; */
+/* 캐릭터 파트박스 */
+.cat-area {
+    position: relative;
+    /* 부모자격! */
+
     aspect-ratio: 2/1;
+    /* 파트박스에 비율만들기
+        ->  height 값을 절대 주지 말것! */
+}
+.cat-box {
+    position: absolute;
+    bottom: 5%;
+    /* 플렉스박스 */
+    display: flex;
+    flex-wrap: wrap; /* fxww */
+
+    /* 진행방향 정렬 */
+    justify-content: center; /* jcc */
+
+    width: 100%;
+    margin: 0 auto;
 }
 
+/* 개별캐릭터 박스 */
+.cat-box article {
+    position: relative;
+    /* 부모자격 */
+    width: calc(95% / 4);
+    /* 개별박스 비율설정 : height설정안함! */
+    aspect-ratio: 2/1.2;
+    outline: 1px dashed blue;
+}
+
+/* 캐릭터 컨텐츠 박스 */
+.cat-content{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    height: 200%;
+
+}
+.cat-content .part{ 
+    flex: 1;
+    /* 등분할 */
+}
+
+/* 이미지박스 - 캐릭터이미지  */
+.img-box>img{
+    width: 100%; 
+}
+
+/* 이미지 설명박스  */
+.img-box figcaption{
+    text-align: center;
+    margin-top: -20%;
+    /* 싸고 있는 박스 높이를 기준한 %로 마진을 설정함
+    동적인 크기변경시 마진도 변경되어야 위치가 일정함 */
+}
+/* 이미지 설명 박스 - 캐릭터 이름 이미지 */
+.img-box figcaption img{
+    width: 40%;
+}
+.img-box figcaption img:last-child{
+    /* 마지막 이미지(진한글자) 숨기기 */
+    display: none;
+}
+/* 개별박스에 오버시 진한글자 보이기 */
+.cat-box article:hover .img-box figcaption img:last-child{
+    display: inline;
+}
+/* 개별박스에 오버시 흐린글자 숨기기 */
+.cat-box article:hover .img-box figcaption img:first-child{
+    display: none;
+}
 
 /***************************** 3. 도깨비 메뉴박스  *****************/
-#dokebi-menu{
+#dokebi-menu {
     /* 스티키 포지션 상단스크롤 걸림! */
     position: sticky;
     top: 0;
     background-color: #fff;
 }
 
-.dokebi-menu ul{
+.dokebi-menu ul {
     /* 플렉스 박스 */
     display: flex;
     padding: 12px 0;
-
 }
 
 /* 도깨비메뉴 상위메뉴 a */
-.dokebi-menu ul>li>a{
+.dokebi-menu ul > li > a {
     color: #999;
     font-size: 1.8rem;
     display: block;
@@ -51,28 +121,27 @@ body>div>*{
 }
 
 /* 도깨비메뉴 상위li 오버시a */
-.dokebi-menu ul>li:hover>a{
+.dokebi-menu ul > li:hover > a {
     color: #111;
 }
 
 /* 하위메뉴가 있는 li만 하위표시하기 */
-.dokebi-menu ul>li.br-sub>a::after{
-    content: '∨';
+.dokebi-menu ul > li.br-sub > a::after {
+    content: "∨";
     display: inline-block;
-    transform: scale(.5,.3); /* scale(x축,y축) */
+    transform: scale(0.5, 0.3); /* scale(x축,y축) */
     margin-left: 3px;
-
 }
 
 /* 현재 선택된 메뉴 li.on 클래스 */
-.dokebi-menu ul>li.on>a{
+.dokebi-menu ul > li.on > a {
     background-color: red;
     color: white;
     border-radius: 30px;
 }
 
 /* 도깨비 서브메뉴 */
-.dokebi-sub-menu{
+.dokebi-sub-menu {
     position: absolute;
     border: 1px solid red;
     border-radius: 20px;
@@ -83,65 +152,38 @@ body>div>*{
     display: none;
 }
 /* 상위 li에 마우스 오버시 서브보이기 */
-.dokebi-menu ul>li:hover .dokebi-sub-menu{
+.dokebi-menu ul > li:hover .dokebi-sub-menu {
     display: block;
 }
 
 /* 도깨비 서브메뉴 a */
-.dokebi-sub-menu a{
+.dokebi-sub-menu a {
     display: block;
-    padding: 10px 15px; 
+    padding: 10px 15px;
     font-size: 1.8rem;
 }
 
-
-/***************************** 4. 메인배너 *****************/
-.cat-area{
-    position: relative;
-    /* 부모자격! */ 
-}
-.cat-box{
-    position: absolute;
-    bottom: 5%;
-    /* 플렉스박스 */
-    display: flex;
-    flex-wrap: wrap; /* fxww */
-
-    /* 진행방향 정렬 */
-    justify-content: center; /* jcc */
-
-
-    width: 100%;
-    margin: 0 auto;
-}
-
-/* 개별캐릭터 박스 */
-.cat-box article{
-    width: calc(95%/4); 
-    aspect-ratio: 2/1.5;
-    outline: 1px dashed blue;
-}
-/***************************** 5. 메인영역 : .group-part *****************/
-#main{
+/***************************** 4. 메인영역 : .group-part *****************/
+#main {
     background-color: lightyellow;
 }
 /* 방송편성소개파트 */
-.main .group-part-01 .partbox{
+.main .group-part-01 .partbox {
     height: 455px;
 }
 /* 미리보기 파트 */
-.main .group-part-02 .partbox{
+.main .group-part-02 .partbox {
     height: 298px;
 }
 /* 현장포토파트 */
-.main .group-part-03 .partbox{
+.main .group-part-03 .partbox {
     height: 300px;
 }
 /* 대표이미지 파트 */
-.main .group-part-04 .partbox{
+.main .group-part-04 .partbox {
     height: 542px;
 }
 /* 최신동영상파트 */
-.main .group-part-05 .partbox{
+.main .group-part-05 .partbox {
     height: 376px;
 }

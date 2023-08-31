@@ -21,6 +21,11 @@ let pg_num = 0;
 // 1-2. 휠 상태변수
 let sts_wheel = 0;
 
+// 새로고침시 첫페이지로 리셋하기
+// 브라우저 스크롤 위치캐싱때문에 함!
+setTimeout(()=>{window.scrollTo(0,0)},500);
+
+
 // 2. 이벤트 등록하기////////////////////////////////
 // 대상: window
 window.addEventListener('wheel',wheelFn); /* addEventListener - 이벤트 등록함수 */

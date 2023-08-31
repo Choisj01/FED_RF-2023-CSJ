@@ -20,6 +20,8 @@
 let pg_num = 0; 
 // 1-2. 휠 상태변수
 let sts_wheel = 0;
+// 1-3. 전체페이지수 
+let total_pg;
 
 // 새로고침시 첫페이지로 리셋하기
 // 브라우저 스크롤 위치캐싱때문에 함!
@@ -29,8 +31,27 @@ setTimeout(()=>{window.scrollTo(0,0)},500);
 // 2. 이벤트 등록하기////////////////////////////////
 // 대상: window
 window.addEventListener('wheel',wheelFn); /* addEventListener - 이벤트 등록함수 */
+window.addEventListener('DOMContentLoaded',loadFn);
 
 // 3. 이벤트 연결함수//////////////////////////////////
+
+// DOM 선택함수 ///////
+const qs = x => document.querySelector('x');
+const qsa = x => document.querySelectorAll('x');
+
+/*************************************
+   함수명: loadFn 
+   기능: html 로딩 후 실행 코드구역
+  *************************************/
+ function loadFn(){
+    // 호출확인!
+    console.log('로딩완료!');
+
+    // 전체 페이지수 할당
+    total_pg = qsa('.page').length;
+    console.log('전체페이지수:',total_pg);
+ } ///////////// loadFn 함수 //////////
+   ///////////////////////////////////
 
 /************************************** 
     함수명: wheelFn
@@ -45,7 +66,7 @@ function wheelFn(e){ //e - 이벤트 전달변수(자동)
     if(sts_wheel) return; // 여기서 나감!
     sts_wheel = 1; // 잠금!
     setTimeout(()=>{sts_wheel=0},500);
-    // 0.8초 후 잠금 해제!!
+    // 0.5초 후 잠금 해제!!
     
     // 함수호출확인!
     console.log('휠작동~~~!');
@@ -63,7 +84,7 @@ function wheelFn(e){ //e - 이벤트 전달변수(자동)
 
     // 한계수 체크(양끝 페이지 고정!)
     if(pg_num<0) pg_num=0;
-    if(pg_num>6) pg_num=6;
+    if(pg_num==total_pg) pg_num=total_pg-1;
 
 
     // 전체 페이지번호 확인

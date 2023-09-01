@@ -11,9 +11,21 @@ body{
 }
 
 /* 큐브를 직접싸고 있는 대상 */
+/* <!-- [전체 랩핑박스 : .wrap ] 
+1.화면고정 필수(fixed) 
+2.화면과 같은 크기 설정 
+3.스크롤셋팅(랩핑박스에서 스크롤됨) 
+4. 원근설정(perspective)
+--> */
 .wrap{
-  
+    /* 1.화면고정 필수(fixed)  */
+    position: fixed;
+    /* 2.화면과 같은 크기 설정 */
+    width: 100vw;
     height: 200vh;
+    /* 3.스크롤셋팅(랩핑박스에서 스크롤됨)  */
+    overflow: scroll;
+    /* 4. 원근설정 */
     perspective: 60vh;
 }
 
@@ -155,11 +167,11 @@ body{
     /* 애니메이션  */
     animation: cube-ani  4s linear  infinite;
     /* 애니메이션 멈춤상태 */
-    animation-play-state: paused;
+    /* animation-play-state: paused; */
 }
 
-/* 큐브회전 클래스.on 작동 */
-.rotate-cube.on{
+/* 큐브회전 오버시 멈춤 */
+.rotate-cube:hover{
     /* 애니메이션 작동상태 */
     animation-play-state: running;
 }

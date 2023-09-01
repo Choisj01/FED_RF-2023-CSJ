@@ -10,3 +10,36 @@
     버튼으로 변경되어 있음!
 
 *************************************/
+// window 로드 이벤트 호출 ////
+window.addEventListener('DOMContentLoaded',loadFn);
+
+// DOM 선택함수
+const qs = x => document.querySelector(x);
+const qsa = x => document.querySelectorAll(x);
+
+///////////////////로딩함수//////////////
+function loadFn(){
+
+    // 함수 호출확인
+    console.log('로딩완료!');
+
+    // 1. 대상선정 : 
+    // 1-1. 이벤트 대상: btngo
+    const btngo =qs('.btngo');
+
+    // 1-2. 변경대상 : .cube
+    const cube = qs('.cube');
+    console.log('대상:',btngo,cube);
+
+    // 2. 이벤트 함수 설정하기
+    btngo.onclick = () => {     
+        // 호출확인
+        console.log('돌아!');
+        // 1. 대상: .cube -> 큐브변수
+        // 2. 변경내용 : 클래스on 없으면 넣고 있으면 빼기
+        // classList.toggle(클래스명)
+        cube.classList.toggle('on');
+    }; ////////// click 이벤트 함수 //////////
+   
+
+} //////////////// loadFn 함수 ////////////

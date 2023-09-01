@@ -107,7 +107,7 @@ body > div > * {
 /* 캐릭터 타이틀 */
 .desc-box h3{
     font-family: 'Gugi';
-    font-size: min(2.4rem,1.7vw);
+    font-size: min(2.4rem,1.7vw); /* 2.4rem~1.7vw 까지 이 사이의 크기를 넘지 않도록 폰트 크기 설정 */
     font-weight: normal;
     white-space: nowrap;
     padding: 15px 10px 5px;

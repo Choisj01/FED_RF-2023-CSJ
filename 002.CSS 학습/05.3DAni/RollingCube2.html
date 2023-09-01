@@ -1,39 +1,43 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rolling Cube 3D Animation + 원근적용</title>
-    <!-- 외부 css  -->
-    <link rel="stylesheet" href="./css/cube2.css">
-    <!-- 외부js -->
-    <script src="./js/cube2.js"></script>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Rolling Cube 3D Animation + 원근적용</title>
+        <!-- 외부 css  -->
+        <link rel="stylesheet" href="./css/cube2.css" />
+        <!-- 외부js -->
+        <script src="./js/cube2.js"></script>
+    </head>
+    <body>
+        <!-- 전체 랩핑박스  -->
+        <div class="wrap">
+            <!-- 작동버튼 -->
+            <button class="btngo">돌아!</button>
 
-</head>
-<body>
+            <!-- preserve- 3d 적용범위 박스 + 높이값설정박스 -->
+            <section class="content">
+                
+                <!-- 큐브 : 정육면체 -->
+                <div class="cube rotate-cube">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
 
-    <!-- 작동버튼 -->
-    <button class="btngo">돌아!</button>
-
-    <!-- 큐브 : 정육면체 -->
-    <div class="cube rotate-cube">
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-    </div>
-    
-    <!-- 큐브 : 정육면체 -->
-    <div class="cube rotate-cube">
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-    </div>
-    
-</body>
+                <!-- 큐브 : 정육면체 -->
+                <div class="cube cube2 rotate-cube">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </section>
+        </div>
+    </body>
 </html>

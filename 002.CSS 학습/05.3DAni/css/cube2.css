@@ -7,8 +7,39 @@ html,body{
 }
 body{
     background-image: linear-gradient(to bottom, #a1f4e0, #ef95fb);
-    height: 100vh;
+    height: 100vh;    
 }
+
+/* 큐브를 직접싸고 있는 대상 */
+.wrap{
+  
+    height: 200vh;
+    perspective: 60vh;
+}
+
+/* preserve- 3d 적용범위 박스 + 높이값설정박스 */
+.content{
+    position: relative;
+    /* 부모자격 - .cube, .cube2 */
+    height: 300vh; /* 보이는 화면의 300% */
+
+        /* 
+        [ 입체로 설정하기! ]
+        -입체로 설정할 요소의 부모박스에
+        아래와 같이 설정해준다!
+        (부모는 싸고 있는 요소 또는 상위요소)
+        transform-style: preserve-3d;
+        -기본값은 flat : 2D
+        -preserve-3d : 3D
+
+    */
+    /* 원근설정과 연결되는 3d 설정! */
+    transform-style: preserve-3d;
+
+
+
+}
+
 /* css 변수 셋팅 */
 :root{
     /* 큐브 공통크기 */
@@ -34,29 +65,26 @@ body{
 /* 큐브 */
 .cube{
     position: absolute;
-    top: calc(50% - var(--cube-size)/2);
-    left: calc(50% - var(--cube-size)/2);
+    top: calc(50vh - var(--cube-size)/2);
+    left: calc(50vw - var(--cube-size)/2);
 
     width: var(--cube-size);
     height: var(--cube-size);
 
-    /* 
-        [ 입체로 설정하기! ]
-        -입체로 설정할 요소의 부모박스에
-        아래와 같이 설정해준다!
-        (부모는 싸고 있는 요소!)
-        transform-style: preserve-3d;
-        -기본값은 flat : 2D
-        -preserve-3d : 3D
-
-    */
+    /* 하위 span을 위한 3d 설정 */
     transform-style: preserve-3d;
 
+
     /* 입체를 잘 보이게 하기 위해 약간 회전함 */
-    transform: rotateX(10deg) rotateY(30deg);
+    transform: rotateY(30deg);
 
     /* outline: 2px solid red; */
 
+}
+
+/* 또 하나의 큐브 */
+.cube2{
+    top: calc(150vh - var(--cube-size)/2);
 }
 
 /* 큐브 각 면공통 */
@@ -140,7 +168,7 @@ body{
        
 @keyframes cube-ani {
     to{
-        transform: rotateX(370deg) rotateY(-330deg);
+        transform: rotateY(-330deg);
         /* transform: rotateX(370deg) rotateY(390deg) rotateZ(360deg); */
          /* 
             x축 양의 방향으로 10도에서 출발

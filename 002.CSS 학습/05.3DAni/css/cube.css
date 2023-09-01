@@ -75,15 +75,15 @@ body{
 .cube span:nth-child(1){
     background: url(../images/seoulCity.jpg) no-repeat center/cover;
 
-/* 화면방향 : z축 */
-transform: translateZ(calc(var(--cube-size)/2));
+    /* 화면방향 : z축 */
+    transform: translateZ(calc(var(--cube-size)/2));
 }
 
 /* 2. 오른쪽면 */
 .cube span:nth-child(2){
     background: url(../images/newyorkCity.jpg) no-repeat right/auto 105%;
 
-    /* 화면방향 : y축 */
+    /* y축회전 + 화면방향이동 : z축 */
     transform: rotateY(90deg)
     translateZ(calc(var(--cube-size)/2));
 }
@@ -91,7 +91,7 @@ transform: translateZ(calc(var(--cube-size)/2));
 .cube span:nth-child(3){
     background: url(../images/parisCity.jpg) no-repeat center/cover;
 
-    /* 화면방향 : z축 */
+    /* y축회전 + 화면방향이동 : z축 */
     transform: rotateY(180deg)
     translatez(calc(var(--cube-size)/2));
 }
@@ -99,7 +99,7 @@ transform: translateZ(calc(var(--cube-size)/2));
 .cube span:nth-child(4){
     background: url(../images/cityMain.jpg) no-repeat center/cover;
 
-    /* 화면방향 : z축 */
+    /*  y축회전 + 화면방향이동 : z축 */
     transform: rotateY(-90deg)
     translatez(calc(var(--cube-size)/2));
 }

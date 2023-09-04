@@ -77,11 +77,15 @@
         width: var(--mover-size);
         height: var(--mover-size);
         border-radius: 50%;
-        background-color: aquamarine;
+        background-color: rgb(0, 255, 234);
+
+        /* 자기자신 요소는 이벤트가 무시되게 셋팅해야
+        아래쪽 요소를  만질 수 있음 */
+        pointer-events: none;
 
         /* 트랜지션 : 이징은 ease-out */
         transition: .4s ease-out;
-        
+
 
     }
 

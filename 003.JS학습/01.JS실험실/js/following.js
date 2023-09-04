@@ -11,8 +11,9 @@ const qsa = (x) => document.querySelectorAll(x);
 // 2-1. 로드함수 ///// (js 순서 3번)
 function loadFn() {
     // 함수호출확인
-    // console.log("로딩완료!");
+    console.log("로딩완료!");
 
+    // [1]html 코드 넣기 /////////////////////////////
     // 1. 대상선정
     // 변경대상: .cont-box
     const cont_box = qs(".cont-box");
@@ -21,7 +22,7 @@ function loadFn() {
     // 2. html 태그만들기
     // 50개 이미지 만들기
     let hcode = ""; /* 데이터 저장 공간 hcode(본인이 명명하면 됨) 메모리공간명 만듦 */
-    // 빈 리터럴 
+    // 빈 리터럴
 
     // for(시;한;증){코드}
     for (let i = 1; i <= 50; i++) {
@@ -38,5 +39,60 @@ function loadFn() {
     // 3. 대상에 html 넣기
     cont_box.innerHTML = hcode;
 
+    // [2] 따라다니는 원 셋팅하기
+    // 1. 대상선정 :
+    // (1) 움직일 대상 : .mover
+    const mover = qs(".mover");
+    // (2) 이벤트 대상: document.body
+    const myBody = document.body;
 
+    // console.log('요소:',mover,myBody);
+
+    // 무버 크기의 절반계산
+    let gap = mover.clientWidth/2;
+    // 선택요소의 크기 JS
+    // width는 clientWidth , height는 clientHeight
+    console.log('무버 width:',gap);
+
+
+    // 2. 이벤트 대상에 마우스 무브 이벤트가 적용될 떄
+    // 무버가 따라 따라다니게 기능 구현
+    myBody.onmousemove = e => { // e -> 이벤트 전달변수
+        // 1. 위치값 가져오기 ( 박스 중앙위치로 보정 )
+        let posx = e.pageX - gap;
+        let posy = e.pageY - gap;
+
+        // 2. 무버에 위치값 적용하기
+        mover.style.top = posy + 'px';
+        mover.style.left = posx + 'px';
+
+
+
+
+        // console.log("pageX:", e.pageX, "/pageY:", e.pageY);
+        // console.log("screenX:", e.screenX, "/screenY:", e.screenY);
+        // console.log("offsetX:", e.offsetX, "/offsetY:", e.offsetY);
+        // console.log("clientX:", e.clientX, "/clientY:", e.clientY);
+
+/***************************************************          
+★[[ 이벤트발생시 위치값 ]]★
+    1. clientX, clientY
+        -> 현재 보이는 브라우저 화면이 기준
+        -> 화면을 기준한 fixed 포지션에서 주로 사용!
+
+    2. offsetX, offsetY
+        -> 이벤트 대상이 기준
+        -> 특정 박스가 부모자격 박스로부터 위치를 사용할 경우
+
+    3. pageX, pageY
+        -> 전체 문서를 기준(스크롤 화면을 포함)
+        -> 화면을 기준한 absolute 포지션에서 주로 사용!
+
+    4. screenX, screenY
+        -> 모니터 화면을 기준
+********************************************************/
+
+
+
+    }; //////////// onmousemove /////////////////
 } /////////////////로드함수 ///////////////////////

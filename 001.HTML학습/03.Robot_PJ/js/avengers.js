@@ -72,12 +72,28 @@ let tit_one = '';
 for(let x of my_text){
     console.log(x);
     tit_one += `<span>${x}</span>`;
-}
+} //////// for of //////////////////
 
 console.log(tit_one);
 
 // 다시 타이틀에 넣기
 mytit.innerHTML = tit_one;
+
+// 생성된 span요소 선택
+let new_span = qsa('.t1 span')
+
+// 셋팅된 span요소를 돌면서 하나씩 transition-delay 시간을
+// 일정시간 간격으로 주기!
+new_span.forEach((ele,idx)=>{
+    ele.style.transitionDelay = (0.2*idx)+'s';
+});
+
+// 어벤져스 박스 나올떄까지 (5초) 기다린 후 
+// span의 transform 변경하기
+setTimeout(()=>{
+    for(let x of new_span) x.style.transform='translateY(0) scale(1)';
+},5000);
+
 
 
  /************************************************* 

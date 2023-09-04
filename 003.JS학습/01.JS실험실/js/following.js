@@ -61,6 +61,9 @@ function loadFn() {
         // 1. 위치값 가져오기 ( 박스 중앙위치로 보정 )
         let posx = e.pageX - gap;
         let posy = e.pageY - gap;
+        // let posy = e.clientY - gap;
+        // -> 만약 .mover가 fixed 포지션이면
+        // 브라우저 화면에서의 위치인 clientY를 사용한다!
 
         // 2. 무버에 위치값 적용하기
         mover.style.top = posy + 'px';
@@ -92,7 +95,32 @@ function loadFn() {
         -> 모니터 화면을 기준
 ********************************************************/
 
-
-
     }; //////////// onmousemove /////////////////
+
+    // 이벤트 구역 들어올때만 따라다니는 마우스 보이기/ 나가면 숨기기
+    myBody.onmouseenter = () => {
+        mover.style.opacity = 1;
+        
+    }; ///////////////onmouseenter ////////////////////
+    myBody.onmouseleave = () => {
+        mover.style.opacity = 0;
+        
+    }; ///////////////onmouseleave ////////////////////
+
+    // [3] a요소에 오버시 원 크게 만들기 //////
+    // 대상 : .link
+    const link = qsa('.link');
+    console.log('링크',link);
+
+    // 한번에 셋팅하기
+    link.forEach(ele=>{
+        // a요소에 마우스 들어올때 
+        ele.onmouseenter = () => mover.style.transform = 'scale(2)';
+        // a요소에 마우스 나갈때
+        ele.onmouseleave = () => mover.style.transform = 'scale(1)';
+    });
+
+
+
+
 } /////////////////로드함수 ///////////////////////

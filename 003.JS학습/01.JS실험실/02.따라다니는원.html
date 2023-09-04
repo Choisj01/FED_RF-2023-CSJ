@@ -71,6 +71,8 @@
     .mover{
         /*  위치값 조정 */
         position: absolute;
+        /* position: fixed; -> js에서 clientY 사용! */
+        
         top: 0;
         left: 0;
        
@@ -83,8 +85,22 @@
         아래쪽 요소를  만질 수 있음 */
         pointer-events: none;
 
+        mix-blend-mode: exclusion;
+        /* 
+            [mix-blend-mode 속성]
+            -겹치는 생각처리 블랜딩 모드속성
+            -겹치는 요소의 색상을 섞어서 
+            디스플레이 처리함
+            -밝은 색 섞기 (screen 계열)
+            -어두운 색 섞기 (darken 계열)
+        
+        */
+
         /* 트랜지션 : 이징은 ease-out */
         transition: .4s ease-out;
+
+        /* 처음에 안보이도록 */
+        opacity: 0;
 
 
     }

@@ -1,14 +1,14 @@
 // 따라다니는 원 JS - following.js
 
-// 1.이벤트 등록하기
+// 1.이벤트 등록하기 (js 순서 1번)
 window.addEventListener("DOMContentLoaded", loadFn);
 
-// 2. 함수만들기
+// 2. 함수만들기 (js 순서 2번)
 // DOM 선택함수
 const qs = (x) => document.querySelector(x);
 const qsa = (x) => document.querySelectorAll(x);
 
-// 2-1. 로드함수 /////
+// 2-1. 로드함수 ///// (js 순서 3번)
 function loadFn() {
     // 함수호출확인
     // console.log("로딩완료!");

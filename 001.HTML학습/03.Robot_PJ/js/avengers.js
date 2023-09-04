@@ -1,22 +1,22 @@
-// 어벤져스 JS - avengers.js
+// 어벤저스 JS - avengers.js
 
 // 공통 DOM 선택함수
-const qs = (x) => document.querySelector(x);
-const qsa = (x) => document.querySelectorAll(x);
+const qs = x => document.querySelector(x);
+const qsa = x => document.querySelectorAll(x);
 
 
 window.addEventListener('wheel',(e)=>{
-    // 기본기능 막기: preventDefault
-    e.preventDefault(); 
+    // 기본기능 막기 : preventDefault()
+    e.preventDefault();
     // 이벤트 호출확인
     console.log('휠~~~',e.wheelDelta);
     // event.wheelDelta 는 휠방향알림(마이너스 아랫방향)
-    // 휠 방향 분기
-    // 페이지 이동하기: scrollTo(x스크롤위치값,y스크롤위치값)
-    window.scrollTo(0,windowinnerHeight*(e.wheelDelta<0?1:0));
-    // windowinnerHeight*(e.wheelDelta<0?1:0)
+    // 휠방향 분기
+    // 페이지 이동하기 : scrollTo(x스크롤위치값,y스크롤위치값)
+    window.scrollTo(0,window.innerHeight*(e.wheelDelta<0?1:0));
+    // window.innerHeight*(e.wheelDelta<0?1:0)
     // 윈도우높이값 * 음수명 1곱하고 양수면 0곱함
-    // 아랫방향은 윈도우높이값만큼 가고 윗방향은 위치값 0임.
+    // 아랫방향은 윈도우높이값만큼 가고 윗방향은 위치값 0임!
 },{passive:false});
 
 // passive:false 설정값 변경을 해야

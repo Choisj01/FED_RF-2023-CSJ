@@ -123,25 +123,85 @@ function wheelFn(e){ //e - 이벤트 전달변수(자동)
 
 // 1. 모바일 이벤트 등록하기///////////
 // 대상 : window
-window.addEventListener('touchstart',mobileFn);
-window.addEventListener('touchend',mobileFn);
+window.addEventListener('touchstart',thouchStart);
+window.addEventListener('touchend',touchEnd);
 
 
 // 2. 모바일 이벤트 함수만들기 ////////
-function mobileFn(e){ //  e - 이벤트 전달변수
+
+// 터치 위치값 변수
+let pos_start = 0, pos_end=0;
+
+
+// 터치 시작 이벤트호출 이벤트 함수/////////////////
+function thouchStart(e){ //  e - 이벤트 전달변수
     // 모바일 이벤트 화면 위치값 구하기
     // 모바일 오리지널 이벤트 객체 - originalEvent
     // 하위 터치 이벤트 컬렉션 -touches[0]
     // 변경된 touch이벤트를 담는 컬렉션 - changedTouches[0]
 
     // 스크린 위치값 구하기
-    let scY = e.originalEvent.touches[0].screenY;
+    // 제이쿼리는 originalEvent를 사용해야 나옴!
+    // let scY = e.originalEvent.touches[0].screenY;
+    pos_start = e.touches[0].screenY;
 
 
     // 함수호출확인
-    console.log('모바일이야~',scY);
+    console.log('터치시작~!',pos_start);
 
 } ///////////// mobileFn /////////////////
+
+
+// 2-2.터치끝 이벤트호출 함수 ///////////////////////
+function touchEnd(e){ //  e - 이벤트 전달변수
+    // 모바일 이벤트 화면 위치값 구하기
+    // 모바일 오리지널 이벤트 객체 - originalEvent
+    // 하위 터치 이벤트 컬렉션 -touches[0]
+    // 변경된 touch이벤트를 담는 컬렉션 - changedTouches[0]
+
+    // 1. 스크린 위치값 구하기
+    // 제이쿼리는 originalEvent를 사용해야 나옴!
+    // let scY = e.originalEvent.touches[0].screenY;
+    // 터치가 끝날때는 changedTouches[0] 를 사용해야함!
+    pos_end = e.changedTouches[0].screenY;
+
+    // 터치방향 알아내기 /////////////
+    // 원리 : 시작위치 - 끝위치
+    // 음수면 윗방향이동, 양수면 아랫방향 이동
+    let result = pos_start - pos_end;
+
+    // 함수호출확인
+    console.log('터치끝~!',pos_end,'결과:',result);
+
+    // return값이 차가 0이면 함수나감!
+    if(result==0) return;
+    
+    // 이벤트 처리 함수 호출
+    // 양수면 1, 음수면 0을 넘겨준다!
+    movePage(result>0?1:0);
+
+} ///////////// mobileFn /////////////////
+
+///// 2-3. 이벤트 처리함수 : 화면 이동 //////////////// 
+function movePage(dir){ //dir - 방향값(1 - 아랫쪽, 0 - 위쪽)
+  // 함수호출
+  console.log('이동방향은?',dir);
+
+  // 1.페이지 번호 변경 반영하기//////
+  // 1은(true) 아랫방향, 0은 윗방향.
+  // 1값은 true/0값은 false로 처리됨!
+  if(dir) pg_num++;
+  else pg_num--;
+
+  // 2.한계수 체크(양끝 페이지 고정!) ///////
+  if(pg_num<0) pg_num=0;
+  if(pg_num==total_pg) pg_num=total_pg-1;
+
+
+   // 3. 페이지 이동하기///////
+   window.scrollTo(0,window.innerHeight*pg_num);
+
+} ////////////// movePage 함수 ///////////////////////////
 
 
 

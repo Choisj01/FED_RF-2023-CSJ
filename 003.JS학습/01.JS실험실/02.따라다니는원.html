@@ -56,12 +56,43 @@
         height: 100%;
         object-fit: cover;
     }
+    /* 마우스 오버시 */
+    .link:hover{
+        color: red;
+    }
+
+    /* 변수 셋팅 */
+    :root{
+        --mover-size: 50px;
+
+    }
+
+    /* 따라다니는 원 */
+    .mover{
+        /*  위치값 조정 */
+        position: absolute;
+        top: 0;
+        left: 0;
+       
+        width: var(--mover-size);
+        height: var(--mover-size);
+        border-radius: 50%;
+        background-color: aquamarine;
+
+        /* 트랜지션 : 이징은 ease-out */
+        transition: .4s ease-out;
+        
+
+    }
 
 </style>
 <body>
     <!-- 컨텐츠 박스 -->
     <div class="cont-box">
-        <!-- 이미지 박스 js로 호출해서 이미지 불러오게 함 -->
+        <!-- 이미지 박스 잘라내고 js로 보내서 for문 호출해서 이미지 불러오게 함 -->
     </div>
+
+    <!-- 따라다니는 원 -->
+    <div class="mover"></div>
 </body>
 </html>

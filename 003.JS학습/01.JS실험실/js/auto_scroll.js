@@ -26,13 +26,14 @@ let total_pg;
 let ele_page;
 
 // 새로고침시 첫페이지로 리셋하기
-// 브라우저 스크롤 위치캐싱때문에 함!
+// 브라우저 스크롤바 위치 캐싱때문에함!
 setTimeout(()=>{window.scrollTo(0,0)},500);
 
 
 // 2. 이벤트 등록하기////////////////////////////////
 // 대상: window
-window.addEventListener('wheel',wheelFn); /* addEventListener - 이벤트 등록함수 */
+window.addEventListener('wheel',wheelFn); 
+/* addEventListener - 이벤트 등록함수 */
 window.addEventListener('DOMContentLoaded',loadFn);
 
 // 3. 이벤트 연결함수//////////////////////////////////
@@ -128,14 +129,14 @@ function wheelFn(e){ //e - 이벤트 전달변수(자동)
 
 // 1. 모바일 이벤트 등록하기///////////
 // 대상 : window
-window.addEventListener('touchstart',thouchStart);
+window.addEventListener('touchstart',touchStart);
 window.addEventListener('touchend',touchEnd);
 
 
 // 2. 모바일 이벤트 함수만들기 ////////
 
 // 터치 위치값 변수
-let pos_start = 0, pos_end=0;
+let pos_start=0, pos_end=0;
 
 
 // 터치 시작 이벤트호출 이벤트 함수/////////////////
@@ -188,10 +189,9 @@ function touchEnd(e){ //  e - 이벤트 전달변수
 } ///////////// mobileFn /////////////////
 
 ///// 2-3. 이벤트 처리함수 : 화면 이동 //////////////// 
-function movePage(dir){ //dir - 방향값(1 - 아랫쪽, 0 - 위쪽)
-  // 함수호출
+function movePage(dir){ // dir은 방향값(1-아랫쪽,0-윗쪽)
+  // 함수호출확인
   console.log('이동방향은?',dir);
-
   // 1.페이지 번호 변경 반영하기//////
   // 1은(true) 아랫방향, 0은 윗방향.
   // 1값은 true/0값은 false로 처리됨!
@@ -200,7 +200,7 @@ function movePage(dir){ //dir - 방향값(1 - 아랫쪽, 0 - 위쪽)
 
   // 2.한계수 체크(양끝 페이지 고정!) ///////
   if(pg_num<0) pg_num=0;
-  if(pg_num==total_pg) pg_num=total_pg-1;
+  if(pg_num==total_pg) pg_num = total_pg-1;
 
 
    // 3. 페이지 이동하기///////

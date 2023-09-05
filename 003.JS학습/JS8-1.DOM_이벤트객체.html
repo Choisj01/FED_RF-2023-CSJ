@@ -72,6 +72,13 @@
                 const sonFn = e => {
                     event.currentTarget.style.
                     outline = '20px dotted hotpink';
+
+                    // 단순 버블링막기 : stopPropagation()
+                    // event.stopPropagation();
+
+                    // 버블링 + 다른이벤트까지 막기 
+                    // stopImmediatePropagation()
+                    // event.stopImmediatePropagation();
                 };
 
                 // 이벤트 걸기
@@ -80,7 +87,7 @@
                 // 아들방 (a요소) 클릭시
                 qs("a").onclick = (e) => {
                     // 이벤트 버블링 막기
-                    // event.stopPropagation();
+                    // e.stopPropagation();
 
                     // 이벤트가 발생한 자신은?
                     // event.currentTarget
@@ -98,6 +105,11 @@
                     // 이벤트가 발생한 자신은?
                     // event.currentTarget
                     e.currentTarget.style.backgroundColor = "yellow";
+
+                    // Target으로 할 경우
+                    // 이벤트가 발생한 요소인 a요소 배경색이
+                    // 변경됨!(a에 버블링 막기가 없어야함!)
+                    // e.Target.style.backgroundColor = "yellow";
 
                     // 이벤트 속성값 찍기
                     showLog("엄마방");
@@ -122,6 +134,18 @@
                      // 이벤트 속성값 찍기
                      showLog('대한민국 전체');
                 }; ///////////// click 이벤트 함수 //////////
+
+                // 아들방 클릭이벤트 지우기 버튼 클릭시 ///
+                qs('.clear').onclick = () => {
+
+                    // 1. 이벤트리스너로 등록한 이벤트 지우기
+                    qs('a').removeEventListener('click',sonFn);
+
+                    // 2. 이벤트 속성에 할당한 값 지우기
+                    qs('a').onclick = ''; 
+
+                }; /////////////// click 이벤트 함수 //////////////////
+
             } /////////////////loadFn ///////////////
 
             /************************************************* 
@@ -230,5 +254,12 @@
                 <a href="#">내방</a>
             </p>
         </div>
+
+        <!-- 아들방 클릭이벤트 지우기 버튼 -->
+        <button class="clear" style="font-size: 5vw;">
+            아들방 이벤트 지워!
+        </button>
+
+
     </body>
 </html>

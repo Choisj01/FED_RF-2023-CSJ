@@ -138,7 +138,7 @@ body{
 }
 
 /* 상위메뉴 오버시 하위메뉴 보이기 */
-.gnb li:hover .smenu{
+.gnb>li:hover .smenu{
     display: block;
 }
 

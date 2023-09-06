@@ -53,11 +53,16 @@ body{
     border-top: 1px solid #ccc;
     border-bottom: 1px solid #ccc;
     background-color: #fff;
+    /* 하단컨텐츠보다 상위메뉴는 항상 위! */
+    z-index: 999;
 }
 .gnb>ul{
     /* 플렉스박스-옆으로 흐르게 */
     display: flex;
     justify-content: center; /* jcc */
+    /* 줄바꿈방지 */
+    white-space: nowrap;
+
     font-family: 'Nanum Gothic', sans-serif;
 }
 /* 상위메뉴 a */
@@ -82,18 +87,23 @@ body{
     width: 100%;
     height: 70px;
     margin-top: 11px;
+    /* background-color: red; */
     background-color: #fff;
+    /* 처음에 숨김 */
+    display: none;
+}
+/* 상위메뉴 오버시 서브배경 가상요소 보이기 */
+.gnb>ul>li:hover::after{
+    display: block;
+    border-bottom: 4px solid darkblue;
 }
 
 /* 오버시 */
-.gnb>ul>li>a:hover{
-    position: relative;
-    /* 부모자격 */
+.gnb>ul>li>a:hover{  
     color: blueviolet;
-    
 }
 /* 가상요소 밑줄 */
-.gnb>ul>li>a:hover::after{
+.gnb>ul>li:hover>a::after{
     content: '';
     position: absolute;
     top: 48px;
@@ -102,38 +112,62 @@ body{
     width: 100%;
     height: 2px;
     background-color: blueviolet;
-
-    
-
 }
 
 /* 서브메뉴 */
 /* 서브메뉴 잠시 숨김 display: none; */
 .smenu{
     display: none;
-}
-.gnb>ul>li:first-child .smenu{
-    display: block;
     position: absolute;
-    background-color: #fff;
-    margin-top: 11px;
+    padding-top: 11px;
     z-index: 1;
+}
+
+/* 5번째 메뉴부터 서브메뉴 위치 변경하기 */
+.gnb>ul>li:nth-child(5) .smenu{
+    margin-left: -50px;
+}
+.gnb>ul>li:nth-child(6) .smenu{
+    margin-left: -200px;
+}
+.gnb>ul>li:nth-child(7) .smenu{
+    margin-left: -650px;
+}
+.gnb>ul>li:nth-child(8) .smenu{
+    margin-left: -300px;
+}
+
+/* 상위메뉴 오버시 하위메뉴 보이기 */
+.gnb li:hover .smenu{
+    display: block;
 }
 
 /* 서브메뉴 ul */
 .smenu ul{
     display: flex;
 }
+
 /* 서브메뉴 li */
 .smenu li{
-    padding: 20px 15px;
+    padding: 20px 10px;
 }
 /* 서브메뉴 a */
 .smenu a{
     display: block;
+    font-size: 15px;
+    padding: 5px 10px;
+}
+/* 서브메뉴 오버시 */
+.smenu:hover{
     background-color: darkblue;
     color: #fff;
-    font-size: 15px;
     font-weight: bold;
-    padding: 5px 10px;
+}
+
+/* 컨텐츠 박스 */
+.cont{
+    position: relative;
+    /* 비율적용박스 */
+    aspect-ratio: 16/9;
+    background: url(../images/visual_img_gansam.jpg) no-repeat center/cover;
 }

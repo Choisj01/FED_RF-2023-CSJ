@@ -1,6 +1,8 @@
 @charset "utf-8";
 
 /* 네비게이션 유형 1 CSS : flex 적용 - nav01_flex.css */
+
+
 html,
 body,
 h1 {
@@ -33,14 +35,15 @@ a {
     text-decoration: none;
 }
 /* 클리어 설정 가상요소
-- .clb 가 설정된 요소는 clear가 셋팅됨! */
-ul::after,
+- .clb 가 설정된 요소는 clear가 셋팅됨!
+-> 플렉스에서는 불필요! */
+/* ul::after,
 ol::after,
 .clb::after {
     content: "";
     display: block;
     clear: both;
-}
+} */
 
 /* 공통 클래스  */
 /* 속박스 */
@@ -86,11 +89,17 @@ ol::after,
     margin: 0 auto;
     /* outline: 3px dotted yellow; */
 }
+/* 리스트 부모인 ul박스가 플렉스박스임! */
+.gnb>ul{
+    display: flex;
+    /* 진행방향 정렬 : 중앙 */
+    justify-content: center;
+}
 /* 최상위 직계 li만 적용! */
 .gnb > ul > li {
     position: relative;
     /* 부모자격 - .sub-menu */
-    float: left;
+    /* float: left; -> 플렉스에서는 안씀! */
     /* 나는 왼쪽, 너는 오른쪽으로 올라와! - 흘러감 */
 
     padding: 29px 0;

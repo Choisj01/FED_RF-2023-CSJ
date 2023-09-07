@@ -23,6 +23,11 @@ font-family: 'Noto Sans KR', sans-serif;
      margin: 0;
      padding: 0;
  }
+
+ ul{
+    list-style: none;
+ }
+ 
  body {
      width: 100vw;
      height: 100vh;
@@ -32,9 +37,6 @@ font-family: 'Noto Sans KR', sans-serif;
  a {
      color: #fff;
      text-decoration: none;
- }
- ul{
-    list-style: none;
  }
 
  /* 전체 타이틀 */

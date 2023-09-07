@@ -111,8 +111,23 @@
                 grid-row-gap (grg)
             **********************************************/
             grid-row-gap: min(1.5vw,15px);
+        }
 
-
+        /* 그리드 각 박스 공통 */
+        .grid>div{
+            position: relative;
+            /* 부모자격 */
+            aspect-ratio: 280/400;
+        }
+        /* 설명박스 */
+        .grid>div aside{
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+            color: #fff;
+            background-color: #00000093;
+            font-size: min(1.2vw,12px);
         }
 
         /* 이미지 셋팅 */
@@ -121,7 +136,57 @@
             height: 100%;
             object-fit: cover;
             object-position: top;
+
+            /* 박스 이미지 하단 공백제거위한 셋팅 */
+            vertical-align: middle;
         }
+
+        /* 미디어쿼리 */
+
+        /* 1200px 이하 미디어쿼리 */
+        @media  screen and (max-width:1200px) {
+            .grid{
+                grid-template-columns: repeat(4,1fr);
+            }
+            
+        }
+         /* 1000px 이하 미디어쿼리 */
+        @media  screen and (max-width:1000px) {
+            .grid{
+                grid-template-columns: repeat(3,1fr);
+            }
+            
+        }
+         /* 800px 이하 미디어쿼리 */
+        @media  screen and (max-width:800px) {
+            .grid{
+                grid-template-columns: repeat(2,1fr);
+            }
+            
+        }
+         /* 500px 이하 미디어쿼리 */
+        @media  screen and (max-width:500px) {
+            .grid{
+                grid-template-columns: repeat(1,1fr);
+            }
+            
+        }
+
+        /* 개별적 변경하기 - 그리드  위치와 크기 변경
+            방법) 개별요소에 column과 row의 시작/끝 번호를 지정함
+            grid-column: 시작번호/끝번호
+            grid-row: 시작번호/끝번호
+
+        */
+        .first{
+            grid-column: 1/3;
+            grid-row: 1/3;
+        }
+        .second{
+            grid-column: 3/5;
+            grid-row: 10/12;
+        }
+
 
 
     </style>
@@ -131,7 +196,7 @@
     <h1 class="tit">그리드1-이미지갤러리</h1>
     <!-- 그리드 레이아웃 박스 -->
     <div class="grid">
-        <div>
+        <div class="frist">
             <img src="./images/1.jpg" alt="dress">
             <aside>
                 <h2>상품명1</h2>
@@ -355,7 +420,7 @@
                 <h3>상품가격32</h3>
             </aside>
         </div>
-        <div>
+        <div class="second">
             <img src="./images/33.jpg" alt="dress">
             <aside>
                 <h2>상품명33</h2>

@@ -33,6 +33,9 @@ font-family: 'Noto Sans KR', sans-serif;
      color: #fff;
      text-decoration: none;
  }
+ ul{
+    list-style: none;
+ }
 
  /* 전체 타이틀 */
  .tit {
@@ -44,33 +47,101 @@ font-family: 'Noto Sans KR', sans-serif;
  }
 
  /* 공통 적용 */
- /* 숨기기 */
+ /* 중앙 속박스  */
+ .inbox{
+    max-width: 1600px;
+    margin: 0 auto;
+ }
+ /* 이미지 숨기기 클래스 */
  .blind img:last-child{
     display: none;
  }
-
- /* 전체타이틀 */
- .top{
-    display: flex;
+ /* .top에 오버시 마지막 이미지 보이기 */
+ .top:hover .blind img:last-child{
+     display: inline;
+    }
+/* .top에 오버시 첫번쨰 이미지 숨기기 */
+ .top:hover .blind img:first-child{
+    display: none;
  }
+
+ /* 상단영역 */
+ .top{
+    /* 플렉스 박스 - 상단영역 큰 레이아웃 3개 */
+    display: flex;
+    /* 진행방향 정렬 : 사이간격 일정하게 */
+    justify-content: space-between;
+    /* 상단영역 글자체 */
+    font-family: 'Maven Pro','Noto Sans KR', sans-serif;
+    /* 전체 숨기기 설정 */
+    overflow: hidden;
+    height: 100px;
+
+    /* 트랜지션 */
+    transition: .4s ease-in-out;
+ }
+ /* .top 마우스 오버시 높이값 늘어나기 */
+ .top:hover{
+    height: 400px;
+    background-color: #fff;
+ }
+ /* .top에 마우스 오버시  글자색 */
+ .top:hover a{
+    color: #222;
+ }
+
  /* 로고 */
  .logo img{
+    margin-top: 20px;
     height: 50px;
  }
- .logo img:last-child{
+ /* .logo img:last-child{
     display: none;
- }
+ } */
 
  /* 네비게이션 박스 */
+ .nav-part{
+    width: 70%;
+ }
  .gnb{
     display: flex;
+    justify-content: center; /* jcc */
+    gap: 0 2vw; /* 플렉스 준 것에 대해 사이간격 줄때 gap 사용!! */
 
  }
- .gnb dl:first-child dt img:last-child{
-    display: none;
+ /* 각 메뉴 박스 : dl */
+ .gnb dl{
+    text-align: center;
  }
+ /* 상위메뉴 : dt */
+ .gnb dt{
+    line-height: 110px;
+    font-size: 17px;
+ }
+ /* a요소 오버시 */
+ .gnb dl:hover dt a,
+ .gnb dd:hover a{
+    color: red;
+ }
+/* 하위메뉴 : dd */
+.gnb dd{
+    font-size: 15px;
+    line-height: 3;/* 단위 없으면 자기 글씨체의 배수 크기 높이 간격 */
+}
+ /* 첫번째 이미지 메뉴(story) 위치조정 */
+ .gnb dl:first-child dt img{
+    transform: translateY(25px);
+ }
+ /* .gnb dl:first-child dt img:last-child{
+    display: none;
+ } */
  /* 기타파트 */
  .tlink{
     display: flex;
+    gap: 0 1.5vw;
+    padding-top: 30px;
  }
- 
+ /* 기타파트 이미지  */
+ .tlink img{
+    height: 30px;
+ }

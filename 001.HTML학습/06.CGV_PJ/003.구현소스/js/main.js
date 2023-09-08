@@ -19,6 +19,8 @@ const domFn = {
 const pmenu = domFn.qsa(".poster-menu a");
 // 1-2. 변경대상 : .screen
 const screen = domFn.qs(".screen");
+// 1-3. 포스터 메뉴 리스트
+const mlist = domFn.qsa('.poster-menu>ul>li');
 
 console.log("대상:", pmenu, screen);
 
@@ -43,13 +45,25 @@ pmenu.forEach((ele) => {
         // 1. 클릭된 a요소 하위 영화제목 정보 읽어오기
         let mtit = domFn.qsEl(ele, "li").innerText;
         //호출확인
-        console.log("나야나", me, mtit, mvCode[mtit]);
+        console.log("나야나", me, mtit, mvCode[mtit],'\n부모:',ele.parentElement);
 
         // 2. 스크린 박스에 아이프레임 src 재구성하여 넣기
         screen.innerHTML = `
             <iframe
-            src="https://www.youtube.com/embed/${mvCode[mtit]}?autoplay=1"allow="autoplay">
+            src="https://www.youtube.com/embed/${mvCode[mtit]}?autoplay=1" allow="autoplay">
             </iframe>
         `;
+
+        // 3. 추가구현 : 클릭된 a요소의 부모인 li에 클래스 on주기
+        // -on을 주면 미리 셋팅된대로 li가 일어나있다!
+        // 부모로 올라가기는 ele.parentElement
+
+        // 3-1. 클래스 on 지우기 초기화 : 대상 mlist
+        mlist.forEach(ele=>ele.classList.remove('on'));
+
+        // 3-2. 해당li요소에 클래스 on 넣기
+        ele.parentElement.classList.add('on');
+
+
     });
 }); //////////////////forEach ///////////////

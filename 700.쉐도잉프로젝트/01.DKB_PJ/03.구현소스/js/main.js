@@ -40,14 +40,35 @@ function loadFn() {
         ele.onwheel = (e) => e.stopPropagation();
     });
 
-/************************************************
- *  [ 현장 포통 데이터 구성하기]
- *  - 배열데이터를 이용하여 HTML코드 구성
- ***********************************************/ 
+    /************************************************
+     *  [ 현장 포통 데이터 구성하기]
+     *  - 배열데이터를 이용하여 HTML코드 구성
+     ***********************************************/
+    // 1. 대상선정: .live-box
+    const liveBox = domFn.qs(".live-box");
+    console.log("대상:", liveBox);
 
+    // 2. 현장포토 데이터를 기반으로 HTML코드 만들기
+    let hcode = "<ul>";
 
+    // 반복코드만들기////
+    // 현장코드 데이터 - data_drama.js에서 가져옴
+    liveData.forEach(val=>{
+        // html변수에 계속 넣기
+        hcode+=`<li>
+        <figure>
+            <img src="./images/live_photo/${val.imgName}.jpg" alt="${val.title}">
+            <figcaption>${val.title}</figcaption>
+        </figure>
+    </li>`;
+    }); ////////////forEach/////////////////
 
+    hcode += '</ul>';
 
+    // console.log(hcode);
+
+    // 3. 대상박스에 html코드 넣기
+    liveBox.innerHTML = hcode;
 
 
 } /////////// loadFn 함수/////////////

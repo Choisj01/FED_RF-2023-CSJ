@@ -73,12 +73,12 @@
 #main{
     /* 본문영역 최소높이 셋팅 */
     min-height: 800px;
-    background-color: lightyellow;
+    /* background-color: lightyellow; */
 }
 
 /************************************ 3. 하단영역 *******************************/
 #footer{
-    background-color: lightgray;
+    /* background-color: lightgray; */
 }
 .footer .partbox{
     height: 100px;

@@ -20,3 +20,4 @@ const liveData = [
     { idx: "7", title: "시청자여러분", imgName: "live_photo2", date: "2023-09-08" },
     { idx: "8", title: "도깨비를마니마니", imgName: "live_photo1", date: "2023-09-08" },
 ]; ////////////// liveData 배열 ////////////////////////
+

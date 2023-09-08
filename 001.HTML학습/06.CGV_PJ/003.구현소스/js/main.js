@@ -25,12 +25,12 @@ console.log("대상:", pmenu, screen);
 // 2. 데이터 생성하기
 // 각 영화별 아이디 객체 만들기
 const mvCode = {
-    닥터스트레인지2: "mI9oyFMUlfg",
-    "쥬라기월드:도미니언": "DSEfRVqjbFA",
-    브로커: "DpVAb7Bi5UQ",
-    범죄도시2: "aw9j_23nORs",
-    잠: "aRxQDCXnfOc",
-    "스파이더맨:노웨이홈": "W7edvITC9g4",
+    '닥터스트레인지2':'mI9oyFMUlfg',
+    '쥬라기월드:도미니언':'DSEfRVqjbFA',
+    '브로커':'DpVAb7Bi5UQ',
+    '범죄도시2':'aw9j_23nORs',
+    '잠':'aRxQDCXnfOc',
+    '스파이더맨:노웨이홈':'W7edvITC9g4',
 };
 
 // 3. 이벤트 함수 만들기

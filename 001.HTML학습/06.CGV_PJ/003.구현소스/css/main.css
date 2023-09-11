@@ -44,7 +44,7 @@ body {
         text-shadow: 0 0 12px aquamarine;
     }
 }
-/* 1-2.GNB */
+/* 2-2.GNB */
 .gnb{
     position: absolute;
     bottom: 0;
@@ -56,6 +56,10 @@ body {
     /* 플렉스박스 사이간격 */
     gap: 0 20px;
     font-family: 'Jua';
+
+    /* 영사기 박스보다 위! */
+    position: relative;
+    z-index: 1;
 }
 /* 상위메뉴 li */
 .gnb ul>li{
@@ -91,7 +95,7 @@ body {
     position: absolute;
     
     left: 50%;
-    /* 가로방향 x축 중앙이동 */
+    /* x축방향 중앙이동 */
     transform: translateX(-50%); /* tftx */
     width: 140px;
     padding: 3px;
@@ -164,14 +168,53 @@ body {
 .cam{
     position: absolute;
     /* 부모는? .gnb */
-    top: -11px;
-    right: -55px;
+    top: -12px;
+    right: -70px;
 }
 /* 영사기 이미지 */
 .cam>img{
+    position: relative;
+    z-index: 1;
     width: 50px;
     transform: rotate(30deg);
+    /* 트랜지션 : 돌아올때 빔회수시간 기다림 */
+    transition:  .3s .2s;
 }
+/* gnb에 오버시 영사기 돌기 */
+.gnb:hover .cam>img{
+    transform: rotate(0);
+    /* 트랜지션 딜레이 없음 */
+    transition-delay: 0s;
+}
+
+/* 빔박스 */
+.beam{
+    position: absolute;
+    top: -16px;
+    right: 9px;
+    width: 0;
+    height: 70px;
+    background: url(../images/bim.png) no-repeat center/auto 100%;
+     /* 트랜지션 : 먼저 빔회수하기 */
+     transition: width .2s linear;
+}
+/* gnb 오버시 빔박스 빔쏘기 */
+.gnb:hover .beam{
+    width: 200px;
+    /* 트랜지션 : 영사기 도는 0.3초 기다림 */
+    transition-delay: .3s;
+    /* 빔 떨림 애니 호출 */
+    animation: beam-ani .02s linear infinite alternate;
+}
+
+/* 빔 떨림 애니키프레임 */
+@keyframes beam-ani {
+    to{
+        opacity: 0.5;
+    }
+    
+}
+
 
 
 

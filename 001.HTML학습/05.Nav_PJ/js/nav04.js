@@ -38,6 +38,7 @@ function showSub() {
     let isSub = domFn.qsEl(this, ".smenu");
     console.log("서브결과:", isSub);
 
+    // [서브메뉴가 있는 li 클릭시]
     // 조건문 조건식에 null값은 false처리됨!
     if (isSub) {
         //.smenu가 있는 경우만 들어옴!
@@ -46,7 +47,9 @@ function showSub() {
         console.log("처리해봐!", hv);
 
         // 3. .smenu(isSub)의 높이값 적용하기
-        isSub.style.height = hv + "px";
+        // 토글기능구현:isSub이 높이가 0이면 hv,아니면 0
+        // isSub.ClientHeight==0?hv:0
+        isSub.style.height = (isSub.clientHeight==0?hv:0) + "px";
 
         // 4. 클릭된 li이외의 li서브는 닫기
         // 방법: 전체 li를 순회하며 현재li만 빼고 처리
@@ -70,7 +73,7 @@ function showSub() {
             } //////////////if///////////////
         }); ////////////forEach////////
     } ////////////if문///////////////
-    // 서브가 없는 li 클릭시 경우에 서브있는것을 모두 닫기
+    //[서브가 없는 li 클릭시 경우에 서브있는것을 모두 닫기]
     else {
         gnbList.forEach((ele) => {
             // 처리대상 변수:순회하며 li하위 .smenu 담기

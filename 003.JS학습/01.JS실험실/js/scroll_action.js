@@ -10,8 +10,7 @@ const domFn = {
 
     // 이벤트셋팅함수
     addEvt: (ele, evt, fn) => ele.addEventListener(evt, fn),
-
-    // 바운딩 위치값함수
+    // 바운딩위치값함수
     getBCR: (ele) => ele.getBoundingClientRect().top,
 }; /////// domFn 객체 /////////////
 
@@ -58,7 +57,6 @@ domFn.addEvt(window, "scroll", showIt);
 // 스크롤시 떨어지는 여자 이벤트 설정
 domFn.addEvt(window, "scroll", moveWoman);
 
-
 // 첫번째요소 위치값
 // let pos1 = scAct[0].offsetTop;
 // let pos2 = scAct[1].offsetTop;
@@ -100,10 +98,6 @@ function addOn(ele) {
     else ele.classList.remove("on");
 } //////////////addOn함수/////////////////////////////
 
-
-
-
-
 // 구현내용: 글자를 박스에 넣고 하나씩 날아오면서 등장
 // 1.대상선정: .stage
 const stage = domFn.qs(".stage");
@@ -140,7 +134,6 @@ setTimeout(() => {
     stage.classList.add("on");
 }, 2000);
 
-
 //////////////스크롤시 떨어지는 여자 함수/////////////////////////
 // 원리: 전체페이지 스크롤 이동한계값을 기준으로
 // 비례식을 세워 보이는 화면에서의 떨녀의 위치를 정해줌
@@ -148,7 +141,7 @@ setTimeout(() => {
 // 윈도우 높이값
 let winH = window.innerHeight;
 // 문서전체 높이값
-let docH = document.body.ClientHeight;
+let docH = document.body.clientHeight;
 // 스크롤 한계값: 전체document 높이 - 화면높이
 let scLimit = docH - winH;
 console.log('스크롤한계값:',scLimit);
@@ -159,23 +152,19 @@ console.log('스크롤한계값:',scLimit);
 const woman = domFn.qs('#woman');
 
 
-function moveWoman(){
-    
+function moveWoman() {
     // 1. 스크롤 위치값
     let scTop = window.scrollY;
 
     // 2. 떨녀 top값
     // 이미지이동값 = 윈도우높이*스크롤이동값/스크롤한계값
-    let wTop = winH*scTop/scLimit;
+    let wTop = winH * scTop / scLimit;
 
-
-    console.log('난 떨녀!',wTop);
+    console.log("난 떨녀!", wTop);
 
     // 3. 떨어지는 여자에 적용하기
-    woman.style.top = wTop + 'px';
+    woman.style.top = wTop + "px";
 
     // 4. 맨위일떄 윗쪽으로 숨기기
-    if(scTop==0) woman.style.top = '-20%';
-
-
-}/////////////moveWoman//////////////////////////////
+    if (scTop == 0) woman.style.top = "-20%";
+} /////////////moveWoman//////////////////////////////

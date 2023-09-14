@@ -23,7 +23,8 @@ console.log("대상:", gnbBox);
 // 3. 객체 데이터로 html코드 만들기
 let hcode = "";
 
-for (let x in mdata) { //x는 속성명
+for (let x in mdata) {
+    //x는 속성명
     console.log("속성명:", x);
     hcode += `
     <ul>
@@ -35,10 +36,7 @@ for (let x in mdata) { //x는 속성명
                     <div class="stit">${x}</div>
                     <a href="#">전체보기</a>
                     <div class="swrap">
-                        <dl>
-                            <dt>2차</dt>
-                            <dd><a href="#">3차</a></dd>
-                        </dl>
+                       ${makeCode('흥')}
                     </div>
                 </h2>
             </aside>
@@ -51,5 +49,37 @@ for (let x in mdata) { //x는 속성명
 
 // 확인
 console.log("코드:", hcode);
+
+// 내부 for in문 코드생성함수 만들기////
+function makeCode(obj) {
+    //obj - 전달값
+    console.log("나야나", obj);
+
+    ` <dl>
+    <dt>2차</dt>
+    <dd><a href="#">3차</a></dd>
+</dl>
+`;
+} ///////////////////////makeCode////////////////////////
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // ul>li>a[href='#']{1차}+.smenu>aside.smbx>h2>(.stit{1차}+a[href='#']{전체보기})+.swrap>dl>dt{2차}+dd>a[href='#']{3차}

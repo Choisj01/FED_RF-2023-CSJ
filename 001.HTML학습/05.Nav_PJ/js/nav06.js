@@ -53,6 +53,6 @@ for (let x in mdata) {
 // 확인
 console.log('코드:',hcode);
 
-// ul>li>a{1차}+.smenu>aside.smbx>h2>(.stit{2차}+a{전체보기})+.swrap>dl>dt+dd>a{요기}
+// ul>li>a{1차}+.smenu>aside.smbx>h2>(.stit{1차}+a{전체보기})+.swrap>dl>dt{2차}+dd>a{3차}
 
 

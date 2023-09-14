@@ -20,7 +20,7 @@
 }
 /* 상단속박스 */
 .top-area{
-    position: relative;
+    /* position: relative; */
     /* 부모자격 - .smenu */
 }
 /* 로고박스 */
@@ -30,13 +30,20 @@
 }
 /****************** GBN박스 ******************/
 .gnb {
+    position: relative;
     display: flex;
     gap: 0 20px;
     line-height: 60px;
 }
-/* 상위메뉴 ul */
-.gnb ul{
-
+/* 상위메뉴 li 가상요소 배경 */
+.gnb>ul>li::before{
+    content: '';
+    position: absolute;
+    left: 0;
+    width: 100%;
+    /* 부모는? -  */
+    height: 400px;
+    background-color: red;
 }
 /* GNB 공통 a */
 .gnb>ul>li:first-child>a{

@@ -18,13 +18,13 @@ const domFn = {
 
 // 2. 대상선정: .gnb
 const gnbBox = domFn.qs(".gnb");
-console.log("대상:", gnbBox);
+// console.log("대상:", gnbBox);
 
 // 3. 객체 데이터로 html 코드만들기
 let hcode = '';
 
 for(let x in mdata){ // x는 속성명
-  console.log('속성명:',x); 
+//   console.log('속성명:',x); 
   hcode +=
   `<ul>
       <li>
@@ -51,7 +51,7 @@ for(let x in mdata){ // x는 속성명
 
 // 내부 for in문 코드 생성함수 만들기 /////
 function makeCode(obj){ // obj - 객체 전달값
-    console.log('나야나',obj);
+    // console.log('나야나',obj);
     // 코드변수
     let hcode = '';
 
@@ -78,12 +78,6 @@ function makeCode(obj){ // obj - 객체 전달값
 
  //4. 최종 GNB 출력하기////////////////////////
 gnbBox.innerHTML = hcode;
-
-
-
-
-
-
 
 
 /********************************************************************* 
@@ -119,22 +113,32 @@ gnbBox.innerHTML = hcode;
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // ul>li>a[href='#']{1차}+.smenu>aside.smbx>h2>(.stit{1차}+a[href='#']{전체보기})+.swrap>dl>dt{2차}+dd>a[href='#']{3차}
+
+
+/**************************************************************************
+  [ 상위메뉴 li오버시 하위메뉴 보이기 ] 
+  이벤트대상: .gnb>ul>li
+  변경대상: .smenu
+
+**************************************************************************/
+// 1. 대상선정 
+const gnb =domFn.qsa('.gnb>ul>li');
+console.log('대상:',gnb);
+
+// 2. 이벤트 설정하기
+// 이벤트 종류 : mouseover / mouseout
+gnb.forEach(ele=>{
+    domFn.addEvt(ele,'mouseover',overFn);
+    domFn.addEvt(ele,'mouseout',outFn);
+});
+
+// 3. 함수만들기
+function overFn(){
+    console.log('나야나',this);
+}/////////////////////////////overFn함수//////////////////////////
+
+function outFn(){   
+    console.log('나야나',this);
+
+}/////////////////////////////outFn함수//////////////////////////

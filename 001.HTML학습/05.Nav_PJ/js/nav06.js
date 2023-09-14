@@ -23,16 +23,16 @@ console.log("대상:", gnbBox);
 // 3. 객체 데이터로 html코드 만들기
 let hcode = "";
 
-for (let x in mdata) {
+for (let x in mdata) { //x는 속성명
     console.log("속성명:", x);
     hcode += `
     <ul>
     <li>
-        <a href="#">1차</a>
+        <a href="#">${x}</a>
         <div class="smenu">
             <aside class="smbx">
                 <h2>
-                    <div class="stit">1차</div>
+                    <div class="stit">${x}</div>
                     <a href="#">전체보기</a>
                     <div class="swrap">
                         <dl>

@@ -89,36 +89,34 @@ function moveSlide(){
 //////////////////////////////////////////////
 // 추가기능 : 메뉴에 오버시 움직이는 배경 구현하기
 
-// 1. 대상선정
-// 이벤트 대상: .gnb li 
-// 변경대상 : .mbg
-const gnbList = domFn.qsa('gnb li');
-const mbg = domFn.qs('.mbg');
-// console.log('대상:',gnbList,mbg);
+// 1.대상선정
+  // 이벤트 대상: .gnb li
+  // 변경 대상: .mbg
+  const gnbList = domFn.qsa('.gnb li');
+  const mbg = domFn.qs('.mbg');
+//   console.log('대상:',gnbList,mbg);
 
-// 2. 이벤트 설정하기
-// 이벤트 종류: mouseover/ mouseout
+// 2.이벤트 설정하기
+// 이벤트종류: mouseover / mouseout
 gnbList.forEach(ele=>{
-  domFn.addEvt(ele,'mouseover',overFn);
-  domFn.addEvt(ele,'mouseout',outFn);
-});/////////////////forEach///////////////////////
+    domFn.addEvt(ele,'mouseover',overFn);
+    domFn.addEvt(ele,'mouseout',outFn);
+}); ///////// forEach ///////////////
 
-// 3. 함수만들기//////////////////////////////
+// 3. 함수만들기 /////////////////////
 function overFn(){
-  console.log('오버:',this);
-  // 1. 오버된 li의 left위치값 읽기
-  let posL = this.offsetLeft;
-  console.log('위치:',posL);
-  // 2. 메뉴배경 보이기 + 움직이기
-  mbg.style.opacity = 1;
-  mbg.style.left = posL + 'px';
-
-}////////////overFn////////////////
+    console.log('오버:',this);
+    // 1. 오버된 li의 left위치값 읽기
+    let posL = this.offsetLeft;
+    console.log('위치:',posL);
+    // 2. 메뉴배경 보이기 + 움직이기
+    mbg.style.opacity = 1;
+    mbg.style.left = posL+'px';
+} ///////// overFn 함수 ///////////
 function outFn(){
-  console.log('아웃:',this);
-  // 메뉴 배경 사라지기
-  mbg.style.opacity = 0;
-}////////////outFn////////////////
-
+    console.log('아웃:',this);
+    // 메뉴배경 사라지기
+    mbg.style.opacity = 0;
+} ///////// outFn 함수 ///////////
 
 

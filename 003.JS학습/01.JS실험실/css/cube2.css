@@ -87,8 +87,12 @@ body {
     /* 하위 span을 위한 3d 설정 */
     transform-style: preserve-3d;
 
-    /* 입체를 잘 보이게 하기 위해 약간 회전함 */
-    transform: rotateY(30deg);
+    /* 트랜지션 */
+    transition: .3s ease-out;
+
+    
+    /* 입체를 잘 보이게 하기 위해 약간 회전함
+    transform: rotateY(30deg); */
 
     /* outline: 2px solid red; */
 }

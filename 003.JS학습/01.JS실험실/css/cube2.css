@@ -14,6 +14,8 @@ html,
 body {
     margin: 0;
     padding: 0;
+    /* 스크롤 없앰 */
+    overflow: hidden;
 }
 body {
     background-image: linear-gradient(to bottom, #a1f4e0, #ef95fb);
@@ -43,7 +45,7 @@ body {
 .content {
     position: relative;
 
-    height: 300vh; /* 보이는 화면의 300% */
+    height: 100vh; /* 보이는 화면의 300% */
 
     /* 
         [ 입체로 설정하기! ]
@@ -110,28 +112,28 @@ body {
 
 /*  1번 */
 .cube span:nth-child(1) {
-    background: url(../images/mv1.jpg) no-repeat center/cover;
+    background: url(../images/imgs_moving/mv1.jpg) no-repeat center/cover;
 
     /* 화면방향 : z축 */
     transform: translateZ(var(--z-size));
 }
 /*  2번 */
 .cube span:nth-child(2) {
-    background: url(../images/mv2.jpg) no-repeat center/cover;
+    background: url(../images/imgs_moving/mv2.jpg) no-repeat center/cover;
 
     /* 화면방향 : z축 */
     transform: rotateY(calc(40deg * 1)) translateZ(var(--z-size));
 }
 /*  3번 */
 .cube span:nth-child(3) {
-    background: url(../images/mv3.jpg) no-repeat center/cover;
+    background: url(../images/imgs_moving/mv3.jpg) no-repeat center/cover;
 
     /* 화면방향 : z축 */
     transform: rotateY(calc(40deg * 2)) translateZ(var(--z-size));
 }
 /*  4번 */
 .cube span:nth-child(4) {
-    background: url(../images/mv4.jpg) no-repeat center/cover;
+    background: url(../images/imgs_moving/mv4.jpg) no-repeat center/cover;
 
     /* 화면방향 : z축 */
     transform: rotateY(calc(40deg * 3)) translateZ(var(--z-size));
@@ -139,7 +141,7 @@ body {
 
 /*  5번 */
 .cube span:nth-child(5) {
-    background: url(../images/mv5.jpg) no-repeat center/cover;
+    background: url(../images/imgs_moving/mv5.jpg) no-repeat center/cover;
 
     /* 화면방향 : z축 */
     transform: rotateY(calc(40deg * 4)) translateZ(var(--z-size));
@@ -147,14 +149,14 @@ body {
 
 /*  6번 */
 .cube span:nth-child(6) {
-    background: url(../images/mv6.jpg) no-repeat center/cover;
+    background: url(../images/imgs_moving/mv6.jpg) no-repeat center/cover;
 
     /* 화면방향 : z축 */
     transform: rotateY(calc(40deg * 5)) translateZ(var(--z-size));
 }
 /*  7번 */
 .cube span:nth-child(7) {
-    background: url(../images/mv7.jpg) no-repeat center/cover;
+    background: url(../images/imgs_moving/mv7.jpg) no-repeat center/cover;
 
     /* 화면방향 : z축 */
     transform: rotateY(calc(40deg * 6))  translateZ(var(--z-size));
@@ -162,7 +164,7 @@ body {
 
 /*  8번 */
 .cube span:nth-child(8) {
-    background: url(../images/mv8.jpg) no-repeat center/cover;
+    background: url(../images/imgs_moving/mv8.jpg) no-repeat center/cover;
 
     /* 화면방향 : z축 */
     transform: rotateY(calc(40deg * 7))  translateZ(var(--z-size));
@@ -170,7 +172,7 @@ body {
 
 /*  9번 */
 .cube span:nth-child(9) {
-    background: url(../images/mv9.jpg) no-repeat center/cover;
+    background: url(../images/imgs_moving/mv9.jpg) no-repeat center/cover;
 
     /* 화면방향 : z축 */
     transform: rotateY(calc(40deg * 8))  translateZ(var(--z-size));

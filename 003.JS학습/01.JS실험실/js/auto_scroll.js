@@ -40,11 +40,12 @@ const domFn = {
     qsEl: (el, x) => el.querySelector(x),
     qsa: (x) => document.querySelectorAll(x),
     qsaEl: (el, x) => el.querySelectorAll(x),
+  
     // 이벤트셋팅함수
     addEvt: (ele, evt, fn) => ele.addEventListener(evt, fn),
   }; /////// domFn 객체 /////////////
     
-    // 3. 이벤트 등록하기////////////////////////////////
+    // 3. 이벤트 등록하기 /////////////////
     // 대상: window
     domFn.addEvt(window,'wheel',wheelFn);
     domFn.addEvt(window,'DOMContentLoaded',loadFn);
@@ -53,71 +54,69 @@ const domFn = {
    함수명: loadFn 
    기능: html 로딩 후 실행 코드구역
   *************************************/
- function loadFn(){
-    // 호출확인!
-    //console.log('로딩완료!');
+   function loadFn(){
+    // 호출확인
+    // console.log('로딩완료');
 
-    // .page 요소 담기
-    ele_page = qsa('.page');
+    // .page요소 담기
+    ele_page = domFn.qsa('.page');
 
-    // 전체 페이지수 할당
+    // 전체페이지수 할당
     total_pg = ele_page.length;
-    //console.log('전체페이지수:',total_pg);
- } ///////////// loadFn 함수 //////////
-   ///////////////////////////////////
+    // console.log('전체페이지수:',total_pg);
 
-/************************************** 
+} ///////// loadFn 함수 ////////////////
+/////////////////////////////////////////
+
+/*************************************** 
     함수명: wheelFn
-    기능: 페이지 이동
-
-****************************************/
-function wheelFn(e){ //e - 이벤트 전달변수(자동)
+    기능 : 마우스 휠 작동시 페이지이동
+***************************************/
+function wheelFn(e){ // 이벤트전달변수(자동)
     // 함수호출확인!
-    //console.log('휠~~~!');
+    // console.log('휠~~~!');
     
-    // 0. 광휠 금지 설정 //////
-    if(sts_wheel) return; // 여기서 나감!
+    // 0. 광휠금지설정 //////
+    if(sts_wheel) return; // 여기서나감!
     sts_wheel = 1; // 잠금!
     setTimeout(()=>{sts_wheel=0},500);
-    // 0.5초 후 잠금 해제!!
-    
+    // 0.8초후 잠금 해제!
+
     // 함수호출확인!
-    //console.log('휠작동~~~!');
+    // console.log('휠작동~~~!');
 
-
-    // 1. 휠 방향에 따른 페이지 변수 변경하기
-    // 휠방향은 wheelDelta로 알아냄!
+    // 1. 휠방향에 따른 페이지변수 변경하기
+    // 휠방향은 wheelDelta 로 알아냄!
     let delta = e.wheelDelta;
-    //console.log('휠델타:',delta);
+    // console.log('휠델타:',delta);
     
-    
-    // 음수(-)는 아랫방향, 양수(+) 윗방향.
+    // 음수(-)는 아랫방향, 양수(+)는 윗방향
     if(delta<0) pg_num++;
     else pg_num--;
 
-    // 한계수 체크(양끝 페이지 고정!)
+    // 한계수체크(양끝페이지고정!)
     if(pg_num<0) pg_num=0;
-    if(pg_num==total_pg) pg_num=total_pg-1;
-
+    if(pg_num==total_pg) pg_num = total_pg-1;
 
     // 전체 페이지번호 확인
-    //console.log('페이지번호:',pg_num);
+    // console.log('페이지번호:',pg_num);
 
-    // 2. 페이지 이동하기
+    // 2. 페이지이동하기
     // scrollTo(x축위치,y축위치)
-    // 세로방향 이동은 두번째(y축)값만 주면 된다!
-    // 스크롤애니메이션은 html{scroll-behavior:smooth}로 처리
+    // 세로방향 이동은 두번째값만 주면된다!
+    // 스크롤 애니메이션은 html{scroll-behavior:smooth}로처리
     // 화면단위로 이동하므로 윈도우 높이값을 기본값으로 처리
-    // window.innerHeight ->  window 높이값 구해온다!
+    // window.innerHeight -> window 높이값 구해온다!
 
     window.scrollTo(0,window.innerHeight*pg_num);
 
-    // 3. 메뉴 변경함수 호출 : 페이지변수 변경후!
+    // 3. 메뉴 변경함수 호출 : 페이지변수변경후!
     chgMenu();
 
-} //////////////////// wheelFn 함수 //////////////
+} /////////// wheelFn 함수 ////////////////
+///////////////////////////////////////////
 
-// 메뉴변경 대상: .gnb li
+// 메뉴변경 대상: .gnb li / .indic li
 const gnbList = domFn.qsa('.gnb li');
 const indicList = domFn.qsa('.indic li');
 console.log(gnbList,indicList);
@@ -128,31 +127,31 @@ console.log(gnbList,indicList);
 
 ****************************************/
 function chgMenu(){
-    // 호출확인!
+    // 호출확인
     console.log('바꿔!',pg_num);
-    // 메뉴li를 순회하여 해당 순번(pg_num)에 .on넣기
+    // 메뉴li를 순회하여 해당순번(pg_num)에 .on넣기
     // 나머지는 .on빼기
 
-    // 내부 함수 만들기//////////
-    const comFn = () => {
-
+    // 내부함수 만들기 //////
+    const comFn = (ele) => {
+        
     };
 
     gnbList.forEach((ele,idx)=>{
         if(idx==pg_num)
-           ele.classList.add('on');
+            ele.classList.add('on');
         else
             ele.classList.remove('on');
     });
 
     indicList.forEach((ele,idx)=>{
         if(idx==pg_num)
-           ele.classList.add('on');
+            ele.classList.add('on');
         else
             ele.classList.remove('on');
     });
 
-}///////////chgMenu 함수///////////////////////
+} //////////// chgMenu 함수 //////////////////
 
 
 
@@ -175,8 +174,8 @@ function chgMenu(){
 
 ***************************************************************/
 
-// 1. 모바일 이벤트 등록하기///////////
-// 대상 : window
+// 1. 모바일 이벤트 등록하기 //////////
+// 대상: window
 window.addEventListener('touchstart',touchStart);
 window.addEventListener('touchend',touchEnd);
 

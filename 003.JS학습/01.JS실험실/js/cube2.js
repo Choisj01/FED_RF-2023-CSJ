@@ -23,7 +23,5 @@ function loadFn(){
     // 함수 호출확인
     console.log('로딩완료!');
     
-    // 부드러운 스크롤 호출!
-   startSS();
 
 } //////////////// loadFn 함수 ////////////

@@ -1,6 +1,6 @@
 @charset "utf-8";
 
-/* 큐브 애니메이션 CSS - cube2.css */
+/* 회전제어 CSS - cube2.css */
 /* css 변수 셋팅 */
 :root {
     /* 큐브 공통크기 */
@@ -88,7 +88,7 @@ body {
     transform-style: preserve-3d;
 
     /* 입체를 잘 보이게 하기 위해 약간 회전함 */
-    /* transform: rotateY(30deg); */
+    transform: rotateY(30deg);
 
     /* outline: 2px solid red; */
 }

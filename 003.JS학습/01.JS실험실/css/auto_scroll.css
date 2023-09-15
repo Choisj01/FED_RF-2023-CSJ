@@ -1,7 +1,7 @@
 @charset "utf-8";
 /* 자동스크롤 css - auto.scroll.css */
 
-/* 기본 초기화 */
+/******** 기본 초기화 *********/
 html,
 body,
 h1,
@@ -21,6 +21,12 @@ html {
 html,
 body {
     overflow: hidden;
+}
+
+ul,ol{
+    margin: 0;
+    padding: 0;
+    list-style: none;
 }
 
 /* 공통 레이아웃 클래스 */

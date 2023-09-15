@@ -12,6 +12,7 @@ const domFn = {
     addEvt: (ele, evt, fn) => ele.addEventListener(evt, fn),
 }; /////// domFn 객체 /////////////
 
+
 // 로딩구역 호출설정
 window.addEventListener("DOMContentLoaded", loadFn);
 
@@ -72,3 +73,30 @@ function loadFn() {
 
 
 } /////////// loadFn 함수/////////////
+////////////////////////////////////////
+
+
+////////////////////////////////////////////////////////////////////////
+// [GNB 서브메뉴 셋팅하기]
+// 구조 : div.smenu > aside.smbx > h2{1차메뉴}+ (ol>li>a{2차메뉴})
+
+// 1. 대상선정 : .gnb > ul > li 
+// 서브메뉴 넣을 li는 하위 a요소의 텍스트가 gnbData 속성명 1차메뉴와
+// 일치하는 경우 하위메뉴를 넣어준다!
+const gnbList = domFn.qsa('.gnb>ul>li');
+console.log('메뉴:',gnbList,'/데이터:',gnbData);
+
+// 3. 대상에 하위메뉴 태그 만들기
+gnbList.forEach(ele=>{
+    // 1. 하위 a요소 텍스트읽기
+    let atxt = domFn.qsEl(ele,'a').innerText;
+    // 2. gnb 데이터읽기
+    let gData = gnbData[atxt];
+    // console.log("텍스트:",atxt,gData);
+    // 3. 해당 서브 데이터가 있을 경우 태그 만들어넣기
+    if(gData){ // 데이터 없으면 undefined ->false처리!
+        console.log('만들어!',atxt);
+    }//////////////if///////////////
+});////////////forEach/////////////////
+
+

@@ -82,11 +82,17 @@ console.log('대상:',btnMap,gmap,cbtn);
 // 2. 이벤트 설정 및 함수구현
 // 2-1. 맵버튼 클릭시 
 domFn.addEvt(btnMap,'click',()=>{
+    // 구글맵 보이기
     gmap.classList.add('on');
+    // 가림막 보이기
+    document.body.classList.add('on');
 });/////////////click 이벤트 함수 ////////////////////
 
 // 2-2. 닫기버튼 클릭시
 domFn.addEvt(cbtn,'click',()=>{
+    // 구글맵 숨기기
     gmap.classList.remove('on');
+    //  가림막 숨기기
+    document.body.classList.remove('on');
 });/////////////click 이벤트 함수 ////////////////////
 

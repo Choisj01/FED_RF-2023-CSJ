@@ -54,7 +54,10 @@ const mvData = [
 ];
 
 // 파일에서 내보내기 셋팅하기!
-export default (v)=>"나야나!"+v;
+export {mTitle,sTitle,
+    personInfo,
+    mvData}
+// export default (v)=>"나야나!"+v;
 /************************************************** 
   [ export 형식 ]
 

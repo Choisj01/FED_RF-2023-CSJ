@@ -1,6 +1,9 @@
 // 모듈 연습 메인 JS - main.js
 // DOM함수
-import mTitle from './text_data';
+// import mTitle from './text_data.js';
+import zzz from './text_data.js';
+
+console.log(zzz('헐'));
 
 
 /*************************************************** 

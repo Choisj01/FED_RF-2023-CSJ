@@ -6,7 +6,7 @@ import dFn from "./dom.js";
 // 부드러운스크롤 모듈
 import { startSS, setPos } from "./smoothScroll23.js";
 // 데이터 모듈
-import { gridData,gnbData } from "./data_drama.js";
+import { gridData, gnbData } from "./data_drama.js";
 
 // 부드러운 스크롤 적용///////////////////
 startSS();
@@ -36,27 +36,30 @@ desc_box.forEach((ele) => {
 const liveBox = dFn.qs(".live-box");
 console.log("대상:", liveBox);
 
-// 2. 현장포토 데이터를 기반으로 HTML코드 만들기
-let hcode = "<ul>";
+// 2. 그리드 스타일 데이터 생성하기 함수
+function makeGrid() {
+    // 1. 현장포토 데이터를 기반으로 HTML코드 만들기
+    let hcode = "<ul>";
 
-// 반복코드만들기////
-// 현장코드 데이터 - data_drama.js에서 가져옴
-gridData[0].forEach((val) => {
-    // html변수에 계속 넣기
-    hcode += `<li>
+    // 반복코드만들기////
+    // 현장코드 데이터 - data_drama.js에서 가져옴
+    gridData[0].forEach((val) => {
+        // html변수에 계속 넣기
+        hcode += `<li>
         <figure>
             <img src="./images/live_photo/${val.imgName}.jpg" alt="${val.title}">
             <figcaption>${val.title}</figcaption>
         </figure>
     </li>`;
-}); ////////////forEach/////////////////
+    }); ////////////forEach/////////////////
 
-hcode += "</ul>";
+    hcode += "</ul>";
 
-// console.log(hcode);
+    // console.log(hcode);
 
-// 3. 대상박스에 html코드 넣기
-liveBox.innerHTML = hcode;
+    // 2. 대상박스에 html코드 넣기
+    liveBox.innerHTML = hcode;
+} ////////////makeGrid///////////////////////
 
 ////////////////////////////////////////////////////////////////////////
 // [GNB 서브메뉴 셋팅하기]
@@ -72,9 +75,11 @@ console.log("메뉴:", gnbList, "/데이터:", gnbData);
 gnbList.forEach((ele) => {
     // 1. 하위 a요소 텍스트읽기
     let atxt = dFn.qsEl(ele, "a").innerText;
+
     // 2. gnb 데이터읽기
     let gData = gnbData[atxt];
     // console.log("텍스트:",atxt,gData);
+    
     // 3. 해당 서브 데이터가 있을 경우 태그 만들어넣기
     // Array.isArray(gData) 로 배열 여부를 확인한다!
     // 배열값은 태그를 만들어 그자리에 출력 : 배열.map().join('')

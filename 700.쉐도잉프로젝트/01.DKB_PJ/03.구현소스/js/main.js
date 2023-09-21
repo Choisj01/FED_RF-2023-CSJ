@@ -6,7 +6,7 @@ import dFn from "./dom.js";
 // 부드러운스크롤 모듈
 import { startSS, setPos } from "./smoothScroll23.js";
 // 데이터 모듈
-import { gridData, gnbData } from "./data_drama.js";
+import { gridData, gnbData, previewData } from "./data_drama.js";
 
 // 부드러운 스크롤 적용///////////////////
 startSS();
@@ -185,12 +185,56 @@ const mvBox = dFn.qs('.intro-mv-img');
 // 2.이벤트 설정하기 
 dFn.addEvt(mvBox,'click',showMv);
 
+// 이벤트 연결 상태변수(1번만 실행시키기위한 변수)
+let stsShowMv=0;
+
 // 3. 함수만들기 
 function showMv(){
+    if(stsShowMv) return; //돌아가!!
+    stsShowMv=1; //한번만 실행
+
     console.log('보여줘!!');
     // 동영상 넣기
-    // 대상: 나자신
+    // 대상: 나자신(.intro-mv-img)
     this.innerHTML = `
-    <video src='./images/intro_mv.mp4' controls></video>
+    <video src='./images/intro_mv.mp4' autoplay controls></video>
     `;
+
+    // 가상요소 플레이버튼 없애기 위해 .off 지우기
+    this.classList.remove('off');
+
+
 }///////////////showMv함수////////////////////////////
+
+//////////////////////////////////////////////////////////
+// 오름차순 데이터를 내림차순으로 변경하여 화면에 뿌리기!
+
+// 데이터 정렬 변경하기
+let preNewData = previewData.sort((x,y)=>{
+    // x,y는 배열값 앞뒤를 계속 가지고 들어옴
+    // 배열값 중 idx 속성값을 가져와서 숫자형변환 후 사용
+    let a = Number(x.idx);
+    let b = Number(y.idx);
+
+    // 배열 순서변경 메서드인 sort() 내부에 return값을 사용하여
+    // 순서를 변경한 새로운 배열을 만들어준다!
+    return a == b ? 0 : (a > b? -1:1);
+    // 비?집:(눈?집:놀이동산)
+
+});
+console.log(previewData);
+
+// 2. 대상선정 : .preview-box>div
+const preBox = dFn.qsa('.preview-box>div');
+console.log(preBox);
+
+// 3. 대상순회하여 태그 넣기
+// 데이터 : 역순정렬을 한 미리보기 데이터 넣기
+preBox.forEach((ele,idx)=>{
+    ele.innerHTML = `
+  <div>  
+    <h3>${preNewData[idx].title}</h3>
+    <P>${preNewData[idx].story}</p>
+  </div>  
+    `;
+}); /////////////////forEach///////////////////////

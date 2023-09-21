@@ -250,7 +250,7 @@ body > div > * {
     aspect-ratio: 2/1.1; 
 }
 /* 가상요소로 플레이버튼 만들기 */
-.intro-mv-img::after{
+.intro-mv-img.off::after{
     content: '';
     position: absolute;
     top: 50%;
@@ -264,7 +264,7 @@ body > div > * {
 
 /* 하위 이미지/동영상 */
 .intro-mv-img img,
-.intro-mv-img img video{
+.intro-mv-img video{
     width: 100%;
     height: 100%;
     object-fit: cover;

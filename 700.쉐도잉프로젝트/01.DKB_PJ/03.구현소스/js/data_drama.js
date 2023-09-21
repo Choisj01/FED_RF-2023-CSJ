@@ -382,4 +382,4 @@ const liveData = [
   ]; /////////// previewData 배열 /////////
   
   // 모듈화 내보내기 ///////////
-  export { gridData, gnbData };
+  export {gridData, gnbData,previewData};

@@ -3,4 +3,7 @@
 // DOM 객체 모듈 불러오기
 import dFn from './dom.js';
 
-console.log(dFn);
+// 데이터 모듈 불러오기
+import langCode from './data_langcode.js';
+
+console.log(langCode);

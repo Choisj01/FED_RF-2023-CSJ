@@ -1,6 +1,7 @@
 // 언어변환 객체
 
-const langCode = {
+// export default {
+const langCode={
     //한국어
     "ko": {
         "메뉴": ["홈", "남성용", "여성용", "게시판"],

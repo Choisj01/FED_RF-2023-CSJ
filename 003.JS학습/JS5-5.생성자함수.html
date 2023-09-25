@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JS5-4.생성자함수</title>
-    <script>
-        /* 
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>JS5-5.생성자함수</title>
+        <script>
+            /* 
             [ 생성자 함수란? ]
             - 쉽게 말해서 함수를 이용해서 객체를 생성하는
             템플릿이다!
@@ -45,7 +45,7 @@
             그냥 return키워드만 쓰게 되면 자동으로 this가 반환됨!)
         */
 
-        /* 
+            /* 
             객체모델:
             1. 속성6가지-포스터,제목,개요,감독,출연,문구
             2. 함수1가지-실행함수
@@ -61,12 +61,37 @@
             }
         
         */
+            // 생성자함수의 인스턴스 생성시 전달값 셋팅함!
+            function MovieInfo(pos, tit, sum, dir, act, des) {
+                // 속성 6가지 셋팅
+                this.포스터 = pos;
+                this.제목 = tit;
+                this.개요 = sum;
+                this.감독 = dir;
+                this.출연 = act;
+                this.문구 = des;
 
-       
-       
-</script>
-</head>
-<body>
-    
-</body>
+                // 메서드 1가지 셋팅 : 영화 감독 정보 리턴함!
+                this.함수 = () => `영화${this.제목} 의 감독님 이름은 ${this.감독}입니다!`;
+            } ///////////MovieInfo 생성자함수///////////////////////////////////
+
+            // 영화정보 배열변수
+            const mi = [];
+
+            //  1. 생성자 함수로 객체 만들기!
+            mi[0] = new MovieInfo(
+                "https://movie-phinf.pstatic.net/20201116_276/1605491658399poUOC_JPEG/movie_image.jpg?type=m99_141_2",
+                "조제",
+                "멜로/로맨스, 드라마",
+                "김종관",
+                "한지민, 남주혁",
+                "조제 보러 오세요"
+            );
+            // 객체확인
+            console.log(mi[0]);
+
+
+        </script>
+    </head>
+    <body></body>
 </html>

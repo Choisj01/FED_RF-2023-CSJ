@@ -140,7 +140,7 @@ function slideFn(selEl) {
             // 놈.놈.놈 -> inertBefore(넣을놈,넣을놈전놈)
             slide.insertBefore(eachOne[eachOne.length - 1], eachOne[0]);
 
-            // 2. left값 -100%만들기 : 들어올 준비위치
+            // 2. left값 -330%만들기 : 들어올 준비위치
             slide.style.left = "-330%";
             // 3. 트랜지션 없애기
             slide.style.transition = "none";
@@ -151,8 +151,8 @@ function slideFn(selEl) {
             // 시간은 0이어도 비동기 처리이므로 효과있음!
 
             setTimeout(() => {
-                // 4. left값 0으로 들어오기
-                slide.style.left = "0";
+                // 4. left값 -220%으로 들어오기
+                slide.style.left = "-220%";
 
                 // 5. 트랜지션 주기
                 slide.style.transition = TIME_SLIDE + "ms ease-in-out";
@@ -188,7 +188,7 @@ function slideFn(selEl) {
 
     // 슬라이드 오른쪽 방향 함수/////////////////////
     function rightSlide() {
-        // 1.대상이동하기
+         //1.대상이동하기 : -330%
         slide.style.left = "-330%";
         // 2. 트랜지션 주기
         slide.style.transition = TIME_SLIDE + "ms ease-in-out";

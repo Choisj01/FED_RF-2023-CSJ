@@ -5,6 +5,11 @@ import dFn from "./dom.js";
 
 console.log(dFn);
 
+/* 
+    [ 여기 등장하는 배열 메서드 정리 ]
+    1. push
+*/
+
 // 0. 기본 정보 셋팅하기/////////////////////
 // (1) 배열변수 선언과 할당
 const fruit = ["배", "사과", "용과", "딸기"];
@@ -43,7 +48,6 @@ const sel = dFn.qs('#sel');
 const anum = dFn.qs('#anum');
 // 2-5. 지울 갯수 입력창 : #delnum
 const delNum = dFn.qs('#delnum');
-
 
 
 console.log("대상:", mbtn, showit, cont,sel,anum);
@@ -106,7 +110,7 @@ bindCombo();
 
 // 4. 이벤트 설정하기 /////////////////////
 mbtn.forEach((ele) => {
-    dFn.addEvt(ele, "click", showFruit);
+    dFn.addEvt(ele, "click", showFruit)
 });
 
 // 5. 함수 만들기 /////////////////////////////////

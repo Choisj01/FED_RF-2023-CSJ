@@ -159,15 +159,10 @@ function showTime() {
 ****************************************/
 
 // 이미지 웹경로 배열
-const rimg = [
-    "https://img.etnews.com/photonews/2110/1461216_20211007085904_466_0001.jpg",
-    "https://d2qqqnyszmt41w.cloudfront.net/wp-content/uploads/2021/04/23150534/202104231445162082.jpg",
-    "https://img.imbc.com/adams/Program/202111/132804027350463581.jpg",
-    "https://image.ytn.co.kr/general/jpg/2021/0925/202109251350012465_d.jpg",
-];
+const rimg = ["https://img.etnews.com/photonews/2110/1461216_20211007085904_466_0001.jpg", "https://d2qqqnyszmt41w.cloudfront.net/wp-content/uploads/2021/04/23150534/202104231445162082.jpg", "https://img.imbc.com/adams/Program/202111/132804027350463581.jpg", "https://image.ytn.co.kr/general/jpg/2021/0925/202109251350012465_d.jpg"];
 
-// 1.요구사항 : 웹경로 이미지를 화면에 넣고 랜덤하게 
-// 이미지를 칼라로 약간 커지게 클래스 on을 주어서 변경함
+// 1. 요구사항 : 웹경로 이미지를 화면에 넣고 랜덤하게
+// 이미지를 칼라로 약간커지게 클래스 on을 주어서 변경함!
 
 // 2. 대상선정 : .imbx
 const imbx = dFn.qs('.imbx');
@@ -182,32 +177,32 @@ rimg.forEach(val=>{
     `;
 }); ///////// forEach ///////////
 
-// 랜덤처리 대상선정 : .imbx div
+// 랜덤처리 대상 선정 : .imbx div
 const target = dFn.qsa('.imbx div');
 console.log('랜덤대상:',target);
 
-/*******************************************************  
-        함수명 : colorImg
-        기능 : 랜덤하기 선택박스에 .on넣기
-        
-**********************************************************/
-// 랜덤수 범위 : 0~3 (4개의 배열이므로)
+
+/************************************** 
+    함수명 : colorImg
+    기능 : 랜덤하게 선택 박스에 .on넣기
+**************************************/
+// 랜덤수 범위: 0~3 (4개의 배열이므로)
 
 // 2초 간격으로 인터발호출
 setInterval(colorImg,2000);
 
-// 직전 랜덤수 : 초기 셋팅은 0~3 사이수가 아닌 수
+// 직전랜덤수 : 초기셋팅은 0~3 사이수가 아님수
 let bNum = 1000;
 
 function colorImg(){
 
-    // 난수만들기 : 0~3 -> 1~4 를 만들고 내림처리
+    // 1. 난수만들기 : 0~3 -> 1~4 를 만들고 내림처리
     let rdmNum  = Math.floor(Math.random()*4);
     console.log('랜덤수:',rdmNum);
-
-    // 2. 직전 랜덤수와 같은경우 다시 난수 발생하기
+    
+    // 2. 직전 랜덤수과 같을 경우 다시 난수발생하기
     // while(조건true){코드} 사용하기!
-    // 항상 직전랜덤수는 전역변수로 저장하고 매번 비교한다!
+    // 항상 직전랜덤수는 전역변수로 저장하고 매번비교한다!
     while(rdmNum==bNum){ // 현재랜덤수가 직전랜덤수와 같냐?
         // 다시 랜덤발생!
         rdmNum  = Math.floor(Math.random()*4);
@@ -215,17 +210,16 @@ function colorImg(){
     } ////////// while /////////////
 
     // while문을 빠져나온 경우 랜덤수가 확정이므로
-    // 이전 랜덤수로 저장하여 다음번에 비교할 수 있도록 한다!
+    // 이전랜덤수로 저장하여 다음번에 비교할 수 있도록 한다!
     bNum = rdmNum;
 
-
-    // 3. 대상에 클래스 .on넣기
-    // 나머지는 뺴기
+    // 3. 대상에 클래스 on 넣기
+    // 나머지는 빼기
     target.forEach((ele,idx)=>{
         if(idx==rdmNum) 
             ele.classList.add('on');
         else   
             ele.classList.remove('on');
-    }); /////// forEach /////////////////
+    }); /////// forEach ////////////
 
-} ////////////colorImg함수//////////////////
+} //////////// colorImg ///////////////

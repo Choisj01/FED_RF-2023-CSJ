@@ -3,6 +3,11 @@
 // DOM메서드 모듈
 import dFn from "./dom.js";
 
+// 메시지 제이슨 불러오기
+import msgTxt from './data_racing.json' assert {type:"json"};
+
+console.log(msgTxt);
+
 /********************************************** 
             [ 게임 기능정의 ]
     _________________________________
@@ -69,6 +74,9 @@ function goGame() {
         goR1();
     } ///////if///////////
     else if (btxt == "거북출발") {
+        // 거북버튼멈춤 상태값에 따른 조작제어
+        if(t1Stop) return;
+
         // 거북위치값 이동셋팅
         t1pos += 16;
         t1.style.left = ++t1pos + "px";
@@ -127,6 +135,40 @@ function goR1() {
     기능: 기준값 보다 레이서위치값이 큰경우
         승자를 판별하여 메시지를 보여준다!
 *****************************************/
+let t1Stop = 0; //거북 멈춤값(1-멈춤,0-허용)
+
 function whoWinner(){
-    console.log('토끼위치:',r1pos,'\n거북위치',t1pos);
+    // console.log('토끼위치:',r1pos,'\n거북위치',t1pos);
+
+    // 1. 토끼 / 거북의 위치값이 기준값 이상일때
+    // 기준값 : 650px
+    if(r1pos >= 650 || t1pos >= 650){
+        // (1) 토끼야 멈춰라!
+        clearInterval(autoI);
+        // (2) 거북아 멈춰라!
+        t1Stop = 1; //거북버튼 조작제어값 업데이트
+
+        // 승자변수
+        let winner;
+        // (3) 승자판별하기
+        if(r1pos > t1pos) winner="토끼";
+        else if(r1pos < t1pos) winner="거북";
+        else winner = "비김";
+
+        // (4) 메시지 랜덤하게 넣기
+        // msgTxt에 제이슨으로부터 데이터 담음!
+        
+        // 선택메시지 객체
+        let selMsg = msgTxt[winner];
+        console.log(selMsg);
+
+        // 랜덤수 만들기
+        let rdmNum = Math.floor(Math.random()*selMsg.length);
+        console.log('랜덤수:',rdmNum,'/개수:',selMsg.length);
+        // selMsg -> 선택된 메세지 배열
+        console.log('랜덤메시지:',selMsg[rdmNum]);
+
+
+    } //////////////if //////////////
+
 }/////////////whoWinner 함수//////////////////////

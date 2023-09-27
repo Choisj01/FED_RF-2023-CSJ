@@ -258,3 +258,75 @@ console.log(clipCode);
 
 // 코드넣기
 clipBox.innerHTML = `<ul>${clipCode}</ul>`;
+
+///////////////////// 최신동영상 파트 이동기능 구현 ///////////////////////
+// 1. 요구사항 : 버튼 한번에 한 영상씩 이동,
+//              양쪽 끝에 가면 이동중단 해당 방향 버튼 사라짐!
+// 2. 대상 선정 :
+// 2-1. 이벤트 대상 : .btn-box button
+const btnClip = dFn.qsa(".btn-box button");
+
+// 2-2. 변경 대상 : clip-box ul
+const clipList = dFn.qs(".clip-box ul");
+
+// 3. 변수 셋팅
+// 3-1. 리스트 개수
+const CNT_LIST = dFn.qsaEl(clipList, "li").length;
+// 3-2. 한 화면당 리스트 노출 개수
+const LIMIT_LIST = 4;
+// 3-3. 이동 한계수
+const LIMIT_MOVE = CNT_LIST - LIMIT_LIST;
+// 3-4. 이동 단위수 : 간격 이동까지 고려한 한번에 이동할 단위 -25.5%
+const BLOCK_NUM = 25.5;
+// 3-5. 이동횟수 : 단위만큼 이동할 횟수
+let mvNum = 0;
+
+// console.log(btnClip,clipList,'이동 한계수:',LIMIT_MOVE);
+
+// 4. 이벤트 셋팅하기
+btnClip.forEach((ele) => {
+    dFn.addEvt(ele, "click", moveClip);
+}); /////////forEach ////////////////
+
+// 5. 함수만들기 ////////////////////////
+function moveClip() {
+    // 1. 오른쪽 버튼 여부
+    let isR = this.classList.contains("fa-chevron-right");
+    console.log("나야나!", isR);
+    // 2. 버튼별 이동분기
+    if (isR) {
+        // 오른쪽 버튼
+        // 이동한계수를 체크하여 이동수를 증가시킴
+        mvNum++;
+        // 마지막 한계수를 넘어가면 마지막 수에 고정!
+        if (mvNum > LIMIT_MOVE) {
+            // 마지막수 고정
+            mvNum = LIMIT_MOVE;
+            // 마지막 버튼 숨기기
+            btnClip[1].style.display = 'none';
+            }
+        else{
+            // 첫번째 버튼 보이기
+            btnClip[0].style.display = 'block';
+        }    
+    } /////////////////if////////////
+    else {
+        // 왼쪽 버튼
+        // 이동한계수를 체크하여 이동수를 증가시킴
+        mvNum--;
+        // 첫번째 한계수를 넘어가면 0에 고정!
+        if (mvNum < 0) {
+            // 0에 고정
+            mvNum = 0;
+            // 첫번째 버튼 숨기기
+            btnClip[0].style.display = 'none';
+        }
+        else{
+            // 마지막 버튼 보이기
+            btnClip[1].style.display = 'block';
+        }
+    } /////////////////if////////////
+
+    // 3. 이동반영하기 : -단위수* 이동수 %
+    clipList.style.left = -(BLOCK_NUM * mvNum) + "%";
+} /////////////moveClip /////////////////////////

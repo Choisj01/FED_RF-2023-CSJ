@@ -1,8 +1,7 @@
 // Racing PJ 메인 JS - main.js
 
-
 // DOM메서드 모듈
-import domFn from "./dom.js";
+import dFn from "./dom.js";
 
 /********************************************** 
             [ 게임 기능정의 ]
@@ -27,33 +26,107 @@ import domFn from "./dom.js";
 
 // 1. 대상선정 ///////////////////
 // (1) 거북 : #t1
+const t1 = dFn.qs("#t1");
 
 // (2) 토끼 : #r1
+const r1 = dFn.qs("#r1");
 
 // (3) 버튼 : #btns a
+const btns = dFn.qsa("#btns a");
 
 // (4) 레벨 : #level
+const level = dFn.qs("#level");
 
 // (5) 메시지박스 : #msg
+const msg = dFn.qs("#msg");
 
 // (6) 토끼, 거북 위치값 변수
-
-// 토끼위치 : r1pos / 거북위치 : t1pos 
+let r1pos = 0,
+    t1pos = 0;
+// 토끼위치 : r1pos / 거북위치 : t1pos
 
 // cg(msg);
 
+// console.log('대상:',t1,r1,btns,level,msg);
+
 // 2. 이벤트 설정하기 ////////////
 // 대상: 버튼들 - btns변수
+btns.forEach((ele) => {
+    dFn.addEvt(ele, "click", goGame);
+}); ///////////////forEach//////////////
 
+/*********************************** 
+    함수명: goGame
+    기능: 버튼별 기능분기
+***********************************/
+function goGame() {
+    // 1. 버튼 글자읽기
+    let btxt = this.innerText;
+    console.log("고우~!", btxt);
+
+    // 2. 버튼별 기능 분기하기
+    if (btxt == "토끼출발") {
+        goR1();
+    } ///////if///////////
+    else if (btxt == "거북출발") {
+        // 거북위치값 이동셋팅
+        t1pos += 16;
+        t1.style.left = ++t1pos + "px";
+
+        // 거북버튼 키보드 작동 막기
+        // 포커스가 가는 것을 blur처리하면 된다!
+        // this는 클릭된 '거북출발'버튼임!
+        this.blur();
+        // 초점가게 하는 메서드 -> focus()
+        // 초점 빠지게 하는 메서드 -> blur()
+
+        // 토끼 출발호출
+        goR1();
+
+    } /////// else if///////////
+    else if (btxt == "처음으로") {
+        // 페이지 리로드하기
+        location.reload();    
+    } /////// else if///////////
+
+
+} //////////////goGame함수/////////////
 
 /*********************************** 
     함수명: goR1
     기능: 토끼자동이동(인터발함수)
 ***********************************/
+// 인터발 지우기용 변수
+let autoI;
 
+function goR1() {
+    // console.log(autoI);
+    
+    // autoI변수에 할당전 상태는 undifined이므로
+    // false처리됨! -> 이떄 if문을 들어가려면 !(not)연산자 사용!
+    if (!autoI) {
+        ////false일때 들어감!
+        console.log('토끼실행');
+        // 인터발 실행하기
+        autoI = setInterval(() => {
+            r1.style.left = ++r1pos + "px";
+            // 승자판별함수 호출!
+            whoWinner();
+        },level.value); ////인터발함수//////
+        // 실행시간은 #level인 선택박스값을 
+        // 읽어온다! -> option의 value값은 level.value
+
+
+    }/////////////////if////////////
+
+
+} //////////////goR1//////////////////
 
 /***************************************** 
     함수명: whoWinner
     기능: 기준값 보다 레이서위치값이 큰경우
         승자를 판별하여 메시지를 보여준다!
 *****************************************/
+function whoWinner(){
+    console.log('토끼위치:',r1pos,'\n거북위치',t1pos);
+}/////////////whoWinner 함수//////////////////////

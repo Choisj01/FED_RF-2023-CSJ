@@ -11,19 +11,22 @@
     - 단위각도: 360도 / 9개 = 40도
     -css 이징적용 : ease-out
 
+    [ 캐릭터별 고유번호 만들기 ]
+    -전역변수를 만들어 고유번호 저장
+    -스크롤 방향에 따른 고유번호 증감
+    -고유번호를 순환하여 항상 고정번호 만들기
+    -> 9개니까 0~8까지의 고유번호가 순환한다!
+
+
 *************************************/
 
-// DOM 함수 객체 //////////////
-const domFn = {
-    // 요소선택함수 ////////
-    qs: (x) => document.querySelector(x),
-    qsEl: (el, x) => el.querySelector(x),
-    qsa: (x) => document.querySelectorAll(x),
-    qsaEl: (el, x) => el.querySelectorAll(x),
-  
-    // 이벤트셋팅함수
-    addEvt: (ele, evt, fn) => ele.addEventListener(evt, fn),
-  }; /////// domFn 객체 /////////////
+// DOM 메서드 모듈 
+import domFn from './dom.js';
+
+// 데이터 제이슨 불러오기 : 어서써 타입 제이슨!
+import mvData from './data_moving.json' assert{type:'json'};
+
+// console.log(mvData);
 
 
 // 0. 변수셋팅
@@ -35,6 +38,11 @@ let stsWheel = 0;
 const TIME_WHEEL = 120;
 // 휠단위 수(휠할때 증감하는 수)
 let numWheel = 0;
+
+// 캐릭터 고유번호
+let catNum = 0;
+// 캐릭터 번호 한계수(9개니까 한계수는 8임(0~8))
+const LIMIT_CNT = 8;
 
 // 1. 대상선정
 const cube = domFn.qs('.cube');
@@ -60,14 +68,23 @@ function rotateMem(){
     if(delta<0){
         // 휠단위수 증가
         numWheel--;
+
+        // 캐릭터 고유번호 증가(한계수에서 0으로 순환!)
+        catNum++;
+        if(catNum>LIMIT_CNT)catNum=0;
     }
     else{
         // 휠단위수 감소
         numWheel++;
+        // 캐릭터 고유번호 감소(한계수에서 끝번호로 순환!)
+        catNum--;
+        if(catNum<0)catNum=LIMIT_CNT;
     }
     
     // 호출확인
-    console.log('휠!~~~~',delta,numWheel);
+    // console.log('휠!~~~~',delta,numWheel);
+    console.log('캐릭터고유번호:',catNum);
+    console.log('캐릭터 데이터:',mvData[catNum]);
 
      // 3. 회전대상요소에 각도 적용하기
      // 적용각도= 단위각도 * 휠단위수

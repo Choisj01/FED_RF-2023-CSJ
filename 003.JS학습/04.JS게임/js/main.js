@@ -4,7 +4,7 @@
 import dFn from "./dom.js";
 
 // 메시지 제이슨 불러오기
-import msgTxt from './data_racing.json' assert {type:"json"};
+import msgTxt from "./data_racing.json" assert { type: "json" };
 
 console.log(msgTxt);
 
@@ -75,7 +75,7 @@ function goGame() {
     } ///////if///////////
     else if (btxt == "거북출발") {
         // 거북버튼멈춤 상태값에 따른 조작제어
-        if(t1Stop) return;
+        if (t1Stop) return;
 
         // 거북위치값 이동셋팅
         t1pos += 16;
@@ -90,14 +90,11 @@ function goGame() {
 
         // 토끼 출발호출
         goR1();
-
     } /////// else if///////////
     else if (btxt == "처음으로") {
         // 페이지 리로드하기
-        location.reload();    
+        location.reload();
     } /////// else if///////////
-
-
 } //////////////goGame함수/////////////
 
 /*********************************** 
@@ -109,25 +106,21 @@ let autoI;
 
 function goR1() {
     // console.log(autoI);
-    
+
     // autoI변수에 할당전 상태는 undifined이므로
     // false처리됨! -> 이떄 if문을 들어가려면 !(not)연산자 사용!
     if (!autoI) {
         ////false일때 들어감!
-        console.log('토끼실행');
+        console.log("토끼실행");
         // 인터발 실행하기
         autoI = setInterval(() => {
             r1.style.left = ++r1pos + "px";
             // 승자판별함수 호출!
             whoWinner();
-        },level.value); ////인터발함수//////
-        // 실행시간은 #level인 선택박스값을 
+        }, level.value); ////인터발함수//////
+        // 실행시간은 #level인 선택박스값을
         // 읽어온다! -> option의 value값은 level.value
-
-
-    }/////////////////if////////////
-
-
+    } /////////////////if////////////
 } //////////////goR1//////////////////
 
 /***************************************** 
@@ -137,12 +130,12 @@ function goR1() {
 *****************************************/
 let t1Stop = 0; //거북 멈춤값(1-멈춤,0-허용)
 
-function whoWinner(){
+function whoWinner() {
     // console.log('토끼위치:',r1pos,'\n거북위치',t1pos);
 
     // 1. 토끼 / 거북의 위치값이 기준값 이상일때
     // 기준값 : 650px
-    if(r1pos >= 650 || t1pos >= 650){
+    if (r1pos >= 650 || t1pos >= 650) {
         // (1) 토끼야 멈춰라!
         clearInterval(autoI);
         // (2) 거북아 멈춰라!
@@ -151,24 +144,48 @@ function whoWinner(){
         // 승자변수
         let winner;
         // (3) 승자판별하기
-        if(r1pos > t1pos) winner="토끼";
-        else if(r1pos < t1pos) winner="거북";
+        if (r1pos > t1pos) winner = "토끼";
+        else if (r1pos < t1pos) winner = "거북";
         else winner = "비김";
 
         // (4) 메시지 랜덤하게 넣기
         // msgTxt에 제이슨으로부터 데이터 담음!
-        
+
         // 선택메시지 객체
         let selMsg = msgTxt[winner];
         console.log(selMsg);
 
         // 랜덤수 만들기
-        let rdmNum = Math.floor(Math.random()*selMsg.length);
-        console.log('랜덤수:',rdmNum,'/개수:',selMsg.length);
+        let rdmNum = Math.floor(Math.random() * selMsg.length);
+        // console.log('랜덤수:',rdmNum,'/개수:',selMsg.length);
         // selMsg -> 선택된 메세지 배열
-        console.log('랜덤메시지:',selMsg[rdmNum]);
+        // console.log('랜덤메시지:',selMsg[rdmNum]);
 
+        // 랜덤메시지
+        let rdmMsg = selMsg[rdmNum];
 
+        // (5) 메시지 박스에 메시지 넣기
+        msg.innerText = rdmMsg;
+
+        // (6) 메시지 박스 보이기
+        msg.style.display = "block";
+        msg.style.zIndex = "100";
+
+        // (7) 전체 반투명 커버 암전주기
+        dFn.qs(".cover").innerHTML += 
+        `<div style='
+            position:fixed;
+            top:0;
+            left:0;
+            width:100vw;
+            height:100vh;
+            background-color:#000;
+            opacity:0.5;
+            z-index:99
+    '></div>`;
+        // (8) 버튼 위로 올리기
+        dFn.qs('#btns').style.zIndex = '200';
+        
     } //////////////if //////////////
 
-}/////////////whoWinner 함수//////////////////////
+} /////////////whoWinner 함수//////////////////////

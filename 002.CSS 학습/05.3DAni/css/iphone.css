@@ -71,6 +71,20 @@ body{
     /* z축 밀기 */
     transform: translateZ(calc(var(--phone-side)/2));
 }
+
+/* 앞면 화면 변경 박스 */
+.iphone span:nth-child(1) b#screen{
+    position: absolute;
+    top: 47px;
+    left: 12px;
+    width: 175px;
+    height: 305px;
+    /* background-color: rgba(255, 0, 0, 0.5); */
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100%;
+}
+
 /* 2.  오른쪽면: 90도 */
 .iphone span:nth-child(2){
     background-image: url(../images/ip03.png);
@@ -247,4 +261,27 @@ body{
         /* left: -200%; */
         left: calc(7623px/-2);
     }
+}
+
+
+/* 아이폰 따라보기 이벤트 박스 */
+.evt-box{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 999;
+    height: 100vh;
+
+    /* 플렉스 박스 */
+    display: flex;
+    /* 랩핑박스 */
+    flex-wrap: wrap;
+
+}
+.evt-box div{
+    width: 20%;
+    height: 50%;
+    outline: 1px dashed green;
 }

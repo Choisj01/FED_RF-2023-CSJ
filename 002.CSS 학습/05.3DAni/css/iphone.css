@@ -187,7 +187,7 @@ body{
     color: #a0a0a0;
     text-shadow: 2px 2px 2px rgb(0 0 0 / .8);
 
-    outline: 2px  dotted red;
+    /* outline: 2px  dotted red; */
 }
 
 /* 흘러가는 텍스트애니 클래스1 */
@@ -272,6 +272,7 @@ body{
     right: 0;
     bottom: 0;
     z-index: 999;
+    width: 0;
     height: 100vh;
 
     /* 플렉스 박스 */
@@ -282,6 +283,6 @@ body{
 }
 .evt-box div{
     width: 20%;
-    height: 50%;
-    outline: 1px dashed green;
+    height: 33.33%;
+    /* outline: 1px dashed green; */
 }

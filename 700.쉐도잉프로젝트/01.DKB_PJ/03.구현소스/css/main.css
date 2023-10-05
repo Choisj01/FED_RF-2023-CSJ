@@ -7,12 +7,12 @@
 @import url(./common.css);
 
 /* 공사중 표시 */
-body * {
+/* body * {
     outline: 2px dashed #ccc;
 }
 body > div > * {
     outline-color: red;
-}
+} */
 
 /*********************** 2. 캐릭터 소개 *********************/
 #banner {
@@ -52,7 +52,7 @@ body > div > * {
     width: calc(95% / 4);
     /* 개별박스 비율설정 : height설정안함! */
     aspect-ratio: 2/1.2;
-    outline: 1px dashed blue;
+    /* outline: 1px dashed blue; */
 }
 
 /* 캐릭터 컨텐츠 박스 */

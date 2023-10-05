@@ -136,6 +136,7 @@
             stroke: black;
             stroke-width: 20;
             stroke-linecap: round;
+            /* 데쉬선 */
             stroke-dasharray: 15%;
             stroke-dashoffset: 102%;
 
@@ -145,17 +146,14 @@
         /* 오버시 선 움직이기 */
         .svg2:hover .rt1{
             stroke-dashoffset: 0;
-        }
-
-        
+        }    
 
         /* 3. 닥스박스 : 다각형(6각형) */
         .svg3{
             background: url(./images/doc.jpg) no-repeat top/cover;
             /* 다각형 클립핑 적용하기
             clip-path: polygon(x1 y1,x2 y2,...) */
-            clip-path: polygon(50% 0,100% 33%,100% 66%,50% 100%,0 66%,0 33%);
-            
+            clip-path: polygon(50% 0,100% 33%,100% 66%,50% 100%,0 66%,0 33%);           
         }
 
         /* 다각형 */
@@ -176,7 +174,6 @@
         }
 
         
-
         /* 4. 완다 : path */
         .svg4 svg{
             background: url(./images/wan.jpg) no-repeat top/cover;

@@ -16,7 +16,7 @@ function Car(props) {
     // 사용법: props.속성명
     // 컴포넌트에서 미리 세부속성명을 정하여 호출하는 곳에서
     // 같은 이름의 속성명으로 값을 담아 보내준다!
-    return (
+    return(
         <React.Fragment>
             <h2>나의 차는 {props.brand}입니다!</h2>
         </React.Fragment>
@@ -25,7 +25,7 @@ function Car(props) {
 
 /// 자동차 상세정보 출력 컴포넌트 ////////////////
 function Detail(props) {
-    return (
+    return(
         <React.Fragment>
             <h2>
                 모델명은 {props.brand.model}이고 차색은 {props.brand.color}입니다!
@@ -42,7 +42,7 @@ function Detail(props) {
 
 // 전체 자동차 브랜드 소개 컴포넌트///////////////////
 function Brand(props) {
-    return (
+    return(
         <React.Fragment>
             <h1>당신의 차는 무슨차죠?</h1>
             <Car brand="기아레이" />
@@ -57,7 +57,7 @@ function AskMore(props) { //props.num - 배열 데이터 순번
     // 컴포넌트에서 사용할 변수
     // 다른 컴포넌트에서도 사용할 경우 컴포넌트 바깥쪽
     // 전역구역에 코드를 넣는다!
-    
+
     // 옵션 배열 변수 셋팅
     const carInfo = [
         { color: "라잇블루", model: "2023년형", opt: { filter: "hue-rotate(0deg)" } },
@@ -65,7 +65,7 @@ function AskMore(props) { //props.num - 배열 데이터 순번
         { color: "녹차그린", model: "2024년형", opt: { filter: "hue-rotate(215deg)" } },
     ]; 
 
-    return (
+    return(
         <React.Fragment>
             <h1>더 자세히 말씀해주세요?!</h1>
             <Detail brand={carInfo[props.num]} />

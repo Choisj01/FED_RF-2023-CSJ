@@ -278,11 +278,10 @@ body {
     right: 0;
     width: 143.75px;
     height: 119px;
-    background: url(../images/move_dog.png) no-repeat;
+    background: url(../images/move_dog1.png) no-repeat;
 
     /* 애니메이션: 이시이지반방마 */
-    animation: spani5X 1s steps(8) infinite,
-    spani5Y 1s steps(2) infinite;
+    animation: spani5X 1s steps(4) infinite;
 }
 
 /* 강아지 키프레임 X축 */
@@ -295,7 +294,7 @@ body {
 /* 강아지 키프레임 Y축 */
 @keyframes spani5Y{
     to{
-        background-position-y: -238px;
+    
     }
     /* y축은 세로크기를 마이너스로 씀 */
 }

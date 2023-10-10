@@ -262,13 +262,13 @@ body {
 }
 .big:hover{
     /* 오버시 확대,멈춤,위로 */
-    transform: scale(3);
+    /* transform: scale(3); */
     animation-play-state: paused;
     z-index: 1;
 }
 /* 웃는여자용 */
 .big2:hover{
-    transform: scale(.7);
+    /* transform: scale(.7); */
 }
 
 /* 3-5.강아지 */
@@ -276,26 +276,26 @@ body {
     position: absolute;
     bottom: 0;
     right: 0;
-    width: 125.2px;
-    height: 208.5px;
-    background: url(../images/cartoon_dog_animation_frames.png) no-repeat;
+    width: 143px;
+    height: 119px;
+    background: url(../images/move_dog.png) no-repeat;
 
     /* 애니메이션: 이시이지반방마 */
-    animation: spani5X 1s steps(5) infinite,
+    animation: spani5X 1.4s steps(8) infinite,
     spani5Y 1s steps(2) infinite;
 }
 
-/* 몬스터 키프레임 X축 */
+/* 강아지 키프레임 X축 */
 @keyframes spani5X{
     to{
-      background-position-x: -626px;
+      background-position-x: -575px;
     }
     /* x축은 가로크기를 마이너스로 씀 */
 }
-/* 몬스터 키프레임 Y축 */
+/* 강아지 키프레임 Y축 */
 @keyframes spani5Y{
     to{
-        background-position-y: -417px;
+        background-position-y: -238px;
     }
     /* y축은 세로크기를 마이너스로 씀 */
 }

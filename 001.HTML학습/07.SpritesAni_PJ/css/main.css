@@ -262,13 +262,13 @@ body {
 }
 .big:hover{
     /* 오버시 확대,멈춤,위로 */
-    /* transform: scale(3); */
+    transform: scale(3);
     animation-play-state: paused;
     z-index: 1;
 }
 /* 웃는여자용 */
 .big2:hover{
-    /* transform: scale(.7); */
+    transform: scale(.7);
 }
 
 /* 3-5.강아지 */
@@ -281,7 +281,7 @@ body {
     background: url(../images/move_dog.png) no-repeat;
 
     /* 애니메이션: 이시이지반방마 */
-    animation: spani5X 1.4s steps(8) infinite,
+    animation: spani5X 1s steps(8) infinite,
     spani5Y 1s steps(2) infinite;
 }
 

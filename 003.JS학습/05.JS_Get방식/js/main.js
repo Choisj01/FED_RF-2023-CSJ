@@ -43,6 +43,7 @@ function goSub(){
     // location.href = 페이지url
     // 현재 브라우저 창에서 URL 이동함!
     location.href = 'Get02.html?shop='+encodeURIComponent(atxt);
+
 }///////////////////////goSub 함수///////////////////
 
 

@@ -114,14 +114,14 @@ body {
     background-size: auto 100%;
 
     /* 애니메이션: 이시이지반방마 */
-
+    animation: spani1 1s steps(8) infinite;
     /* outline: 5px solid red; */
 }
 
 /* 걷는존 키프레임 */
 @keyframes spani1 {
     to{
-       
+       background-position-x: -797.14px;
     }
     /* 배경이미지 x축 이동일 경우
     줄였을때 이미지 전체 가로크기를
@@ -178,13 +178,13 @@ body {
     background: url(../images/spAni01.png) no-repeat;
 
     /* 애니메이션: 이시이지반방마 */
-   
+   animation: spani2 1s steps(10) infinite;
 }
 
 /* 꼬마 키프레임 */
 @keyframes spani2 {
     to{
-        
+        background-position-x: -500px;
     }
 }
 /* 키프레임 */
@@ -199,20 +199,26 @@ body {
     background: url(../images/spAni02.png) no-repeat;
 
     /* 애니메이션: 이시이지반방마 */
-    
+    animation: spani3X 1s steps(6) infinite,
+    spani3Y 3s steps(3) infinite;
+
+    /*  
+        x축은 6장면을 1초간 작동
+        
+    */
 }
 
 /* 몬스터 키프레임 X축 */
-@keyframes spani3X {
+@keyframes spani3X{
     to{
-        
+       background-position-x: -710px; 
     }
     /* x축은 가로크기를 마이너스로 씀 */
 }
 /* 몬스터 키프레임 Y축 */
-@keyframes spani3Y {
+@keyframes spani3Y{
     to{
-        
+        background-position-y: -355px;
     }
     /* y축은 세로크기를 마이너스로 씀 */
 }
@@ -232,20 +238,21 @@ body {
     transform: scale(.5);
 
     /* 애니메이션: 이시이지반방마 */
-    
+    animation: spani4X .8s steps(5) infinite,
+    spani4Y 2.4s steps(3) infinite;
 
 
 }
 /* 웃는여자 키프레임 X축 */
 @keyframes spani4X {
     to{
-       
+       background-position-x: -1280px;
     }
 }
 /* 웃는여자 키프레임 Y축 */
 @keyframes spani4Y {
     to{
-        
+        background-position-y: -1222px;
     }
 }
 
@@ -262,6 +269,35 @@ body {
 /* 웃는여자용 */
 .big2:hover{
     transform: scale(.7);
+}
+
+/* 3-5.강아지 */
+.spani5{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 125.2px;
+    height: 208.5px;
+    background: url(../images/cartoon_dog_animation_frames.png) no-repeat;
+
+    /* 애니메이션: 이시이지반방마 */
+    animation: spani5X 1s steps(5) infinite,
+    spani5Y 1s steps(2) infinite;
+}
+
+/* 몬스터 키프레임 X축 */
+@keyframes spani5X{
+    to{
+      background-position-x: -626px;
+    }
+    /* x축은 가로크기를 마이너스로 씀 */
+}
+/* 몬스터 키프레임 Y축 */
+@keyframes spani5Y{
+    to{
+        background-position-y: -417px;
+    }
+    /* y축은 세로크기를 마이너스로 씀 */
 }
 
 /* 

@@ -25,9 +25,12 @@ console.log(dFn);
 
     2. 프로세스
     (1) mousedown 이벤트에서는 시작위치값 저장
+    -모바일 이벤트 : touchstart
     (2) mousemove 이벤트에서는 움직인위치와 시작위치 차이저장
+    -모바일 이벤트 : touchmove
     (3) mousemove에서 차이값을 타겟요소의 left,top값에 반영
     (4) mouseup 이벤트에서는 다음 이동을 위한 마지막위치 저장
+    -모바일 이벤트: touchend
     (5) mousemove 이벤트에서 마지막위치로 부터의 이동을 계산함
 
 
@@ -71,17 +74,41 @@ function goDrag(ele) {
     const dFalse = () => drag = false;
 
     // (3) 드래그 움직일떄 작동함수
-    const dMove = () => {
+    const dMove = (e) => {
         console.log("드래그상태:", drag);
 
         // 드래그 상태일때만 실행
         if(drag){
             // 1. 드래그 상태에서 움직일때 위치값 : mvx, mvy
-            mvx = event.pageX;
-            mvy = event.pageY;
+            // - pageX,pageY 는 일반브라우저용
+            // -touches[0].screenX,touches[0].screenY 는 터치스크린용
+            mvx = e.pageX || e.touches[0].screenX;
+            mvy = e.pageY || e.touches[0].screenY;
+
+            // 2. 움직일때 위치값 - 처음 위치값 : rx, ry
+            // x축 값은 left 값, y축 값은 top값 이동이다!
+            rx = mvx - fx;
+            ry = mvy - fy;
+            // 순수하게 움직인 거리를 계산! -> 가장 중요한 핵심!
+
+            // 3. x,y 움직인 위치값을 타켓요소에 적용!
+            // 대상 : 전달된 드래그 요소 -> ele 변수
+            ele.style.left = (rx+lx)+'px';
+            ele.style.top = (ry+ly)+'px';
+            // 한번 드래그 후 다시 드래그시 움직인 위치값이 필요함!
+            // -> 마지막 위치값 저장 필요! -> lx,ly
+            // -> 항상 최종 위치에서 움직인 위치를 더한다!!!
+
+            // 4. z-index값을 모두 초기화 후 드래그 대상만 높여줌!
+            dtg.forEach(ele=>ele.style.zIndex=0);
+            ele.style.zIndex = 1;
+
 
             // 값확인
+            console.log(`fx:${fx} | fy:${fy}`);
             console.log(`mvx:${mvx} | mvy:${mvy}`);
+            console.log(`rx:${rx} | ry:${ry}`);
+            console.log(`lx:${lx} | ly:${ly}`);
 
         } //////////// if ///////////
 
@@ -89,15 +116,17 @@ function goDrag(ele) {
 
     // (4) 첫번쨰 위치포인트 셋팅함수 : fx, fy
     const firstPoint = () => {
-        fx = event.pageX;
-        fy = event.pageY;
+        fx = event.pageX || event.touches[0].screenX;
+        fy = event.pageY || event.touches[0].screenY;
+        // console.log('첫포인트:',fx,'|',fy)
     }; ///////////firstPoint 함수 /////////////
-
+    
     // (5) 마지막 위치포인트 셋팅함수: lx,ly
     const lastPoint = () => {
         // 움직일때 위치값을 기존값에 계속 더함
         lx += rx;
         ly += ry;
+        // console.log('끝포인트:',lx,'|',ly)
     };/////////////lastPoint 함수 ////////////////////
 
     // 3. 이벤트 등록하기 /////////////////
@@ -107,17 +136,35 @@ function goDrag(ele) {
         dTrue();
         firstPoint();
     }); //////////// mousemove 함수 ///////////
+
+    // 모바일 이벤트 추가///////////////////
+    dFn.addEvt(ele,'touchstart',()=>{
+        dTrue();
+        firstPoint();
+    }); //////////// mousemove 함수 ///////////
     // (2) 마우스 올라올때 : 드래그 false + 마지막 위치값 업데이트
     dFn.addEvt(ele,'mouseup',()=>{
         dFalse();
         lastPoint();
     }); //////////// mousemove 함수 ///////////
+
+    // 모바일 이벤트 추가 ///////////////////////
+    dFn.addEvt(ele,'touchend',()=>{
+        dFalse();
+        lastPoint();
+    }); //////////// mousemove 함수 ///////////
+
     // (3) 마우스 움직일때 : 움직일때 처리함수 호출
     dFn.addEvt(ele,'mousemove',dMove);
+
+    // 모바일 이벤트 추가//////////////////////
+    dFn.addEvt(ele,'touchmove',dMove);
+
     // (4) 마우스 벗어날때 : 드래그 상태 false처리 함수 호출
     dFn.addEvt(ele,'mouseleave',dFalse);
 
 
+    dFn.addEvt
 
 
 } ///////////////////////goDrag 함수 ////////////////////

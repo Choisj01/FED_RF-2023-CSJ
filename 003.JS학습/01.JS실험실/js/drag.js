@@ -111,6 +111,8 @@ function goDrag(ele) {
             console.log(`lx:${lx} | ly:${ly}`);
 
         } //////////// if ///////////
+        // 커서 편손(grab)/쥔손(grabbing) 상태 변경하기
+        ele.style.cursor = drag?'grabbing':'grab';
 
     }; ///////////////dMove 함수 //////////////////
 
@@ -163,8 +165,6 @@ function goDrag(ele) {
     // (4) 마우스 벗어날때 : 드래그 상태 false처리 함수 호출
     dFn.addEvt(ele,'mouseleave',dFalse);
 
-
-    dFn.addEvt
 
 
 } ///////////////////////goDrag 함수 ////////////////////

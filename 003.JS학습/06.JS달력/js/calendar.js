@@ -2,13 +2,13 @@
 
 // DOM 메서드 //////
 const dFn = {
-    qs: (x) => document.querySelector(x),
-    qsa: (x) => document.querySelectorAll(x),
-    cg: (x) => console.log(x),
-    fm: (x) =>
-        `${x.getFullYear()}-${x.getMonth() + 1 < 10 ? "0" + (x.getMonth() + 1) : x.getMonth() + 1}-${
-            x.getDate() < 10 ? "0" + x.getDate() : x.getDate()
-        }(${week[x.getDay()]})`,
+    qs : x => document.querySelector(x),
+    qsa : x => document.querySelectorAll(x),
+    cg : x => console.log(x),
+    addZero : x => x < 10 ? '0' + x : x,
+    fm : x => `${x.getFullYear()}-${
+        dFn.addZero(x.getMonth()+1)}-${
+        dFn.addZero(x.getDate())}(${week[x.getDay()]})`
 }; ///////// dFn 객체 //////////
 
 // 요일변경배열
@@ -61,12 +61,12 @@ function makeDallyeok() {
 
         // 2. 현재달 첫째날짜 (옵션:1-전달로 셋팅)
         // -> 달력 전달 셋팅을 위한 요일 구하기 위해!
-        const thisFirst = new Date(cYr, cMt + 1, 1);
+        const thisFirst = new Date(cYr, cMt, 1);
 
         dFn.cg("현재달 첫째날짜" + dFn.fm(thisFirst));
 
         // 3. 현재달 마지막날짜(옵션:0)
-        const thisLast = new Date(cYr, cMt + 2, 0);
+        const thisLast = new Date(cYr, cMt + 1, 0);
 
         dFn.cg("현재달 마지막날짜" + dFn.fm(thisLast));
 
@@ -74,7 +74,7 @@ function makeDallyeok() {
         yearTit.innerHTML = cYr;
 
         // 5. 월 표시하기
-        monthTit.innerHTML = cMt + 2;
+        monthTit.innerHTML = cMt + 1;
 
         // 6. 날짜 데이터 태그 구성하기
         // 6-1. 전달 날짜 앞쪽 채우기
@@ -98,22 +98,31 @@ function makeDallyeok() {
 
         // 6-2. 현재월 삽입하기 /////////////////
         // 반복문 구성 : 현재월 1일부터 마지막날짜까지 반복 배열 추가
-        for (let i = 1; i < thisLast.getDate(); i++) {
+        for(let i = 1; i <= thisLast.getDate(); i++){
             dateSet.push(i);
-        } ////////////// for ////////////////
+        } ///////////// for ////////////////////
 
+        
         // 6-3. 다음달 나머지 칸 삽입하기 ////////////
         // 다음달은 클래스 'am'으로 구분
         // 반복구성: 1부터 2주분량정도 넣는다!
-        for (let i = 1; i <= 14; i++) {
+        for(let i = 1; i <= 14; i++){
             dateSet.push(`
-            <span style="color:#ccc" class="am">
-            ${i}
-            </span>
+                <span style="color:#ccc" class="am">
+                    ${i}
+                </span>
             `);
-        } //////////////for ////////////////
 
-        dFn.cg("날짜배열:" + dateSet);
+        } //////////// for //////////////
+
+        
+        // 7. 날짜배열로 날짜태그 구성하여 출력하기
+        // 7일 * 6주 = 42개
+        dates.innerHTML = dateSet.map((v,i)=>
+        i<42?`<div class="date">${v}</div>`:'').join('');
+        
+        // dFn.cg("날짜배열:" + dateSet.map((v,i)=>i<42?`<div class="date">${v}</div>`:'').join(''));
+
     }; /////////////// initDallyeok 함수 /////////////
 
     // 초기셋팅 함수 호출!

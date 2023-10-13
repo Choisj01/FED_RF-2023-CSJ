@@ -2,13 +2,13 @@
 
 // DOM 메서드 //////
 const dFn = {
-    qs : x => document.querySelector(x),
-    qsa : x => document.querySelectorAll(x),
-    cg : x => console.log(x),
-    addZero : x => x < 10 ? '0' + x : x,
-    fm : x => `${x.getFullYear()}-${
-        dFn.addZero(x.getMonth()+1)}-${
-        dFn.addZero(x.getDate())}(${week[x.getDay()]})`
+    qs: (x) => document.querySelector(x),
+    qsa: (x) => document.querySelectorAll(x),
+    addEvt : (ele,evt,fn) => 
+            ele.addEventListener(evt,fn),
+    cg: (x) => console.log(x),
+    addZero: (x) => (x < 10 ? "0" + x : x),
+    fm: (x) => `${x.getFullYear()}-${dFn.addZero(x.getMonth() + 1)}-${dFn.addZero(x.getDate())}(${week[x.getDay()]})`,
 }; ///////// dFn 객체 //////////
 
 // 요일변경배열
@@ -33,6 +33,8 @@ function makeDallyeok() {
     const dates = dFn.qs(".dates");
     // (6) 날짜넣을 배열 변수
     const dateSet = [];
+    // (7) html 코드 저장변수
+    let hcode = "";
 
     // dFn.cg(yearTit);
     // dFn.cg(maonthTit);
@@ -91,40 +93,82 @@ function makeDallyeok() {
                 <span style="color:#ccc" class="bm">
                         ${prevLast.getDate() - i}
                     </span>
-                `)
+                `);
                 // 전달 마지막 날짜 - for문 i값(0,1,2,...)
             } ////////////////  for 문 ////////
         } ///////////////// if 문 /////////////////
 
         // 6-2. 현재월 삽입하기 /////////////////
         // 반복문 구성 : 현재월 1일부터 마지막날짜까지 반복 배열 추가
-        for(let i = 1; i <= thisLast.getDate(); i++){
+        for (let i = 1; i <= thisLast.getDate(); i++) {
             dateSet.push(i);
         } ///////////// for ////////////////////
 
-        
         // 6-3. 다음달 나머지 칸 삽입하기 ////////////
         // 다음달은 클래스 'am'으로 구분
         // 반복구성: 1부터 2주분량정도 넣는다!
-        for(let i = 1; i <= 14; i++){
+        for (let i = 1; i <= 14; i++) {
             dateSet.push(`
                 <span style="color:#ccc" class="am">
                     ${i}
                 </span>
             `);
-
         } //////////// for //////////////
 
-        
-        // 7. 날짜배열로 날짜태그 구성하여 출력하기
+        // 7. 날짜배열로 날짜태그 구성하기
         // 7일 * 6주 = 42개
-        dates.innerHTML = dateSet.map((v,i)=>
-        i<42?`<div class="date">${v}</div>`:'').join('');
-        
-        // dFn.cg("날짜배열:" + dateSet.map((v,i)=>i<42?`<div class="date">${v}</div>`:'').join(''));
+        for (let i = 0; i < 42; i++) {
+            if (
+                // 년,월,일이 모두 일치하는 오늘만 표시
+                // (1) 오늘 날짜 == 배열값날짜 AND연산자(&&)
+                today.getDate() == dateSet[i] &&
+                // (2) 현재달 == 선택달 AND
+                today.getMonth() == currDate.getMonth() &&
+                // (3) 현재년도  == 선택년도
+                today.getFullYear() == currDate.getFullYear()
+            ) {
+                hcode += `<div class="date today">${dateSet[i]}</div>`;
 
+            } ////////////////// if ///////////////
+            else {
+                hcode += `<div class="date">${dateSet[i]}</div>`;
+
+            } /////////// else ////////////////////
+
+        } //////////////// for //////////////////
+
+        // 8. 날짜태그 출력하기
+        dates.innerHTML = hcode;
+
+        // dates.innerHTML = dateSet.map((v,i)=>
+        // i<42?`<div class="date">${v}</div>`:'').join('');
+
+        // dFn.cg("날짜배열:" + dateSet.map((v,i)=>i<42?`<div class="date">${v}</div>`:'').join(''));
     }; /////////////// initDallyeok 함수 /////////////
+
+    // (2) 이전달력 출력하기 함수 ///////
+    const prevCalendar = () => {
+        console.log('이전 달력 고고!');
+        // 이전 달로 변경하여 initDallyeok() 함수호출!
+        // getMonth() 월 가져오기 / setMonth() 월 셋팅하기
+        currDate.setMonth(currDate.getMonth()-1)
+    }; /////////////////prevCalendar 함수////////////////////////
+    
+    // (3) 다음달력 출력하기 함수 ///////
+    const nextCalendar = () => {
+        console.log('다음 달력 고고!');
+
+    }; /////////////////nextCalendar 함수////////////////////////
+
+     // 3. 이벤트 설정하기 ////////////////////
+    // 이전버튼에 함수연결하기
+    dFn.addEvt(dFn.qs('.btnL'),'click',prevCalendar);
+    // 다음버튼에 함수연결하기
+    dFn.addEvt(dFn.qs('.btnR'),'click',nextCalendar);
+
+
 
     // 초기셋팅 함수 호출!
     initDallyeok();
+
 } /////////////// makeDallyeok 함수 ////////////

@@ -194,11 +194,25 @@ function makeDallyeok() {
                             nowM = 12;
                             // 12월은 전해로 처리
                             nowY--;
-                        }
+                        } ////if/////
                     } //////else////////
                 
                 } /////////////////if ///////////////
+
+                    // 날짜구성하기 : yyyy-mm-dd
+                    let setDate = 
+                    `${nowY}-${dFn.addZero(nowM)
+                    }-${dFn.addZero(nowD)}`;
+                     
+                    // 요일셋팅하기 : 해당날짜의 요일 getDay()
+                    let setDay = new Date(setDate).getDay();
+    
+                    // 날짜요일출력 : yyyy-mm-dd(요일)
+                    console.log(setDate+`(${week[setDay]})`);
+    
+
                 console.log(`${nowY}-${dFn.addZero(nowM)}-${dFn.addZero(nowD)}`);
+
             }); //////////click 함수////////////
         }); //////////////forEach///////////////
     }; /////////////// initDallyeok 함수 /////////////

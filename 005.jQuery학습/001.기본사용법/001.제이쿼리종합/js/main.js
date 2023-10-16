@@ -356,7 +356,7 @@ btns.first() // 첫번째 버튼
                 .delay(500)
                 .animate({
                     rotate:"-150deg"       
-                },500,"easeInOutCirc",
+                },700,"easeInOutCirc",
                 ()=>{ // 주사기 회전 후 콜백함수
                     // 미니언즈 이미지 변경하기
                     // attr(속성명,값) -> 값설정하기 
@@ -370,7 +370,7 @@ btns.first() // 첫번째 버튼
 
                     // 대사 : 2번방
                     msg.html(msgTxt[2])
-                    .fadeIn(200);
+                    .fadeIn(300);
 
                     // 다음버튼 보이기
                     showNextBtn(this);

@@ -162,7 +162,11 @@ import dFn from "./dom.js";
 
                 (4) 객체값으로 구성되는 배열일 경우 아래와 같이 변환한다
                 -> 객체를 변환후 map으로 값을 다시 담아준다!
+
+                
                 객체변수 = 객체
+
+                [한번에 값배열로 변환: 오브젝트.키스.맵!]
                 새변수 = Object.keys(객체변수).map(v=>객체변수[v])
 
             3. 새로구성한 객체 변환 배열로 기존 배열 메서드를 사용하여
@@ -616,6 +620,44 @@ const list3 ={
     },
 }; /////////////// list3 /////////////  
 
-// (2) 출력대상선정 : .showList5
+// (2) 객체데이터를 배열로 변경하기
+// 1단계 : 객체속성을 키배열로 변환하기
+// -> Objct.keys(객체) -> 속성값으로 구성된 배열!
+let myKey = Object.keys(list3);
+// console.log('키배열:',myKey);
+// console.log('키배열 정렬:',myKey.reverse());
+
+// 2단계 : 키배열을 객체의 값으로 대체하여 원하는 값배열만들기
+// let myVal = myKey.map(v=>list3[v]);
+// console.log('값배열:',myVal);
+ 
+// 1,2단계를 한번에 값배열 만들기 : 오브젝트.키스.맵!
+let newList3 = Object.keys(list3).map(v=>list3[v]);
+console.log('새로운 값배열:',newList3);
+
+// (3) 출력대상선정 : .showList5
 const showList5 = dFn.qs('.showList5');
 
+// (4) 초기 출력하기 : upCode()
+upCode(newList3,showList5);
+
+// (5) 정렬기능 이벤트 설정하기 : sortingFn()
+// 이벤트대상 : .sel5
+
+// 데이터 맵핑하기
+dFn.addEvt(dFn.qs('.sel5'),'change',()=>{
+    // 타겟 데이터 설정
+    targetData = newList3;
+    // 타겟 출력요소
+    targetEle = showList5;
+
+});
+
+// change 이벤트 연결설정
+dFn.addEvt(dFn.qs('.sel5'),'change',sortingFn);
+
+
+// 검색 기준 선택박스 변경시 정렬선택 초기화하기
+dFn.addEvt(dFn.qs('.cta5'),'change',()=>{
+    dFn.qs('.sel5').value='0';
+}); ///////////// chage//////////////////

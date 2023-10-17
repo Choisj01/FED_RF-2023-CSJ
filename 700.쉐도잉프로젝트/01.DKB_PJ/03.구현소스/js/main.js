@@ -235,7 +235,7 @@ preBox.forEach((ele, idx) => {
 ////////////최신동영상 영역 데이터 뿌리기/////////////////
 // 대상 : .clip-box
 const clipBox = dFn.qs(".clip-box");
-console.log(clipBox);
+// console.log(clipBox);
 
 // 생성할 데이터
 let clipCode = "";
@@ -254,7 +254,7 @@ clipData.forEach((val) => {
     `;
 }); //////////////forEach/////////////////
 
-console.log(clipCode);
+// console.log(clipCode);
 
 // 코드넣기
 clipBox.innerHTML = `<ul>${clipCode}</ul>`;
@@ -292,7 +292,7 @@ btnClip.forEach((ele) => {
 function moveClip() {
     // 1. 오른쪽 버튼 여부
     let isR = this.classList.contains("fa-chevron-right");
-    console.log("나야나!", isR);
+    // console.log("나야나!", isR);
     // 2. 버튼별 이동분기
     if (isR) {
         // 오른쪽 버튼
@@ -303,12 +303,11 @@ function moveClip() {
             // 마지막수 고정
             mvNum = LIMIT_MOVE;
             // 마지막 버튼 숨기기
-            btnClip[1].style.display = 'none';
-            }
-        else{
+            btnClip[1].style.display = "none";
+        } else {
             // 첫번째 버튼 보이기
-            btnClip[0].style.display = 'block';
-        }    
+            btnClip[0].style.display = "block";
+        }
     } /////////////////if////////////
     else {
         // 왼쪽 버튼
@@ -319,11 +318,10 @@ function moveClip() {
             // 0에 고정
             mvNum = 0;
             // 첫번째 버튼 숨기기
-            btnClip[0].style.display = 'none';
-        }
-        else{
+            btnClip[0].style.display = "none";
+        } else {
             // 마지막 버튼 보이기
-            btnClip[1].style.display = 'block';
+            btnClip[1].style.display = "block";
         }
     } /////////////////if////////////
 
@@ -331,23 +329,22 @@ function moveClip() {
     clipList.style.left = -(BLOCK_NUM * mvNum) + "%";
 } /////////////moveClip /////////////////////////
 
-
 //////////////////////////////////////////////////////////////////////
 // 하단링크 콤보 박스 바인딩하기////////////////////////////////////////
 // 1. 요구사항 - 콤보박스에 맞는 데이터를 바인딩한다!
 // 2. 데이터 - linkData
-// console.log('하단콤보박스 데이터:',linkData); 
+// console.log('하단콤보박스 데이터:',linkData);
 
 // 3. 대상선정 : 바인딩할 콤보박스
 // #brand, #corp
-const brandBox = dFn.qs('#brand');
-const corpBox = dFn.qs('#corp');
-console.log('콤보박스:',brandBox,corpBox);
+const brandBox = dFn.qs("#brand");
+const corpBox = dFn.qs("#corp");
+// console.log("콤보박스:", brandBox, corpBox);
 
 // 4. 데이터 바인딩하기
 // 4-1. 브랜드 바로가기 콤보박스 : 단순 바인딩(option만)
 // 데이터 대상 : linkData.brand
-linkData.brand.forEach(val=>{
+linkData.brand.forEach((val) => {
     brandBox.innerHTML += `<option value="${val}">${val}</option>`;
 }); /////////forEach /////////////////////
 
@@ -357,14 +354,13 @@ linkData.brand.forEach(val=>{
 const corpData = Object.keys(linkData.corp);
 
 // 내부 초기화
-corpBox.innerHTML = '';
-
+corpBox.innerHTML = "";
 
 // console.log('계열사 데이터:',corpData);
-corpData.forEach(val=>{
-    corpBox.innerHTML+=`
+corpData.forEach((val) => {
+    corpBox.innerHTML += `
     <optgroup label="${val}">
-      ${linkData.corp[val].map(v=>`<option value="${v}">${v}</option>`).join('')}
+      ${linkData.corp[val].map((v) => `<option value="${v}">${v}</option>`).join("")}
     </optgroup>
     `;
 }); ///////////////forEach//////////////////////////
@@ -386,4 +382,44 @@ corpData.forEach(val=>{
      </optgroup>
 *****************************************************/
 
+////////////////////////////////////////////////////////
 
+/////// 제이쿼리로 기능구현하기//////////////////////////////
+
+// 1. 서브컨텐츠 보이기 기능구현////////////////
+
+// (1) 대상선정
+// 이벤트대상 : .sub-view-box 하위.partbox 또는 li
+const subViewBox = $(".sub-view-box .partbox,.sub-view-box li");
+// 변경대상 : .sub-cont
+const subContBox = $(".sub-cont");
+// console.log(subContBox);
+
+// (2) 이벤트 함수 만들기 ////////
+subViewBox.click(function () {
+    console.log("나야나!", this); //this - 클릭된 요소 자신
+
+    // 1. 제목 읽어오기
+    let subTit = $(this).parents(".sub-view-box").prev().text();
+    // 나자신.부모들(특정클래스).이전형제().글자읽기();
+
+    // 2. 내용 읽어오기
+    let subItem = $(this).text();
+
+    // 3. 서브박스 내용 넣기
+    subContBox.html(`
+      <button class="cbtn">×</button>
+      <div class="sub-inbox inbox">
+        <h1>${subTit}</h1>
+        <div class="sub-item">
+          ${subItem}
+        </div>
+      </div>
+    `);
+
+    // 3. 닫기버튼 이벤트설정
+    $(".cbtn").click(() => subContBox.hide());
+
+    // 999. 서브박스 보이기
+    subContBox.show();
+}); /////////// click //////////

@@ -53,13 +53,29 @@ calBox.mouseenter(function(){
         dc2.week[myData[3]]+'요일)'
 
         // 출력 : 해당달력의 부모의 이전 text박스
-        $(this).parents('.calendar').parent().prev().val(myData);
+        $(this).parents('.calendar')
+        .parent().prev().val(myData);
         // parent() 한단계 위의 부모요소 선택
         // parents(특정요소) 부모들중 특정요소 선택 
 
     }); ////////////click////////////////
 
 });///////////mouseenter함수////////////////
+
+////////// 달력 박스 보이기 / 숨기기 처리 //////
+// 대상: .calendar 
+const myCal = $('.calendar');
+
+// 1. 보이기 : input 박스를 클릭하면 보임!
+$(".dalcom input").click(function(){
+    // input 다음에 하위 .calendar 찾아서 보여! show()
+    $(this).next().find('.calendar').show();
+});//////////////click/////////////////
+
+// 2. 달력 처음에 숨기기 + 떠날때 숨기기
+myCal.hide().mouseleave(function(){
+    $(this).hide();
+}); ////////////mouseleave///////////
 
 
 

@@ -18,7 +18,8 @@ const week = ["일", "월", "화", "수", "목", "금", "토"];
 // 달력함수 호출
 makeDallyeok();
 
-function makeDallyeok() {
+function makeDallyeok(selEl){ 
+    //selEl - 달력넣을 요소
     dFn.cg("달력만들어!");
 
     // 1. 변수 셋팅 ///////////
@@ -236,3 +237,45 @@ function makeDallyeok() {
     // 초기셋팅 함수 호출!
     initDallyeok();
 } /////////////// makeDallyeok 함수 ////////////
+
+
+/*****************************************************  
+  
+    함수명 : insertHcode
+    기능 : 달력에 html 코드 넣기
+
+***********************************************************/
+function insertHcode(){
+    // 달력 html 코드를 리턴함!
+    return`
+    <!-- 달력 전체박스 -->
+    <div class="calender">
+        <!-- 달력상단:해당년/월표시 -->
+        <header class="header">
+            <!-- 달력이동버튼:이전 -->
+            <button class="mbtn btnL">〈</button>
+            <div class="title">
+                <div class="yearTit"></div>
+                <div class="monthTit"></div>
+            </div>
+            <!-- 달력이동버튼:다음 -->
+            <button class="mbtn btnR">〉</button>
+        </header>
+        <!-- 달력날짜표시박스 -->
+        <section class="main">
+            <!-- 주단위 구분박스 -->
+            <div class="week">
+                <div class="day">Sun</div>
+                <div class="day">Mon</div>
+                <div class="day">Tue</div>
+                <div class="day">Wed</div>
+                <div class="day">Thu</div>
+                <div class="day">Fri</div>
+                <div class="day">Sat</div>
+            </div>
+            <!-- 해당월의 달력날짜 구성박스 -->
+            <div class="dates"></div>
+        </section>
+    </div>
+    `;
+}///////////////insertHcode 함수///////////////////////////

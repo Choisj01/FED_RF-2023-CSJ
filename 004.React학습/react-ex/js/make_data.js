@@ -5,18 +5,18 @@ let gname = ["반스캐쥬얼","반스어얼리","반스뉴진스","반스스타
 let gprice = ["23000","55000","76000","48000","66000"];
 
 // rdm[아이템갯수] //rdm-랜덤
-let rdm = (x) => Math.floor(Math.random() * x);
+let rdm = (x) => Math.floor(Math.random() * x); //rdm 함수
 
 let bb = '';
-for (let x = 1; x < 19; x++) {
+for (let x = 1; x <= 19; x++) {
 bb += `
 {
-    "idx":${x},
-    "gname":${gname[rdm[4]]},
-    "category":${category[rdm[3]]},
-    "gprice":${gprice[rdm[5]]}
+    "idx":'${x}',
+    "gname":'${gname[rdm(4)]}',
+    "category":'${category[rdm(3)]}',
+    "gprice":'${gprice[rdm(5)]}'
 },
 `;
 }
 
-console.log(bb)
+console.log(bb);

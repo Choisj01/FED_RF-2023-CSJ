@@ -150,6 +150,8 @@ function slideFn(selEl) { // selEl - 선택 슬라이드 부모 요소
             slide.style.left = 
             -(slide.parentElement.clientWidth*3.3-rx)+"px";
             // rx는 드래그시 이동한 수치임(보정해야 안튐!)
+            // 이동 후엔 rx=0으로 초기화 해야 버튼클릭시 정상작동함!
+            console.log('보정값:',rx);
 
             // 3. 트랜지션 없애기
             slide.style.transition = "none";
@@ -165,6 +167,9 @@ function slideFn(selEl) { // selEl - 선택 슬라이드 부모 요소
 
                 // 5. 트랜지션 주기
                 slide.style.transition = TIME_SLIDE + "ms ease-in-out";
+
+                // 6. 드래그 보정값 rx 초기화
+                rx = 0; //버튼클리기 정상작동함!
             }, 0);
 
         } ////////// else ///////////////

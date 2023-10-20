@@ -38,6 +38,15 @@
             width: 100%;
             height: 100%;
         }
+
+        body{
+            cursor: none;
+        }
+
+        #cs-img{
+            position: absolute;
+            width: 5vw;
+        }
         
     </style>
     <script src="js/jquery-1.8.1.min.js"></script>
@@ -94,6 +103,28 @@
             // -> 대상에서 pageX,pageY 이벤트 마우스 포인터 위치값으로 구함!
             let mPosX, mPosY;
 
+
+            //커서용 이미지요소
+            const csImg = $('#cs-img'); 
+
+            // 커서 이미지 이름배열
+            const csName = [
+            '13148a1','cursor','strtail','Tail2.gif-c200','yoshi-cursor'
+            ];
+
+            // 커서용 숫자변수
+            let csNum = 0;
+
+            // 일정시간 간격으로 커서 이미지 변경하기
+            setInterval(()=>{
+                // 이미지 경로 속성 변경하기 : attr(속성, 값)
+                csImg.attr('src',`./images/cursor/${csName[csNum]}.gif`);
+                // 다음을 위해 숫자 증가
+                csNum++;
+                // 배열 갯수와 같아지면 첫번호로 가라!
+                if(csNum==csName.length) csNum=0;
+            },3000); /////////setInterval/////////////////
+
             // 5. 위의 비례식에 맞게 실제 이동값으로 적용하기
             // 이벤트 대상 : #cover -> cover 변수
             cover.mousemove(e=>{
@@ -101,7 +132,7 @@
                 mPosX = e.pageX;
                 mPosY = e.pageY;
 
-                console.log(`x:${mPosX}\ny:${mPosY}`);
+                // console.log(`x:${mPosX}\ny:${mPosY}`);
 
                 // 2. 비례식 적용하기 //////
                 // 이이=마이*이최/마최
@@ -126,6 +157,17 @@
                     left: iPosX+'px'
                 }); //////css///////
 
+                 // 4. 커서 이미지 마우스 포인터 위치로 이동하기
+                 csImg.css({
+                    top: mPosY + 'px',
+                    left: mPosX + 'px',
+                }); ////////css/////////
+
+                // 추가예시)
+                //  커서 방향을 위치에 따라 변경할 수 있는 방법
+                // if(mPosX < 300) csImg.css({transform: 'rotateY(180deg)'});
+                // else csImg.css({transform: 'rotateY(0deg)'});
+
                 
             }); //////////mousemove////////////
 
@@ -141,5 +183,7 @@
         <div id="cover"></div>
     </div>
     
+    <!-- 커서용 이미지 -->
+    <img src="./images/cursor/yoshi-cursor.gif" alt="커서" id="cs-img">
 </body>
 </html>

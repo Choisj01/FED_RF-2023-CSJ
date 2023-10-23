@@ -54,148 +54,237 @@ import dFn from "./dom.js";
 https://www.w3schools.com/js/js_api_web_storage.asp
 ***************************************************************/
 
-// [ 1.로컬 스토리지 연습 ]///////////////////////////////////////
+// [ 1. 로컬 스토리지 연습 ] //////////////////////
 // 1. 버튼 기능 이벤트 대상: .local-box button
-const btnLocal = dFn.qsa(".local-box button");
-console.log("대상:", btnLocal);
+const btnLocal = dFn.qsa('.local-box button');
+console.log('대상:',btnLocal);
 
-//  2. 버튼에 이벤트 설정
-btnLocal.forEach((ele) => dFn.addEvt(ele, "click", localSFn));
+// 2. 버튼에 이벤트 설정
+btnLocal.forEach(ele=>dFn.addEvt(ele,'click',localSFn));
 
-// ->개별 로컬스토리지 삭제 이벤트 설정하기//////
-dFn.qsa(".local ol li").forEach((ele, idx) => {
+// -> 개별 로컬스토리지 삭제 이벤트 설정하기
+dFn.qsa('.local ol li').forEach((ele,idx)=>{
     // 로컬스토리지 키명 배열
-    const keyName = ["lname", "lrole", "lcat"];
-    ele.onclick = function () {
-        // 개별 로컬스토리지 키 삭제
-        console.log('삭제할 키:',keyName);
+    const keyName = ["lname","lrole","lcat"];
+    ele.onclick = function(){
+        // 개별 로컬스토리지 키삭제
+        console.log('삭제할키:',keyName[idx]);
         localStorage.removeItem(keyName[idx]);
-    }; ///click////
-}); //////////forEach/////////
+    }; //////// click ////////
+}); /////////// forEach /////////////
 
-// 3. 로컬쓰 처리 함수 만들기 ////////////
-function localSFn() {
-
+// 3. 로컬쓰 처리 함수 만들기 /////////
+function localSFn(){
     // 1. 버튼 텍스트 읽기
     let btxt = this.innerText;
-    console.log("로컬쓰:", btxt);
+    console.log('로컬쓰:',btxt);
 
-    // 2. 버튼별 기능 분기하기///
-    if (btxt == "처음") {
-        // 로컬 스토리지 읽기 :
-        // ->localStorage.getItem(키명)
-        // console.log("로컬쓰lname:",
-        //     localStorage.getItem("lname"));
-        // 만약 값이 셋팅안됐으면 null값이 나옴!
-
-        // 로컬 스토리지 셋팅 :
+    // 2. 버튼별 기능 분기하기 ////
+    if(btxt == '처음'){
+        // 로컬 스토리지 읽기 : 
+        // -> localStorage.getItem(키명)
+        // console.log('로컬쓰 lname:',
+        //     localStorage.getItem('lname'));
+        // 만약 값이 셋팅안됐으면 null 값이 나옴!
+        
+        // 로컬 스토리지 셋팅 : 
         // -> localStorage.setItem(키명,값)
-        localStorage.setItem("lname", "이정재");
-        localStorage.setItem("lrole", "박평호역");
-        localStorage.setItem("lcat", "조직내 스파이를 색출하는 해외팀 안기부팀장");
+        localStorage.setItem('lname','이정재');
+        localStorage.setItem('lrole','박평호역');
+        localStorage.setItem('lcat','조직내 스파이를 색출하는 해외팀 안기부팀장');
+        
+        // console.log('로컬쓰 lname:',
+        // localStorage.getItem('lname'));
 
-        // console.log("로컬쓰lname:",
-        //     localStorage.getItem("lname"));
-    } //////if:처음////////
-
-    else if (btxt == "전체삭제") {
-        // 해당 url로 관리되는 로컬스토리지를 모두 지움! : clear()
+    } ///////// if : 처음 /////////
+    else if(btxt == '전체삭제'){
+        // 해당 url로 관리되는 로컬쓰를 모두 지움! : clear()
         localStorage.clear();
-        // 개별 로컬스토리지로 지우는 방법은 removeItem(키명)
-    } /////////////else if: 전체삭제 ///////////////
+        // 개별 로컬쓰로 지우는 방법은 removeItem(키명)
+    } /////// else if : 전체삭제 ////////////
+    else if(btxt == '보여줘'){
+        dFn.qs('.local .nm').innerText = 
+        localStorage.getItem('lname');
+        dFn.qs('.local .role').innerText = 
+        localStorage.getItem('lrole');
+        dFn.qs('.local .cat').innerText = 
+        localStorage.getItem('lcat');
 
-    else if (btxt == "보여줘") {
-        dFn.qs(".local .nm").innerText = localStorage.getItem("lname");
-        dFn.qs(".local .role").innerText = localStorage.getItem("lrole");
-        dFn.qs(".local .cat").innerText = localStorage.getItem("lcat");
+    } /////// else if : 보여줘 ////////////
 
-    } ///////////else if : 보여줘 /////////////
+    // -> 객체를 생성하여 로컬 스토리지에 넣기
+    else if(btxt = '처리'){
+        if(!localStorage.getItem('minfo')) makeObj();
 
-    // - 객체를 생성하여 로컬 스토리지에 넣기
-    else if(btxt == '처리'){
-        // 게시판 형식의 객체를 생성함!
-        let obj = [
-            {
-                idx: 1,
-                tit: '내가 왕이 될 상인가?',
-                cont: '이정재형은 진정 왕이십니다~!',
-            }
-        ];
+        // 바인딩 함수 호출!
+        bindData();
+        
+    } //////// else if : 처리 ////////////////
+    
+    
+    
+} //////////// localSFn 함수 ////////////////
 
-        // 로컬 스토리지에 넣기
-        // 배열객체를 직접 넣으면 데이터형 표시 문자값만
-        // 입력되고 실제 객체는 입력되지 않는다!
-        // -> 왜??? 로컬스토리지는 문자형만 받으니까!
-        // 그래서 배열/객체를 문자데이터화 해서 넣는다!
-        // JSON.stringify(배열/객체)
-        // localStorage.setItem('minfo',obj);
-        localStorage.setItem('minfo',JSON.stringify(obj));
+// 처음에 바인딩 함수 호출하여 게시판 보이기 ////
+bindData();
 
-    }///////////else if : 처리 ///////////////
+/// 객체가 없으면 로컬스토리지에 생성하기 ///////
+function makeObj(){  
+    console.log('배열/객체만들기!!!');  
+
+    // 게시판 형식의 객체를 생성함!
+    let obj = [
+        {
+            idx: 1,
+            tit: '내가 왕이될 상인가?',
+            cont: '이정재형은 진정 왕이십니다~!',
+        },
+    ];
+    
+    // 로컬 스토리지에 넣기
+    // 배열/객체를 직접 넣으면 데이터형 표시 문자값만
+    // 입력되고 실제 객체는 입력되지 않는다!
+    // -> 왜??? 로컬스토리지는 문자형만 받으니까!
+    // 그래서 배열/객체를 문자데이터화 해서 넣는다!!!
+    // JSON.stringify(배열/객체)
+    // localStorage.setItem('minfo',obj);
+    localStorage.setItem('minfo',JSON.stringify(obj));
+} /////////////// makeObj 함수 ///////////////
+
+
+/// 화면에 게시판 리스트를 데이터에 맞게 바인딩하기 /////
+function bindData(){
+
+    // 1. 로컬스토리지 데이터 : 문자형(string)
+    let localData = localStorage.getItem('minfo');
+    console.log(localData,"데이터형:",typeof localData);
+
+    
+    // 바인딩 데이터변수
+    let bindCode = '';
+    
+    // 2. 데이터 존재 여부 확인하기
+    if(localData){ // null이 아니면 true!
+        // 문자형을 배열로 형변환해야함!!!
+        // 로컬스토리지 데이터 배열객체형변환 
+        // -> JSON.parse(문자형배열객체)
+        localData = JSON.parse(localData);
+        console.log(localData,
+            "데이터형:", typeof localData, 
+            "배열인가? ",Array.isArray(localData));
+        
+        // 배열이니까 map()사용하여 태그만들기!
+        // -> 맵쬬잉~!!!! map().join('')
+        bindCode = localData.map((v,i)=>`
+            <tr>
+                <td>${v.idx}</td>
+                <td>${v.tit}</td>
+                <td>${v.cont}</td>
+                <td>
+                    <a href="#" onclick="delRec(${i})">×</a>
+                </td>
+            </tr>
+        `).join(''); // 태그를 연결자없는 배열전체로 저장
+    } ///////// if : 데이터가 있는 경우 ///////
+    else{ // 데이터가 없는 경우 //////////
+        bindCode = `
+            <tr>
+                <td colspan="4" style="text-align:center">
+                    데이터가 없습니다...
+                </td>
+            </tr>
+        `;
+
+    } /////////////// else //////////////
+
+
+    // 3. 화면에 테이블 요소로 데이터바인딩 구성하기
+    let hcode = `
+        <table>
+            <tr>
+                <th>번호</th>
+                <th>제목</th>
+                <th>내용</th>
+                <th>삭제</th>
+            </tr>
+            <!-- 데이터에 따른 반복바인딩 -->
+            ${bindCode}
+        </table>
+    `;
+
+    // 4. 화면출력 : 대상 - .board
+    dFn.qs('.board').innerHTML = hcode;
+
+} /////////////// bindData 함수 ////////////////
+
+
+/// 삭제 처리함수 /////////////////////
+function delRec(idx){
+    console.log('지울순번:',idx);
+
+} ////////// delRec함수 //////////////////
 
 
 
-
-} ////////////localSFn함수/////////////////
-
-
-//*************************************************************** */
+// ***********************************************
 
 
-// [ 2.세션 스토리지 연습 ]///////////////////////////////////////
+
+// [ 2. 세션 스토리지 연습 ] //////////////////////
 // 1. 버튼 기능 이벤트 대상: .session-box button
-const btnSession = dFn.qsa(".session-box button");
-console.log("대상:", btnSession);
+const btnSession = dFn.qsa('.session-box button');
+console.log('대상:',btnSession);
 
-//  2. 버튼에 이벤트 설정
-btnSession.forEach((ele) => dFn.addEvt(ele, "click", sessionSFn));
+// 2. 버튼에 이벤트 설정
+btnSession.forEach(ele=>dFn.addEvt(ele,'click',sessionSFn));
 
-// ->개별 세션스토리지 삭제 이벤트 설정하기//////
-dFn.qsa(".session ol li").forEach((ele, idx) => {
+// -> 개별 세션스토리지 삭제 이벤트 설정하기
+dFn.qsa('.session ol li').forEach((ele,idx)=>{
     // 세션스토리지 키명 배열
-    const keyName = ["lname", "lrole", "lcat"];
-    ele.onclick = function () {
-        // 개별 세션스토리지 키 삭제
-        console.log('삭제할 키:',keyName);
+    const keyName = ["lname","lrole","lcat"];
+    ele.onclick = function(){
+        // 개별 세션스토리지 키삭제
+        console.log('삭제할키:',keyName[idx]);
         sessionStorage.removeItem(keyName[idx]);
-    }; ///click////
-}); //////////forEach/////////
+    }; //////// click ////////
+}); /////////// forEach /////////////
 
-// 3. 세션쓰 처리 함수 만들기 ////////////
-function sessionSFn() {
+// 3. 세션쓰 처리 함수 만들기 /////////
+function sessionSFn(){
     // 1. 버튼 텍스트 읽기
     let btxt = this.innerText;
-    console.log("세션쓰:", btxt);
-
-    // 2. 버튼별 기능 분기하기///
-    if (btxt == "처음") {
-        // 세션 스토리지 읽기 :
-        // ->sessionStorage.getItem(키명)
-        // console.log("세션쓰lname:",
-        //     sessionStorage.getItem("lname"));
-        // 만약 값이 셋팅안됐으면 null값이 나옴!
-
-        // 세션 스토리지 셋팅 :
+    console.log('세션쓰:',btxt);
+    // 2. 버튼별 기능 분기하기 ////
+    if(btxt == '처음'){
+        // 세션 스토리지 읽기 : 
+        // -> sessionStorage.getItem(키명)
+        // console.log('세션쓰 lname:',
+        //     sessionStorage.getItem('lname'));
+        // 만약 값이 셋팅안됐으면 null 값이 나옴!
+        
+        // 세션 스토리지 셋팅 : 
         // -> sessionStorage.setItem(키명,값)
-        sessionStorage.setItem("lname", "정우성");
-        sessionStorage.setItem("lrole", "김정도역");
-        sessionStorage.setItem("lcat", "국내팀 안기부팀장,박평호랑 사이나쁨");
+        sessionStorage.setItem('lname','정우성');
+        sessionStorage.setItem('lrole','김정도역');
+        sessionStorage.setItem('lcat','국내팀 안기부팀장, 박평호랑 사이나쁨');
+        
+        // console.log('세션쓰 lname:',
+        // sessionStorage.getItem('lname'));
 
-        // console.log("세션쓰lname:",
-        //     sessionStorage.getItem("lname"));
-    } //////if:처음////////
-    else if (btxt == "전체삭제") {
-        // 해당 url로 관리되는 세션스토리지를 모두 지움! : clear()
+    } ///////// if : 처음 /////////
+    else if(btxt == '전체삭제'){
+        // 해당 url로 관리되는 세션쓰를 모두 지움! : clear()
         sessionStorage.clear();
-        // 개별 세션스토리지로 지우는 방법은 removeItem(키명)
-    } /////////////else if: 전체삭제 ///////////////
-    else if (btxt == "보여줘") {
-        dFn.qs(".session .nm").innerText = 
-        sessionStorage.getItem("lname");
-        dFn.qs(".session .role").innerText = 
-        sessionStorage.getItem("lrole");
-        dFn.qs(".session .cat").innerText = 
-        sessionStorage.getItem("lcat");
-    }
+        // 개별 세션쓰로 지우는 방법은 removeItem(키명)
+    } /////// else if : 전체삭제 ////////////
+    else if(btxt == '보여줘'){
+        dFn.qs('.session .nm').innerText = 
+        sessionStorage.getItem('lname');
+        dFn.qs('.session .role').innerText = 
+        sessionStorage.getItem('lrole');
+        dFn.qs('.session .cat').innerText = 
+        sessionStorage.getItem('lcat');
 
-} ////////////sessionSFn함수/////////////////
+    } /////// else if : 보여줘 ////////////
+
+} //////////// sessionSFn 함수 ////////////////

@@ -123,7 +123,7 @@ $(() => {
                 font: "bold 48px Verdana",
                 color: "#fff",
                 textShadow: "0 0 5px #777",
-                zIndex:"99999"
+                zIndex: 1
             })///////css/////////
             .click(function(){ //닫기 버튼 a 요소 클릭시
                 // 1. mbox닫기

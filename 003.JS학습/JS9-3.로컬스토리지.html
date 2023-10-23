@@ -63,7 +63,8 @@
                 background-color: #ccc;
             }
         </style>
-        
+        <!-- 로컬 스토리지JS -->
+        <script type="module" src="./js/js9-3.local_storage.js"></script>
     </head>
     <body>
         <div class="tit"></div>
@@ -71,9 +72,7 @@
             <div class="local">
                 <h2>로칼쓰님</h2>
                 <div class="imgbx">
-                    <img
-                        src="https://img.marieclairekorea.com/2022/08/mck_62e9fd08ca1bd.jpg"
-                        alt="이정재" />
+                    <img src="https://img.marieclairekorea.com/2022/08/mck_62e9fd08ca1bd.jpg" alt="이정재" />
                 </div>
                 <ol>
                     <li>당신의 이름은? : <span class="nm"></span></li>
@@ -81,11 +80,13 @@
                     <li>캐릭터는? : <span class="cat"></span></li>
                 </ol>
 
-                <button onclick="startFn('로칼쓰')">처음</button>
-                <button onclick="showFn('.local')">보여줘</button>
-                <button onclick="delFn('로칼쓰')">전체삭제</button>
-                <button onclick="makeObj()">처리</button>
-                <button onclick="bindData()">업데이트</button>
+                <div class="local-box">
+                    <button>처음</button>
+                    <button>보여줘</button>
+                    <button>전체삭제</button>
+                    <button>처리</button>
+                    <button>업데이트</button>
+                </div>
 
                 <div class="board"></div>
 
@@ -110,9 +111,7 @@
             <div class="session">
                 <h2>세션쓰님</h2>
                 <div class="imgbx ib2">
-                    <img
-                        src="https://img.marieclairekorea.com/2022/08/mck_62e9fd08ca1bd.jpg"
-                        alt="정우성" />
+                    <img src="https://img.marieclairekorea.com/2022/08/mck_62e9fd08ca1bd.jpg" alt="정우성" />
                 </div>
                 <ol>
                     <li>당신의 이름은? : <span class="nm"></span></li>
@@ -120,11 +119,13 @@
                     <li>캐릭터는? : <span class="cat"></span></li>
                 </ol>
 
-                <button onclick="startFn('세션쓰')">처음</button>
-                <button onclick="showFn('.session')">보여줘</button>
-                <button onclick="delFn('세션쓰')">전체삭제</button>
-                <button onclick="">처리</button>
-                <button onclick="">추가</button>
+                <div class="session-box">
+                    <button>처음</button>
+                    <button>보여줘</button>
+                    <button>전체삭제</button>
+                    <button>처리</button>
+                    <button>추가</button>
+                </div>
             </div>
         </div>
     </body>

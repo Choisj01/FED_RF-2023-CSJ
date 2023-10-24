@@ -389,13 +389,14 @@ function setMod(){
     if(optVal=='show') return;
 
     // 1.해당 idx의 값을 가지는 배열값을 선택
+    // 1. 로컬쓰 가져오기
      // 1-1.로컬스데이터 가져오기: minfo
      let orgData = localStorage.getItem("minfo");
 
      // 만약 minfo 로컬쓰가  null이면 빈 배열로 생성하기
      if (!orgData) {
          // 빈 배열로 생성하기
-         localStorage.setItem("minfo", "[]");
+         localStorage.setItem("minfo","[]");
          // 초기로컬쓰 재할당
          orgData = localStorage.getItem('minfo');
      } /////if/////////
@@ -420,8 +421,6 @@ function setMod(){
     // 2. 선택배열값으로 제목,내용넣기
     modTit.value = selRec.tit;
     modCont.value = selRec.cont;
-
-
 
 }/////////setMod 함수///////////
 

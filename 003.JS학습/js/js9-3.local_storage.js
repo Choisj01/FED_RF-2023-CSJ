@@ -385,8 +385,10 @@ function setMod(){
     let optVal = this.value;
     console.log('수정셋업:',optVal);
 
-    // 1.해당 idx의 값을 가지는 배열값을 선택
+    // 만약 수정선택 박스의 값이 'show'이면 돌아가!
+    if(optVal=='show') return;
 
+    // 1.해당 idx의 값을 가지는 배열값을 선택
      // 1-1.로컬스데이터 가져오기: minfo
      let orgData = localStorage.getItem("minfo");
 
@@ -428,8 +430,57 @@ dFn.addEvt(moBtn,'click',modifyData);
 
 // 6. 수정내용반영 함수 만들기
 function modifyData(){
-    console.log('수정할꼬양~!');
+    // 0.만약 수정선택 박스의 값이 'show'이면 돌아가!
+    if(modSel.value=='show') return;
     
+    // 1. 현재 선택된 배열의 유일한 값 idx 읽기
+    // -> 현재 선택된 수정 선택박스의 value 값
+    let selIdx = modSel.value;
+    console.log('수정할꼬양~!',selIdx);
+
+    // 1.해당 idx의 값을 가지는 배열값을 선택
+     // 1-1.로컬스데이터 가져오기: minfo
+     let orgData = localStorage.getItem("minfo");
+
+     // 만약 minfo 로컬쓰가  null이면 빈 배열로 생성하기
+     if (!orgData) {
+         // 빈 배열로 생성하기
+         localStorage.setItem("minfo", "[]");
+         // 초기로컬쓰 재할당
+         orgData = localStorage.getItem('minfo');
+     } /////if/////////
+ 
+     // 2-2.제이슨 파싱!
+     orgData = JSON.parse(orgData);
+
+    //  2-3.해당 아이디 배열값 찾기 : 배열 find() 메서드
+    // find()로 찾아서 해당값을 직접 업데이트 한다!
+    orgData.find(v=>{
+        if(v.idx==selIdx){ 
+            // 고유idx값인 경우 입력값으로 업데이트하기
+            // 선택 배열값인 객체의 제목과 내용을 
+            // 다시넣고 업데이트하기
+            v.tit = modTit.value;
+            v.cont = modCont.value;
+        } /////// if /////////
+    }); // find() 메서드 /////////////////
+
+
+    console.log('변경 후 배열:',orgData)
+
+     // 3.배열/객체 데이터를 문자화하여 로컬스에 넣기
+    // JSON.stringgify()
+    localStorage.setItem("minfo", JSON.stringify(orgData));
+
+     // 4.리스트 업데이트하기
+    bindData();
+     // 5. 수정 선택박스 업데이트
+    bindMod();
+
+
+
+    
+
 }/////////modifyData함수///////////
 
 

@@ -1,4 +1,4 @@
-// 보그PJ 서브페이지 JS - main.js
+// 보그PJ 카테고리 JS - category.js
 import dFn from "./dom.js";
 
 // 부드러운스크롤 모듈

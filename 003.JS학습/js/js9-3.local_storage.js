@@ -100,9 +100,14 @@ function localSFn() {
         // localStorage.getItem('lname'));
     } ///////// if : 처음 /////////
     else if (btxt == "전체삭제") {
-        // 해당 url로 관리되는 로컬쓰를 모두 지움! : clear()
+        //1. 해당 url로 관리되는 로컬쓰를 모두 지움! : clear()
         localStorage.clear();
-        // 개별 로컬쓰로 지우는 방법은 removeItem(키명)
+        //개별 로컬쓰로 지우는 방법은 removeItem(키명)
+        // 2. 리스트 바인딩 업데이트
+        bindData();
+
+        //3. 수정 선택박스 업데이트
+        bindMod();
     } /////// else if : 전체삭제 ////////////
     else if (btxt == "보여줘") {
         dFn.qs(".local .nm").innerText = localStorage.getItem("lname");
@@ -112,12 +117,18 @@ function localSFn() {
 
     // -> 객체를 생성하여 로컬 스토리지에 넣기
     else if ((btxt = "처리")) {
-        // 로컬쓰에 'minfo'가 없으면 makeObj() 호출!
-        if (!localStorage.getItem("minfo")) makeObj();
+        // 1.로컬쓰에 'minfo'가 없거나 'minfo'값이 '[]'배열 초기화값이면 makeObj() 호출!
+        if (!localStorage.getItem("minfo")||
+        localStorage.getItem('minfo')=='[]') makeObj();
 
-        // 바인딩 함수 호출!
+        // 2.바인딩 함수 호출!
         bindData();
+
+        // 3.수정 선택박스 업데이트
+        bindMod();
     } //////// else if : 처리 ////////////////
+
+
 } //////////// localSFn 함수 ////////////////
 
 // 처음에 바인딩 함수 호출하여 게시판 보이기 ////
@@ -143,7 +154,7 @@ function makeObj() {
     // 그래서 배열/객체를 문자데이터화 해서 넣는다!!!
     // JSON.stringify(배열/객체)
     // localStorage.setItem('minfo',obj);
-    localStorage.setItem("minfo", JSON.stringify(obj));
+    localStorage.setItem('minfo',JSON.stringify(obj));
 } /////////////// makeObj 함수 ///////////////
 
 /// 화면에 게시판 리스트를 데이터에 맞게 바인딩하기 /////
@@ -153,33 +164,31 @@ function bindData() {
     console.log(localData, "데이터형:", typeof localData);
 
     // 바인딩 데이터변수
-    let bindCode = "";
+    let bindCode = '';
 
     // 2. 데이터 존재 여부 확인하기
-    if (localData) {
-        // null이 아니면 true!
+    if (localData) {// null이 아니면 true!
         // 문자형을 배열로 형변환해야함!!!
         // 로컬스토리지 데이터 배열객체형변환
         // -> JSON.parse(문자형배열객체)
         localData = JSON.parse(localData);
-        console.log(localData, "데이터형:", typeof localData, "배열인가? ", Array.isArray(localData));
+        console.log(localData,
+            "데이터형:", typeof localData, 
+            "배열인가? ", Array.isArray(localData));
 
         // 배열이니까 map()사용하여 태그만들기!
         // -> 맵쬬잉~!!!! map().join('')
         bindCode = localData
-            .map(
-                (v, i) => `
-        <tr>
-            <td>${v.idx}</td>
-            <td>${v.tit}</td>
-            <td>${v.cont}</td>
-            <td class="del-link">
-                <a href="#" data-idx="${i}">×</a>
-            </td>
-        </tr>
-    `
-            )
-            .join(""); // 태그를 연결자없는 배열전체로 저장
+            .map((v, i) => `
+                <tr>
+                    <td>${v.idx}</td>
+                    <td>${v.tit}</td>
+                    <td>${v.cont}</td>
+                    <td class="del-link">
+                        <a href="#" data-idx="${i}">×</a>
+                    </td>
+                </tr>
+    `).join(""); // 태그를 연결자없는 배열전체로 저장
     } ///////// if : 데이터가 있는 경우 ///////
     else {
         // 데이터가 없는 경우 //////////
@@ -207,13 +216,13 @@ function bindData() {
     `;
 
     // 4. 화면출력 : 대상 - .board
-    dFn.qs(".board").innerHTML = hcode;
+    dFn.qs('.board').innerHTML = hcode;
 
     // 5. 화면출력 후 지우기 링크 셋팅하기
-    dFn.qsa(".board .del-link a").forEach((ele) =>
-        dFn.addEvt(ele, "click", () => delRec(ele.getAttribute("data-idx")))
-    );
+    dFn.qsa(".board .del-link a").forEach(ele =>
+        dFn.addEvt(ele, "click", () => delRec(ele.getAttribute("data-idx"))));
     ///////forEach/////////////
+    
 } /////////////// bindData 함수 ////////////////
 
 // 입력 처리함수 호출 이벤트 설정하기////
@@ -240,6 +249,8 @@ function insData() {
     if (!orgData) {
         // 빈 배열로 생성하기
         localStorage.setItem("minfo", "[]");
+        // 초기로컬쓰 재할당
+        orgData = localStorage.getItem('minfo');
     } /////if/////////
 
     // 3-2.제이슨 파싱!
@@ -280,6 +291,9 @@ function insData() {
 
     // 4.리스트 업데이트하기
     bindData();
+
+    // 5. 수정 선택박스 업데이트
+    bindMod();
 } ///////////insData/////////////
 
 /// 삭제 처리함수 /////////////////////
@@ -308,8 +322,59 @@ function delRec(idx) {
 
         // 5.리스트 업데이트하기
         bindData();
+
+        // 6. 수정 선택박스 업데이트
+        bindMod();
     } //////////if///////////
 } ////////// delRec함수 //////////////////
+
+//////////////////////////////////////////////////
+////////// 데이터 수정하여 반영하기////////////////
+/////////////////////////////////////////////////
+
+// 1.선택박스 대상선정 : #sel
+const modSel = dFn.qs('#sel');
+// 2. 데이터 바인딩하기
+// 바인딩함수 만들어서 사용!
+function bindMod(){
+    // 1. 로컬쓰 가져오기
+    // 1-1.로컬스데이터 가져오기: minfo
+    let orgData = localStorage.getItem("minfo");
+
+    // 만약 minfo 로커르가  null이면 빈 배열로 생성하기
+    if (!orgData) {
+        // 빈 배열로 생성하기
+        localStorage.setItem("minfo", "[]");
+        // 초기로컬쓰 재할당
+        orgData = localStorage.getItem('minfo');
+    } /////if/////////
+
+    // 1-2.제이슨 파싱!
+    orgData = JSON.parse(orgData);
+
+    // 2.선택박스 초기화 : 새로 업데이트 될때를 대비!
+    modSel.innerHTML = `
+    <option value="show">항목선택</option>
+    `;
+    // 3. idx로 value값을 만들고 제목으로 항목명을 만들기
+    orgData.forEach(v=>{
+        modSel.innerHTML += `
+            <option value="${v.idx}">${v.tit}</option>
+        `
+    })
+
+} //////////bindMod 함수/////////
+
+// 최초호출!
+bindMod();
+
+
+
+
+
+
+
+
 
 // ***********************************************
 

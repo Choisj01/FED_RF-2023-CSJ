@@ -95,7 +95,6 @@ function MainComponent() {
     const testFn = () => {
         setTest(test ? 0 : 1);
         console.log("test 후크변수 변경!", test);
-
     }; ////////////////// testFn함수 //////////////////////
 
     /*********************************** 
@@ -112,6 +111,19 @@ function MainComponent() {
     setDataNum(dataNum?0:1);
     console.log('업데이트값:',dataNum);
   }; //////// chgData함수 ///////////
+
+  /***************************************** 
+    함수명: chgSubView
+    상태변수: subView / setSubNum
+    기능: 상태관리변수 중 리스트/상세보기
+    선택변수를 업데이트를 하여 실제뷰를 전환함!
+  ********************************************/
+  const chgSubView = (num,idx) => {
+    console.log('뷰바꿔!',num,'/고유번호:',idx);
+    // 리스트/상세보기 뷰 상태관리변수 변경하기
+    setSubView(num);
+
+  }; //////////chgSubView///////////////
 
   // 최종 리턴 코드 /////////
   // 함수, 변수, 구현소스는 모두 return위쪽에 코딩!
@@ -146,10 +158,13 @@ function MainComponent() {
       <div className="gwrap">        
         { // 상품리스트 컴포넌트 출력
         subView==0 &&
-          <GoodsCode idx={dataNum} />}
+          <GoodsCode idx={dataNum} chgFn={chgSubView}/>}
         { // 상품상세보기 컴포넌트 출력
+        // 부모의 함수 chgSubView를 props로 전달함!
+        // 변수명에 할당하는 방식으로 전달!
+        // 자식컴포넌트는 props.속성명() 방식으로 호출!
         subView==1 &&
-          <SubViewCode idx={dataNum} />}        
+          <SubViewCode idx={dataNum} chgFn={chgSubView}/>}        
       </div>
     </React.Fragment>
   );
@@ -169,28 +184,35 @@ function GoodsCode(props) { // idx - 데이터 배열순번
   // 선택데이터
   const selData = twoData[props.idx];
 
-  // 코드 리턴파트 //////////
+  ////////// 코드 리턴파트 ///////////
   return selData.map((v) => (
-    <ol class="glist">
-      <li>
-        <img src={
-          props.idx?
-          "./images/gallery/"+v.idx+".jpg":
-          "./images/vans/vans_"+v.idx+".jpg"
-          } alt={props.idx?"드레스":"신발"} />
-      </li>
-      <li>{v.gname}</li>
-      <li>가격 : {v.gprice}원</li>
-    </ol>
+    /* props.chgFn(뷰상태1,상품고유번호idx) */
+    <a href="#" onClick={()=>props.chgFn(1,v.idx)}>
+        <ol class="glist">
+          <li>
+            <img src={
+              props.idx?
+              "./images/gallery/"+v.idx+".jpg":
+              "./images/vans/vans_"+v.idx+".jpg"
+              } alt={props.idx?"드레스":"신발"} />
+          </li>
+          <li>{v.gname}</li>
+          <li>가격 : {v.gprice}원</li>
+        </ol>
+    </a>
   ));
 } /////////// GoodsCode //////////////////
 
 /************************************
  * 서브컴포넌트 2 : SubViewCode
- * 상품상세보기 html코드 구성 컴포넌트
+ * 상품상세보기: html코드 구성 컴포넌트
 ************************************/
 function SubViewCode(props){
   // props.idx - 선택데이터 순번(신발/드레스)
+  // props.chgFn() 함수로 사용가능! 
+  // -> 부모 chgSubView() 함수를 호출하는 것임!
+  // -> 프롭스 다운, 프롭스 펑션 업/다운!  
+
   // 선택데이터 //////////////////
   const selData = twoData[props.idx][0];
   // -> 전체선택배열[특정배열값순번]
@@ -208,7 +230,8 @@ function SubViewCode(props){
       <li>
         상품명 : {selData.gname} <br />
         가격 : {selData.gprice}원 <br />
-        <button>리스트로 가기</button>
+        <button onClick={()=>props.chgFn(0,0)}>
+            리스트로 가기</button>
       </li>
     </ol>
   );

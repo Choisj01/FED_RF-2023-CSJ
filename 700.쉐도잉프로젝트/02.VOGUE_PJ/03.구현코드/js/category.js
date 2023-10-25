@@ -1,5 +1,10 @@
 // 보그PJ 카테고리 JS - category.js
 
+// 카테고리 데이터 불러오기 : assert{type:'json'}
+import catData from "./data/category_data.json" assert { type: "json" };
+
+console.log(catData);
+
 // 부드러운스크롤 모듈
 import { startSS, setPos } from "./smoothScroll23.js";
 
@@ -19,7 +24,6 @@ console.log(pm);
 // 값 처리함수 호출하기
 setValue();
 
-
 // 값 셋팅하기 함수 //////////////
 function setValue() {
     // 2. url에서 키값 분리하기
@@ -27,23 +31,63 @@ function setValue() {
     // 이것의 존재여부로 문자 자르기를 실행한다!
     // =(이퀄) 기호도 같이 확인함
     try {
-        if (pm.indexOf("?") == -1||
-        pm.indexOf('=')==-1) {
+        if (pm.indexOf("?") == -1 || pm.indexOf("=") == -1) {
             throw "잘못된 접근입니다!";
         } ////////if///////
-        
-    }  //////////try///////////
-    catch (err) {//err - 메시지 받기
+    } catch (err) {
+        //////////try///////////
+        //err - 메시지 받기
         // 에러메시지 띄우기
         alert(err);
         // 메인페이지로 보내기
-        location.href = 'index.html';
+        location.href = "index.html";
     } ///////catch//////////
 
     // 3. url 키값 추출하기
-    pm = pm.split('?')[1].split('=')[1];
+    pm = pm.split("?")[1].split("=")[1];
     // 특수문자 변환하기 : time&gem
     pm = decodeURIComponent(pm);
-    console.log('최종키값:',pm);    
+    console.log("최종키값:", pm);
+
+    // 4.카테고리 데이터 매칭하기
+    // 제이슨파일 객체데이터에서 속성으로 선택함
+    const selData = catData[pm];
+    console.log("선택데이터:", selData);
+
+    // 5. 데이터 바인딩하기
+    // 5-1. 배경이미지 셋팅을 위한 main요소에 클래스 넣기
+    // pm에 담아놓은 이름으로 넣어준다
+    // 대상: .main-area
+    // ' & ' -> '-'로 변경하기 : time-gem 로 변경(클래스명이 time-gem)
+    $(".main-area").addClass(pm.replace(" & ", "-"));
+
+    // 5-2.카테고리 타이틀 변경하기
+    $(".cat-tit").text(selData.제목);
+
+    // 5-3.메뉴변경하기
+    // 5-3-1.대상: .lnb
+    let lnb = $(".lnb");
+    // 5-3-2.메뉴데이터:selData.메뉴
+    let mData = selData.메뉴;
+    // 5-3-3.메뉴리턴함수
+    let retMenu = () => 
+    mData.map(v=>`<li><a href="#">${v}</a></li>`).join("");
+
+    // 5-3-4.메뉴 없음에 따라 분기하기
+    if (mData == "없음") {
+        //lnb 없애기
+        lnb.remove();
+    } /////////if////////
+    else {
+        //메뉴만들기
+        lnb.html(`<ul>${retMenu()}</ul>`);
+    } //////else////////
+
+    // 5-4.서브섹션 타이틀 넣기
+    // $(선택자).each((순번,요소)=>{구현부})
+    // 대상 : .cat-cont-area h2
+    $('.cat-cont-area h2').each((idx,ele)=>{
+        $(ele).html(selData.타이틀[idx]);
+    }); //////////each//////////////
 
 } //////////////////setValue////////

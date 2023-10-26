@@ -69,7 +69,7 @@ $(() => {
         // 2. 이동할 페이지 주소할당
         let url;
         switch(atxt){
-            // 외부 시스템 페이지
+            // 외부시스템 페이지
             case '인스타그램':
                 url="https://www.instagram.com/VOGUEKOREA/";
                 break;
@@ -85,7 +85,7 @@ $(() => {
             case '카카오스토리':
                 url="https://story.kakao.com/ch/voguekr";
                 break;
-            // 내부시스템 페이지
+            // 내부 시스템 페이지
             case '로그인':
                 url="login";
                 break;
@@ -96,12 +96,12 @@ $(() => {
                 url="gallery";
                 break;
 
-        }//////////switch case////////
+        } ////////////// switch case ////////
 
         // 3. 페이지 이동하기
         // 내부 페이즌는 현재페이지에서 이동하기
         if(atxt=='로그인'||atxt=='회원가입'||atxt=='갤러리'){
-            location.href = url;
+            location.href = url+'html';
         } /////////////if////////
         else{ //sns 타 시스템은 새창열기
             // window.open(주소) - 새창열기(브라우저 탭메뉴)

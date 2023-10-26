@@ -5,11 +5,6 @@ import catData from "./data/category_data.json" assert { type: "json" };
 
 console.log(catData);
 
-// 부드러운스크롤 모듈
-import { startSS, setPos } from "./smoothScroll23.js";
-
-//부드러운 스크롤 적용//////////////
-startSS();
 
 /////////////////////////////////////////////////
 // 카테고리 페이지 기능구현하기////////////////////

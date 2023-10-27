@@ -251,9 +251,10 @@
     transform: translate(-50%, -50%);
     width: 72px;
     height: 72px;
-    background: url(../images/icon_play.png) no-repeat;
+    background: url(../images/icon-play.png) no-repeat;
     cursor: pointer;
 }
+
 
 /* 하위 이미지/동영상 */
 .intro-mv-img img,
@@ -268,6 +269,7 @@
     font-size: 2rem;
     padding-top: 10px;
 }
+
 
 
 /*********** 미리보기파트 : .preview-part ***********/

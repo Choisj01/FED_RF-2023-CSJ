@@ -210,7 +210,7 @@ body > div > * {
 }
 /**************************************** 방송편성소개파트 : intro-part ****************************************/
 .main .intro-part .partbox {
-    height: auto;
+    height: 455px;
     padding: 10px;
 }
 /* 서브타이틀 */
@@ -220,6 +220,7 @@ body > div > * {
 /* 하위제목+아이콘박스 */
 .intro-desc{
     display: flex;
+    flex-wrap: wrap;
     font-size: 2.5rem;
 }
 .intro-desc h3{

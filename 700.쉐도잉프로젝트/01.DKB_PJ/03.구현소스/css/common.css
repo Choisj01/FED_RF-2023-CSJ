@@ -85,7 +85,7 @@
 aside.smbx {
     max-width: 1000px;
     margin: 0 auto;
-    outline: 4px dashed green;
+    /* outline: 4px dashed green; */
 }
 
 .smbx h2 {
@@ -109,6 +109,28 @@ aside.smbx {
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
+/* 모바일 햄버거 버튼 */
+.ham {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    width: 50px;
+    height: 50px;
+    background-color: transparent;
+    border: none;
+    font-size: 40px;
+    color: #555;
+    transform: scaleX(1.5);
+
+    /* 처음에 숨기기 */
+    display: none;
+}
+/* 햄버거모양 가상요소넣기 */
+.ham::before{
+    content: '≡';
+}
+
 /***************************** 2. 메인영역 : .group-part *****************/
 #main {
     /* 본문영역 최소높이 셋팅 */
@@ -128,6 +150,7 @@ aside.smbx {
 .info-link ul{
     display: flex;
     gap: 0 15px;
+    flex-wrap: wrap;
 }
 .info-link a{
     font-size: 1.4rem;
@@ -137,6 +160,9 @@ aside.smbx {
 
 }
 /* 바로가기 콤보박스 영역 */
+.combo-area{
+    text-align: right;
+}
 .combo-area select{
     width: 150px;
     height: 30px;
@@ -144,6 +170,7 @@ aside.smbx {
     border: none;
     background-color: rgb(226, 226, 226);
     font-size: 1.5rem;
+    margin: 5px;
 }
 /* 하단로고박스 */
 .footer__logo{

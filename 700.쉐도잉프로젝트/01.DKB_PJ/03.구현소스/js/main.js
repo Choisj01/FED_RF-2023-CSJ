@@ -19,6 +19,8 @@ const chkMob = () => {
 if($(window).width()<=1024)mob=1;
 else mob =0;
 console.log('모바일?',mob);
+// 부가기능 : 모바일일떄 기본 스타일 지우기
+if(mob)$('.smenu').attr('style','');
 } ////////chkMob 함수///////////////
 
 // 모바일 검사함수 최초 호출
@@ -30,18 +32,43 @@ $(window).resize(chkMob);
 // 모바일시 기능구현///////////////////////
 //////////////////////////////////////////
 // 1. 햄버거 버튼 클릭시 메뉴 보이기/숨기기
-// 대상 : .ham
+// 대상 : .ham / .header
+const hEle = $('.header');
 $('.ham').click(()=>{
     $('.header').toggleClass('on');
-})
+
+    // is() 메서드 : 선택요소의 이름 확인!
+    console.log('지금.header에 .on있니?',$('.header'),hEle.is('.on'));
+    // 만약 .header.on 이면 body에 스크롤바 숨기기
+    if(hEle.is('.on')) $('body').css({overflow:'hidden'})
+    // 아니면 넣었던 스타일 지우기
+    else $('body').attr('style','')
+
+});////////click//////////
 
 // 2. 메뉴 클릭시 하위메뉴 보이기/////////////
 // 대상: .gnb > li
 $('.gnb li').click(function(){
     if(mob!=1) return; //모바일이 아니면 나가!
     console.log('나 클릭?');
+    // 서브메뉴 슬라이드 애니로 보이기/숨기기
+    // 대상: .smenu
+    $(this).find('.smenu')//클릭된 li 하위 .smenu
+    .slideToggle(300,'easeInOutQuad') //열거나 닫거나함
+    .parent() //부모로 올라감!
+    .siblings().find('.smenu') //다른 li하위 .smenu
+    .slideUp(300,'easeInOutQuad'); //스르륵 닫힘! 모두
+
 }); ///////////click///////////
+
+// 3. sticky 메뉴박스 드래그하여 움직여보기
+// 대상 :dokebi-menu ul
+$('.dokebi-menu ul')
+.draggable({
+    axis:'x', //x 축 고정
+}); ///////draggable/////////
     
+//////////////////////////////////////////////////////
 
 
 // 0. 새로고치면 스크롤바 위치캐싱후 맨위로 이동
@@ -197,6 +224,7 @@ function overFn() {
 } /////////////////////////////overFn함수//////////////////////////
 
 function outFn() {
+    if(mob)return; //모바일이면 나감!
     // //console.log('아웃',this);
     // 서브메뉴 박스 높이값 0 만들기
     dFn.qsEl(this, ".smenu").style.height = "0px";

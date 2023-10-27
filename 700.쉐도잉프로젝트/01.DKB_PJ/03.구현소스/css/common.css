@@ -120,7 +120,7 @@ aside.smbx {
     background-color: transparent;
     border: none;
     font-size: 40px;
-    color: #555;
+    /* color: #555; */
     transform: scaleX(1.5);
 
     /* 처음에 숨기기 */

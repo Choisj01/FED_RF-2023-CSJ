@@ -80,7 +80,7 @@ float에 의한 망가짐 방지!! */
 
 /* 공통 서브 타이틀 */
 .stit{
-    padding: 32px;
+    padding-bottom: 32px;
     font-size: 3.8rem;
 }
 

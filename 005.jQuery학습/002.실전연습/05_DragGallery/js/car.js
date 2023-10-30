@@ -47,7 +47,7 @@ $(() => {
         // 0. 이벤트 횟수 줄이기 : 광클금지원리와 같음!
         if (protEvt) return;
         protEvt = 1; //잠금! - 이벤트 하나만 통과!
-        setTimeout(() => (protEvt = 0), 30); // 해제
+        setTimeout(() => protEvt = 0, 30); // 해제
         // 타임아웃 시간에 따라 이벤트수를 조절할 수 있다!
 
         // 1. x축 위치값
@@ -67,16 +67,23 @@ $(() => {
             // 이미지넘김 함수 호출 : 방향보냄!
             rotateCar(dir);
         } ////////if//////////
+
+        // 2. x 축 처음 위치값 업데이트
+        point = e.pageX || e.changedTouches[0].pageX;
+        // -> 마우스다운이 아닌 마우스 무브에서
+        // 처음 위치값을 업데이트하면 드래그 상태일떄 
+        // 그대로 방향을 다시 설정하여 원하는 방향으로
+        // 이미지를 변경할 수 있다!
     }); ////////mousemove///////////
 
     // (2) 드래그 상태 시작 이벤트함수 /////////
     // - 이벤트종류 : mousedown - touchstart
-    cbx.on("mousedown touchstart", (e) => {
+    cbx.on("mousedown touchstart", e => {
         // 1. 드래그 상태값 변경
         drag = 1;
 
         // 2. x 축 처음 위치값 업데이트
-        point = e.pageX || e.changedTouches[0].pageX;
+        // point = e.pageX || e.changedTouches[0].pageX;
         // e.changedTouches[0].pageX - 모바일용 x축위치값
 
         // 3. 커서 움켜쥔 모양
@@ -88,7 +95,7 @@ $(() => {
     // (3) 드래그 상태 시작 이벤트함수 /////////
     // - 이벤트종류 : mouseup - touchend
     // 마우스가 나갈때도 해제처리해야 드래그하다가 나갈때 괜찮음!
-    cbx.on("mouseup mouseout touchend", (e) => {
+    cbx.on("mouseup mouseout touchend", e => {
         // 1. 드래그 상태값 변경
         drag = 0;
 
@@ -132,14 +139,12 @@ $(() => {
         console.log("순번:", fnum);
 
         // (다른방법:) 위에서 증감전 숨기기 안하고 아래에서 하기
-        // 1. 주석 후 테스트할 것! 
+        // 1. 주석 후 테스트할 것!
         // cbx.find('img:visible').hide();
         // 선택요소:visible 은 'display:none'이 아닌요소 선택함!
         // -> 반대로 'display: none'인 요소 선택은 ':hidden'
 
         // [3. fnum 증감 후 보이기 -> 다음 이미지 보이기]
         carImg.eq(fnum).show();
-
-
     }; ///////////////rotateCar 함수///////////////
 }); //////////// JQB ///////////////////

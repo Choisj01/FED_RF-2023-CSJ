@@ -107,9 +107,10 @@ form.logF input[type=password]`)
 ********************************************************/
 let eyeNum = 1;
 $('.eye')
-.css({ // 처음 상태는 중가줄있고 흐림
+.css({ // 처음 상태는 중간줄있고 흐림
     textDecoration:'line-through',
-        opacity: 0.5
+        opacity: 0.5,
+        cursor:'pointer'
 }) //////////css//////////
 .click((e)=>{
     // 1. 글자보이기 타입전환 :  type='text|password'

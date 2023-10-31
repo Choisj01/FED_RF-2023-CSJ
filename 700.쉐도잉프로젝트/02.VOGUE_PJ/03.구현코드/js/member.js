@@ -7,6 +7,64 @@ import { mcode } from "./data/mem_data.js";
 // 약관동의 html 코드넣기 : #conf
 $('#conf').html(mcode.conf);
 
+/***********************************************************************
+    약관동의 전체 체크시 모든 체크박스 변경하기
+***********************************************************************/
+// 1. 대상선정
+// 1-1. 모두 동의 체크박스: #chk_all
+const chkAll = $('#chk_all');
+// 1-2. 개별체크박스 공통 : .chk
+const chkEach = $('.chk');
+
+// 2. 체크박스 변경이벤트 함수 만들기
+chkAll.change(function(){
+    //  1. 체크박스 체크여부 확인하기-prop() 메서드 사용
+    let isChk = $(this).prop('checked');
+    console.log('체크양?',isChk);
+
+    // 2. 전체 체크박스가 체크상태(true)이면
+    // 개별체크박스도 모두 true로 체크상태 변경!
+    // 미체크상태(false)면 개별박스도 모두 false!
+    chkEach.prop('checked',isChk);
+    // chkEach.attr('checked',isChk);
+    // for문 없이도 여러개의 체크박스를 
+    // 동시에 변경할 수 있음! 
+    // attr()도 동일하게 변경가능!(true/false읽기만 안됨)
+}); ////// change 이벤트 ///////
+
+/***********************************************************************
+    약관동의 개별 체크시 전체 체크박스 변경하기
+***********************************************************************/
+// 원리 : 개별체크박스가 모두 체크되면 전체체크하기
+// 대상 : .chk -> chkEach 변수
+chkEach.change(function(){
+    // 1. 체크개수 알아오기 : length -> 갯수 리턴
+    let num=$('.chk:checked').length;
+    console.log('체크개수:',num);
+
+    // 2. 체크개수가 3이면 전체 체크박스 체크하기
+    if(num==3) chkAll.prop('checked',true);
+    else chkAll.prop('checked',false);
+}); ///////////change 이벤트////////////
+
+
+/* 
+    [ 속성값을 읽어오는 메서드 2가지 ]
+    attribute 단어의 메서드 : attr(속성명)
+    property 단어의 메서드 : prop(속성명)
+    -> 둘의 차이는 일반 속성값을 읽어올떄는 차이가 없다!
+    체크박스의 checked속성인 경우 true/false를
+    리턴해주는 것은 prop() 메서드뿐임!
+
+    [ 속성값을 셋팅하는 메서드 2가지 ]
+    1. attr(속성명,값)
+    2. prop(속성명,값)
+
+*/
+
+
+
+
 
 
 

@@ -1,5 +1,15 @@
 // 보그PJ 회원가입 페이지 JS - member.js
 
+// 약관동의 html 코드 불러오기
+import { mcode } from "./data/mem_data.js";
+
+// console.log(mcode);
+// 약관동의 html 코드넣기 : #conf
+$('#conf').html(mcode.conf);
+
+
+
+
 /*************************************************************** 
     [ 사용자 입력폼 유효성 검사 ]
     - 이벤트 종류 : blur(포커스가 빠질때 발생)

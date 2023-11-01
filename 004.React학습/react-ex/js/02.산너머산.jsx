@@ -7,7 +7,7 @@ import { 누구냐 } from "./02.sub_com/cont_provider.jsx";
 // 서브 컴포넌트 불러오기
 import 이야기 from "./02.sub_com/sub_com.jsx";
 
-console.log(mtInfo);
+// console.log(mtInfo);
 
 /************************************************************* 
     1. props로 데이터를 전달하여 제목 출력하기

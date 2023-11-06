@@ -5,14 +5,12 @@
 // DOM 메서드
 import dFn from './dom.js';
 
-// 상단,하단 공통 데이터 불러오기
-import tData from './data/com_module.js';
-
 // 부드러운스크롤 모듈
 import { startSS, setPos } from "./smoothScroll23.js";
 
-
-// [1] 상단하단 공통 모듈넣기 /////////////
+/////////////////////////////////////////////////////////////
+export default function setJST(){
+    // [1] 상단하단 공통 모듈넣기 /////////////
 
 // 대상선정: .common-area
 const comArea = dFn.qsa('.common-area');
@@ -87,6 +85,11 @@ $('.sbtn').click(()=>$('.mos').slideToggle(300));
 // toggle() -> show() /hide() 전환
 // slideToggle() -> slideDown() / slideUp() 전환
 // fadeToggle() -> fadeIn() / fadeOut() 전환
+
+} /////////////////////setJST //////////////////////////////
+
+
+
 
 
 

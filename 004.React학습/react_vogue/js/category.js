@@ -19,7 +19,7 @@ import setJST from "./common2.js";
 *****************************************************/
 function MainComponent(){
     // 페이지 랜더링 후 한번만 실행
-    // React.useEffect(setJST,[]);
+    React.useEffect(setJST,[]);
 
 
     // 우선 url로 넘어온 키값을 가져옴!

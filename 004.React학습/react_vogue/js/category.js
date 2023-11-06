@@ -18,6 +18,15 @@ function TopArea() {
     // -> 컴포넌트는 모두 만들어진 후 화면 뿌리기 직전 ( 가랜더링(가짜랜더링))
     React.useLayoutEffect(makeLink);
 
+    // GNB용 메뉴 배열 변수 만들기
+    const gnbText = ["FASHION","BEAUTY","LIVING","PEOPLE","VIDEO","RUNWAY","TIME & GEM","SHOPPING"];
+
+    // 메뉴 클릭시 변수변경 함수
+    const chgCat = data => {
+        console.log('나야나~~!',data);
+    }; ////// chgCat /////////////
+
+
     return (
         <React.Fragment>
             {/* 1-1.상단메뉴  */}
@@ -73,30 +82,12 @@ function TopArea() {
             {/* 1-3.GNB박스 */}
             <nav className="gnb">
                 <ul>
-                    <li>
-                        <a href="#">FASHION</a>
-                    </li>
-                    <li>
-                        <a href="#">BEAUTY</a>
-                    </li>
-                    <li>
-                        <a href="#">LIVING</a>
-                    </li>
-                    <li>
-                        <a href="#">PEOPLE</a>
-                    </li>
-                    <li>
-                        <a href="#">VIDEO</a>
-                    </li>
-                    <li>
-                        <a href="#">RUNWAY</a>
-                    </li>
-                    <li>
-                        <a href="#">TIME &amp; GEM</a>
-                    </li>
-                    <li>
-                        <a href="#">SHOPPING</a>
-                    </li>
+                    {gnbText.map(v=>
+                        <li>
+                            <a href="#" onClick={()=>chgCat(v)}>{v}</a>
+                        </li>)
+                    }
+                   
                     <li>
                         {/* 돋보기 검색버튼  */}
                         <i href="#" className="fi fi-search">
@@ -128,25 +119,41 @@ function MainCategory() {
     // 파라미터 중 특정키 받기 : get(키이름) -> 키이름은 'cat'
     const catName = decodeURIComponent(params.get("cat"));
     // 'time & gem' 때문에  decodeURIComponent로 변환!
+    // -> 보내는 곳에서는 encodeURIComponent로 처리해야함!
 
-    console.log("URL:", location.search, "\n파라미터:", params, "\n키값:", catName);
+    console.log(
+        "URL:", location.search, 
+        "\n파라미터:", params, 
+        "\n키값:", catName);
+
+    // 카테고리 데이터 상태관리 변수 만들기!!
+    const [nowCat,setNowCat] = React.useState(catName);
+
 
     // 카테고리 해당 데이터 선택하기
     // 카테고리 전체 객체 데이터 중 해당항목 선택
-    const selData = catData[catName];
+    const selData = catData[nowCat];
 
     console.log(selData);
 
+    const chgMenu = () => setNowCat('living');
+
     return (
         <React.Fragment>
-            <SubTitle tit={selData["제목"]} menu={selData["메뉴"]} />
-            <ItemList cname={selData["경로"]} tit={selData["타이틀"]} />
+            <SubTitle 
+            tit={selData["제목"]} 
+            menu={selData["메뉴"]}/>
+            <button onClick={chgMenu}>변경해!</button>
+            <ItemList 
+            cname={selData["경로"]} 
+            tit={selData["타이틀"]} />
         </React.Fragment>
     );
 } /////////// MainCategory 컴포넌트 //////////////////////
 
 // 메인영역 출력하기 //////////////
-ReactDOM.render(<MainCategory />, document.querySelector(".main-area"));
+ReactDOM.render(<MainCategory />, 
+document.querySelector(".main-area"));
 /////////////////////////////////////////
 
 /////////// 메인 컴포넌트 하위 서브타이틀 컴포넌트 ////////////
@@ -200,30 +207,56 @@ function ItemList(props) {
     // cname - 카테고리명(클래스명넣기)
     // tit - 리스트 타이틀
 
+    // 태그처리 구분 코드생성 함수 
+    const makeCode = data => {
+        console.log('배열인가?:',Array.isArray(data));
+        // 배열데이터인 경우  ////////
+        if(Array.isArray(data)){
+           return(
+           <h2>
+                <small>{data[0]}</small><br/>{data[1]}
+            </h2>
+            )
+        } //////// if ///////////
+        else{ // 배열이 아닌경우 //////////
+            return(<h2>{data}</h2>);
+
+        } //////// else /////////
+    }; ///////////// makeCode 함수///////////
+
     return (
         // 2-2. 카테고리 페이지 컨텐츠영역
-        // html출력일 경우 dangerouslySetInnerHTML을 
+        // html출력일 경우 dangerouslySetInnerHTML을 사용함!
+        // <요소 dangerouslySetInnerHTML={{__html:값}}>
+        // < dangerouslySetInnerHTML={{__html:props.tit[0]}}>
+        // -> script태그와 같은 위험요소가 실행될 수 있으므로
+        // 데이터에서 직접적으로 태그를 넣는 방법을 비추천함!
+        // -> 개선 : 태그 데이터를 제거하고 데이터화 함!
+        // -> runway 데이터를 배열형으로 만들고 첫번쨰 데이터를
+        // small 태그로 싸고 뒤에 br태그로 줄바꿈한 구성을 
+        // 컴포넌트에서 구성하도록 변경함!
+
         <div className={"cat-cont-area "+props.cname}>
             <section className="pt2">
                 <div className="cbx bgi bg1-1">
-                    <h2>{props.tit[0]}</h2>
+                   {makeCode(props.tit[0])}
                 </div>
                 <div className="cbx bgi bg1-2">
-                    <h2>{props.tit[1]}</h2>
+                {makeCode(props.tit[1])}
                 </div>
                 <div className="cbx bgi bg1-3">
-                    <h2>{props.tit[2]}</h2>
+                {makeCode(props.tit[2])}
                 </div>
             </section>
             <section className="pt2">
                 <div className="cbx bgi bg2-1">
-                    <h2>{props.tit[3]}</h2>
+                {makeCode(props.tit[3])}
                 </div>
                 <div className="cbx bgi bg2-2">
-                    <h2>{props.tit[4]}</h2>
+                {makeCode(props.tit[4])}
                 </div>
                 <div className="cbx bgi bg2-3">
-                    <h2>{props.tit[5]}</h2>
+                {makeCode(props.tit[5])}
                 </div>
             </section>
         </div>

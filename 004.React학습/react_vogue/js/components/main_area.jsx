@@ -22,7 +22,7 @@ export default function MainCategory(props) {
 
     console.log(selData);
 
-    const chgMenu = () => setNowCat("living");
+    const chgMenu = () => {};
 
     return (
         <div id="main-area">
@@ -34,6 +34,9 @@ export default function MainCategory(props) {
     );
 } /////////// MainCategory 컴포넌트 //////////////////////
 
+// 메인영역 출력하기 ////////////////////
+// ReactDOM.render(<MainCategory />, document.querySelector(".main-area"));
+///////////////////////////////////////
 
 
 /////////// 메인 컴포넌트 하위 서브타이틀 컴포넌트 ////////////
@@ -45,7 +48,7 @@ function SubTitle(props) {
     // tit - 서브타이틀 / menu - 서브메뉴
 
     // 서브메뉴 있을경우 li데이터 생성하기
-    // 서브메뉴 있을 경우 li데이터 생성하기
+    // 전달변수 data에 들어오는 값은 메뉴 배열임!
     // 배열.map(v=>코드) -> html코드 생성 후 리턴됨!
     const makeList = (data) =>
         data.map((v) => (

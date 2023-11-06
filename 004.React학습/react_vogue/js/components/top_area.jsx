@@ -6,10 +6,12 @@ import { makeLink } from "./linksys2.js";
     컴포넌트명 : TopArea
     기능 : 상단영역 메뉴, 로고 등 요소 구성
 *****************************************************/
-export default function TopArea() {
+export default function TopArea(props) {
     // 컴포넌트 요소 랜더링 직전 호출구역
     // -> 컴포넌트는 모두 만들어진 후 화면 뿌리기 직전 ( 가랜더링(가짜랜더링))
-    React.useLayoutEffect(makeLink);
+    React.useEffect(makeLink,[]);
+    // React.useEffect(함수,[]); -> 뒤에 의존성 변수 구역 비어있으면
+    // 본 컴포넌트가 처음 실행될때 한번만 실행한다!
 
     // GNB용 메뉴 배열 변수 만들기
     const gnbText = ["FASHION", "BEAUTY", "LIVING", "PEOPLE", "VIDEO", "RUNWAY", "TIME & GEM", "SHOPPING"];
@@ -17,6 +19,8 @@ export default function TopArea() {
     // 메뉴 클릭시 변수변경 함수
     const chgCat = (data) => {
         console.log("나야나~~!", data);
+        // 전달된 부모함수 chgCat을 호출함!
+        props.chgItem(data.toLowerCase());
     }; ////// chgCat /////////////
 
     return (

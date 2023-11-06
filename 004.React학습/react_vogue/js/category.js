@@ -9,6 +9,7 @@ import catData from "./data/category_data.js";
 
 // 상단영역 컴포넌트 불러오기 //////
 import TopArea from "./components/top_area.jsx";
+
 // 하단영역 컴포넌트 불러오기 //////
 import FooterArea from "./components/footer_area.jsx";
 

@@ -25,7 +25,7 @@ export default function TopArea(props) {
 
     return (
         <div id="top-area">
-            <header class="top-area ibx common-area">
+            <header className="top-area ibx common-area">
                 {/* 1-1.상단메뉴  */}
                 <div className="tmenu">
                     {/* 1-1-1.sns박스 */}

@@ -13,25 +13,12 @@ import catData from "./data/category_data.js";
     컴포넌트명 : MainCategory
     기능 : 아이템 페이지 타이틀 + 리스트 요소 구성
 *****************************************************/
-export default function MainCategory() {
-    // 우선 url로 넘어온 키값을 가져옴!
-    // 파라미터 전달값 받기 : 파라미터JS전담객체는?
-    // -> URLSearchParams(전체URL)
-    const params = new URLSearchParams(location.search);
-
-    // 파라미터 중 특정키 받기 : get(키이름) -> 키이름은 'cat'
-    const catName = decodeURIComponent(params.get("cat"));
-    // 'time & gem' 때문에  decodeURIComponent로 변환!
-    // -> 보내는 곳에서는 encodeURIComponent로 처리해야함!
-
-    console.log("URL:", location.search, "\n파라미터:", params, "\n키값:", catName);
-
-    // 카테고리 데이터 상태관리 변수 만들기!!
-    const [nowCat, setNowCat] = React.useState(catName);
+export default function MainCategory(props) {
+    
 
     // 카테고리 해당 데이터 선택하기
     // 카테고리 전체 객체 데이터 중 해당항목 선택
-    const selData = catData[nowCat];
+    const selData = catData[props.category];
 
     console.log(selData);
 
@@ -41,7 +28,6 @@ export default function MainCategory() {
         <div id="main-area">
             <main class="main-area ibx">
                 <SubTitle tit={selData["제목"]} menu={selData["메뉴"]} />
-                <button onClick={chgMenu}>변경해!</button>
                 <ItemList cname={selData["경로"]} tit={selData["타이틀"]} />
             </main>
         </div>

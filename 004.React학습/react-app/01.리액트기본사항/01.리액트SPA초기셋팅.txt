@@ -1,7 +1,4 @@
-[ 리액트 SPA 앱 환경설정 초기셋팅 ] 
--> gitignore 파일(src 폴더 내부)이 sj-app>my-first-react-app에 깔려 있어서
-깃허브에 노드 모듈파일이 깃허브로 올라가지 않음
-(노드 모듈파일이 깃허브로 푸쉬될 경우 용량이 커서 깃허브 마비가 와서 소스 날릴 수 있음)
+[ 리액트 SPA 앱 환경설정 초기셋팅 ]
 
 -> 왜 노드JS인가?
 (서버에서 작동하는 JS가 바로 노드JS다!)
@@ -12,20 +9,19 @@ https://nodejs.org/ko/download/
 위의 주소는 공식홈페이지 다운로드 페이지임
 
 -> 설치후 확인 폴더는 아래와 같다
-로컬디스크 C:\Program Files\nodejs
+C:\Program Files\nodejs
 
-->>> 시스템 환경변수(윈도우 하단 검색창에 시스템 환경변수 편집 검색)에 등록해준다!
+->>> 시스템 환경변수에 등록해준다!
 PATH에 추가등록!
 (노드설치시 자동등록된다! 그러나 확인필요!`)
 예) C:\Program Files\nodejs 
 -> 설치된 노드js위치를 등록후 재부팅필요!!!
--> 환경변수에 등록된다는 의미는 어느위치에서 cmd명령어를 
-사용해도 해당 노드 명령어를 전역적으로 사용하도록 해준다!(개발자 편의)
-
+-> 환경변수에 등록된다는 의미는 어느 위치에서 cmd명령어를
+사용해도 해당 노드 명령어를 전역적으로 사용하도록 해준다!
 
 ####################################
 
-[ VSCODE에서 작업 -> 햄버거버튼>터미널> 새터미널>Command Prompt 창  ] 
+[ VSCODE에서 작업 ] 
 
 npm 명령어 사용 - (node package manager)
 -> 터미널의 Command Prompt 창에서 명령어를 입력한다!
@@ -36,6 +32,7 @@ npm 명령어 사용 - (node package manager)
 -> cd 이동할 폴더명 (react-app까지 이동)
 -> 참고) cd 띄어쓰고 이동할 하위 폴더 드래그&드롭
 
+
 2. 기존에 리액트앱이 글로벌로 설치되었다면 삭제
 npm uninstall -g create-react-app
 
@@ -43,7 +40,7 @@ npm uninstall -g create-react-app
 (npx 명령어사용!)
 
 npx create-react-app my-first-react-app
-(my-first-react-app은 내가지은이름)
+(my-react-app은 내가지은이름)
 
 ______________________________________________
 
@@ -70,7 +67,6 @@ npx는 우선적으로 로컬 프로젝트 실행파일을 찾음
 로컬 프로젝트에 없으면 최신 버전의 모듈을 설치후
 전역에서 실행함
 ________________________________________________
-
 4. 이미 만들고 깃허브에서 연결하였다면...
 만약 package.json파일에서 
 "dependencies"항목에
@@ -82,7 +78,7 @@ npm i react react-dom
 
 5. 해당어플위치에서 npm을 스타트한다
 npm start
--> 종료는 ctrl+C (close의 c) 종료질문에 y로 답한다!
+-> 종료는 ctrl+c (close의 c) 종료질문에 y로 답한다!
 
 ###################################################
 -> 5번의 결과로 브라우저에 가상서버가 뜨고 
@@ -90,6 +86,7 @@ http://localhost:3000/
 위의 주소로 테스트 환경의 브라우저가 구동한다!
 새로고침 없이 계속 변경된 소스와 에러시 메시지를 리턴함!
 ####################################################
+
 
 6. 라우터 기능사용시 추가설치
 npm i react-router-dom
@@ -101,7 +98,8 @@ npm install react-bootstrap bootstrap
 
 8. 제이쿼리 추가설치
 npm install jquery
-->npm i jquery (--save)
+또는 npm i jquery (--save)
+
 사용:
 import $ from 'jquery';
 
@@ -109,7 +107,6 @@ import $ from 'jquery';
 npm i jquery-ui-dist
 사용:
 import 'jquery-ui-dist/jquery-ui';
-
 
 10. 제이쿼리 UI 드래그기능 
 모바일까지 커버하기 위해 터치펀치 설치

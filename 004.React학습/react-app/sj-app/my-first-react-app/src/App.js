@@ -7,7 +7,6 @@ require('jquery-ui-dist/jquery-ui');
 require('jquery-ui-touch-punch/jquery.ui.touch-punch');
 
 
-
 function App() {
   // 이미지 경로
   let isrc = './images/dcm36.jpeg';

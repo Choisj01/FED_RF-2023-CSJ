@@ -21,7 +21,7 @@ export default function TopArea(props) {
     // const goFn = (v) => props.chgItem(v);
     // -> 컨텍스트 API를 사용할떄는 프롭스펑션다운 불필요!(주석달기)
 
-
+    console.log('상단영역 실행!!!!');
     return (
         <div id="top-area">
             <header className="top-area ibx common-area">

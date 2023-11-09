@@ -3,7 +3,9 @@
 import { Logo } from "../contents/Logo";
 import { menu } from "../data/gnb";
 
-export function TopArea(){
+export function TopArea(props){
+    // chgFn 속성 - 메인함수인 chgMenu() 호출
+
     return(
         <>
         {/* 1. 상단영역 */}
@@ -17,7 +19,11 @@ export function TopArea(){
                     {
                         
                         menu.map((v,i)=>
-                        <li key={i}>
+                        <li key={i}
+                        onClick={
+                            ()=>
+                            props.chgFn(v.txt=="Home"?"main":v.txt)
+                                }>
                             <a href="#">{v.txt}</a>
                         </li>
                         /* 

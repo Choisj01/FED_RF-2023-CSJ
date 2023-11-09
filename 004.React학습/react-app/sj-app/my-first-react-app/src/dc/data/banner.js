@@ -1,4 +1,4 @@
-// DC.com 배너 데이터 - banner.js
+// DC.com 배너 데이터
 
 export const banData = {
     "main":[

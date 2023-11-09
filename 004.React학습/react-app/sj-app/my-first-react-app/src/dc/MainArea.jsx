@@ -1,13 +1,12 @@
 // DC.com MainArea 컴포넌트
 
-import { Banner } from "./banner";
+import { Banner } from "./Banner";
 
 export function MainArea(){
     return(
-        <> 
         <main className="cont">
-            <Banner/>
+            <Banner />
         </main>
-        </>
     );
-} ///////////////MainArea 컴포넌트////////////////////
+
+} ///////// MainArea 컴포넌트 ////////////

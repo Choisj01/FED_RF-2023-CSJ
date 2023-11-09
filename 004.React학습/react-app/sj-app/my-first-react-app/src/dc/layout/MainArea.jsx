@@ -1,10 +1,13 @@
 // DC.com MainArea 컴포넌트
-import { Banner } from "./Banner";
+import { Banner } from "../contents/Banner";
+import { Charactor } from "../contents/Charactor";
+import { Main } from "../contents/Main";
 
-export function MainArea(){
+export function MainArea(props){
+    // cat 속성으로 메뉴분류 전달
     return(
         <main className="cont">
-            <Banner category="main"/>
+            <Main cat={props.cat}/>
         </main>
     );
 

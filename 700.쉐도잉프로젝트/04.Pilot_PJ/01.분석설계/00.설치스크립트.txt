@@ -1,24 +1,42 @@
-[ DC PJ 설치스크립트 ]
+[ Pilot PJ 설치스크립트 ]
 1. 리액트 앱 설치하기
-- 설치위치: 03.DC_PJ\02.구현소스
-- 설치이름: dc-app
+- 설치위치: 04.Pilot_PJ\02.구현소스
+- 설치이름: pilot-app
 - 스크립트: npx create-react-app pilot-app
 
 2. 팩키지 모듈 설치하기
-- 설치위치: 04.DC_PJ\02.구현소스\dc-app
+- 설치위치: 04.Pilot_PJ\02.구현소스\pilot-app
 - 스크립트: 
-    (1) npm i react-router-dom@latest
-    (2) npm i jquery
-    (3) npm i jquery-ui-dist
-    (4) npm i jquery-ui-touch-punch
-    (5) npm i swiper
+    (1) npm i jquery
+    (2) npm i jquery-ui-dist
+    (3) npm i jquery-ui-touch-punch
+    (4) npm i swiper
 
 3. 설치확인
 - 파일명: package.json
 - 항목명: "dependencies"
 
 4. 개발서버구동
-- 서버구동위치: 04.DC_PJ\02.구현소스\pilot-app
+- 서버구동위치: 04.Pilot_PJ\02.구현소스\pilot-app
 - 스크립트:
     (1) 시작: npm start
     (2) 멈춤: ctrl+c 후 질문에 답: y
+
+
+-_______________________________
+집가서 리액트 루트파일 설치하기!
+
+예)
+1. 터미널 켜고 새로 폴더 만들기 위해 화면에 cd 한칸띄고 04.Pilot_PJ\02.구현소스 폴더를 
+루트 뒤로 드래그앤드롭하고 엔터를 누른다.
+2.04.Pilot_PJ\02.구현소스 루트가 아래에 새롭게 뜨면 
+npx create-react-app pilot-app(앱명은 참고용으로 본인 PJ할땐 본인이 정해서 씀) 를
+쓰고 엔터를 누른다!
+3. cd 한칸띄고 pilot-app(앱명은 참고용으로 본인 PJ할땐 본인이 정해서 씀)를 쓰고 엔터를
+누른다음에 해당 루트로 들어간다!
+4. 2번의 패키지 모듈들을 순서대로 하나씩 글자 복붙하고 엔터를 눌러 설치한다!
+5. 다 설치한 다음에 package.json 에서 제대로 설치됐는지 항목명: "dependencies"를 
+확인한다.
+6.리액트 화면 확인을 위해 pilot-app(앱명은 참고용으로 본인 PJ할땐 본인이 정해서 씀)루트에서
+npm start를 입력하고 엔터!를 눌러 화면 실행 확인한다!
+7. 끝!!

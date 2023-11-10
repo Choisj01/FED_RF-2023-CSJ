@@ -16,7 +16,7 @@ function slideFn() {
     // (1) 슬라이드
     const sldBox = $(".slider");
     // (2) 슬라이드 블릿
-    const indic = $('.indic li');
+    const indic = $(".indic li");
     // console.log('블릿:',indic);
 
     // 2. 변수설정
@@ -31,7 +31,6 @@ function slideFn() {
     // (5) 슬라이드 개수
     const sCnt = sldBox.find("li").length;
     // console.log("개수:", sCnt);
-
 
     // 3. 이벤트 설정 및 기능구현
     // 이동버튼 클릭시
@@ -50,8 +49,8 @@ function slideFn() {
         if (isR) {
             // 슬라이드가 왼쪽으로 이동함
             // left값이 -100%
-            sldBox.animate({ left: "-100%" }, A_TM, A_ES, 
-            () => { // 콜백함수(애니후)
+            sldBox.animate({ left: "-100%" }, A_TM, A_ES, () => {
+                // 콜백함수(애니후)
                 // 맨앞li 맨뒤로 이동
                 sldBox
                     .append(sldBox.find("li").first())
@@ -71,7 +70,7 @@ function slideFn() {
                 .css({ left: "-100%" })
                 // left값을 0으로 애니메이션
                 .animate({ left: "0" }, A_TM, A_ES);
-                
+
             // 슬라이드 순번감소(0보다 작으면 끝번호)
             sNum--;
             if (sNum < 0) sNum = sCnt - 1;
@@ -79,8 +78,7 @@ function slideFn() {
         // console.log('슬순번:',sNum);
 
         // 블릿해당 순번 클래스 'on'넣기 (다른 li는 제거)
-        indic.eq(sNum).addClass('on')
-        .siblings().removeClass('on');
+        indic.eq(sNum).addClass("on").siblings().removeClass("on");
     }); /////////////click/////////////
 } ////////////SlideFn////////////////
 
@@ -95,7 +93,7 @@ export function Banner(props) {
     useEffect(() => {
         // console.log("랜더링후!");
         // 슬라이드 기능구현 함수 호출 : 선택데이터가 1초과일떄
-        if(selData.length>1) slideFn();
+        if (selData.length > 1) slideFn();
     }); ///////useEffect/////////
 
     // 리스트만들기 함수
@@ -103,7 +101,15 @@ export function Banner(props) {
         console.log(data);
         return data.map((v, i) => (
             <li key={i}>
+                {/* 배너이미지 */}
                 <img src={v.src} alt="ㅎㅎ" />
+                {/* 배너정보 */}
+                <section class="bantit">
+                    <h3>{v.tit1}</h3>
+                    <h2>{v.tit2}</h2>
+                    <p>{v.cont}</p>
+                    <button>{v.btn}</button>
+                </section>
             </li>
         ));
     };

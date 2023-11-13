@@ -1,8 +1,5 @@
-/* index.css */
+/* DC.com 메인페이지 CSS - index.css */
 @import url(./reset.css);
+@import url(./core.css);
 @import url(./layout.css);
 
-/* div{
-  border: 1px solid #000;
-  background-image: url(../../public/images/dcm1.jpg);
-} */

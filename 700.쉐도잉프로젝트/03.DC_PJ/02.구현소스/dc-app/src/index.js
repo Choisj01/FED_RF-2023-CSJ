@@ -3,8 +3,10 @@ import React, { useState } from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
+// 메인페이지 CSS 불러오기
 // css도 불러온다!
 import "./css/index.css";
+
 import { Layout } from "./dc/layout/Layout";
 import { Main } from "./dc/contents/Main";
 import { Character } from "./dc/contents/Character";
@@ -64,7 +66,7 @@ export default function App() {
                 <Route path="games" element={<Games />}/>
                 <Route path="news" element={<News />}/>
                 <Route path="video" element={<Video />}/>
-                <Route path="swiperapp" element={<SwiperApp />}/>
+                <Route path="board" element={<SwiperApp />}/>
             </Route>
         </Routes>
     </BrowserRouter>);

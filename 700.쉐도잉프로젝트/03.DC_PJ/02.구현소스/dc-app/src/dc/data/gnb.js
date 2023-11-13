@@ -1,4 +1,4 @@
-// DC.com GNB 메뉴 데이터 
+// DC.com GNB메뉴 데이터
 export const menu = [
     // {
     //     txt:"Home",
@@ -12,12 +12,37 @@ export const menu = [
         txt:"COMICS",
         link:"/comics",
         sub:[
-            
+            {
+                txt: "LATEST COMICS",
+                link: "/co1",
+            },
+            {
+                txt: "DC UNIVERSE INFINITE",
+                link: "/co2",
+            },
+            {
+                txt: "ALL COMICS SERIES",
+                link: "/co3",
+            },
         ],
     },
     {
-        txt:"MOVIES",
+        txt:"MOVIES & TV",
         link:"/movies",
+        sub:[
+            {
+                txt: "DC MOVIES",
+                link: "/mv",
+            },
+            {
+                txt: "DC SERIES",
+                link: "/mv",
+            },
+            {
+                txt: "DC ON HBO MAX",
+                link: "/mv",
+            },
+        ]
     },
     {
         txt:"GAMES",
@@ -32,7 +57,7 @@ export const menu = [
         link:"/video",
     },
     {
-        txt:"SWIPER",
-        link:"/swiperapp",
+        txt:"OPINIONS",
+        link:"/board",
     },
-]; 
+];

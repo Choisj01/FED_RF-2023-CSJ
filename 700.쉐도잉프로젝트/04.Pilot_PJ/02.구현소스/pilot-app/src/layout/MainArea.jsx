@@ -3,17 +3,17 @@
 import { MainCont } from "../pages/MainCont";
 import { MenSub } from "../pages/MenSub";
 import { StyleSub } from "../pages/StyleSub";
-import { WomenSub } from "../pages/WomenSUb";
+import { WomenSub } from "../pages/WomenSub";
 
-export function MainArea(props) {
+export function MainArea(props){
     // props.page 속성값으로 main/men/women/style
-    return (
+    return(
         <>
             <h1>메인영역</h1>
-            {props.page == "main" && <MainCont />}
-            {props.page == "men" && <MenSub />}
-            {props.page == "women" && <WomenSub/>}
-            {props.page == "style" && <StyleSub />}
+            {props.page=='main'&&<MainCont />}
+            {props.page=='men'&&<MenSub />}
+            {props.page=='women'&&<WomenSub />}
+            {props.page=='style'&&<StyleSub />}
         </>
     );
-} //////////////////MainArea 컴폰넌트//////////////////
+} //////////////// MainArea 컴포넌트 //////////

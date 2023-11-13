@@ -60,4 +60,4 @@ export function TopArea() {
       이용할 수 있도록 리액트에서 강제하고 있음!)
   Warning: Each child in a list 
   should have a unique "key" prop.
-  */
+*/

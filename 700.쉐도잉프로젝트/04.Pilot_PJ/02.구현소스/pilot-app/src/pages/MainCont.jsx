@@ -4,7 +4,11 @@ export function MainCont(){
 
     return(
         <>
-            <h2>메인 컨텐츠야~!</h2>
+            <section className="page"style={{background:"lightblue"}}></section>
+            <section className="page"style={{background:"lightgreen"}}></section>
+            <section className="page"style={{background:"lightpink"}}></section>
+            <section className="page"style={{background:"lightcoral"}}></section>
+            <section className="page"style={{background:"lightgray"}}></section>
         </>
     )
 

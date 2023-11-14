@@ -92,6 +92,7 @@ export function Banner(props) {
     
         // 블릿해당 순번 클래스 'on'넣기 (다른 li는 제거)
         indic.eq(sNum).addClass("on").siblings().removeClass("on");
+        
     }; /////////// goSlide 함수 ////////////
 
     // category - 카테고리 분류명(배너 데이터선택)

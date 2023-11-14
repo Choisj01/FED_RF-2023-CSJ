@@ -4,7 +4,9 @@ export function MainCont(){
 
     return(
         <>
+            {/* 1. 배너페이지 */}
             <section className="page"style={{background:"lightblue"}}></section>
+            
             <section className="page"style={{background:"lightgreen"}}></section>
             <section className="page"style={{background:"lightpink"}}></section>
             <section className="page"style={{background:"lightcoral"}}></section>

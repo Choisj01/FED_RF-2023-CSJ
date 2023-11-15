@@ -15,6 +15,7 @@ export function Main() {
                 'main1' /'main2/'main3' 중 하나를 불러온다! */}
 
             {/* 2. 섹션소개 컴포넌트 */}
+            
             <SecIntro />
         </>
     );

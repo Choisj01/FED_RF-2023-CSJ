@@ -4,6 +4,7 @@
 import "../css/banner.css";
 
 export function Banner() {
+    
     // 배너리스트 개수
     const BAN_CNT = 6;
 

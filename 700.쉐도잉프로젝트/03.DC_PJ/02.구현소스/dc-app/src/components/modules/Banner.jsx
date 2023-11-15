@@ -115,7 +115,7 @@ export function Banner(props) {
                 {/* 배너이미지 */}
                 <img src={v.src} alt="ㅎㅎ" />
                 {/* 배너정보 */}
-                <section class="bantit">
+                <section className="bantit">
                     <h3>{v.tit1}</h3>
                     <h2>{v.tit2}</h2>
                     <p>{v.cont}</p>

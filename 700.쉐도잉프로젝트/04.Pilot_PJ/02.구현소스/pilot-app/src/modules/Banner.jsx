@@ -32,7 +32,6 @@ export function Banner() {
                             <span className="bld">블릿</span>
                         </a>
                     </li>
-                
             }
         } //////////////////// for ///////////////
         console.log(hcode);

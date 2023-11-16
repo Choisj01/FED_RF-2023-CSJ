@@ -2,6 +2,7 @@
 
 import { Banner } from "../modules/Banner";
 import { SecIntro } from "../modules/SecIntro";
+import { VidIntro } from "../modules/vidintro";
 
 export function Main() {
     // cat속성으로  메뉴분류 전달
@@ -15,8 +16,9 @@ export function Main() {
                 'main1' /'main2/'main3' 중 하나를 불러온다! */}
 
             {/* 2. 섹션소개 컴포넌트 */}
-            
             <SecIntro />
+            {/* 3. 비디오 소개 컴포넌트 */}
+            <VidIntro />
         </>
     );
 } /////////////Main컴포넌트/////////////

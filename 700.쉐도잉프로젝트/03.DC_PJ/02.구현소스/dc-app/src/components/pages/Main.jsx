@@ -2,7 +2,7 @@
 
 import { Banner } from "../modules/Banner";
 import { SecIntro } from "../modules/SecIntro";
-import { VidIntro } from "../modules/vidintro";
+import { VidIntro } from "../modules/VidIntro";
 
 export function Main() {
     // cat속성으로  메뉴분류 전달

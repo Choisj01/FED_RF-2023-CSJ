@@ -7,6 +7,7 @@ import { Banner } from "../modules/Banner";
 import { autoScroll } from "../func/jquery-autoScroll";
 // 드래그 배너 JS 불러오기
 import { dragBanner } from "../func/drag_banner";
+import { FashionIntro } from "../modules/FashionIntro";
 
 
 export function MainCont() {
@@ -29,13 +30,24 @@ export function MainCont() {
       <section id="ban" className="page" style={{ background: "lightblue" }}>
         <Banner />
       </section>
-      <section className="page" style={{ background: "lightcoral" }}></section>
-      <section className="page" style={{ background: "lightgreen" }}></section>
-      <section
-        className="page"
-        style={{ background: "lightseagreen" }}
-      ></section>
-      <section className="page" style={{ background: "lightpink" }}></section>
+
+        {/* 2. 남성패션 페이지 */}
+      <section className="page">
+        <FashionIntro cat="men"/>
+      </section>
+
+        {/* 3. 여성패션 페이지 */}
+      <section className="page">
+        <FashionIntro cat="women"/>
+      </section>
+
+      {/* 4. 스타일패션 페이지 */}
+      <section className="page">
+      <FashionIntro cat="style"/>
+      </section>
+
+      {/* 5. 하단 공통영역 */}
+       <section className="page" style={{ background: "lightpink" }}></section>
     </>
   );
 

@@ -62,9 +62,22 @@ $('.stopPlay').css({
     display:'block',
     margin: '0 auto',
     cursor:'pointer',
-}).click((e)=>{
-    console.log($(e.target).text())
-})
+}).attr('title','멈추기')
+.click((e)=>{
+    let icon = $(e.target).text();
+    console.log(icon);
+    if(icon=='▣'){ // 멈춤기능
+        swiper.autoplay.pause();
+        $(e.target).text('▶')
+        .attr('title','자동넘기기');
+    }
+    else{ // 자동넘김 시작
+        swiper.autoplay.start();
+        $(e.target).text('▣')
+        .attr('title','멈추기');
+    }
+}); ////////// click ////////////
+
 
 /* 
     [ swiper API 주요 메서드 ]

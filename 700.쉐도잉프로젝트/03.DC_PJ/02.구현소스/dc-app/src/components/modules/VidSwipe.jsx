@@ -16,7 +16,8 @@ section.vidswbox >
 import '../../css/vid_swipe.css'
 import { SwiperVid } from '../plugin/SwiperVId';
 
-export function VidSwipe(){
+export function VidSwipe(props){
+    //props.tit - 비디오 스와이프 타이틀
 
 
     // 리턴 코드 /////////////////////////
@@ -25,7 +26,7 @@ export function VidSwipe(){
         {/* 모듈코드 */}
          <section className="vid-swbox">
             {/* 1. 모듈 타이틀 */}
-            <h2 className="tit">LATEST TRAILERS, CLIPS & MORE</h2>
+            <h2 className="tit">{props.tit}</h2>
             {/* 2. 스와이퍼 컴포넌트 : SwiperVid */}
             <SwiperVid/>
 

@@ -42,14 +42,23 @@ export function SwiperVid() {
     const vbx = $('.vid-bx');
     // 1-3. 타이틀 박스 : .ifr-tit
     const itit = $('.ifr-tit');
+    // 1-4. 닫기버튼 : .cbtn
+    const cbtn = $('.cbtn');
 
     // 2. 변경하기
     // 2-1.아이프레임 src경로 넣기
-    ifr.attr('src',src);
+    ifr.attr('src',src+"?autoplay=1");
     // 2-2. 비디오 타이틀 넣기
     itit.text(tit);
     // 2-3. 비디오 전체박스 나타나기
     vbx.fadeIn(300);
+    // 2-4. 닫기버튼 셋팅
+    cbtn.click(()=>{
+      // 전체박스 사라지기
+      vbx.fadeOut(300);
+      // 기존 동영상 플레이 멈추기(src 삭제)
+      ifr.attr('src','');
+    }); ////////click////////
 
   }; /////////////showVid함수//////////////
 
@@ -62,6 +71,21 @@ export function SwiperVid() {
         navigation={true}
         /* 사용할 모듈을 여기에 적용시킨다 */
         modules={[Navigation]}
+        // 스와이퍼 사이즈별 슬라이드수 변경!
+        breakpoints={{
+          200: {
+              slidesPerView: 1,
+          },
+          500: {
+              slidesPerView: 2,
+          },
+          1000: {
+              slidesPerView: 3,
+          },
+          1200: {
+              slidesPerView: 4,
+          },
+      }}
         className="mySwiper"
       >
         {

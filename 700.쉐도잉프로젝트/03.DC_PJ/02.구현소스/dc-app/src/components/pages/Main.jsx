@@ -23,7 +23,7 @@ export function Main() {
             <VidIntro cat="main" cls="off" />
 
             {/* 4. 비디오 스와이퍼 컴포넌트 */}
-            <VidSwipe/>
+            <VidSwipe tit="LATEST TRAILERS, CLIPS & MORE"/>
         </>
     );
 } /////////////Main컴포넌트/////////////

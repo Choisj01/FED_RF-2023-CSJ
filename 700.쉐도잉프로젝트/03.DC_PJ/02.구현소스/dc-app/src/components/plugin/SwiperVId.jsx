@@ -28,7 +28,7 @@ import { Navigation } from "swiper/modules";
 
 export function SwiperVid() {
 
-  // 선태 데이터 : 여기서는 그대로 가져온다
+  // 선택 데이터 : 여기서는 그대로 가져온다
   const selData = swVidData;
 
   // 비디오 보이기 함수

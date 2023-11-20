@@ -28,7 +28,10 @@ export function TopArea(props) {
                         </a>
                     </h1>
                     <nav className="gnb">
-                        <ul>{makeList(props.cat)}</ul>
+                        <ul>
+                        <li className="bld">배너순번 li 숨기기</li>
+                            {makeList(props.cat)}
+                            </ul>
                     </nav>
                     <div className="ham">
                         <span></span> <span></span> <span></span>

@@ -17,7 +17,13 @@ import '../../css/vid_swipe.css'
 import { SwiperVid } from '../plugin/SwiperVId';
 
 export function VidSwipe(props){
-    //props.tit - 비디오 스와이프 타이틀
+    //props.cat - 카테고리명
+
+    // 비디오 스와이프 카테고리별 타이틀
+    const catTit = {
+        main:"LATEST TRAILERS, CLIPS & MORE",
+        movies:"TRAILERS, CLIPS AND MORE",
+    }
 
 
     // 리턴 코드 /////////////////////////
@@ -26,9 +32,12 @@ export function VidSwipe(props){
         {/* 모듈코드 */}
          <section className="vid-swbox">
             {/* 1. 모듈 타이틀 */}
-            <h2 className="tit">{props.tit}</h2>
-            {/* 2. 스와이퍼 컴포넌트 : SwiperVid */}
-            <SwiperVid/>
+            <h2 className="tit">
+            {catTit[props.cat]}
+            </h2>
+            {/* 2. 스와이퍼 컴포넌트 : SwiperVid
+            -> 전달소속 cat은 데이터 선택을 위한 값 */}
+            <SwiperVid cat={props.cat}/>
 
             {/* 3. 비디오 재생창 */}
             <section className="vid-bx">

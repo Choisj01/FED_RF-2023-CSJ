@@ -49,12 +49,22 @@ export function SwiperCat() {
             >
                 {selData.map((v, i) =>
                       // idx 고유번호 7번이하만 출력 
-                        Number(v.idx) <= 7 && (
+                        Number(v.idx) <= 7 && 
                             <SwiperSlide key={i}>
-                              
+                              <Link to="/datail">
+                                <section className="sw-inbox2">
+                                  {/* 캐릭터 이미지 영역 */}
+                                  <div className="cat-img2">
+                                    <img src={v.tmsrc} alt={v.cname}/>
+                                  </div>
+                                  {/* 캐릭터 타이틀 영역 */}
+                                  <div className="cat-tit2">
+                                    <h3>{v.cname}</h3>
+                                  </div>
+                                </section>
+                              </Link>
                             </SwiperSlide>
-
-                        )
+                        
                 )}
             </Swiper>
         </>

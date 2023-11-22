@@ -3,7 +3,7 @@
 import React from "react";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
-import {Link} from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 // 캐릭터 리스트 데이터 가져오기
 import { catListData } from "../data/swiper_cat";
@@ -47,24 +47,34 @@ export function SwiperCat() {
                 }}
                 className="mySwiper2"
             >
-                {selData.map((v, i) =>
-                      // idx 고유번호 7번이하만 출력 
-                        Number(v.idx) <= 7 && 
+                {selData.map(
+                    (v, i) =>
+                        // idx 고유번호 7번이하만 출력
+                        Number(v.idx) <= 7 && (
                             <SwiperSlide key={i}>
-                              <Link to="/datail">
-                                <section className="sw-inbox2">
-                                  {/* 캐릭터 이미지 영역 */}
-                                  <div className="cat-img2">
-                                    <img src={v.tmsrc} alt={v.cname}/>
-                                  </div>
-                                  {/* 캐릭터 타이틀 영역 */}
-                                  <div className="cat-tit2">
-                                    <h3>{v.cname}</h3>
-                                  </div>
-                                </section>
-                              </Link>
+                                <Link
+                                    to="/detail"
+                                    state={{
+                                        cname: v.cname,
+                                        cdesc: v.cdesc,
+                                        facts: v.facts,
+                                    }}
+                                >
+                                    {/* 라우터 데이터전달은 
+                                state속성에 객체로 보낸다! */}
+                                    <section className="sw-inbox2">
+                                        {/* 캐릭터 이미지 영역 */}
+                                        <div className="cat-img2">
+                                            <img src={v.tmsrc} alt={v.cname} />
+                                        </div>
+                                        {/* 캐릭터 타이틀 영역 */}
+                                        <div className="cat-tit2">
+                                            <h3>{v.cname}</h3>
+                                        </div>
+                                    </section>
+                                </Link>
                             </SwiperSlide>
-                        
+                        )
                 )}
             </Swiper>
         </>

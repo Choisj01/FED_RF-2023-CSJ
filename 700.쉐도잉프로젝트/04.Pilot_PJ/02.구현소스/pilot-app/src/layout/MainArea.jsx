@@ -1,7 +1,7 @@
 // Pilot PJ 메인영역 공통 컴포넌트
 
 import { MainCont } from "../pages/MainCont";
-import { MenSub } from "../pages/MenSub";
+import { MenSub } from "../pages/Fashion";
 import { StyleSub } from "../pages/StyleSub";
 import { WomenSub } from "../pages/WomenSub";
 

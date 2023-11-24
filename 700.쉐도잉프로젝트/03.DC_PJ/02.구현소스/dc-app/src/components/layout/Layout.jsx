@@ -7,7 +7,6 @@ import { TopArea } from "./TopArea";
 // Context API 불러오기
 import { dcCon } from "../modules/dcContext";
 import { useNavigate } from "react-router-dom";
-// import { useEffect } from "react";
 import { useLayoutEffect } from "react";
 
 export function Layout(){

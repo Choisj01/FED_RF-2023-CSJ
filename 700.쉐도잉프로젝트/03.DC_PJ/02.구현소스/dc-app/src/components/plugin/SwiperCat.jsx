@@ -1,4 +1,4 @@
-// DC.com 캐릭터리스트용 스와이퍼 컴포넌트 - SwiperCat.jsx
+// DC.com 캐릭터 리스트용 스와이퍼 컴포넌트 - SwiperCat.jsx
 
 import React from "react";
 // Import Swiper React components

@@ -7,9 +7,16 @@ import { catListData } from "../data/swiper_cat";
 
 // 캐릭터 검색 리스트 CSS
 import '../../css/search_cat_list.css';
-export function SchCatList() {
+
+export function SchCatList(props) {
+    // props.word - 데이터 선택값
+
     // 선택데이터
-    const selData = catListData;
+    const selData = catListData.filter(v=>{
+        if(v.cname.toLowerCase().indexOf(props.word) !== -1) return true;
+    });
+
+    console.log(selData);
 
     return (
         <>

@@ -41,14 +41,19 @@ export function TopArea() {
 
   // 2. 입력창에 엔터키를 누르면 검색함수 호출
   const enterKey = e => {
-    console.log(e.target);
+    // console.log(e.target);
     // 엔터키는 "Enter"문자열을 리턴함!
     if(e.key === 'Enter') {
         // 입력창의 입력값 읽어오기 : val() 사용! - 제이쿼리 메서드 / trim - 앞뒤 공백제거 메서드
         let txt = $(e.target).val().trim();
         console.log(txt);
         // 빈값이 아니면 검색함수 호출(검색어 전달!)
-        if(txt!='') goSearch(txt);
+        if(txt!='') {
+            // 입력창 비우기 + 부모박스 닫기
+            $(e.target).val('').parent().hide();
+            // 검색 보내기
+            goSearch(txt);
+        } ///////// if /////////
     } /////////// if /////////////
   }; //////// enterKey 함수 ///////////
 

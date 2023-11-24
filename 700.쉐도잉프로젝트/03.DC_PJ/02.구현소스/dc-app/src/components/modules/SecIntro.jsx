@@ -48,7 +48,7 @@ export function SecIntro() {
                             <button
                                 onClick={() =>
                                     // 컨텍스트 API 함수호출!
-                                    myCon.chgPage(v.link)
+                                    myCon.chgPage(v.link,{})
                                 }
                             >
                                 {v.btn.toUpperCase()}

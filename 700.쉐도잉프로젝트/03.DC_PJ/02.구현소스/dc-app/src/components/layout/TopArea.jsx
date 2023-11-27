@@ -1,4 +1,7 @@
 // 상단영역 컴포넌트
+
+import { memo } from "react";
+
 // GNB 데이터
 import { Link, useNavigate } from "react-router-dom";
 import { Logo } from "../modules/Logo";
@@ -24,14 +27,36 @@ import { useContext } from "react";
   -> 라우터 연결 컴포넌트 출력자리 컴포넌트
   -> 여기서는 MainArea 컴포넌트에 출력!
 *******************************************************/
-export function TopArea() {
+
+// 메모이제이션 적용하기! //////
+//  -> 그러나 ....단순히 적용하면 효과가 없음!
+// 이유는? 컨텍스트 API가 전역적인 함수/변수를 전달하고 있어서
+// 매번 새롭게 리랜더링되므로 인해 메모이제이션 갱신을 
+// 하게끔 하기에 효과가 없는것!(->콘솔에 확인시 상단영역이양이 페이지 바꿀때마다 뜸)
+// ->>>>>>>>> 방법은? 컨텍스트API를 사용하지 말고
+// props로 전달하는 방식으로 전환하면 효과를 볼 수 있다!(->상단영역 한번만 랜더링됨)
+// ->React.memo는 전달속성이 변경됨을 기준하여
+// 메모이제이션 기능을 제공하기 때문이다!
+// ->  전달되는 함수가 반드시 useCallback() 처리가 되어야 한다!!!
+
+// export function TopArea() {
+export const TopArea = memo(({chgPageFn})=>{
+
+    // 보통 props 등 전달변수만 쓰면 하위속성명으로 
+    // 값을 전달하지만 중괄호{}를 사용하면 속성명을 
+    // 직접사용할 수 있다!
+
+    // 컴포넌트 호출확인
+    console.log('상단영역이양');
 
     // 컨텍스트 API 사용
-    const myCon = useContext(dcCon);
+    // const myCon = useContext(dcCon);
 
   // 검색관련 함수들 //////////////////
   // 1. 검색창 보이기 함수
-  const showSearch = () => {
+  const showSearch = (e) => {
+    // 0. a요소 기본기능 막기(리랜더링도 막는다!)
+    e.preventDefault();
     // 1.검색창 보이기
     $('.searchingGnb').show();
     // 2. 포커스 주기
@@ -61,7 +86,7 @@ export function TopArea() {
   const goSearch = (txt) => { //txt- 검색어
     console.log('나는 검색하러 간다규!!!');
     // 라우터 이동함수로 이동하기 : 컨텍스트 API 사용
-    myCon.chgPage('/schpage',{state:{keyword:txt}})
+    chgPageFn('/schpage',{state:{keyword:txt}})
 
   }; //////// goSearch 함수 ///////////
 
@@ -140,7 +165,7 @@ export function TopArea() {
             </header>
         </>
     );
-}
+}); /////////////// TopArea 컴포넌트 //////////////////
 
 /* 
   map()을 사용하여 태그를 생성할때

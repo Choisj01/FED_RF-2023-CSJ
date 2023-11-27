@@ -34,7 +34,7 @@ export function Fashion(props) {
                 <SwiperApp cat={myCon.pgName}/>
             </section>
             {/* 2. 신상픔 영역 */}
-            <section id="c1" className={"cont c1"+myCon.pgName}>
+            <section id="c1" className={"cont c1 "+myCon.pgName}>
                 <SinSang cat={myCon.pgName} />
             </section>
             {/* 2.5. 상세보기 박스 */}

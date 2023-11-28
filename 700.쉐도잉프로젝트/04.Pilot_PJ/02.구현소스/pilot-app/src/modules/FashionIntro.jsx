@@ -55,14 +55,16 @@ export function FashionIntro(props) {
                     {props.cat == "style" && (
                         <>
                             <h2 className="tm">
-                                <a href="#" onClick={()=>myCon.chgPgName(props.cat)}>
+                                <a href="#" 
+                                onClick={()=>myCon.chgPgName(props.cat)}>
                                     {selData.tit[0][0]}
                                     <br />
                                     {selData.tit[0][1]}
                                 </a>
                             </h2>
                             <h2 className="tw">
-                                <a href="#" onClick={()=>myCon.chgPgName(props.cat)}>
+                                <a href="#" 
+                                onClick={()=>myCon.chgPgName(props.cat)}>
                                     {selData.tit[1][0]}
                                     <br />
                                     {selData.tit[1][1]}

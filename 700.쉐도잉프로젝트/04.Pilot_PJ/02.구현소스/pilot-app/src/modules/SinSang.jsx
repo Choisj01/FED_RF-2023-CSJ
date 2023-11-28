@@ -125,8 +125,9 @@ export function SinSang(props) {
           <button>전체리스트</button>
         </h2>
         <div className="flowbx" 
-        onMouseOver={()=>callSts=0} 
-        onMouseOut={()=>{callSts=1;flowList($('.flist'));}}>
+        onMouseEnter={()=>callSts=0} 
+        onMouseLeave={()=>{
+          callSts=1;flowList($('.flist'));}}>
           <ul className="flist">{makeList()}</ul>
         </div>
       </>

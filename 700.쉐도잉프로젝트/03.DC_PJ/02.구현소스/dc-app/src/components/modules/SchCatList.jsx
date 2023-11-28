@@ -7,7 +7,6 @@ import { catListData } from "../data/swiper_cat";
 
 // 캐릭터 검색 리스트 CSS
 import '../../css/search_cat_list.css';
-import { text } from "@fortawesome/fontawesome-svg-core";
 
 export function SchCatList({word,chgCntFn}) {
     // props.word - 데이터 선택값
@@ -18,7 +17,7 @@ export function SchCatList({word,chgCntFn}) {
     let kword = word.toLowerCase();
 
     // 선택데이터
-    const selData = catListData.filter(v=>{
+    const selData = catListData.filter((v)=>{
         if(v.cname.toLowerCase().indexOf(kword) !== -1) return true;
     });
 

@@ -138,9 +138,9 @@ export function Searching(props) {
     } /////// if //////////
   }; ////////// enterKey 함수 ///////////////
 
-  ///////////////////////////////
+  /////////////////////////////
   // 체크박스검색 함수 ////////
-  ///////////////////////////////
+  ///////////////////////////
   const chkSearch = (e) => { 
     // 1. 체크박스 아이디 : 검색항목의 값(alignment)
      const cid = e.target.id;
@@ -165,7 +165,7 @@ export function Searching(props) {
      // 5. 체크박스 체크유무에 따른 분기
      // (1) 체크박스가 true일때 해당 검색어로 검색하기
      if(chked){
-      // 현재 데이터 변수에 담기
+      // 현재 데이터 변수에 담기 (수정 예정~~!!)
       const nowList = catListData.filter(v=>{
         if(v.alignment==cid) return true;
       }); ////// filter ///////
@@ -174,15 +174,46 @@ export function Searching(props) {
       if(num>1){ // 스프레드 연산자(...) 사용!
         lastList= [...temp,...nowList];
       } /////// if ////////
-      else{
+      else{ // 체크박스 하나일때
         lastList = nowList;
-      }
+      } ///// else ///////
 
      } ////////// if ///////////
+      // (2) 체크박스가 false일때 데이터 지우기!
+      else{
+        console.log('지울데이터:',cid);
+        // for문을 돌면서 배열데이터 중 해당값을 지운다!
+        for(let i=0;i<temp.length;i++){
+          // -> 삭제대상:  
+          // 데이터 중 alignment 항목값이 아이디명과 같은것
+          if(temp[i].alignment==cid){
+            // 해당 항목 지우기
+            // 배열지우기 메서드 : splice(순번,개수)
+            temp.splice(i,1);
+            // 주의! 배열을 지우면 전체개수가 1씩 줄어든다!
+            // 반드시 줄임처리할 것!
+            i--;
+
+            // 참고테스트 :배열삭젝 delete는 무엇인가?
+            // delete 배열지우기는 값만 지우고 주소는 남는다!(자리는 있고 값만 지움!)
+            // 지운 후 값은 undefined로 남아진다!
+            // delete temp[i];
+            // -> 리스트 처리시 에러발생함!
+            //여기서는 splice를 반드시 사용할 것!
+
+          } /////////// if////////
+        } //////////// for ///////////
+
+        console.log('삭제처리된 배열:',temp);
+
+        // 결과처리하기 : 삭제처리된 temp를 결과에 넣기!
+        lastList = temp;
+
+      } /////////// else //////////
 
     //  6. 검색결과 리스트 업데이트 하기
-    setSelData([temp,2]);
-    setCnt(temp.length); 
+    setSelData([lastList,2]);
+    setCnt(lastList.length); 
 
   }; ////////// chkSearch 함수 //////////
 

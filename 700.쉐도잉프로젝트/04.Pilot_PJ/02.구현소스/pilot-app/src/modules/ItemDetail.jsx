@@ -1,6 +1,7 @@
 // 상품상세보기 컴포넌트
 
 // 신상품 데이터 가져오기
+import { useEffect } from "react";
 import { sinsangData } from "../data/sinsang";
 
 import $ from "jquery";
@@ -18,8 +19,48 @@ export function ItemDetail({ cat, goods }) {
     // 닫기 함수 ////
     const closeBox = (e) => {
         e.preventDefault();
-        $(".cbtn").slideUp(400);
+        $(".bgbx").slideUp(400);
     };
+
+    // 랜더링 후 실행구역////////////
+    useEffect(() => {
+        // 숫자 출력 input
+        const sum = $("#sum");
+        // 수량 증감 이미지 버튼
+        const numBtn = $(".chg_num img");
+
+        // 수량 증감 함수 /////////////
+        numBtn.click((e) => {
+            // 이미지순번
+            let seq = $(e.currentTarget).index();
+            // 기존값 읽기
+            let num = Number(sum.val());
+            // 윗버튼은 ++ , 아래버튼은 --
+            seq ? num-- : num++;
+            // 한계값
+            if (num < 1) num = 1;
+            console.log("순번:", seq, num);
+            // 증감 반영
+            sum.val(num);
+            // 총합계 반영
+            // 기본값: selData[2]
+            // 출력박스 : #total
+            $("#total").text(addComa(selData[2] * num)+'원');
+        });
+    }, []); ////////// useEffect(한번만 실행) ///////////
+    
+    // 리랜더링 실행구역 ////////
+    useEffect(() => {
+        // 수량 초기화
+        $("#sum").val("1");
+        //총합계 초기화
+        $("#total").text(addComa(selData[2] * num)+'원');
+    }); ///////// useEffect (리랜더링 실행) ///////////////
+
+    //정규식함수(숫자 세자리마다 콤마해주는 기능)
+    function addComa(x) {
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
 
     // 리턴코드 ///////////////////////////
     return (
@@ -58,7 +99,7 @@ export function ItemDetail({ cat, goods }) {
                                 </li>
                                 <li>
                                     <span>판매가</span>
-                                    <span id="gprice">{selData[2]}</span>
+                                    <span id="gprice">{addComa(selData[2])}원</span>
                                 </li>
                                 <li>
                                     <span>적립금</span>
@@ -97,7 +138,7 @@ export function ItemDetail({ cat, goods }) {
                                     <span>권장계절</span> <span>여름</span>
                                 </li>
                                 <li className="tot">
-                                    <span>총합계</span> <span id="total">13,000</span>
+                                    <span>총합계</span> <span id="total">{addComa(selData[2])}원</span>
                                 </li>
                             </ol>
                         </div>

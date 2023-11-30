@@ -9,6 +9,8 @@ import $ from 'jquery';
 
 export function SinSang(props) {
     // props.cat - 카테고리 분류명
+    // props.chgItemFn - 선택상품정보 변경 부모함수
+
 
     // 선택데이터 : 해당 카테고리 상품데이터만 가져온다!
     const selData = sinsangData[props.cat];
@@ -26,7 +28,7 @@ export function SinSang(props) {
           onMouseEnter={showInfo}
           onMouseLeave={removeInfo}
           >
-            <a href="#">
+            <a href="#" onClick={()=>props.chgItemFn('m'+(x+1))}>
               <img
                 src={"./images/goods/" + props.cat + "/m" + (x + 1) + ".png"}
                 alt="신상품"
@@ -112,8 +114,8 @@ export function SinSang(props) {
       // 대상선정: .flist
 
 
-      // 신상일스트 이동함수 호출!
-      flowList($('.flist'))
+      // 신상리스트 이동함수 호출!
+      flowList($('.flist'));
 
     }); //////// useEffect ////////////
   

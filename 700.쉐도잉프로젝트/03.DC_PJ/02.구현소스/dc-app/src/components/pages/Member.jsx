@@ -7,6 +7,9 @@ import "../../css/member.css";
 import { useState } from "react";
 import { faL } from "@fortawesome/free-solid-svg-icons";
 
+// 로컬스토리지 생성 JS
+import { clearData, initData } from "../func/mem_fn";
+
 export function Member() {
     // [ 회원가입 페이지 요구사항 ]////////////////////////////////
     //-> 각 입력 항목별로 유효성검사 실행함
@@ -79,9 +82,40 @@ export function Member() {
         // (false이면 에러상태값 true)
         if (valid.test(e.target.value)) {
             // 1. 사용중 아이디인지 검사 (로컬쓰 셋팅 후 추가)
+             // 로컬스토리지 체크함수 호출(없으면 생성함!)
+             initData();
 
-            // 2. 결과 반영하기
-            setUserIdError(false);
+             // 1. 로컬스 변수 할당
+             let memData = localStorage.getItem("mem-data");
+ 
+             // 2. 로컬쓰 객체변환
+             memData = JSON.parse(memData);
+
+             //3. 기존 아이디가 있으면 상태값 false로 업데이트
+             let isOK = true;
+             
+             //4. 검사 돌리기ㅣ
+             memData.forEach(v=>{
+                // 기존아이디와 같은 경우 
+                if(v.uid===e.target.value){
+                    // 메시지 변경
+                    setIdMsg(msgId[1]);
+                    // 아이디 에러상태값 업데이트
+                    setUserIdError(true);
+                    // 존재여부 업데이트
+                    isOK = false;
+                } ////// if //////
+                
+             }); ///////// forEach ///////////
+
+             //5. 기존아이디 없으면 들어감
+             if(isOK){
+                // 메시지 변경
+                setIdMsg(msgId[0]);
+                // 아이디 에러상태값 업데이트
+                setUserIdError(false);
+             } ////// if /////////
+
         } ///////////// if문 ////////////
         else {
             setUserIdError(true);
@@ -120,17 +154,18 @@ export function Member() {
     // 4. 사용자이름 유효성 검사////////////
     const changeUserName = (e) => {
         // 1. 빈값체크
-        if (e.target.value!=='') setUserNameError(false);
+        if (e.target.value !== "") setUserNameError(false);
         else setUserNameError(true);
 
         // 2. 기존 입력값 반영하기
         setUserName(e.target.value);
     }; ////////// changeUserName함수 //////////
 
-      // 5. 이메일 유효성 검사 /////////////
-      const changeEmail = (e) => {
+    // 5. 이메일 유효성 검사 /////////////
+    const changeEmail = (e) => {
         // 1. 비밀번호 유효성 검사식(따옴표로 싸지 말것!)
-        const valid = /^(([^<>()\[\].,;:\s@"]+(\.[^<>()\[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
+        const valid =
+            /^(([^<>()\[\].,;:\s@"]+(\.[^<>()\[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
 
         // 2. 입력값 확인 : e.target -> 이벤트가 발생한 요소
         // console.log(e.target.value);
@@ -145,27 +180,73 @@ export function Member() {
 
     // [ 전체 유효성 검사 체크 함수 ] /////////
     const totalValid = () => {
-        // 1. 모든 입력창 검사 (상태변수 검사) -> 입력전 상태는 false
-        //-> 빈값일 경우 에러처리함!
-        if(!userId) setUserIdError(true);
-        if(!pwd) setPwdError(true);
-        if(!chkPwd) setChkPwdError(true);
-        if(!userName) setUserNameError(true);
-        if(!email) setEmailError(true);
+        // 1. 모든 상태변수에 빈값일떄 에러상태값 업데이트!
+        if (!userId) setUserIdError(true);
+        if (!pwd) setPwdError(true);
+        if (!chkPwd) setChkPwdError(true);
+        if (!userName) setUserNameError(true);
+        if (!email) setEmailError(true);
 
-
+        // 2. 통과시 true, 불통과시 false 리턴처리
+        // 통과조건 : 빈값아님 + 에러후크변수가 모두 false
+        if (
+            userId && // &&(앤드 조건) true
+            pwd &&
+            chkPwd &&
+            userName &&
+            email &&
+            !userIdError &&
+            !pwdError &&
+            !chkPwdError &&
+            !userNameError &&
+            !emailError
+        )
+            return true;
+        // 하나라도 false이면 false를 리턴함!
+        else return false;
     }; ////////// totalValid 함수 //////
 
-
     // [ 서브밋 기능함수 ]///////////
-    const onSubmit = e => {
+    const onSubmit = (e) => {
         // 1. 서브밋 기본이동 막기
         e.preventDefault();
         // 2. 유효성 검사 전체통과시
-        if(totalValid){}
+        if (totalValid()) {
+            // alert('OK!');
+            // 회원가입 정보를 로컬스토리지에 저장하기!
+
+            // 로컬스토리지 체크함수 호출(없으면 생성함!)
+            initData();
+
+            // 1. 로컬스 변수 할당
+            let memData = localStorage.getItem("mem-data");
+
+            // 2. 로컬쓰 객체변환
+            memData = JSON.parse(memData);
+
+            // 3. 새로운 데이터 구성하기
+            let newData = {
+                idx: memData.length + 1,
+                uid: userId,
+                pwd: pwd,
+                unm: userName,
+                eml: email,
+            };
+
+            // 4. 데이터 추가하기 : 배열에 데이터 추가 push
+            memData.push(newData);
+
+            // 5. 로컬쓰에 반영하기
+            localStorage.setItem("mem-data", JSON.stringify(memData));
+
+            //6. 로그인 페이지로 이동(라우터 이동) - 보류!
+            document.querySelector(".sbtn").innerText = "넌 이제 회원인거야~~!";
+        } /////// if문 ////////
+        // 3. 불통과시
+        else {
+            alert("Chang your input!");
+        }
     }; ///////// onSubmit 함수 ///////////
-
-
 
     // 리턴 코드 //////////////////////////////////////////////
     return (
@@ -275,12 +356,12 @@ export function Member() {
                         <li>
                             {/* 4. 이름 */}
                             <label> User Name : </label>
-                            <input 
-                            type="text" 
-                            maxLength={20} 
-                            placeholder="Please enter your Name"
-                            value={userName}
-                            onChange={changeUserName}
+                            <input
+                                type="text"
+                                maxLength={20}
+                                placeholder="Please enter your Name"
+                                value={userName}
+                                onChange={changeUserName}
                             />
                             {
                                 //에러시 메시지 출력
@@ -298,17 +379,17 @@ export function Member() {
                                 )
                             }
                         </li>
-                        
+
                         <li>
                             {/* 5. 이메일 */}
                             <label> Email : </label>
-                            <input 
-                            type="text" 
-                            maxLength={50} 
-                            placeholder="Please enter your Email" 
-                            value={email}
-                            onChange={changeEmail}
-                            /> 
+                            <input
+                                type="text"
+                                maxLength={50}
+                                placeholder="Please enter your Email"
+                                value={email}
+                                onChange={changeEmail}
+                            />
                             {
                                 //에러시 메시지 출력
                                 emailError && (
@@ -325,10 +406,12 @@ export function Member() {
                                 )
                             }
                         </li>
-                       
+
                         <li style={{ overflow: "hidden" }}>
                             {/* 6. 버튼 */}
-                            <button className="sbtn" onClick={onSubmit}>Submit</button>
+                            <button className="sbtn" onClick={onSubmit}>
+                                Submit
+                            </button>
                         </li>
                         <li>
                             {/* 7. 로그인 페이지 링크 */}

@@ -17,9 +17,6 @@ export function ItemDetail({ cat, goods }) {
 
     // 카트에 담기 버튼 클릭시 호출함수/////////////
     const useCart = () => {
-        console.log("카트쓸꼬얌~~~!",selData);
-
-
         // 1. 선택된 상품을 로컬스토리지에 담기!
         // 데이터 구성 : 
         /* 
@@ -34,6 +31,8 @@ export function ItemDetail({ cat, goods }) {
         */
        // 1-1. num 항목 추가하기 : 값은 #sum의 vlaue값
        selData.num = $('#sum').val();
+
+       console.log("카트쓸꼬얌~~~!",selData);
 
        // 1-2. 로컬스에 문자형변환하여 담는다
        // (1)기존 카트로컬스가 없는 경우

@@ -5,6 +5,8 @@ import '../css/cartlist.css';
 
 export function CartList(){
 
+    console.log(localStorage.getItem('cart'));
+
     return(
         <>
             <section id="cartlist">
@@ -91,9 +93,8 @@ export function CartList(){
                         </td>
                     </tr>
 
-                
                     <tr>
-                        <td colspan="6">
+                        <td colSpan="6">
                             총합계 : 
                         </td>
                         <td>

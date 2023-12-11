@@ -37,7 +37,7 @@ export function SwiperVid(props) {
   const showVid = (src,tit) => {
     // src - 비디오 경로 / tit - 비디오제목
     console.log(src,tit);
-    // 1. 대상선정
+    // 1. 
     // 1-1. 아이프레임 : .play-vid iframe
     const ifr =$('.play-vid iframe');
     // 1-2.전체 박스:.vid-bx
@@ -99,7 +99,7 @@ export function SwiperVid(props) {
                 onClick={()=>showVid(v.vsrc,v.tit)}>
                   {/* 동영상 이미지 박스 */}
                   <div className="vid-img">
-                    <img src={v.isrc} alt={v.tit} />
+                    <img src={process.env.PUBLIC_URL+v.isrc} alt={v.tit} />
                     {/* 폰트어썸 아이콘 */}
                     <FontAwesomeIcon
                       icon={faCirclePlay}

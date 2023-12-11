@@ -1,7 +1,11 @@
 // Pilot PJ 장바구니 리스트 컴포넌트
 
 // 장바구니 리스트 CSS 불러오기
+import { useEffect } from "react";
 import "../css/cartlist.css";
+
+//제이쿼리
+import $ from "jquery";
 
 export function CartList() {
     // 선택 데이터 : 로컬스토리지 데이터를 객체변환!
@@ -9,11 +13,26 @@ export function CartList() {
 
     console.log(localStorage.getItem("cart"));
 
+    //데이터 개수
+    const cntData = selData.length;
+
+     console.log(selData,cntData+'개');
+
     //정규식함수(숫자 세자리마다 콤마해주는 기능)
     function addComma(x) {
         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
 
+    useEffect(() => {
+        //카트버튼 나타나기
+        $("#mycart").fadeIn(300, function () {
+            $(this).addClass('on');
+        }); ///// fade in ////////
+
+        console.log("나야나");
+    }, []); ///////// useEffect //////////////
+
+    //리턴코드 ///////////////////////////////////////////////////////////
     return (
         <>
             <section id="cartlist">
@@ -35,32 +54,31 @@ export function CartList() {
                             <th>합계</th>
                             <th>삭제</th>
                         </tr>
-                    {selData.map((v,i)=>(
-                        <tr key={i}>
-                            {/* 상품이미지 */}
-                            <td>
-                                <img src={"images/goods/"+v.cat+"/"+v.ginfo[0]+".png"} 
-                                alt="item" />
-                            </td>
-                            {/* 리스트 순번 */}
-                            <td>1</td>
-                            {/* 상품명 */}
-                            <td>{v.ginfo[1]}</td>
-                            {/* 상품코드 */}
-                            <td>{v.ginfo[2]}</td>
-                            {/* 상품가격 */}
-                            <td>{addComma(v.ginfo[3])}원</td>
-                            {/* 상품수량 */}
-                            <td>{v.num}</td>
-                            {/* 상품가격 총합계 */}
-                            <td>{addComma(v.ginfo[3]*v.num)}원</td>
-                            <td>
-                                <button className="cfn" data-idx={v.idx}>
-                                    ×
-                                </button>
-                            </td>
-                        </tr>
-                    ))}
+                        {selData.map((v, i) => (
+                            <tr key={i}>
+                                {/* 상품이미지 */}
+                                <td>
+                                    <img src={"images/goods/" + v.cat + "/" + v.ginfo[0] + ".png"} alt="item" />
+                                </td>
+                                {/* 리스트 순번 */}
+                                <td>1</td>
+                                {/* 상품명 */}
+                                <td>{v.ginfo[1]}</td>
+                                {/* 상품코드 */}
+                                <td>{v.ginfo[2]}</td>
+                                {/* 상품가격 */}
+                                <td>{addComma(v.ginfo[3])}원</td>
+                                {/* 상품수량 */}
+                                <td>{v.num}</td>
+                                {/* 상품가격 총합계 */}
+                                <td>{addComma(v.ginfo[3] * v.num)}원</td>
+                                <td>
+                                    <button className="cfn" data-idx={v.idx}>
+                                        ×
+                                    </button>
+                                </td>
+                            </tr>
+                        ))}
 
                         <tr>
                             <td colSpan="6">총합계 :</td>
@@ -70,6 +88,14 @@ export function CartList() {
                     </tbody>
                 </table>
             </section>
+            {/* 카트버튼 이미지 박스 */}
+            <div className="" id="mycart">
+                {/* 카트이미지 */}
+                <img src="./images/mycart.gif" title="개의 상품이 있습니다!" />
+                {/* 카트 상품개수 출력 박스 */}
+                <div className="cntBx">{cntData}</div>
+
+            </div>
         </>
     );
 } /////////////////CartList 컴포넌트 ////////////////////////

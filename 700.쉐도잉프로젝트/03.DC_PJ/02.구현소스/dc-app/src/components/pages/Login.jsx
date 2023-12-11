@@ -159,7 +159,7 @@ export function Login() {
   return (
     <div className="outbx">
       {/* 모듈코드 */}
-      <section className="membx" style={{ minHeight: "300px" }}>
+      <section className="membx" style={{ minHeight: "350px" }}>
         <h2>LOG IN</h2>
         <form method="post" action="process.php">
           <ul>

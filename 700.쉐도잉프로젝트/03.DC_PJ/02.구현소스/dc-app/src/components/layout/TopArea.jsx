@@ -1,7 +1,4 @@
 // 상단영역 컴포넌트
-
-import { memo, useState } from "react";
-
 // GNB 데이터
 import { Link, useNavigate } from "react-router-dom";
 import { Logo } from "../modules/Logo";
@@ -10,13 +7,13 @@ import { menu } from "../data/gnb";
 // 컨텍스트 API
 import { dcCon } from "../modules/dcContext";
 
-//제이쿼리
-import $ from "jquery";
+// 제이쿼리
+import $ from 'jquery';
 
-// 리액트 폰트어썸 불러오기
+// 폰트어썸 불러오기
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useContext } from "react";
+import { memo, useContext, useState } from "react";
 
 /******************************************************* 
   [ 리액트 라우터와 연결하여 사용되는 라우터 컴포넌트 ]

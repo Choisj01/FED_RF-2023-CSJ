@@ -1,6 +1,6 @@
 // 상단영역 컴포넌트
 
-import { memo } from "react";
+import { memo, useState } from "react";
 
 // GNB 데이터
 import { Link, useNavigate } from "react-router-dom";
@@ -11,7 +11,7 @@ import { menu } from "../data/gnb";
 import { dcCon } from "../modules/dcContext";
 
 //제이쿼리
-import $ from 'jquery';
+import $ from "jquery";
 
 // 리액트 폰트어썸 불러오기
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
@@ -31,7 +31,7 @@ import { useContext } from "react";
 // 메모이제이션 적용하기! //////
 //  -> 그러나 ....단순히 적용하면 효과가 없음!
 // 이유는? 컨텍스트 API가 전역적인 함수/변수를 전달하고 있어서
-// 매번 새롭게 리랜더링되므로 인해 메모이제이션 갱신을 
+// 매번 새롭게 리랜더링되므로 인해 메모이제이션 갱신을
 // 하게끔 하기에 효과가 없는것!(->콘솔에 확인시 상단영역이양이 페이지 바꿀때마다 뜸)
 // ->>>>>>>>> 방법은? 컨텍스트API를 사용하지 말고
 // props로 전달하는 방식으로 전환하면 효과를 볼 수 있다!(->상단영역 한번만 랜더링됨)
@@ -40,55 +40,57 @@ import { useContext } from "react";
 // ->  전달되는 함수가 반드시 useCallback() 처리가 되어야 한다!!!
 
 // export function TopArea() {
-export const TopArea = memo(({chgPageFn})=>{
-
-    // 보통 props 등 전달변수만 쓰면 하위속성명으로 
-    // 값을 전달하지만 중괄호{}를 사용하면 속성명을 
+export const TopArea = memo(({ chgPageFn }) => {
+    // 보통 props 등 전달변수만 쓰면 하위속성명으로
+    // 값을 전달하지만 중괄호{}를 사용하면 속성명을
     // 직접사용할 수 있다!
 
     // 컴포넌트 호출확인
-    console.log('상단영역이양');
+    console.log("상단영역이양");
+
+    //************ Hook 상태관리 변수 ****************** */
+    // 1. 로그인 상태 체크 변수 : 로컬스 'minfo' 초기할당!
+    const [logSts, setLogSts] = useState(localStorage.getItem("minfo"));
 
     // 컨텍스트 API 사용
     // const myCon = useContext(dcCon);
 
-  // 검색관련 함수들 //////////////////
-  // 1. 검색창 보이기 함수
-  const showSearch = (e) => {
-    // 0. a요소 기본기능 막기(리랜더링도 막는다!)
-    e.preventDefault();
-    // 1.검색창 보이기
-    $('.searchingGnb').show();
-    // 2. 포커스 주기
-    $('#schinGnb').focus();
+    // 검색관련 함수들 //////////////////
+    // 1. 검색창 보이기 함수
+    const showSearch = (e) => {
+        // 0. a요소 기본기능 막기(리랜더링도 막는다!)
+        e.preventDefault();
+        // 1.검색창 보이기
+        $(".searchingGnb").show();
+        // 2. 포커스 주기
+        $("#schinGnb").focus();
+    }; ///////////showSearch 함수////////////
 
-  }; ///////////showSearch 함수////////////
+    // 2. 입력창에 엔터키를 누르면 검색함수 호출
+    const enterKey = (e) => {
+        // console.log(e.target);
+        // 엔터키는 "Enter"문자열을 리턴함!
+        if (e.key === "Enter") {
+            // 입력창의 입력값 읽어오기 : val() 사용! - 제이쿼리 메서드 / trim - 앞뒤 공백제거 메서드
+            let txt = $(e.target).val().trim();
+            console.log(txt);
+            // 빈값이 아니면 검색함수 호출(검색어 전달!)
+            if (txt != "") {
+                // 입력창 비우기 + 부모박스 닫기
+                $(e.target).val("").parent().hide();
+                // 검색 보내기
+                goSearch(txt);
+            } ///////// if /////////
+        } /////////// if /////////////
+    }; //////// enterKey 함수 ///////////
 
-  // 2. 입력창에 엔터키를 누르면 검색함수 호출
-  const enterKey = e => {
-    // console.log(e.target);
-    // 엔터키는 "Enter"문자열을 리턴함!
-    if(e.key === 'Enter') {
-        // 입력창의 입력값 읽어오기 : val() 사용! - 제이쿼리 메서드 / trim - 앞뒤 공백제거 메서드
-        let txt = $(e.target).val().trim();
-        console.log(txt);
-        // 빈값이 아니면 검색함수 호출(검색어 전달!)
-        if(txt!='') {
-            // 입력창 비우기 + 부모박스 닫기
-            $(e.target).val('').parent().hide();
-            // 검색 보내기
-            goSearch(txt);
-        } ///////// if /////////
-    } /////////// if /////////////
-  }; //////// enterKey 함수 ///////////
-
-  // 3. 검색페이지로 검색어와 함께 이동하기
-  const goSearch = (txt) => { //txt- 검색어
-    console.log('나는 검색하러 간다규!!!');
-    // 라우터 이동함수로 이동하기 : 컨텍스트 API 사용
-    chgPageFn('/schpage',{state:{keyword:txt}})
-
-  }; //////// goSearch 함수 ///////////
+    // 3. 검색페이지로 검색어와 함께 이동하기
+    const goSearch = (txt) => {
+        //txt- 검색어
+        console.log("나는 검색하러 간다규!!!");
+        // 라우터 이동함수로 이동하기 : 컨텍스트 API 사용
+        chgPageFn("/schpage", { state: { keyword: txt } });
+    }; //////// goSearch 함수 ///////////
 
     // 리턴코드 /////////////////////////////////////
     return (
@@ -108,12 +110,8 @@ export const TopArea = memo(({chgPageFn})=>{
                                 {
                                     // 하위메뉴가 있으면 일반a요소에 출력
                                     // 없으면 Link 라우팅 출력
-                                    v.sub ? (
-                                        <a href="#">{v.txt}</a>
-                                      ) : (
-                                        <Link to={v.link}>{v.txt}</Link>
-                                      )
-                                    }
+                                    v.sub ? <a href="#">{v.txt}</a> : <Link to={v.link}>{v.txt}</Link>
+                                }
                                 {
                                     // 서브메뉴 데이터가 있으면 하위 그리기
                                     v.sub && (
@@ -135,29 +133,36 @@ export const TopArea = memo(({chgPageFn})=>{
                             {/* 검색입력박스 */}
                             <div className="searchingGnb">
                                 {/* 검색버튼 돋보기 아이콘 */}
-                                <FontAwesomeIcon 
-                                icon={faSearch} 
-                                className="scbtnGnb" 
-                                title="Open search" />
+                                <FontAwesomeIcon icon={faSearch} className="scbtnGnb" title="Open search" />
                                 {/* 입력창 */}
-                                <input 
-                                id="schinGnb" 
-                                type="text" 
-                                placeholder="Filter by keyword"
-                                onKeyUp={enterKey} />
+                                <input id="schinGnb" type="text" placeholder="Filter by keyword" onKeyUp={enterKey} />
                             </div>
                             {/* 검색기능 링크 - 클릭시 검색창보이기 */}
                             <a href="#" onClick={showSearch}>
                                 <FontAwesomeIcon icon={faSearch} />
                             </a>
                         </li>
-                        {/* 회원가입,로그인은 로그인 아닌 상태일때 나옴 */}
-                        <li>
-                            <Link to="/member">JOIN US</Link>
-                        </li>
-                        <li>
-                            <Link to="/login">LOGIN</Link>
-                        </li>
+                        {
+                            /* 회원가입,로그인은 로그인 아닌 상태일때 나옴 */
+                            logSts === null && 
+                                <>
+                                    <li>
+                                        <Link to="/member">JOIN US</Link>
+                                    </li>
+                                    <li>
+                                        <Link to="/login">LOGIN</Link>
+                                    </li>
+                                </>
+                        }
+                        {
+                            /* 로그인 상태일때 로그아웃 버튼만 보임 */
+                            logSts !== null &&
+                                <>
+                                    <li>
+                                        <a href="#">LOG OUT</a>
+                                    </li>
+                                </>
+                        }
                     </ul>
                     {/* 모바일용 햄버거 버튼 */}
                     <button className="hambtn"></button>

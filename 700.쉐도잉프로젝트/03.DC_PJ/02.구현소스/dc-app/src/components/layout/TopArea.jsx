@@ -40,17 +40,13 @@ import { useContext } from "react";
 // ->  전달되는 함수가 반드시 useCallback() 처리가 되어야 한다!!!
 
 // export function TopArea() {
-export const TopArea = memo(({ chgPageFn }) => {
+export const TopArea = memo(({chgPageFn,logSts,logMsg,logOut}) => {
     // 보통 props 등 전달변수만 쓰면 하위속성명으로
     // 값을 전달하지만 중괄호{}를 사용하면 속성명을
     // 직접사용할 수 있다!
 
     // 컴포넌트 호출확인
     console.log("상단영역이양");
-
-    //************ Hook 상태관리 변수 ****************** */
-    // 1. 로그인 상태 체크 변수 : 로컬스 'minfo' 초기할당!
-    const [logSts, setLogSts] = useState(localStorage.getItem("minfo"));
 
     // 컨텍스트 API 사용
     // const myCon = useContext(dcCon);
@@ -97,6 +93,8 @@ export const TopArea = memo(({ chgPageFn }) => {
         <>
             {/* 1.상단영역 */}
             <header className="top-area">
+                {/* 로그인 환영 메시지박스 */}
+                <div className="logmsg">{logMsg}</div>
                 {/* 네비게이션 GNB파트 */}
                 <nav className="gnb">
                     <ul>
@@ -159,7 +157,7 @@ export const TopArea = memo(({ chgPageFn }) => {
                             logSts !== null &&
                                 <>
                                     <li>
-                                        <a href="#">LOG OUT</a>
+                                        <a href="#" onClick={logOut}>LOG OUT</a>
                                     </li>
                                 </>
                         }

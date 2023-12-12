@@ -96,7 +96,7 @@ export function Login() {
 
         // 4-2. 유효성검사 전체 통과시 ////
         if (totalValid()) {
-            console.log("통과!");
+            //console.log("통과!");
             // DB역할의 로컬스에 데이터를 비교한다!
 
             // 만약 로컬스에 'mem-data'가 없으면
@@ -108,7 +108,7 @@ export function Login() {
 
             // 로컬스 데이터 객체화하기
             memData = JSON.parse(memData);
-            console.log(memData);
+            //console.log(memData);
 
             // 같은 아이디 검사 상태변수
             // -> true면 아이디불일치할 경우
@@ -123,19 +123,19 @@ export function Login() {
                 if (v["uid"] === userId) return true;
             }); /////// find ////////
 
-            console.log("find결과:", findD);
+            //console.log("find결과:", findD);
 
             // 만약 검색결과가 있으면 true처리됨!
             // 결과가 리턴이 없는 경우 undefined이므로 false!
             if (findD) {
                 // 같은 아이디가 있는 경우 /////
-                console.log("아이디같아요~!");
+                //console.log("아이디같아요~!");
                 // 아이디에러 상태 업데이트
                 setUserIdError(false);
 
                 // 비밀번호가 일치하는가? -> 로그인 최종성공
                 if (findD["pwd"] === pwd) {
-                    console.log("비번이 같아요~!");
+                    //console.log("비번이 같아요~!");
                     // 비번에러 상태값 업데이트
                     setPwdError(false);
 
@@ -162,7 +162,7 @@ export function Login() {
                 } ///// if ////
                 else {
                     /// 비번 불일치!
-                    console.log("비번달라요~!");
+                    //console.log("비번달라요~!");
                     // 비번 다를때 메시지
                     setPwdMsg(msgPwd[1]);
                     // 비번에러 상태 업데이트
@@ -171,7 +171,7 @@ export function Login() {
             } //////// if /////////
             else {
                 // 같은 아이디가 없는 경우 ///////
-                console.log("아이디 달라요~!");
+                //console.log("아이디 달라요~!");
                 // 아이디가 다를때 메시지 보이기
                 setIdMsg(msgId[1]);
                 // 아이디 에러 상태 업데이트
@@ -217,9 +217,9 @@ export function Login() {
             // } //////// if ///////////
         } ///// if ///////
         // 4-3. 유효성검사 불통과시 /////
-        else {
-            console.log("실패!");
-        } ////// else ///////
+        // else {
+        //     console.log("실패!");
+        // } ////// else ///////
     }; //////////// onSubmit 함수 ///////////
 
     // 리턴코드 ///////////////////////////

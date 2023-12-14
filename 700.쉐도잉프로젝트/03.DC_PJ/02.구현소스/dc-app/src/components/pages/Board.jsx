@@ -28,7 +28,7 @@ export function Board() {
     // 1. 페이지 단위 수 : 한 페이지당 레코드 수
     const pgBlock = 7;
     // 2. 전체 레코드 수 : 배열데이터 총 개수
-    const totNum = baseData.length;
+    const totNum = orgData.length;
     console.log("페이지 단위수:", pgBlock, "\n전체 레코드수:", totNum);
 
     // [ 상태관리 변수 셋팅 ] ///////////

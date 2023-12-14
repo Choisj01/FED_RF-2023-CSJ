@@ -9,9 +9,7 @@ import baseData from "../data/board.json";
 
 // 기본 데이터 역순정렬
 baseData.sort((a, b) => {
-    return Number(a.idx) === Number(b.idx) ?
-    0 : Number(a.idx) > Number(b.idx) ?
-    -1 : 1;
+    return Number(a.idx) === Number(b.idx) ? 0 : Number(a.idx) > Number(b.idx) ? -1 : 1;
 });
 
 // 초기 데이터 셋업하기 (원본 데이터 담기)
@@ -20,6 +18,7 @@ let orgData;
 if (localStorage.getItem("bdata")) orgData = JSON.parse(localStorage.getItem("bdata"));
 // 로컬스 없으면 제이슨 데이터 넣기
 else orgData = baseData;
+// else orgData = [];
 
 // console.log(org);
 
@@ -30,16 +29,12 @@ export function Board() {
     const pgBlock = 7;
     // 2. 전체 레코드 수 : 배열데이터 총 개수
     const totNum = baseData.length;
-    console.log(
-        "페이지 단위수:", pgBlock, 
-        "\n전체 레코드수:", totNum);
+    console.log("페이지 단위수:", pgBlock, "\n전체 레코드수:", totNum);
 
-        
-        
     // [ 상태관리 변수 셋팅 ] ///////////
 
     // 1. 현재 페이지 번호 : 가장 중요한 리스트 바인딩의 핵심!
-    const [pgNum,setPgNum] = useState(1);
+    const [pgNum, setPgNum] = useState(1);
     // 1. 데이터 변경 변수 : 리스트에 표시되는 실제 데이터셋
     const [currData, setCurrData] = useState(null);
     // 2. 게시판 모드관리 변수
@@ -54,34 +49,41 @@ export function Board() {
      * 기능 : 페이지별 리스트를 생성하여 바인딩함
      ****************************************/
     const bindList = () => {
-        console.log('다시 바인딩!',pgNum);
+        console.log("다시 바인딩!", pgNum);
         // 데이터 선별하기
         const tempData = [];
-        
+
         // 시작값: (페이지번호-1)*블록단위수
-        let initNum = (pgNum-1) * pgBlock;
+        let initNum = (pgNum - 1) * pgBlock;
         // 한계값 : 블록단위수*페이지번호
         let limitNum = pgBlock * pgNum;
-        
-                // 블록단위가 7일 경우 첫 페이지는 0~7, 7~14,....
-                console.log(
-                    '시작값:',initNum,
-                    '\n한계값:',limitNum);
+
+        // 블록단위가 7일 경우 첫 페이지는 0~7, 7~14,....
+        console.log("시작값:", initNum, "\n한계값:", limitNum);
 
         // 데이터 선별용 for문 : 원본데이터(orgData)로부터 생성
         for (let i = initNum; i < limitNum; i++) {
             // 마지막 페이지 한계수 체크
-            if(i>=totNum) break; 
+            if (i >= totNum) break;
             // 코드 푸쉬
             tempData.push(orgData[i]);
         } ////// for //////
 
-        console.log('결과셋:',tempData);
+        console.log("결과셋:", tempData);
 
+        // 데이터가 없는 경우 출력 /////
+        if (tempData.length === 0) {
+            return(
+            <tr>
+                <td colSpan="5">There is no data.</td>
+            </tr>);
+        } ////// if /////
+
+        // if문에 들어가지 않으면 여기를 리턴함!
         return tempData.map((v, i) => (
             <tr key={i}>
                 {/* 1. 일련번호 */}
-                <td>{i + 1+initNum}</td>
+                <td>{i + 1 + initNum}</td>
                 {/* 2. 글 제목 */}
                 <td>
                     <a href="#" datatype={v.idx}>
@@ -118,39 +120,44 @@ export function Board() {
         // 최종 한계수 -> 여분 레코드 존재에 따라 1 더하기
         const limit = blockCnt + (blockPad === 0 ? 0 : 1);
 
-        console.log(
-            "블록개수", blockCnt, 
-            "\n블록나머지:", blockPad, 
-            "\n최종 한계수", limit);
+        console.log("블록개수", blockCnt, "\n블록나머지:", blockPad, "\n최종 한계수", limit);
 
-        // 리액트에서는 jsx문법 코드를 배열에 넣고 
+        // 리액트에서는 jsx문법 코드를 배열에 넣고
         // 출력하면 바로 코드로 변환된다!
         let pgCode = [];
         // 리턴코드 ////
         // 만약 빈태그 묶음에 key를 심어야 할 경우
         // 불가하므로 Fragment 조각 가상태그를 사용한다!
         for (let i = 0; i < limit; i++) {
-            pgCode[i] = 
-            <Fragment key={i}>
-                <a href="#" onClick={chgList}>{i+1}</a> {i<limit-1?'|':''} 
-            </Fragment>;
+            pgCode[i] = (
+                <Fragment key={i}>
+                    {pgNum - 1 === i ? (
+                        <b>{i + 1}</b>
+                    ) : (
+                        <a href="#" onClick={chgList}>
+                            {i + 1}
+                        </a>
+                    )}
+
+                    {i < limit - 1 ? "|" : ""}
+                </Fragment>
+            );
         } /////// for ////////
 
-        return (pgCode);
+        return pgCode;
     }; /////// pagingLink함수 ///////////
 
-
-     /****************************************
+    /****************************************
      * 함수명 : chgList
      * 기능 : 페이지 링크 클릭시 리스트 변경
      ****************************************/
     const chgList = (e) => {
-        let currNum = e. target.innerText;
-        console.log('번호:',currNum);
+        let currNum = e.target.innerText;
+        console.log("번호:", currNum);
         // 현재 페이지번호 업데이트! -> 리스트 업데이트됨!
         setPgNum(currNum);
-        // 바인드 리스트 호출! - 불필요!!!! 
-        // 왜?? pgNum을 bindList()에서 사용하기 떄문에 
+        // 바인드 리스트 호출! - 불필요!!!!
+        // 왜?? pgNum을 bindList()에서 사용하기 떄문에
         // 리랜더링이 자동으로 일어남!!!
     }; ////// chgList 함수 /////////
 

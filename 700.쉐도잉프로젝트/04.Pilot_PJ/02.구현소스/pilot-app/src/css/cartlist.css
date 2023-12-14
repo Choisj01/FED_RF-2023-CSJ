@@ -96,3 +96,32 @@
   opacity: 1;
   transition: .4s 3s;
 }
+
+/* 수량 증감 박스 */
+.cnt-part{
+
+}
+.cnt-part span,.cnt-part>div {
+  display: flex;
+}
+/* 입력창 */
+#item-cnt{
+  width: 20px;
+  height: 15px;
+}
+
+/* 증감 이미지 버튼 */
+.btn-cnt {
+
+}
+
+#cartlist .btn-cnt img{
+  width: 16px;
+  display: block;
+}
+/* 반영 버튼 */
+.btn-insert {
+    width: 34px;
+    white-space: nowrap;
+    padding: 0;
+}

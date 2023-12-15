@@ -12,8 +12,16 @@ export function ItemDetail({ cat, goods }) {
     // cat - 카테고리명(men/women/style)
     // goods - 상품 아이템정보(속성코드: m1,m2,...)
 
+    // 카트 사용여부 초기값은 로컬스 'cart'가 있으면 1
+    // 없으면 0으로 셋팅해준다!
+
+    let stsVal = 0;
+    if(localStorage.getItem('cart')) {
+        stsVal=1;
+        setTransData(JSON.parse(localStorage.getItem('cart')));
+    }
     // 카트사용여부 상태변수 /////////
-    const [csts, setCsts] = useState(0);
+    const [csts, setCsts] = useState(stsVal);
 
     // 자식 카트 컴포넌트와 함께 상태값 공유할 변수 
     const flag = useRef(true);
@@ -25,6 +33,8 @@ export function ItemDetail({ cat, goods }) {
     // 로컬스 변환값 변수 - 상태변수로 리랜더링시 값을 유지하게 함!
     const [transData, setTransData] = useState(null);
 
+    
+
     // 카트에 담기 버튼 클릭시 호출함수 ////
     const useCart = () => {
         // 카트 선택 아이템만 추가하기 위해 
@@ -33,8 +43,8 @@ export function ItemDetail({ cat, goods }) {
         flag.current = true;
 
         
-        // 1.선택된 상품을 로컬스토리지에 담기!
-        /* 데이터 구성:
+    // 1.선택된 상품을 로컬스토리지에 담기!
+    /* 데이터 구성:
     {
       idx: 상품유일키,
       cat: 상품분류,

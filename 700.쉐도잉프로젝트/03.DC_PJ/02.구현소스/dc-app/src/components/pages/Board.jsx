@@ -1,7 +1,7 @@
 // OPINION 의견 게시판 컴포넌트
 
 // 게시판용 CSS
-import { Fragment, useCallback, useContext, useRef, useState } from "react";
+import { Fragment, useCallback, useContext, useEffect, useRef, useState } from "react";
 import "../../css/board.css";
 
 // 컨텍스트 API 불러오기
@@ -15,6 +15,7 @@ import $ from "jquery";
 
 // 기본 데이터 제이슨 불러오기
 import baseData from "../data/board.json";
+import { faL } from "@fortawesome/free-solid-svg-icons";
 
 // 기본 데이터 역순정렬
 baseData.sort((a, b) => {
@@ -61,7 +62,25 @@ export function Board() {
     // 상태추가 : L - 글목록
     // 전체 5가지 상태값 : CRUD+L
 
-    /************************************* 
+    // 3. 버튼 공개여부 관리 변수 : 수정버튼
+    const [btnSts, setBtnSts] = useState(false);
+
+    // 리랜더링 루프에 빠지지 않도록 랜더링 후 실행구역에 
+    // 변경코드를 써준다! 단, logSts에 의존성을 설정해준다!
+    useEffect(()=>{
+      // 만약 로그아웃하면 버튼 상태값 false로 변경하기!
+      if(myCon.logSts===null) setBtnSts(false);
+      
+    },[myCon.logSts]);
+  // [ 리랜더링의 원인 중 많은 경우 랜더링 전 즉,
+  // 가상돔에 설정을 잡을 떄 발생한다! ]
+  //-> 해결책은 랜더링 후 처리구역에서 변경되는 상태변수를
+  // 의존성에 등록하여 그 변경 발생시 한번만 실행되도록 설정하는
+  // 것이다!!!
+
+
+
+  /************************************* 
     함수명 : bindList
     기능 : 페이지별 리스트를 생성하여 바인딩함
   *************************************/
@@ -109,7 +128,7 @@ export function Board() {
                     </a>
                 </td>
                 {/* 3. 글쓴이 */}
-                <td>{v.writer}</td>
+                <td>{v.unm}</td>
                 {/* 4. 쓴날짜 */}
                 <td>{v.date}</td>
                 {/* 5. 조회수 */}
@@ -185,7 +204,10 @@ export function Board() {
     // 선택된 데이터 셋팅을 위한 참조변수
     const cData = useRef(null);
 
-    /************************************* 
+    // 로그인 사용자 데이터 셋팅을 위한 참조변수
+    const logData = useRef(null);
+
+  /************************************ 
     함수명 : chgMode
     기능 : 게시판 옵션 모드를 변경함
   *************************************/
@@ -243,6 +265,10 @@ export function Board() {
 
             console.log("현재Data:", cData.current);
 
+            // 로그인 사용자와 글쓴이가 같으면 btnSts 상태값 true
+            // 상태업데이트 함수 호출!(uid를 보냄)
+            compUsr(cData.current.uid);
+
             setBdMode("R");
             // -> 아래의 방식은 스크립트로 DOM에 셋팅하는 방법
             // ->>>> 리액트는 가상돔에 데이터를 셋팅하도록 해야함!
@@ -264,18 +290,26 @@ export function Board() {
         } ///// else if /////////
         // 3-3. 쓰기 모드
         else if (modeTxt === "C") {
+
+            // 로그인한 사용자 정보 셋팅하기: 글쓰기버튼은 
+            // 로그인한 사람에게 노출되므로 아래 코드는 괜찮다!
+            logData.current = JSON.parse(myCon.logSts);
+            // 이 데이터로 가상돔 구성시 리액트 코드에 데이터 매칭함!
+            // 필요 데이터 : 로그인 사용자이름(unm), 이메일(eml)
+            // 
+
             setBdMode("C");
 
             // 1. 글쓴이와 이메일은 로그인 상태값에서 읽어와서
             // 본 읽기전용 입력창에 넣어준다!
             // 지금은 임시로 tomtom / tom@gmail.com
-            $(() => {
-                // DOM 그려진 후 실행
-                // (1) 글쓴이
-                $(".writeone .name").val("tomtom");
-                // (2) 이메일
-                $(".writeone .email").val("tom@gmail.com");
-            });
+            // $(() => {
+            //     // DOM 그려진 후 실행
+            //     // (1) 글쓴이
+            //     $(".writeone .name").val("tomtom");
+            //     // (2) 이메일
+            //     $(".writeone .email").val("tom@gmail.com");
+            // });
         } ///// else if //////
 
         // 3-4. 글쓰기 서브밋 //////////
@@ -310,27 +344,44 @@ export function Board() {
         // } ////// else if ///////
     }; //////// chgMode 함수 ///////////
 
-    // 사용자 정보 변환함수 /////////////
-    const chgUsrInfo = (usr) => {
-      // 사용자 정보조회 로컬스(mem-info)
-      // 보드 상단에서 null일 경우 생성함수 이미 호출!
-      // null은 고려하지 말고 코드작성!
-      
-      // 1. 로컬스 원본 데이터 조회
-      const info = JSON.parse(localStorage.getItem('mem-data'));
-      console.log(info);
+    // 사용자 비교함수 /////////////
+    // 원본으로부터 해당 사용자정보 조회하여
+    // 글쓴이와 로그인 사용자가 같으면 btnSts값을 true로 업데이트
+    const compUsr = (usr) => {
+        // usr - 글쓴이 아이디(uid)
+        // opt - 리턴받을 데이터종류
+        // unm - 사용자 이름 , eml - 사용자 이메일
 
-      // 2. 원본으로부터 해당 사용자정보 조회
-      const cUser = info.find(v=>{
-        if(v.uid===usr) return true;
-      })
+        // 사용자 정보조회 로컬스(mem-info)
+        // 보드 상단에서 null일 경우 생성함수 이미 호출!
+        // null은 고려하지 말고 코드작성!
 
-      console.log(cUser);
+        // 로그인 상태일 경우 조회하여
+        // 버튼 상태 업데이트 하기
+        if (myCon.logSts !== null) {
+            // 1. 로컬스 원본 데이터 조회
+            const info = JSON.parse(localStorage.getItem("mem-data"));
+            console.log(info);
 
+            // 2. 원본으로 부터 해당 사용자 정보 조회하여
+            // 글쓴이와 로그인사용자가 같으면 btnSts값을 true로 업데이트
+            const cUser = info.find((v) => {
+                if (v.uid === usr) return true;
+            });
 
+            console.log(cUser);
 
-
-    }; //////// chgUsrInfo 함수 ////////
+            // 3. 로그인사용자 정보와 조회하기
+            // 아이디로 조회함!
+            const currUsr = JSON.parse(myCon.logSts);
+            if (currUsr.uid === cUser.uid) setBtnSts(true);
+            else setBtnSts(false);
+        } /////// if ////////////
+        else {
+            // 로그인 안한 상태 ////
+            setBtnSts(false);
+        } //////// else ///////////
+    }; //////// compUsr  함수 ////////
 
     // 리턴코드 ////////////////////
     return (
@@ -375,13 +426,13 @@ export function Board() {
                             <tr>
                                 <td>Name</td>
                                 <td>
-                                    <input type="text" className="name" size="20" readOnly />
+                                    <input type="text" className="name" size="20" readOnly value={logData.current.unm}/>
                                 </td>
                             </tr>
                             <tr>
                                 <td>Email</td>
                                 <td>
-                                    <input type="text" className="email" size="40" readOnly />
+                                    <input type="text" className="email" size="40" readOnly value={logData.current.eml}/>
                                 </td>
                             </tr>
                             <tr>
@@ -409,7 +460,7 @@ export function Board() {
                             <tr>
                                 <td>Name</td>
                                 <td>
-                                    <input type="text" className="name" size="20" readOnly value={chgUsrInfo(cData.current.uid)} />
+                                    <input type="text" className="name" size="20" readOnly value={cData.current.unm} />
                                 </td>
                             </tr>
                             <tr>
@@ -517,9 +568,15 @@ export function Board() {
                                         <button onClick={chgMode}>
                                             <a href="#">List</a>
                                         </button>
-                                        <button onClick={chgMode}>
-                                            <a href="#">Modify</a>
-                                        </button>
+                                        {
+                                          /* btnSts 상태변수가 true일때 보임
+                                          -> 글쓴이===로그인사용자 일때 true변경 */
+                                            btnSts && (
+                                                <button onClick={chgMode}>
+                                                    <a href="#">Modify</a>
+                                                </button>
+                                            )
+                                        }
                                     </>
                                 )
                             }

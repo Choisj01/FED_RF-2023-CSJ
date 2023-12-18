@@ -142,7 +142,8 @@ export function Login() {
                     // ******* [ 로그인 후 셋팅작업 ]************//
                     // 1. 로그인한 회원정보를 로컬스에 셋팅!
                     // -> 서버의 세션을 대신하여 사용함!
-                    localStorage.setItem("minfo", JSON.stringify(findD));
+                    localStorage
+                    .setItem("minfo", JSON.stringify(findD));
 
                     // 2. 컨텍스트 API에 공개된 로그인 상태 업데이트하기!
                     myCon.setLogSts(localStorage.getItem('minfo'));

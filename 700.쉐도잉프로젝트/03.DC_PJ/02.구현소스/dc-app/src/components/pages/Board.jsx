@@ -15,7 +15,6 @@ import $ from "jquery";
 
 // 기본 데이터 제이슨 불러오기
 import baseData from "../data/board.json";
-import { faL } from "@fortawesome/free-solid-svg-icons";
 
 // 기본 데이터 역순정렬
 baseData.sort((a, b) => {
@@ -32,7 +31,7 @@ else orgData = baseData;
 
 // // console.log(org);
 
-// ******* Borad 컴포넌트 ******* //
+// ******* Board 컴포넌트 ******* //
 export function Board() {
     // 기본 사용자 정보 셋업 함수 호출
     initData();
@@ -65,22 +64,22 @@ export function Board() {
     // 3. 버튼 공개여부 관리 변수 : 수정버튼
     const [btnSts, setBtnSts] = useState(false);
 
-    // 리랜더링 루프에 빠지지 않도록 랜더링 후 실행구역에 
+    // 리랜더링 루프에 빠지지 않도록 랜더링 후 실행구역에
     // 변경코드를 써준다! 단, logSts에 의존성을 설정해준다!
-    useEffect(()=>{
-      // 만약 로그아웃하면 버튼 상태값 false로 변경하기!
-      if(myCon.logSts===null) setBtnSts(false);
-      
-    },[myCon.logSts]);
-  // [ 리랜더링의 원인 중 많은 경우 랜더링 전 즉,
-  // 가상돔에 설정을 잡을 떄 발생한다! ]
-  //-> 해결책은 랜더링 후 처리구역에서 변경되는 상태변수를
-  // 의존성에 등록하여 그 변경 발생시 한번만 실행되도록 설정하는
-  // 것이다!!!
+    useEffect(() => {
+        // 만약 로그아웃하면 버튼 상태값 false로 변경하기!
+        if (myCon.logSts === null) setBtnSts(false);
 
+        // 만약 글쓰기모드에서 로그아웃을 한 경우 리스트페이지 이동
+        if (myCon.logSts === null && bdMode === "C") setBdMode("L");
+    }, [myCon.logSts]);
+    // [ 리랜더링의 원인 중 많은 경우 랜더링 전 즉,
+    // 가상돔에 설정을 잡을 떄 발생한다! ]
+    //-> 해결책은 랜더링 후 처리구역에서 변경되는 상태변수를
+    // 의존성에 등록하여 그 변경 발생시 한번만 실행되도록 설정하는
+    // 것이다!!!
 
-
-  /************************************* 
+    /************************************* 
     함수명 : bindList
     기능 : 페이지별 리스트를 생성하여 바인딩함
   *************************************/
@@ -207,7 +206,7 @@ export function Board() {
     // 로그인 사용자 데이터 셋팅을 위한 참조변수
     const logData = useRef(null);
 
-  /************************************ 
+    /************************************ 
     함수명 : chgMode
     기능 : 게시판 옵션 모드를 변경함
   *************************************/
@@ -241,11 +240,6 @@ export function Board() {
             default:
                 modeTxt = "R";
         }
-
-        // 3. 모드 이동하기
-        // -> Submit은 모드변경없이 새글쓰기/글변경하기
-        // 둘 중 하나의 기능을 하므로 리스트로 보내기만 한다!
-        // if(modeTxt!=="X") setBdMode(modeTxt);
 
         console.log("버튼명:", btxt, "모드명:", modeTxt);
 
@@ -290,13 +284,11 @@ export function Board() {
         } ///// else if /////////
         // 3-3. 쓰기 모드
         else if (modeTxt === "C") {
-
-            // 로그인한 사용자 정보 셋팅하기: 글쓰기버튼은 
+            // 로그인한 사용자 정보 셋팅하기: 글쓰기버튼은
             // 로그인한 사람에게 노출되므로 아래 코드는 괜찮다!
             logData.current = JSON.parse(myCon.logSts);
             // 이 데이터로 가상돔 구성시 리액트 코드에 데이터 매칭함!
             // 필요 데이터 : 로그인 사용자이름(unm), 이메일(eml)
-            // 
 
             setBdMode("C");
 
@@ -311,17 +303,51 @@ export function Board() {
             //     $(".writeone .email").val("tom@gmail.com");
             // });
         } ///// else if //////
-
-        // 3-4. 글쓰기 서브밋 //////////
-        else if (modeTxt === "S" && bdMode === "C") {
-            console.log("글쓰기 서브밋");
-        } //// else if ///
-        // 3-5. 수정모드 //////////
-        else if (modeTxt === "ㅕ") {
-            console.log("수정모드");
-
-            // 1. 제목,내용필수입력 체크
-        } ////// else if//////
+    
+    // 3-4. 글쓰기 서브밋 /////////
+    else if (modeTxt === "S" && bdMode === "C") {
+        console.log("글쓰기 서브밋");
+  
+        // 제목,내용 입력요소
+        const subEle = $(".writeone .subject");
+        const contEle = $(".writeone .content");
+  
+        // console.log(subEle.val().trim(),contEle.val().trim());
+  
+        // 1. 제목, 내용 필수입력 체크
+        // 리랜더링 없는 DOM상태 기능구현!!
+        if (subEle.val().trim() === "" || contEle.val().trim() === "") {
+          window.alert("제목과 내용은 필수입력입니다!");
+        } /////// if /////////
+  
+        // 2. 통과시 실제 데이터 입력하기
+        else {
+          const addZero = (x) => (x < 10 ? "0" + x : x);
+          // 1. 날짜 데이터 구성
+          let today = new Date();
+          let yy = today.getFullYear();
+          let mm = today.getMonth() + 1;
+          let dd = today.getDate();
+  
+          // 2. 원본 데이터 변수할당
+          let orgTemp = orgData;
+  
+          // 3. 임시변수에 입력할 객체 데이터 생성하기
+          let temp = {
+            idx: 51,
+            tit: subEle.val().trim(),
+            cont: contEle.val().trim(),
+            att: "",
+            date: `${yy}-${addZero(mm)}-${addZero(dd)}`,
+            uid: logData.current.uid,
+            unm: logData.current.unm,
+            cnt: "0",
+          };
+  
+          console.log('입력전 준비데이터:',temp);
+        } //////// else //////////
+      } ////// else if ///////
+  
 
         // 3-5. 수정모드 /////////
         else if (modeTxt === "U") {
@@ -426,13 +452,25 @@ export function Board() {
                             <tr>
                                 <td>Name</td>
                                 <td>
-                                    <input type="text" className="name" size="20" readOnly value={logData.current.unm}/>
+                                    <input
+                                        type="text"
+                                        className="name"
+                                        size="20"
+                                        readOnly
+                                        value={logData.current.unm}
+                                    />
                                 </td>
                             </tr>
                             <tr>
                                 <td>Email</td>
                                 <td>
-                                    <input type="text" className="email" size="40" readOnly value={logData.current.eml}/>
+                                    <input
+                                        type="text"
+                                        className="email"
+                                        size="40"
+                                        readOnly
+                                        value={logData.current.eml}
+                                    />
                                 </td>
                             </tr>
                             <tr>
@@ -569,7 +607,7 @@ export function Board() {
                                             <a href="#">List</a>
                                         </button>
                                         {
-                                          /* btnSts 상태변수가 true일때 보임
+                                            /* btnSts 상태변수가 true일때 보임
                                           -> 글쓴이===로그인사용자 일때 true변경 */
                                             btnSts && (
                                                 <button onClick={chgMode}>

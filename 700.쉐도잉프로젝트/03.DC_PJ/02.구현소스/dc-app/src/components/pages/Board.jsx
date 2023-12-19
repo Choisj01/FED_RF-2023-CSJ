@@ -11,7 +11,7 @@ import { dcCon } from "../modules/dcContext";
 import { initData } from "../func/mem_fn";
 
 // 제이쿼리
-import $ from "jquery";
+import $, { escapeSelector } from "jquery";
 
 // 기본 데이터 제이슨 불러오기
 import baseData from "../data/board.json";
@@ -455,6 +455,33 @@ export function Board() {
             } //////// else //////////
 
         } ////// else if ////////
+
+       // 3-7. 삭제하기 /////////
+       else if(modeTxt === "D" && bdMode === "U"){
+
+        if(window.confirm('정말로 글을 삭제하시겠습니까?')){
+          // 1. 데이터 순회하다가 해당데이터 이면 
+          // 순번으로 splice(순번,1)사용 삭제
+          orgData.some((v,i)=>{
+            if(Number(cData.current.idx)===Number(v.idx)){
+              // 해당 데이터의 순번으로 삭제
+              orgData.splice(i,1);
+  
+              // 이코드를 만나면 여기시 순회종료!
+              return true;
+            } ///// if ////
+          }); /////// Array some /////   
+          
+          // 2. 로컬스에 반영하기
+          localStorage.setItem('bdata',
+          JSON.stringify(orgData))
+  
+          // 3. 리스트 페이지로 이동하기
+          setBdMode('L');        
+  
+        } ///// if //////
+  
+      } ////// else if ///////
 
 
     }; //////// chgMode 함수 ///////////

@@ -429,15 +429,14 @@ export function Board() {
 
             // 2. 통과시 실제 데이터 입력하기
             else {
-                
                 // 2. 원본 데이터 변수할당
                 let orgTemp = orgData;
 
                 // 3. 원본에 해당 데이터 찾아서 업데이트하기
-                orgTemp.some(v=>{
-                    if(cData.current.idx===Number(v.idx)){
+                orgTemp.some((v) => {
+                    if (cData.current.idx === Number(v.idx)) {
                         // 제목과 내용 변경하기
-                        v.tit =subEle.val().trim();
+                        v.tit = subEle.val().trim();
                         v.cont = contEle.val().trim();
 
                         // 이 코드를 만나면 여기서 순회종료!
@@ -445,45 +444,36 @@ export function Board() {
                     } ////// if ////////
                 }); /////////// Array some //////////
 
-
                 // 4. 로컬스에 반영하기
-                localStorage.setItem("bdata",
-                JSON.stringify(orgTemp));
+                localStorage.setItem("bdata", JSON.stringify(orgTemp));
 
                 // 5. 리스트 페이지로 이동하기
                 setBdMode("L");
             } //////// else //////////
-
         } ////// else if ////////
 
-       // 3-7. 삭제하기 /////////
-       else if(modeTxt === "D" && bdMode === "U"){
+        // 3-7. 삭제하기 /////////
+        else if (modeTxt === "D" && bdMode === "U") {
+            if (window.confirm("정말로 글을 삭제하시겠습니까?")) {
+                // 1. 데이터 순회하다가 해당데이터 이면
+                // 순번으로 splice(순번,1)사용 삭제
+                orgData.some((v, i) => {
+                    if (Number(cData.current.idx) === Number(v.idx)) {
+                        // 해당 데이터의 순번으로 삭제
+                        orgData.splice(i, 1);
 
-        if(window.confirm('정말로 글을 삭제하시겠습니까?')){
-          // 1. 데이터 순회하다가 해당데이터 이면 
-          // 순번으로 splice(순번,1)사용 삭제
-          orgData.some((v,i)=>{
-            if(Number(cData.current.idx)===Number(v.idx)){
-              // 해당 데이터의 순번으로 삭제
-              orgData.splice(i,1);
-  
-              // 이코드를 만나면 여기시 순회종료!
-              return true;
-            } ///// if ////
-          }); /////// Array some /////   
-          
-          // 2. 로컬스에 반영하기
-          localStorage.setItem('bdata',
-          JSON.stringify(orgData))
-  
-          // 3. 리스트 페이지로 이동하기
-          setBdMode('L');        
-  
-        } ///// if //////
-  
-      } ////// else if ///////
+                        // 이코드를 만나면 여기시 순회종료!
+                        return true;
+                    } ///// if ////
+                }); /////// Array some /////
 
+                // 2. 로컬스에 반영하기
+                localStorage.setItem("bdata", JSON.stringify(orgData));
 
+                // 3. 리스트 페이지로 이동하기
+                setBdMode("L");
+            } ///// if //////
+        } ////// else if ///////
     }; //////// chgMode 함수 ///////////
 
     // 사용자 비교함수 /////////////
@@ -515,14 +505,24 @@ export function Board() {
 
             // 3. 로그인사용자 정보와 조회하기
             // 아이디로 조회함!
-            const currUsr = JSON.parse(myCon.logSts);
-            if (currUsr.uid === cUser.uid) setBtnSts(true);
-            else setBtnSts(false);
+            if (cUser) {
+                // 할당 안되면 undefined 이므로 할당되었을때만 if문 처리
+                const currUsr = JSON.parse(myCon.logSts);
+                if (currUsr.uid === cUser.uid) setBtnSts(true);
+                else setBtnSts(false);
+            } ///// if ///////
+
+            else { // 사용자 비교값이 없는 경우
+                setBtnSts(false);
+            } //// else /////
+
         } /////// if ////////////
+
         else {
             // 로그인 안한 상태 ////
             setBtnSts(false);
         } //////// else ///////////
+
     }; //////// compUsr  함수 ////////
 
     // 리턴코드 ////////////////////

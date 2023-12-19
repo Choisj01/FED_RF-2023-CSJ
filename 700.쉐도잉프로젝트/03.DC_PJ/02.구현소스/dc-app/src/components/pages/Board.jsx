@@ -410,6 +410,53 @@ export function Board() {
         // else if(modeTxt==="U" && btxt==="Delete"){
         //   console.log("삭제처리");
         // } ////// else if ///////
+
+        //// 3-6. 수정하기 서브밋 ////////////
+        else if (modeTxt === "S" && bdMode === "U") {
+            console.log("수정하기 서브밋");
+
+            // 제목,내용 입력요소
+            const subEle = $(".updateone .subject");
+            const contEle = $(".updateone .content");
+
+            // console.log(subEle.val().trim(),contEle.val().trim());
+
+            // 1. 제목, 내용 필수입력 체크
+            // 리랜더링 없는 DOM상태 기능구현!!
+            if (subEle.val().trim() === "" || contEle.val().trim() === "") {
+                window.alert("제목과 내용은 필수입력입니다!");
+            } /////// if /////////
+
+            // 2. 통과시 실제 데이터 입력하기
+            else {
+                
+                // 2. 원본 데이터 변수할당
+                let orgTemp = orgData;
+
+                // 3. 원본에 해당 데이터 찾아서 업데이트하기
+                orgTemp.some(v=>{
+                    if(cData.current.idx===Number(v.idx)){
+                        // 제목과 내용 변경하기
+                        v.tit =subEle.val().trim();
+                        v.cont = contEle.val().trim();
+
+                        // 이 코드를 만나면 여기서 순회종료!
+                        return true;
+                    } ////// if ////////
+                }); /////////// Array some //////////
+
+
+                // 4. 로컬스에 반영하기
+                localStorage.setItem("bdata",
+                JSON.stringify(orgTemp));
+
+                // 5. 리스트 페이지로 이동하기
+                setBdMode("L");
+            } //////// else //////////
+
+        } ////// else if ////////
+
+
     }; //////// chgMode 함수 ///////////
 
     // 사용자 비교함수 /////////////
@@ -580,13 +627,7 @@ export function Board() {
                             <tr>
                                 <td>Name</td>
                                 <td>
-                                    <input
-                                        type="text"
-                                        className="name"
-                                        size="20"
-                                        readOnly
-                                        value={cData.current.writer}
-                                    />
+                                    <input type="text" className="name" size="20" readOnly value={cData.current.unm} />
                                     {/* value는 수정불가! */}
                                 </td>
                             </tr>

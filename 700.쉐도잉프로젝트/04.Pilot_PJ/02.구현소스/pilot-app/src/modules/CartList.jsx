@@ -6,6 +6,7 @@ import "../css/cartlist.css";
 
 // 제이쿼리
 import $ from "jquery";
+import { Fragment } from "react";
 
 // 전달값이 변경되면 리랜더링하기 위해 메모이제이션을 적용!
 export const CartList = memo(({ selData, flag }) => {
@@ -13,11 +14,19 @@ export const CartList = memo(({ selData, flag }) => {
     // flag - 상태값 체크변수 (true / false) -> 업데이트 여부 결정!
     console.log("업뎃 상태값:", flag.current);
 
+    // [컴포넌트 전체 공통변수] /////////////
+    // 1. 페이지 단위수 : 한 페이지 당 레코드수
+    const pgBlock = 5;
+
+    // console.log("페이지단위수:", pgBlock, "\n전체 레코드수:", totNum);
+
     // 상태관리변수 설정 /////////////
-    // 1. 변경 데이터 변수 : 전달된 데이터로 초기셋팅
+    // 1. 현재 페이지 번호 : 가장중요한 리스트 바인딩의 핵심!
+    const [pgNum, setPgNum] = useState(1);
+    // 2. 변경 데이터 변수 : 전달된 데이터로 초기셋팅
     const [cartData, setCartData] = useState(selData);
-    // 2. 리랜더링 강제적용 상태변수
-    const [force,setForce] = useState(null);
+    // 3. 리랜더링 강제적용 상태변수
+    const [force, setForce] = useState(null);
 
     console.log("받은 데이터", selData, "\n기존 데이터", cartData);
 
@@ -33,7 +42,7 @@ export const CartList = memo(({ selData, flag }) => {
     // 선택 데이터 : 로컬스토리지 데이터를 객체변환! -> 주석처리
     // const selData = JSON.parse(localStorage.getItem("cart"));
 
-    // 데이터개수
+    // 전체 데이터개수
     const cntData = cartData.length;
 
     console.log(cartData, cntData + "개");
@@ -136,8 +145,8 @@ export const CartList = memo(({ selData, flag }) => {
     const goResult = (e) => {
         // 업데이트할 배열 고유값 idx
         let tg = $(e.currentTarget);
-        let cidx = tg.attr('data-idx');
-        console.log("결과야 나와라~!",cidx);
+        let cidx = tg.attr("data-idx");
+        console.log("결과야 나와라~!", cidx);
 
         // 데이터 리랜더링 중복실행막기
         flag.current = false;
@@ -160,32 +169,170 @@ export const CartList = memo(({ selData, flag }) => {
         // });
 
         // 클릭시 'data-idx'값에 업데이트할 요소 idx번호 있음!
-        cartData.some((v,i) => {
+        cartData.some((v, i) => {
             // 해당 순번 업데이트 하기
-            if(v.idx==cidx){
+            if (v.idx == cidx) {
                 // 업데이트 하기
                 cartData[i].num = tg.prev().val();
 
                 // some 메서드이므로 true 리턴시 순회종료!
                 return true;
             } ///// if ///////
-        }); 
+        });
 
         // 로컬스 데이터 업데이트!!!
         localStorage.setItem("cart", JSON.stringify(cartData));
 
         // 전체 데이터 업데이트 하면 모두 리랜더링되게 하자!
         setCartData(cartData);
-        // 그러나,,, 기존 배열자체가 추가/삭제되지 않는 한 
+        // 그러나,,, 기존 배열자체가 추가/삭제되지 않는 한
         // 배열데이터가 업데이트 된 것으로 인식되지 않는다!
         // 따라서 강제 리랜더링상태값을 설정하여 이 값을
         // 변경하여 리랜더링 하자!
         setForce(Math.random());
         // 매번 랜덤수를 넣으면 반드시 리랜더링된다!!!^^
-        
-
-        
     }; //////// goResult ////////
+
+    /************************************* 
+    함수명 : bindList
+    기능 : 페이지별 리스트를 생성하여 바인딩함
+  *************************************/
+    const bindList = () => {
+        // 데이터 선별하기
+        const tempData = [];
+
+        // 시작값 : (페이지번호-1)*블록단위수
+        let initNum = (pgNum - 1) * pgBlock;
+        // 한계값 : 블록단위수*페이지번호
+        let limitNum = pgBlock * pgNum;
+
+        // 데이터 선별용 for문 : 원본데이터(orgData)로부터 생성
+        for (let i = initNum; i < limitNum; i++) {
+            // 마지막 페이지 한계수체크(cntData전체개수체크)
+            if (i >= cntData) break;
+            // 코드 푸시
+            tempData.push(cartData[i]);
+        } ///// for /////
+
+        // 데이터가 없는 경우 출력 ///
+        if (cartData.length === 0) {
+            return (
+                <tr>
+                    <td colSpan="8">There is no data.</td>
+                </tr>
+            );
+        } ////// if /////////
+
+        //console.log('찍기직전 Data:',tempData);
+
+        return tempData.map((v, i) => (
+            <tr key={i} data-v={v}>
+                {/* 상품이미지 */}
+                <td>
+                    <img src={"images/goods/" + v.cat + "/" + v.ginfo[0] + ".png"} alt="item" />
+                </td>
+                {/* 리스트순번 */}
+                <td>{i + 1 + initNum}</td>
+                {/* 상품명 */}
+                <td>{v.ginfo[1]}</td>
+                {/* 상품코드 */}
+                <td>{v.ginfo[2]}</td>
+                {/* 상품가격 */}
+                <td>{addComma(v.ginfo[3])}원</td>
+                {/* 상품수량 */}
+                <td className="cnt-part">
+                    <div>
+                        <span>
+                            <input type="text" 
+                            className="item-cnt" 
+                            defaultValue={v.num} 
+                            readOnly
+                            />
+                            <button className="btn-insert" data-idx={v.idx} onClick={goResult}>
+                                반영
+                            </button>
+                            <b className="btn-cnt">
+                                <img src="./images/cnt_up.png" alt="증가" onClick={chgNum} />
+                                <img src="./images/cnt_down.png" alt="감소" onClick={chgNum} />
+                            </b>
+                        </span>
+                    </div>
+                </td>
+                {/* 상품가격 총합계 */}
+                <td>{addComma(v.ginfo[3] * v.num)}원</td>
+                {/* 삭제버튼 */}
+                <td>
+                    <button className="cfn" data-idx={v.idx} onClick={deleteItem}>
+                        ×
+                    </button>
+                </td>
+            </tr>
+        ));
+    }; /////////// bindList 함수 ////////////
+
+    /************************************* 
+    함수명 : pagingLink
+    기능 : 리스트 페이징 링크를 생성한다!
+  *************************************/
+    const pagingLink = () => {
+        // 페이징 블록만들기 ////
+        // 1. 블록개수 계산하기
+        const blockCnt = Math.floor(cntData / pgBlock);
+        // 전체레코드수 / 페이지단위수 (나머지가 있으면 +1)
+        // 전체레코드수 : pgBlock변수에 할당됨!
+        // 2. 블록 나머지수
+        const blockPad = cntData % pgBlock;
+
+        // 최종 한계수 -> 여분레코드 존재에 따라 1더하기
+        const limit = blockCnt + (blockPad === 0 ? 0 : 1);
+
+        // console.log(
+        //   "블록개수:",
+        //   blockCnt,
+        //   "\n블록나머지:",
+        //   blockPad,
+        //   "\n최종한계수:",
+        //   limit
+        // );
+
+        // 리액트에서는 jsx문법 코드를 배열에 넣고
+        // 출력하면 바로 코드로 변환된다!!!
+        let pgCode = [];
+        // 리턴 코드 //////////
+        // 만약 빈태그 묶음에 key를 심어야할 경우
+        // 불가하므로 Fragment 조각 가상태그를 사용한다!
+        for (let i = 0; i < limit; i++) {
+            pgCode[i] = (
+                <Fragment key={i}>
+                    {pgNum - 1 === i ? (
+                        <b>{i + 1}</b>
+                    ) : (
+                        <a href="#" onClick={chgList}>
+                            {i + 1}
+                        </a>
+                    )}
+
+                    {i < limit - 1 ? " | " : ""}
+                </Fragment>
+            );
+        } ////// for /////
+
+        return pgCode;
+    }; /////////// pagingLink 함수 ////////
+
+    /************************************* 
+    함수명 : chgList
+    기능 : 페이지 링크 클릭시 리스트변경
+  *************************************/
+    const chgList = (e) => {
+        let currNum = e.target.innerText;
+        // console.log("번호:", currNum);
+        // 현재 페이지번호 업데이트! -> 리스트 업데이트됨!
+        setPgNum(currNum);
+        // 바인드 리스트 호출 불필요!!!
+        // 왜? pgNum을 bindList()에서 사용하기때문에
+        // 리랜더링이 자동으로 일어남!!!
+    }; ///////// chgList 함수 //////////////
 
     /// 리턴 코드 ///////////////////////
     return (
@@ -209,45 +356,7 @@ export const CartList = memo(({ selData, flag }) => {
                             <th>합계</th>
                             <th>삭제</th>
                         </tr>
-                        {cartData.map((v, i) => (
-                            <tr key={i}>
-                                {/* 상품이미지 */}
-                                <td>
-                                    <img src={"images/goods/" + v.cat + "/" + v.ginfo[0] + ".png"} alt="item" />
-                                </td>
-                                {/* 리스트순번 */}
-                                <td>{i + 1}</td>
-                                {/* 상품명 */}
-                                <td>{v.ginfo[1]}</td>
-                                {/* 상품코드 */}
-                                <td>{v.ginfo[2]}</td>
-                                {/* 상품가격 */}
-                                <td>{addComma(v.ginfo[3])}원</td>
-                                {/* 상품수량 */}
-                                <td className="cnt-part">
-                                    <div>
-                                        <span>
-                                            <input type="text" className="item-cnt" defaultValue={v.num} />
-                                            <button className="btn-insert" data-idx={v.idx} onClick={goResult}>
-                                                반영
-                                            </button>
-                                            <b className="btn-cnt">
-                                                <img src="./images/cnt_up.png" alt="증가" onClick={chgNum} />
-                                                <img src="./images/cnt_down.png" alt="감소" onClick={chgNum} />
-                                            </b>
-                                        </span>
-                                    </div>
-                                </td>
-                                {/* 상품가격 총합계 */}
-                                <td>{addComma(v.ginfo[3] * v.num)}원</td>
-                                {/* 삭제버튼 */}
-                                <td>
-                                    <button className="cfn" data-idx={v.idx} onClick={deleteItem}>
-                                        ×
-                                    </button>
-                                </td>
-                            </tr>
-                        ))}
+                        {bindList()}
 
                         <tr>
                             <td colSpan="6">총합계 :</td>
@@ -255,12 +364,21 @@ export const CartList = memo(({ selData, flag }) => {
                             <td></td>
                         </tr>
                     </tbody>
+                    {/* 하단 페이징 표시부분 */}
+                    <tfoot>
+                        <tr>
+                            <td colSpan="8" className="paging">
+                                {/* 페이징번호 위치  */}
+                                {pagingLink()}
+                            </td>
+                        </tr>
+                    </tfoot>
                 </table>
             </section>
             {/* 카트버튼이미지 박스 */}
             <div id="mycart" onClick={showList}>
                 {/* 카트이미지 */}
-                <img src="./images/mycart.gif" title="개의 상품이 있습니다" />
+                <img src="./images/mycart.gif" title={cntData+"개의 상품이 있습니다"} />
                 {/* 카트상품개수 출력박스 */}
                 <div className="cntBx">{cntData}</div>
             </div>

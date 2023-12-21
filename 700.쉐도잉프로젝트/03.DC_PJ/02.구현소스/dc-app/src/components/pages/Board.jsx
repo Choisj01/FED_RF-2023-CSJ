@@ -11,7 +11,7 @@ import { dcCon } from "../modules/dcContext";
 import { initData } from "../func/mem_fn";
 
 // 제이쿼리
-import $, { escapeSelector } from "jquery";
+import $ from "jquery";
 
 // 기본 데이터 제이슨 불러오기
 import baseData from "../data/board.json";

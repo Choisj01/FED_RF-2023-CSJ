@@ -111,7 +111,8 @@ function App() {
 
     // 리턴코드 //////////////////////////
     return (
-        <pCon.Provider value={{ pgName, chgPgName, flag, setTransData, transData, setCsts }}>
+        <pCon.Provider 
+        value={{ pgName, chgPgName, flag, setTransData, transData, setCsts }}>
             <TopArea cat={pgName} />
             <MainArea page={pgName} />
             <FooterArea />

@@ -2,15 +2,18 @@
 
 import { MainCont } from "../pages/MainCont";
 import { Fashion } from "../pages/Fashion";
+import { GList } from "../pages/GList";
 
 // 라우터 역할을 하는 MainArea 컴포넌트 ////////
 export function MainArea(props){
-    // props.page 속성값으로 main/men/women/style
+    // props.page 속성값으로 main/glist/men/women/style
     return(
         <>
             {
-                // main이 아니면 서브 Fashion 이동
+                // main or glist 아니면 
+                // 서브 Fashion 이동 (삼항연산자 사용으로 if문 사용안함!)
                 props.page=='main'?<MainCont />:
+                props.page=='glist'?<GList />:
                 <Fashion cat = {props.page}/>
             }
         </>

@@ -1,6 +1,19 @@
 /* 게시판 모듈용 CSS - board.css  */
 
 /* CSS Document */
+
+/* 검색 옵션박스 */
+.selbx {
+    max-width: 90%;
+    width: 950px;
+    margin: 0 auto;
+    padding: 20px 10px 10px;
+    box-sizing: border-box;
+}
+.selbx>*{
+    margin-right: 10px;
+}
+
 /*테이블 디자인*/
 .dtbl {
     /*테이블전체*/
@@ -24,7 +37,13 @@
     color: #333;
     padding: 10px 0;
 }
-
+.dtbl tbody td a{
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    /* 말줄임표시 */
+    text-overflow: ellipsis;
+}
 .dtbl a {
     text-decoration: none;
     color: #666;

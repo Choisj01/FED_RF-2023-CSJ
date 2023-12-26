@@ -176,34 +176,44 @@ export function GList() {
         <main id="cont">
             <h1 className="tit">All ITEMS LIST</h1>
 
-            { // Filter List 모드 출력 ///
-            myCon.gMode === "F" && (
-                <section>
-                    <div id="optbx">
-                        <label htmlFor="men">남성</label>
-                        <input type="checkbox" className="chkbx" id="men" defaultChecked onChange={changeList} />
-                        <label htmlFor="women">여성</label>
-                        <input type="checkbox" className="chkbx" id="women" defaultChecked onChange={changeList} />
-                        <label htmlFor="style">스타일</label>
-                        <input type="checkbox" className="chkbx" id="style" defaultChecked onChange={changeList} />
-                    </div>
-                    <div className="grid">{makeList()}</div>
-                </section>
-            )}
-            { // Paging List 모드 출력 ///
-            myCon.gMode === "P" && (
-                <section>
-                    <div className="grid">{makeList()}</div>
-                    페이징~~!!
-                </section>
-            )}
-            { // More List 모드 출력 ///
-            myCon.gMode === "M" && (
-                <section>
-                    <div className="grid">{makeList()}</div>
-                     모아리스트~~~~!!
-                </section>
-            )}
+            {
+                // Filter List 모드 출력 ///
+                myCon.gMode === "F" && (
+                    <section>
+                        <div id="optbx">
+                            <label htmlFor="men">남성</label>
+                            <input type="checkbox" className="chkbx" id="men" defaultChecked onChange={changeList} />
+                            <label htmlFor="women">여성</label>
+                            <input type="checkbox" className="chkbx" id="women" defaultChecked onChange={changeList} />
+                            <label htmlFor="style">스타일</label>
+                            <input type="checkbox" className="chkbx" id="style" defaultChecked onChange={changeList} />
+                        </div>
+                        <div className="grid">{makeList()}</div>
+                    </section>
+                )
+            }
+            {
+                // Paging List 모드 출력 ///
+                myCon.gMode === "P" && (
+                    <section>
+                        <div className="grid">{makeList()}</div>
+                        <div id="paging">
+                            <a href="#">1</a>|<a href="#">2</a>|<a href="#">3</a>
+                        </div>
+                    </section>
+                )
+            }
+            {
+                // More List 모드 출력 ///
+                myCon.gMode === "M" && (
+                    <section>
+                        <div className="grid">{makeList()}</div>
+                        <div id="more">
+                            <button class="more">MORE</button>
+                        </div>
+                    </section>
+                )
+            }
             {/* 2.5. 상세보기 박스 */}
 
             <div

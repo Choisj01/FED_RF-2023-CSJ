@@ -7,8 +7,7 @@ import { pCon } from "./modules/PilotContext";
 import { TopArea } from "./layout/TopArea";
 import { MainArea } from "./layout/MainArea";
 import { FooterArea } from "./layout/FooterArea";
-import {CartList} from "./modules/CartList";
-
+import { CartList } from "./modules/CartList";
 
 // 제이쿼리
 import $ from "jquery";
@@ -96,7 +95,13 @@ function App() {
     // 처음 로딩시 스크롤 상단이동 /////////
     useLayoutEffect(() => {
         window.scrollTo(0, 0);
-    },[]); //////// useLayoutEffect /////////////
+    }, []); //////// useLayoutEffect /////////////
+
+    // GList 페이지에서 사용ㅇ하는 모드구분 참조변수
+    const [gMode, setGMode] = useState('F');
+    // 처음값은 'F' -> Filter List임!
+    // 'P' -> Paging List 
+    // 'M' -> More List 
 
     /***************************************************** 
       [ 컨텍스트 API 공개 변수들 ]
@@ -106,13 +111,16 @@ function App() {
       4. setTransData - 카트 사용 데이터 셋업
       5. transData - 카트 사용 데이터
       6. setCsts - 로컬스에 카드정보 셋업 여부
-    
+      7. gMode,setGMode 
+         - 전체 리스트 페이지 뷰 모드구분
     *****************************************************/
 
     // 리턴코드 //////////////////////////
     return (
-        <pCon.Provider 
-        value={{ pgName, chgPgName, flag, setTransData, transData, setCsts }}>
+        <pCon.Provider value={{ pgName, chgPgName, 
+        flag, setTransData, transData, 
+        setCsts, gMode, setGMode }}
+        >
             <TopArea cat={pgName} />
             <MainArea page={pgName} />
             <FooterArea />

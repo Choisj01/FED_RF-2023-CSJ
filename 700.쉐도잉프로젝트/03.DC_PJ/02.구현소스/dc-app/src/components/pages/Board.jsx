@@ -642,6 +642,7 @@ export function Board() {
                     <>
                         {/* 전체 타이틀 */}
                         <h1 className="tit">OPINION</h1>
+
                         {/* 검색옵션박스 */}
                         <div class="selbx">
                             <select name="cta" id="cta" class="cta">
@@ -655,10 +656,12 @@ export function Board() {
                                 <option value="2">Descending</option>
                             </select>
                             <input id="stxt" type="text" maxlength="50" />
-                            <button class="sbtn">검색</button>
+                            <button class="sbtn">Search</button>
                         </div>
 
+                        {/* 리스트 테이블 */}
                         <table className="dtbl" id="board">
+                            {/* <caption></caption> */}
                             {/* 상단 컬럼명 표시영역 */}
                             <thead>
                                 <tr>

@@ -1,7 +1,7 @@
 // 상품전체 리스트 페이지
 
 // 상품전체 리스트 CSS 불러오기
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import "../css/glist.css";
 
 // 제이쿼리 불러오기
@@ -10,6 +10,9 @@ import $ from "jquery";
 // 상품데이터 불러오기 : 원본데이터
 import gdata from "../data/glist-items";
 
+// 컨텍스트 API 불러오기
+import { pCon } from "../modules/PilotContext";
+
 import { ItemDetail } from "../modules/ItemDetail";
 
 console.log("전체Data:", gdata);
@@ -17,12 +20,19 @@ console.log("전체Data:", gdata);
 ///////////////////////////////////////////////////////////////////////
 //////////////////GList 컴포넌트 //////////////////////////////////////
 export function GList() {
+    // 컨텍스트 사용하기
+    const myCon = useContext(pCon);
+
+    // 컨텍스트 변수인 gMOde의 3가지 값 :
+    // 1. 'F' -> Filter List임!
+    // 2. 'P' -> Paging List
+    // 3. 'M' -> More List
+    // -> 위의 값에 따라 리액트 조건출력(&&)을 사용함!
+
     // 변경될 데이터 원본과 분리하여 데이터 변경하기 위한 참조변수
     const transData = useRef(JSON.parse(JSON.stringify(gdata)));
     // -> 깊은복사로 원본데이터와 연결성 없음!!!
     // 주의 : 사용시 current 속성을 씀!
-
-
 
     // 참조변수 셋팅 : 리랜더링없이 값 유지!! //////////////
     // 1. 아이템 코드(m1,m2,m3, ...)
@@ -33,31 +43,28 @@ export function GList() {
     // 리랜더링을 위한 상태변수 : 무조건 리랜더링 설정 목적
     const [force, setForce] = useState(null);
     // 데이터 상태 관리 변수
-    const [currData,setCurrData] = useState(gdata);
+    const [currData, setCurrData] = useState(gdata);
 
     // 리스트 만들기 함수 ////////
-  const makeList = () =>
-  currData.map((v, i) => (
-    <div key={i}>
-      <a
-        href="#"
-        onClick={(e) => {
-          e.preventDefault();
-          showDetail(v.ginfo[0], v.cat);
-        }}
-      >
-        [{i + 1}]
-        <img
-          src={"./images/goods/" + v.cat + "/" + v.ginfo[0] + ".png"}
-          alt="dress"
-        />
-        <aside>
-          <h2>{v.ginfo[1]}</h2>
-          <h3>{addComma(v.ginfo[3])}원</h3>
-        </aside>
-      </a>
-    </div>
-  )); //////////// makeList ////////
+    const makeList = () =>
+        currData.map((v, i) => (
+            <div key={i}>
+                <a
+                    href="#"
+                    onClick={(e) => {
+                        e.preventDefault();
+                        showDetail(v.ginfo[0], v.cat);
+                    }}
+                >
+                    [{i + 1}]
+                    <img src={"./images/goods/" + v.cat + "/" + v.ginfo[0] + ".png"} alt="dress" />
+                    <aside>
+                        <h2>{v.ginfo[1]}</h2>
+                        <h3>{addComma(v.ginfo[3])}원</h3>
+                    </aside>
+                </a>
+            </div>
+        )); //////////// makeList ////////
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -91,14 +98,14 @@ export function GList() {
        기능 :  체크박스에 따른 리스트 변경하기
     *****************************************************/
     const changeList = (e) => {
-          // 1. 체크박스 아이디
-          const cid = e.target.id;
+        // 1. 체크박스 아이디
+        const cid = e.target.id;
 
-          //2. 체크박스 체크여부 : checked (true/false)
-          const chked = e.target.checked;
-          console.log("아이디는:", cid, chked);
+        //2. 체크박스 체크여부 : checked (true/false)
+        const chked = e.target.checked;
+        console.log("아이디는:", cid, chked);
 
-           // 3. 체크박스 체크개수세기 : 1개 초과시 배열 합치기
+        // 3. 체크박스 체크개수세기 : 1개 초과시 배열 합치기
         let num = $(".chkbx:checked").length;
         console.log("체크개수:", num);
 
@@ -107,21 +114,21 @@ export function GList() {
         // -> 데이터 추가시 원본에서 데이터를 만들고 참조변수에 추가함!
         if (chked) {
             // 현재 데이터 변수에 담기 (원본데이터로부터!)
-            const nowList = gdata.filter(v=>{
-                if(v.cat===cid) return true;
-            }) ////// filter ////////
+            const nowList = gdata.filter((v) => {
+                if (v.cat === cid) return true;
+            }); ////// filter ////////
 
             // 체크개수가 1초과일때 배열합치기
             if (num > 1) {
                 // 스프레드 연산자(...) 사용!
-                transData.current = [...transData.current,...nowList];
+                transData.current = [...transData.current, ...nowList];
             } /////// if ////////
             else {
                 // 체크박스 하나일때
                 transData.current = nowList;
             } ///// else ///////
 
-            console.log('추가구역:',transData.current);
+            console.log("추가구역:", transData.current);
         } ////////// if ///////////
 
         // (2) 체크박스가 false일때 데이터 지우기!
@@ -156,35 +163,47 @@ export function GList() {
 
             // 결과처리하기 : 삭제처리된 temp를 참조변수에 할당!
             transData.current = temp;
-
         } //////// else ///////////
-        
+
         // 6. 검색결과 리스트 업데이트 하기
         // 위의 분기문에서 만들어진 참조변수 데이터를 최종 업데이트함!
         setCurrData(transData.current);
         // 리스트가 리랜더링됨!!!!
-      
-      
     }; //////////// changeList 함수 ///////////
 
     // 리턴 코드 ///////////////////////////////////////
     return (
         <main id="cont">
             <h1 className="tit">All ITEMS LIST</h1>
-            <section>
-                <div id="optbx">
-                    <label htmlFor="men">남성</label>
-                    <input type="checkbox" className="chkbx" id="men" defaultChecked  
-                    onChange={changeList}/>
-                    <label htmlFor="women">여성</label>
-                    <input type="checkbox" className="chkbx" id="women" defaultChecked 
-                    onChange={changeList}/>
-                    <label htmlFor="style">스타일</label>
-                    <input type="checkbox" className="chkbx" id="style" defaultChecked 
-                    onChange={changeList}/>
-                </div>
-                <div className="grid">{makeList()}</div>
-            </section>
+
+            { // Filter List 모드 출력 ///
+            myCon.gMode === "F" && (
+                <section>
+                    <div id="optbx">
+                        <label htmlFor="men">남성</label>
+                        <input type="checkbox" className="chkbx" id="men" defaultChecked onChange={changeList} />
+                        <label htmlFor="women">여성</label>
+                        <input type="checkbox" className="chkbx" id="women" defaultChecked onChange={changeList} />
+                        <label htmlFor="style">스타일</label>
+                        <input type="checkbox" className="chkbx" id="style" defaultChecked onChange={changeList} />
+                    </div>
+                    <div className="grid">{makeList()}</div>
+                </section>
+            )}
+            { // Paging List 모드 출력 ///
+            myCon.gMode === "P" && (
+                <section>
+                    <div className="grid">{makeList()}</div>
+                    페이징~~!!
+                </section>
+            )}
+            { // More List 모드 출력 ///
+            myCon.gMode === "M" && (
+                <section>
+                    <div className="grid">{makeList()}</div>
+                     모아리스트~~~~!!
+                </section>
+            )}
             {/* 2.5. 상세보기 박스 */}
 
             <div

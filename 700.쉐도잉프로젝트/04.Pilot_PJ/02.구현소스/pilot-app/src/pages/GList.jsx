@@ -49,7 +49,7 @@ export function GList() {
     // 1. 페이지 단위수 : 한 페이지 당 레코드수
     const pgBlock = 10;
     // 2. 전체 레코드수 : 배열데이터 총개수
-    const totNum = currData.length;
+    const totNum = gdata.length;
     // 3. 현재 페이지 번호 : 가장중요한 리스트 바인딩의 핵심!
     const [pgNum, setPgNum] = useState(1);
 
@@ -62,7 +62,19 @@ export function GList() {
 
         // 1. Filter List
         if (myCon.gMode === "F") {
-            retVal = currData.map((v, i) => (
+
+            // 데이터 초기화하기
+            // gdata와 같지 않으면 초기화!
+            // 단, 모드를 변경하는 상단메뉴일때만 적용해야함!
+            // 컨텍스트 API의 gInit 참조변수가 true일때만 적용함!
+            if(currData !== gdata && myCon.gInit.current){
+                // 깊은복사로 데이터 재할당!
+                // -> 무한 리랜더링을 피하려면 참조변수를 활용한다!
+                transData.current = JSON.parse(JSON.stringify(gdata));
+            }
+
+            // 참조변수 데이터로 map 돌기!
+            retVal = transData.current.map((v, i) => (
                 <div key={i}>
                     <a
                         href="#"
@@ -84,6 +96,18 @@ export function GList() {
 
         // 2. Paging List
         else if (myCon.gMode === "P") {
+            // 페이징은 데이터 변형이 아닌 
+            // 원본데이터에 대한 부분 데이터 가져오기다!
+            // console.log('원본data:',gdata);
+
+            // 만약 상단메뉴를 클릭해서 들어온 경우 
+            // 페이지 번호가 1이 아니면 초기화 해주기
+            if(pgNum!==1 && myCon.gInit.current){
+                setPgNum(1);
+            }
+
+            console.log('원본개수:',totNum);
+
             // map 이 아닌 일반 for문 사용시
             // 배열에 push하여 데이터넣기
             // JSX문법 태그를 그냥 태그가 아.니.다!!!
@@ -99,24 +123,24 @@ export function GList() {
                 // 마지막 페이지 한계수체크
                 if (i >= totNum) break;
 
-                // 순회하기 데이터 넣기
+                // 순회하며 데이터 넣기
                 retVal.push(
                     <div key={i}>
                         <a
                             href="#"
                             onClick={(e) => {
                                 e.preventDefault();
-                                showDetail(currData[i].ginfo[0], currData[i].cat);
+                                showDetail(gdata[i].ginfo[0], gdata[i].cat);
                             }}
                         >
                             [{i + 1}]
                             <img
-                                src={"./images/goods/" + currData[i].cat + "/" + currData[i].ginfo[0] + ".png"}
+                                src={"./images/goods/" + gdata[i].cat + "/" + gdata[i].ginfo[0] + ".png"}
                                 alt="dress"
                             />
                             <aside>
-                                <h2>{currData[i].ginfo[1]}</h2>
-                                <h3>{addComma(currData[i].ginfo[3])}원</h3>
+                                <h2>{gdata[i].ginfo[1]}</h2>
+                                <h3>{addComma(gdata[i].ginfo[3])}원</h3>
                             </aside>
                         </a>
                     </div>
@@ -184,6 +208,9 @@ export function GList() {
     기능 : 페이지 링크 클릭시 리스트변경
   *************************************/
     const chgList = (e) => {
+        // 초기화 전역변수 false로 업데이트하기!(초기화하기)
+        myCon.gInit.current = false;
+
         let currNum = e.target.innerText;
         // console.log("번호:", currNum);
         // 현재 페이지번호 업데이트! -> 리스트 업데이트됨!
@@ -225,6 +252,10 @@ export function GList() {
     기능: 체크박스에 따른 리스트 변경하기
   *******************************************/
   const changeList = (e) => {
+
+    // 체크박스일 경우 초기화 전역변수 false로 업데이트
+    myCon.gInit.current = false;
+
     // 1. 체크박스 아이디
     const cid = e.target.id;
 

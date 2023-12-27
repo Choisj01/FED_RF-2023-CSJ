@@ -21,7 +21,10 @@ export function TopArea(props) {
     const clickGnb = (e)=>{
         console.log(props.cat);
          if(props.cat==="glist"){
-            //클릭된 요소 
+            // 초기화 상태값 true로 업데이트 하기
+            myCon.gInit.current = true;
+            
+            // 클릭된 요소 
             const tgEle =  $(e.currentTarget);
             let atxt = tgEle.text();
             console.log('메뉴글자:',atxt);

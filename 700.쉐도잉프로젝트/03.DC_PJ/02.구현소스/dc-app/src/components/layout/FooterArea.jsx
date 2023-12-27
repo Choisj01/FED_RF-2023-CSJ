@@ -6,6 +6,7 @@ import { Logo } from "../modules/Logo";
 import { bmData } from "../data/bmenu";
 import React from "react";
 import { memo } from "react";
+import Weather from "../modules/Weather";
 
 ///////////////////////////////////////////////////
 // 아주 간단한 컴포넌트 메모이제이션하기!
@@ -48,6 +49,8 @@ export const FooterArea=React.memo(()=>{
                 © & ™ DC. ALL RIGHTS RESERVED
                 </li>
             </ul>
+            {/* 날씨정보 컴포넌트 */}
+            <Weather/>
         </footer>
     )
 

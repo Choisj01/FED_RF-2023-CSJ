@@ -872,6 +872,9 @@ export function Board() {
                                 // 리스트 모드(L)
                                 bdMode === "L" && myCon.logSts !== null && (
                                     <>
+                                    {/* List 버튼은 검색실행시에만 나타남.
+                                    클릭시 전체리스트로 돌아감. 이때 버튼 사라짐 */}
+
                                         <button onClick={chgMode}>
                                             <a href="#">List</a>
                                         </button>

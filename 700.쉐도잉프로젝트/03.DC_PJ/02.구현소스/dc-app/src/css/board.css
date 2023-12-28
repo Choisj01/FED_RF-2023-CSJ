@@ -37,12 +37,16 @@
     color: #333;
     padding: 10px 0;
 }
-.dtbl tbody td a{
+
+/* 보드 메인리스트 a요소 말줄임 표시하기 */
+#board tbody td a {
     display: block;
     white-space: nowrap;
     overflow: hidden;
-    /* 말줄임표시 */
+    /* 말줄임 표시 */
     text-overflow: ellipsis;
+    /* 가로크기 지정(최대 361px) */
+    width: min(361px,40vw);
 }
 .dtbl a {
     text-decoration: none;

@@ -256,7 +256,7 @@ export function Board() {
 
         for (let i = initNum; i < limitNum; i++) {
           // 맨끝 페이지 번호를 만나면 나가라
-          if(limitNum>=limit) break;
+          if(i>=limit) break;
 
             pgCode[i] = (
                 <Fragment key={i}>

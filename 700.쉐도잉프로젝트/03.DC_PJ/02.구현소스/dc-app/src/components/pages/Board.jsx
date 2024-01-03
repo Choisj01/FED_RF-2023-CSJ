@@ -137,7 +137,12 @@ export function Board() {
  }; ///////////// rawData /////////////
 
  // 최초 랜더링 시에만 한번 실행하기
- if(firstSts.current) sortData(orgData,[-1,1]);
+ if(firstSts.current) {
+  // 내림차순 정렬 적용하기
+  sortData(orgData,[-1,1]);
+  // 정렬선택박스 내림차순으로 변경하기
+  $('#sel').val('0');
+} //////////// if //////////
 
   /************************************* 
     함수명 : bindList
@@ -460,7 +465,13 @@ export function Board() {
         // 6. 로컬스에 반영하기
         localStorage.setItem("bdata", JSON.stringify(orgTemp));
 
-        // 7. 리스트 페이지로 이동하기
+        // 내림차순 정렬 firstSts 값을 true로 변경하면
+        // 리랜더링시 정렬 적용될까? bindList 전에 적용되어야 함!
+        firstSts.current=true; // > 효과있음!
+        // bindList() 위의 내림차순 코드가 실행됨!
+
+
+        // 7. 리스트 페이지로 이동하기 : 리랜더링됨!
         setBdMode("L");
       } //////// else //////////
     } ////// else if ///////
@@ -720,6 +731,11 @@ export function Board() {
 
     // 5. 리스트 업데이트 하기
     orgData = resData;
+
+    // 내림차순 정렬 firstSts 값을 true로 변경하면
+    // 리랜더링시 정렬 적용될까? bindList 전에 적용되어야 함!
+    firstSts.current=true; // > 효과있음!
+    // bindList() 위의 내림차순 코드가 실행됨!
 
     // 6. 강제 리랜더링하기
     // 조건: 기존 1페이지 일때만 실행

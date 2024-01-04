@@ -229,6 +229,7 @@ export function Board() {
         const pgblockPad = limit % pgPgBlock;
         const pgLimit = pgblockCnt + (pgblockPad === 0 ? 0 : 1);
         console.log("페이징의 페이징한계값 :", pgLimit);
+        // -> pgLimit가 마지막 페이징의 페이징번호이기도함!
 
         // // console.log(
         //   "블록개수:",
@@ -273,13 +274,12 @@ export function Board() {
                         // 바출력조건:
                         // 페이징의 페이징에서 끝번호 전번호일때와
                         // 동시에 전체 한계값이 전체페이지끝 이전번호 보다 작을때
-                        i < limitNum - 1 && i < limit - 1 ? " | " : ""
-                    }
+                        (i < limitNum - 1 && i < limit - 1) ? 
+                        " | " : ""}
                 </Fragment>
             );
         } ////// for /////
 
-        //
         // pgPgNum.current = 2;
 
         {
@@ -290,15 +290,22 @@ export function Board() {
                     ""
                 ) : (
                     <Fragment key={-1}>
-                        <a
-                            href="#"
+                        <a href="#"
+                            title="맨앞으로"
+                            style={{ marginRight: "10px"}}
                             onClick={(e) => {
                                 e.preventDefault();
-                                goPaging(-1);
+                                goPaging(1, false);
+                            }}>«</a>
+
+                        <a href="#"
+                            onClick={(e) => {
+                                e.preventDefault();
+                                goPaging(-1, true);
                             }}
-                        >
-                            ◀
-                        </a>
+                            title="앞으로"
+                            style={{ marginRight: "10px" }}
+                        >◀</a>
                     </Fragment>
                 )
             );
@@ -311,15 +318,22 @@ export function Board() {
                     ""
                 ) : (
                     <Fragment key={-2}>
-                        <a
-                            href="#"
+                        <a href="#"
                             onClick={(e) => {
                                 e.preventDefault();
-                                goPaging(1);
+                                goPaging(1, true);
                             }}
-                        >
-                            ▶
-                        </a>
+                            title="뒤로"
+                            style={{ marginLeft: "10px" }}
+                        >▶</a>
+
+                        <a href="#"
+                            style={{ marginLeft: "10px" }}
+                            title="맨뒤로"
+                            onClick={(e) => {
+                                e.preventDefault();
+                                goPaging(pgLimit, false);
+                            }}>»</a>
                     </Fragment>
                 )
             );
@@ -329,11 +343,20 @@ export function Board() {
     }; /////////// pagingLink 함수 ////////
 
     // 페이징의 페이징 이동함수 /////////////////////////
-    const goPaging = (dir) => {
+    // 전달변수 : dir은 페이지 더하기/빼기 기능
+    // 전달변수 : opt는 true이면 일반이동
+    //                 false이면 맨앞,맨뒤이동
+    const goPaging = (dir, opt) => {
         // dir - 이동방향 (오른쪽: +1,왼쪽: -1)
-        const newPgPgNum = pgPgNum.current + dir;
-        // 새 페이지번호 : 전 페이지 끝번호 +1
-        const newPgNum = (newPgPgNum - 1) * pgPgBlock + 1;
+        let newPgPgNum;
+
+        // opt가 true이면 일반이동
+        if (opt) newPgPgNum = pgPgNum.current + dir;
+        // opt가 false이면 맨끝이동
+        else newPgPgNum = dir; // dir에 첫번호/끝번호 옴!
+
+        // 새 페이지번호 : (전 페이지 끝번호) +1
+        const newPgNum = ((newPgPgNum - 1) * pgPgBlock) + 1;
 
         // 페이징의 페이징번호 업데이트
         pgPgNum.current = newPgPgNum;

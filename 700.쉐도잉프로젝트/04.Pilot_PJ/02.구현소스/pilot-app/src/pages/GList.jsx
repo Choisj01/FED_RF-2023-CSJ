@@ -1,158 +1,227 @@
-// 상품전체 리스트 페이지
+// 상품 전체 리스트 페이지
 
-// 상품전체 리스트 CSS 불러오기
+// 상품전체리스트 CSS 불러오기
 import { Fragment, useContext, useEffect, useRef, useState } from "react";
 import "../css/glist.css";
 
-// 제이쿼리 불러오기
+// 제이쿼리
 import $ from "jquery";
 
 // 상품데이터 불러오기 : 원본데이터
 import gdata from "../data/glist-items";
 
+import { ItemDetail } from "../modules/ItemDetail";
+
 // 컨텍스트 API 불러오기
 import { pCon } from "../modules/PilotContext";
 
-import { ItemDetail } from "../modules/ItemDetail";
-
 console.log("전체Data:", gdata);
 
-///////////////////////////////////////////////////////////////////////
-//////////////////GList 컴포넌트 //////////////////////////////////////
+///////////////////////////////////////////
+//////// GList 컴포넌트 ///////////////////
 export function GList() {
-    // 컨텍스트 사용하기
-    const myCon = useContext(pCon);
+  // 컨텍스트 사용하기
+  const myCon = useContext(pCon);
 
-    // 컨텍스트 변수인 gMOde의 3가지 값 :
-    // 1. 'F' -> Filter List임!
-    // 2. 'P' -> Paging List
-    // 3. 'M' -> More List
-    // -> 위의 값에 따라 리액트 조건출력(&&)을 사용함!
+  // 컨텍스트 변수인 gMode의 3가지값 :
+  // 1. 'F' -> Filter List임!
+  // 2. 'P' -> Paging List
+  // 3. 'M' -> More List
+  // -> 위의 값에 따라 리액트 조건출력(&&)을 사용함!
 
-    // 변경될 데이터 원본과 분리하여 데이터 변경하기 위한 참조변수
-    const transData = useRef(JSON.parse(JSON.stringify(gdata)));
-    // -> 깊은복사로 원본데이터와 연결성 없음!!!
-    // 주의 : 사용시 current 속성을 씀!
+  // 변경될 데이터 원본과 분리하여 데이터 변경하기위한 참조변수
+  const transData = useRef(JSON.parse(JSON.stringify(gdata)));
+  // -> 깊은복사로 원본데이터와 연결성 없음!!!
+  // 주의: 사용시 current 속성을 씀!
 
-    // 참조변수 셋팅 : 리랜더링없이 값 유지!! //////////////
-    // 1. 아이템 코드(m1,m2,m3, ...)
-    const item = useRef("m1");
-    // 2. 카테고리명(men/women/style)
-    const catName = useRef("men");
+  // 참조변수셋팅 : 리랜더링없이 값유지!
+  // 1. 아이템 코드(m1,m2,m3,...)
+  const item = useRef("m1");
+  // 2. 카테고리명(men/women/style)
+  const catName = useRef("men");
 
-    // 리랜더링을 위한 상태변수 : 무조건 리랜더링 설정 목적
-    const [force, setForce] = useState(null);
-    // 데이터 상태 관리 변수
-    const [currData, setCurrData] = useState(gdata);
+  // 리랜더링을 위한 상태변수 : 무조건 리랜더링설정목적
+  const [force, setForce] = useState(null);
+  // 데이터 상태관리 변수
+  const [currData, setCurrData] = useState(gdata);
 
-    // 페이징을 위한 변수 셋팅하기 ////////
-    // 1. 페이지 단위수 : 한 페이지 당 레코드수
-    const pgBlock = 10;
-    // 2. 전체 레코드수 : 배열데이터 총개수
-    const totNum = gdata.length;
-    // 3. 현재 페이지 번호 : 가장중요한 리스트 바인딩의 핵심!
-    const [pgNum, setPgNum] = useState(1);
+  // 페이징을 위한 변수 셋팅하기 //////
+  // 1. 페이지 단위수 : 한 페이지 당 레코드수
+  const pgBlock = 10;
+  // 2. 전체 레코드수 : 배열데이터 총개수
+  const totNum = gdata.length;
+  // 3. 현재 페이지 번호 : 가장중요한 리스트 바인딩의 핵심!
+  const [pgNum, setPgNum] = useState(1);
+  // 4. 더보기 블록단위수 : 한번에 보여주는 레코드수
+  const moreBlock = 5;
+  // 5. 더보기 블록개수 : 상태변수로 숫자 유지하기
+  const [moreNum, setMoreNum] = useState(1);
+  // 6. 더보기 블록개수 한계수 계산
+  const moreLimit =
+    Math.floor(totNum / moreBlock) + (totNum % moreBlock !== 0 ? 1 : 0);
+  // 나누어서 나머지가 있으면 1더하고 없으면 0더함(즉,없음)
+  console.log("더보기한계수:", moreLimit);
 
-    // 리스트 만들기 함수 ////////
-    const makeList = () => {
-        //리턴용 변수
-        let retVal;
+  // 리스트 만들기 함수 ////////
+  const makeList = () => {
+    // 리턴용변수
+    let retVal;
 
-        console.log(currData);
+    console.log(currData);
 
-        // 1. Filter List
-        if (myCon.gMode === "F") {
+    // 1. Filter List //////////////
+    if (myCon.gMode === "F") {
+      // 데이터 초기화하기 /////////////
+      // gdata와 같지 않으면 초기화!
+      // 단, 모드를 변경하는 상단메뉴일때만 적용해야함!
+      // 컨텍스트 API의 gInit 참조변수가 true일때만 적용함!
+      if (currData !== gdata && myCon.gInit.current) {
+        // 깊은복사로 데이터 재할당!
+        // -> 무한 리랜더링을 피하려면 참조변수를 활용한다!
+        transData.current = JSON.parse(JSON.stringify(gdata));
+      }
 
-            // 데이터 초기화하기
-            // gdata와 같지 않으면 초기화!
-            // 단, 모드를 변경하는 상단메뉴일때만 적용해야함!
-            // 컨텍스트 API의 gInit 참조변수가 true일때만 적용함!
-            if(currData !== gdata && myCon.gInit.current){
-                // 깊은복사로 데이터 재할당!
-                // -> 무한 리랜더링을 피하려면 참조변수를 활용한다!
-                transData.current = JSON.parse(JSON.stringify(gdata));
-            }
+      // 참조변수 데이터로 map 돌기!
+      retVal = transData.current.map((v, i) => (
+        <div key={i}>
+          <a
+            href="#"
+            onClick={(e) => {
+              e.preventDefault();
+              showDetail(v.ginfo[0], v.cat);
+            }}
+          >
+            [{i + 1}]
+            <img
+              src={"./images/goods/" + v.cat + "/" + v.ginfo[0] + ".png"}
+              alt="dress"
+            />
+            <aside>
+              <h2>{v.ginfo[1]}</h2>
+              <h3>{addComma(v.ginfo[3])}원</h3>
+            </aside>
+          </a>
+        </div>
+      ));
+    } ////////////// if //////////////
 
-            // 참조변수 데이터로 map 돌기!
-            retVal = transData.current.map((v, i) => (
-                <div key={i}>
-                    <a
-                        href="#"
-                        onClick={(e) => {
-                            e.preventDefault();
-                            showDetail(v.ginfo[0], v.cat);
-                        }}
-                    >
-                        [{i + 1}]
-                        <img src={"./images/goods/" + v.cat + "/" + v.ginfo[0] + ".png"} alt="dress" />
-                        <aside>
-                            <h2>{v.ginfo[1]}</h2>
-                            <h3>{addComma(v.ginfo[3])}원</h3>
-                        </aside>
-                    </a>
-                </div>
-            ));
-        } /////////// if //////////
+    // 2. Paging List //////////////
+    else if (myCon.gMode === "P") {
+      // 페이징은 데이터 변형이 아닌 원본데이터에 대한
+      // 부분데이터 가져오기다!
+      // console.log('원본data:',gdata);
 
-        // 2. Paging List
-        else if (myCon.gMode === "P") {
-            // 페이징은 데이터 변형이 아닌 
-            // 원본데이터에 대한 부분 데이터 가져오기다!
-            // console.log('원본data:',gdata);
+      // 만약 상단메뉴를 클릭해서 들어온 경우
+      // 페이지 번호가 1이 아니면 초기화해주기
+      if (pgNum !== 1 && myCon.gInit.current) {
+        setPgNum(1);
+      }
 
-            // 만약 상단메뉴를 클릭해서 들어온 경우 
-            // 페이지 번호가 1이 아니면 초기화 해주기
-            if(pgNum!==1 && myCon.gInit.current){
-                setPgNum(1);
-            }
+      console.log("원본개수:", totNum);
 
-            console.log('원본개수:',totNum);
+      // map아닌 일반 for문사용시
+      // 배열에 push하여 데이터넣기
+      // JSX문법 태그를 그냥태그가 아.니.다!!!!
+      // 절대 변환불필요!!! 그대로 보내서 출력함!
+      retVal = []; // 배열형 할당!
 
-            // map 이 아닌 일반 for문 사용시
-            // 배열에 push하여 데이터넣기
-            // JSX문법 태그를 그냥 태그가 아.니.다!!!
-            // 절대 변환 불필요!!!!그대로 보내서 출력함!
-            retVal = []; // 배열형 할당!
+      // 시작값 : (페이지번호-1)*블록단위수
+      let initNum = (pgNum - 1) * pgBlock;
+      // 한계값 : 블록단위수*페이지번호
+      let limitNum = pgBlock * pgNum;
 
-            // 시작값 : (페이지번호-1)*블록단위수
-            let initNum = (pgNum - 1) * pgBlock;
-            // 한계값 : 블록단위수*페이지번호
-            let limitNum = pgBlock * pgNum;
+      for (let i = initNum; i < limitNum; i++) {
+        // 마지막 페이지 한계수체크
+        if (i >= totNum) break;
 
-            for (let i = initNum; i < limitNum; i++) {
-                // 마지막 페이지 한계수체크
-                if (i >= totNum) break;
+        // 순회하며 데이터 넣기
+        retVal.push(
+          <div key={i}>
+            <a
+              href="#"
+              onClick={(e) => {
+                e.preventDefault();
+                showDetail(gdata[i].ginfo[0], gdata[i].cat);
+              }}
+            >
+              [{i + 1}]
+              <img
+                src={
+                  "./images/goods/" +
+                  gdata[i].cat +
+                  "/" +
+                  gdata[i].ginfo[0] +
+                  ".png"
+                }
+                alt="dress"
+              />
+              <aside>
+                <h2>{gdata[i].ginfo[1]}</h2>
+                <h3>{addComma(gdata[i].ginfo[3])}원</h3>
+              </aside>
+            </a>
+          </div>
+        );
+      } //////// for //////////////
+    } ////////////// else if //////////////
 
-                // 순회하며 데이터 넣기
-                retVal.push(
-                    <div key={i}>
-                        <a
-                            href="#"
-                            onClick={(e) => {
-                                e.preventDefault();
-                                showDetail(gdata[i].ginfo[0], gdata[i].cat);
-                            }}
-                        >
-                            [{i + 1}]
-                            <img
-                                src={"./images/goods/" + gdata[i].cat + "/" + gdata[i].ginfo[0] + ".png"}
-                                alt="dress"
-                            />
-                            <aside>
-                                <h2>{gdata[i].ginfo[1]}</h2>
-                                <h3>{addComma(gdata[i].ginfo[3])}원</h3>
-                            </aside>
-                        </a>
-                    </div>
-                );
-            } ////// for ///////
-        } /////// else if ////////
+    // 3. More List //////////////
+    else if (myCon.gMode === "M") {
+      // 데이터 초기화하기 /////////////
+      // moreNum이 1이 아니면 초기화!
+      // 단, 모드를 변경하는 상단메뉴일때만 적용해야함!
+      // 컨텍스트 API의 gInit 참조변수가 true일때만 적용함!
+      console.log("상단메뉴클릭상태:", myCon.gInit.current);
+      if (moreNum !== 1 && myCon.gInit.current) {
+        setMoreNum(1);
+      } ///////// if /////////
 
-        // 분기문 결과 리턴하기 //////
-        return retVal;
-    }; //////////// makeList ////////
+      // 리턴할 배열을 새로할당함
+      retVal = []; // 배열형 할당!
 
-     /************************************* 
+      // 한계값 : 더보기 블록단위수 * 더보기 블록개수
+      let limitNum = moreBlock * moreNum;
+      // 한계값이 전체 레코드수(totNum)보다 커지면
+      // 전체레코드수로 고정!
+      if (limitNum > totNum) limitNum = totNum;
+
+      for (let i = 0; i < limitNum; i++) {
+        // 순회하며 데이터 넣기
+        retVal.push(
+          <div key={i}>
+            <a
+              href="#"
+              onClick={(e) => {
+                e.preventDefault();
+                showDetail(gdata[i].ginfo[0], gdata[i].cat);
+              }}
+            >
+              [{i + 1}]
+              <img
+                src={
+                  "./images/goods/" +
+                  gdata[i].cat +
+                  "/" +
+                  gdata[i].ginfo[0] +
+                  ".png"
+                }
+                alt="dress"
+              />
+              <aside>
+                <h2>{gdata[i].ginfo[1]}</h2>
+                <h3>{addComma(gdata[i].ginfo[3])}원</h3>
+              </aside>
+            </a>
+          </div>
+        );
+      } //////// for //////////////
+    } ////////////// else if //////////////
+
+    // 분기문 결과 리턴하기 ////
+    return retVal;
+  }; ////////////// makeList ///////////////
+
+  /************************************* 
     함수명 : pagingLink
     기능 : 리스트 페이징 링크를 생성한다!
   *************************************/
@@ -202,57 +271,55 @@ export function GList() {
     return pgCode;
   }; /////////// pagingLink 함수 ////////
 
-
   /************************************* 
     함수명 : chgList
     기능 : 페이지 링크 클릭시 리스트변경
   *************************************/
-    const chgList = (e) => {
-        // 초기화 전역변수 false로 업데이트하기!(초기화하기)
-        myCon.gInit.current = false;
+  const chgList = (e) => {
+    // 초기화 전역변수 false로 업데이트하기(초기화막기!)
+    myCon.gInit.current = false;
 
-        let currNum = e.target.innerText;
-        // console.log("번호:", currNum);
-        // 현재 페이지번호 업데이트! -> 리스트 업데이트됨!
-        setPgNum(currNum);
-        // 바인드 리스트 호출 불필요!!!
-        // 왜? pgNum을 bindList()에서 사용하기때문에
-        // 리랜더링이 자동으로 일어남!!!
-      }; ///////// chgList 함수 ///////////////
+    let currNum = e.target.innerText;
+    // console.log("번호:", currNum);
+    // 현재 페이지번호 업데이트! -> 리스트 업데이트됨!
+    setPgNum(currNum);
+    // 바인드 리스트 호출 불필요!!!
+    // 왜? pgNum을 bindList()에서 사용하기때문에
+    // 리랜더링이 자동으로 일어남!!!
+  }; ///////// chgList 함수 //////////////
 
-    useEffect(() => {
-        window.scrollTo(0, 0);
-    }, []);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
-    //정규식함수(숫자 세자리마다 콤마해주는 기능)
-    function addComma(x) {
-        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    }
+  //정규식함수(숫자 세자리마다 콤마해주는 기능)
+  function addComma(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
 
-    // 상품 클릭시 상세보기 보여주는 함수 //////
-    const showDetail = (gcode, catCode) => {
-        // gcode - 상품코드, catCode - 분류명
+  // 상품클릭시 상세보기 보여주는 함수 ////
+  const showDetail = (gCode, catCode) => {
+    // gCode - 상품코드, catCode - 분류명
+    console.log("상세보여!", gCode, catCode);
 
-        console.log("상세보여!", gcode, catCode);
-        // 1. 값 업데이트
-        item.current = gcode;
-        catName.current = catCode;
+    // 1. 값업데이트
+    item.current = gCode;
+    catName.current = catCode;
 
-        // 2. 리랜더링 상태변경
-        setForce(Math.random());
-        // -> 리랜더링시 변경된 부분만 업데이트 한다!
-        // -> ItemDetail 컴포넌트 파트가 업데이트됨!
+    // 2. 리랜더링 상태변경
+    setForce(Math.random());
+    // -> 리랜더링시 변경된 부분만 업데이트 한다!
+    // -> ItemDetail 컴포넌트 파트가 업데이트됨!
 
-        // 대상 보이기
-        $(".bgbx").slideDown(600);
-    }; ///////////showDetail 함수 //////////////
+    // 대상 보이기
+    $(".bgbx").slideDown(600);
+  }; //////////// showDetail 함수 ///////////
 
-     /******************************************* 
+  /******************************************* 
     함수명: changeList
     기능: 체크박스에 따른 리스트 변경하기
   *******************************************/
   const changeList = (e) => {
-
     // 체크박스일 경우 초기화 전역변수 false로 업데이트
     myCon.gInit.current = false;
 
@@ -330,63 +397,96 @@ export function GList() {
     // 리스트가 리랜더링됨!!!
   }; ////////////// changeList 함수 ///////////
 
+  // 리턴 코드 ///////////////////
+  return (
+    <main id="cont">
+      <h1 className="tit">All ITEMS LIST</h1>
 
-    // 리턴 코드 ///////////////////////////////////////
-    return (
-        <main id="cont">
-            <h1 className="tit">All ITEMS LIST</h1>
-
-            {
-                // Filter List 모드 출력 ///
-                myCon.gMode === "F" && (
-                    <section>
-                        <div id="optbx">
-                            <label htmlFor="men">남성</label>
-                            <input type="checkbox" className="chkbx" id="men" defaultChecked onChange={changeList} />
-                            <label htmlFor="women">여성</label>
-                            <input type="checkbox" className="chkbx" id="women" defaultChecked onChange={changeList} />
-                            <label htmlFor="style">스타일</label>
-                            <input type="checkbox" className="chkbx" id="style" defaultChecked onChange={changeList} />
-                        </div>
-                        <div className="grid">{makeList()}</div>
-                    </section>
-                )
-            }
-            {
-                // [ Paging List 모드 출력 ] //
-                myCon.gMode === "P" && (
-                    <section>
-                        <div className="grid">{makeList()}</div>
-                        <div id="paging">{pagingLink()}</div>
-                    </section>
-                )
-            }
-            {
-                // More List 모드 출력 ///
-                myCon.gMode === "M" && (
-                    <section>
-                        <div className="grid">{makeList()}</div>
-                        <div id="more">
-                            <button className="more">MORE</button>
-                        </div>
-                    </section>
-                )
-            }
-            {/* 2.5. 상세보기 박스 */}
-
-            <div
-                className="bgbx"
-                style={{
-                    position: "fixed",
-                    top: 0,
-                    paddingTop: "12vh",
-                    backdropFilter: "blur(8px)",
-                    height: "88vh",
-                    zIndex: 9999,
-                }}
-            >
-                <ItemDetail goods={item.current} cat={catName.current} />
+      {
+        // [ Filter List 모드 출력 ] //
+        myCon.gMode === "F" && (
+          <section>
+            <div id="optbx">
+              <label htmlFor="men">남성</label>
+              <input
+                type="checkbox"
+                className="chkbx"
+                id="men"
+                defaultChecked
+                onChange={changeList}
+              />
+              <label htmlFor="women">여성</label>
+              <input
+                type="checkbox"
+                className="chkbx"
+                id="women"
+                defaultChecked
+                onChange={changeList}
+              />
+              <label htmlFor="style">스타일</label>
+              <input
+                type="checkbox"
+                className="chkbx"
+                id="style"
+                defaultChecked
+                onChange={changeList}
+              />
             </div>
-        </main>
-    );
-} ///////////////////////////////// GList 컴포넌트 /////////////////////////////
+            <div className="grid">{makeList()}</div>
+          </section>
+        )
+      }
+
+      {
+        // [ Paging List 모드 출력 ] //
+        myCon.gMode === "P" && (
+          <section>
+            <div className="grid">{makeList()}</div>
+            <div id="paging">{pagingLink()}</div>
+          </section>
+        )
+      }
+
+      {
+        // [ More List 모드 출력 ] //
+        myCon.gMode === "M" && (
+          <section>
+            <div className="grid">{makeList()}</div>
+            {
+              // 더보기 블록개수가 한계수가 아닐때만 버튼출력
+              moreNum !== moreLimit && (
+                <div id="more">
+                  <button
+                    className="more"
+                    onClick={() => {
+                      // 부모 클릭 상태변수값 false변경!
+                      myCon.gInit.current = false;
+                      let temp = moreNum;
+                      setMoreNum(++temp);
+                    }}
+                  >
+                    MORE
+                  </button>
+                </div>
+              )
+            }
+          </section>
+        )
+      }
+      {/* 2.5. 상세보기박스 */}
+      <div
+        className="bgbx"
+        style={{
+          position: "fixed",
+          top: 0,
+          paddingTop: "12vh",
+          backdropFilter: "blur(8px)",
+          height: "100vh",
+          zIndex: 9999,
+        }}
+      >
+        <ItemDetail goods={item.current} cat={catName.current} />
+      </div>
+    </main>
+  );
+} /////////////// GList 컴포넌트 ///////////

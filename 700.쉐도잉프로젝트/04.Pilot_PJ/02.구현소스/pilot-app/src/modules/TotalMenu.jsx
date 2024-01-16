@@ -19,68 +19,79 @@ export function TotalMenu() {
     // 코드리턴 /////////////////////////////////
     return (
         <>
-            <div className="mbox">
-                <video src="./images/disc2018.mp4" loop="loop" muted="muted" className="bgm"></video>
-                <nav className="mlist">
-                    <dl>
-                        <dt>
-                            <a href="#" onClick={() => goPage("men")}>
-                                MEN
-                            </a>
-                        </dt>
-                        <dd>
-                            <a href="#">T-SHIRT</a>
-                        </dd>
-                        <dd>
-                            <a href="#">JACKET</a>
-                        </dd>
-                        <dd>
-                            <a href="#">TRAINING WARE</a>
-                        </dd>
-                        <dd>
-                            <a href="#">BEACH WARE</a>
-                        </dd>
-                    </dl>
-                    <dl>
-                        <dt>
-                            <a href="#" onClick={() => goPage("women")}>
-                                WOMEN
-                            </a>
-                        </dt>
-                        <dd>
-                            <a href="#">T-SHIRT</a>
-                        </dd>
-                        <dd>
-                            <a href="#">JACKET</a>
-                        </dd>
-                        <dd>
-                            <a href="#">TRAINING WARE</a>
-                        </dd>
-                        <dd>
-                            <a href="#">BEACH WARE</a>
-                        </dd>
-                    </dl>
-                    <dl>
-                        <dt>
-                            <a href="#" onClick={() => goPage("style")}>
-                                STYLE
-                            </a>
-                        </dt>
-                        <dd>
-                            <a href="#">COLLECTION</a>
-                        </dd>
-                        <dd>
-                            <a href="#">SEASON AD</a>
-                        </dd>
-                        <dd>
-                            <a href="#">STAR &amp; NEWS</a>
-                        </dd>
-                        <dd>
-                            <a href="#">MAIN ITEM</a>
-                        </dd>
-                    </dl>
-                </nav>
-            </div>
+          <div className="mbox">
+            <video
+              src="./images/disc2018.mp4"
+              loop="loop"
+              muted="muted"
+              className="bgm"
+            ></video>
+            <nav className="mlist">
+              <dl>
+                <dt>
+                  <a href="#" 
+                  onClick={(e)=>{
+                    e.preventDefault();
+                    goPage('men');
+                  }}>MEN</a>
+                </dt>
+                <dd>
+                  <a href="#">T-SHIRT</a>
+                </dd>
+                <dd>
+                  <a href="#">JACKET</a>
+                </dd>
+                <dd>
+                  <a href="#">TRAINING WARE</a>
+                </dd>
+                <dd>
+                  <a href="#">BEACH WARE</a>
+                </dd>
+              </dl>
+              <dl>
+                <dt>
+                  <a href="#" 
+                  onClick={(e)=>{
+                    e.preventDefault();
+                    goPage('women');
+                  }}>WOMEN</a>
+                </dt>
+                <dd>
+                  <a href="#">T-SHIRT</a>
+                </dd>
+                <dd>
+                  <a href="#">JACKET</a>
+                </dd>
+                <dd>
+                  <a href="#">TRAINING WARE</a>
+                </dd>
+                <dd>
+                  <a href="#">BEACH WARE</a>
+                </dd>
+              </dl>
+              <dl>
+                <dt>
+                  <a href="#" 
+                  onClick={(e)=>{
+                    e.preventDefault();
+                    goPage('style');
+                  }}>STYLE</a>
+                </dt>
+                <dd>
+                  <a href="#">COLLECTION</a>
+                </dd>
+                <dd>
+                  <a href="#">SEASON AD</a>
+                </dd>
+                <dd>
+                  <a href="#">STAR &amp; NEWS</a>
+                </dd>
+                <dd>
+                  <a href="#">MAIN ITEM</a>
+                </dd>
+              </dl>
+            </nav>
+          </div>
         </>
-    );
-} ////////TotalMenu 컴포넌트//////////
+      );
+    } ///////// TotalMenu 컴포넌트 //////////

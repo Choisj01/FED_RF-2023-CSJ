@@ -15,7 +15,7 @@ import "jquery-ui-dist/jquery-ui";
 
 // 페이지 공통 CSS
 import "./css/common.css";
-// 페이지 공통 미디어쿼리(max-width:800px)
+// 페이지 공통 미디어쿼리 (max-width:800px)
 import "./css/media.css";
 
 // 최상위 Root 컴포넌트 ///////

@@ -19,7 +19,7 @@ export function FashionIntro(props) {
   // pCon에 Provider value 속성에 공개한 변수/함수를 사용함!
 
   // 선택데이터
-  const selData = fsData[props.cat];
+  let selData = fsData[props.cat];
 
   // 만약 서브 페이지 데이터일 경우 다시 선택함
   if(props.subcat !== 'etc'){
@@ -45,7 +45,7 @@ export function FashionIntro(props) {
         //   style={props.cat=='women'?{flexDirection:'row-reverse'}:{}}
       >
         {/* 스타일일때 이미지경로는 배열! */}
-         {// 메인에서 호출하는 subcat이 etc인 경우만 해당!
+        {// 메인에서 호출하는 subcat이 etc인 경우만 해당!
           props.subcat === 'etc' &&
           <li className="imgc">
             <img
@@ -84,15 +84,15 @@ export function FashionIntro(props) {
           )}
         </li>
         }
-      {/* 스타일 패션에서만 나오는 이미지 */}
+        {/* 스타일 패션에서만 나오는 이미지 */}
         {props.cat == "style" && (
           <li className="imgc">
             <img src={selData.isrc[1]} alt={selData.ialt[1]} />
           </li>
         )}
 
-           {/* 서브페이지용 구성 */}
-           { // sub인고 첫번째 sub 분류 데이터 사용!
+        {/* 서브페이지용 구성 */}
+        { // sub인고 첫번째 sub 분류 데이터 사용!
         props.cat == "sub" && props.subcat[1] === 0 && (
           <>
             {/* 글자박스 */}

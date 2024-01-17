@@ -109,12 +109,12 @@ body {
 /* svg 삼각형 박스 */
 .tribox{
     position: absolute;
-    top: 0;
+    top: 24px;
     left: 50%;
     transform: translateX(-48%);
     display: block;
     margin: 0 auto;
-    width: 25%;
+    width: 22%;
 }
 /* svg 삼각형 */
 .tribox polygon{
@@ -163,4 +163,12 @@ body {
     to{
         stroke-dashoffset: 0;
     }
+}
+
+/* 오디오 박스 */
+.play-box{
+    position: fixed;
+    top: 100px;
+    right: 20px;
+    cursor: pointer;
 }

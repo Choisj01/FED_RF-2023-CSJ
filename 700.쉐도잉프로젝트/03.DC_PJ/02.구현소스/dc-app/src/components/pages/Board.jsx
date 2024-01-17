@@ -1007,7 +1007,7 @@ export function Board() {
                             <tr>
                                 <td>Attachment</td>
                                 <td>
-                                    <AttachBox/>
+                                    <AttachBox />
                                 </td>
                             </tr>
                         </tbody>
@@ -1197,25 +1197,113 @@ const AttachBox = () => {
     // 2. 업로드 파일 정보 관리변수
     const [uploadedInfo, setUploadedInfo] = useState(null);
 
+    // [ 이벤트처리 메서드 ]
+    // 드래그 대상영역을 들어가고 나갈때 isOn  상태값 업데이트하기
+    const controlDragEnter = () => setIsOn(true);
+    const controlDragLeave = () => setIsOn(false);
+    // 드래그를 할때 dragOver 이벤트는 비활성화함(필요가 없어서!)
+    const controlDragOver = e => e.preventDefault();
+
+    // 드롭이벤트 발생시 처리 메서드
+    const controlDrop = e => {
+        // 기본 드롭기능 막기
+        e.preventDefault();
+        // 드롭했으므로 비활성화 전환!
+        setIsOn(false);
+
+        // 파일정보 읽어오기 /////////////////
+        // 드롭된 파일로부터 전송된 파일정보는 아래와 같이 읽어온다!
+        const fileInfo = e.dataTransfer.files[0];
+        // console.log('파일정보 읽어오기:',fileInfo);
+
+        // 파일정보 셋팅 메서드 호출!
+        setFileInfo(fileInfo);
+
+    }; ///////// controlDrop 메서드 ////////
+
+    // 드롭된 파일 정보를 화면에 뿌려주는 메서드 ////
+    const setFileInfo = (fileInfo) => {
+        // 전달된 객체값을 한번에 할당하는 방법(객체구조 분해법)
+        // 구조분해 할당을 하면 객체의 값이 담긴다!
+        const {name,size: byteSize,type} = fileInfo;
+        const size = (byteSize/(1024*1024)).toFixed(2)+'mb';
+        // console.log('전체값:',fileInfo);
+        // console.log('name:',name);
+        // console.log('size:',size);
+        // console.log('type:',type);
+
+        // 파일정보 상태관리 변수에 업데이트함!
+        setUploadedInfo({name,size,type});
+        // -> 변경시 리랜더링으로 업로드구역에 반영됨!
+
+
+    }; //////// setFileInfo메서드 ///////
+
+    /* 
+        [ 드래그 관련이벤트 구분 ]
+        onDragEnter : 드래그 대상영역 안으로 들어갈 때
+        onDragLeave :드래그 대상영역 밖으로 나갈 때
+        onDragOver :드래그 대상영역 위에 있을 때
+        onDrop={} :드래그 대상영역 안에 드롭될 때
+    
+    */
+
     // 리턴코드 ////////////////////////////////
     return (
-        <label className="info-view">
+        <label className="info-view"
+            onDragEnter={controlDragEnter}
+            onDragLeave={controlDragLeave}
+            onDragOver={controlDragOver}
+            onDrop={controlDrop}
+        >
             <input type="file" className="file" />
             {
                 // 업로드 정보가 null이 아니면 파일정보 출력
+                uploadedInfo && <FileInfo uploadedInfo={uploadedInfo}/>
             }
             {
                 // 업로드정보가 null이면 안내 문자 출력
                 !uploadedInfo && (
                     <>
                         {/* 업로드 안내 아이콘 */}
-                        <p className="info-view-msg">
-                            Click or drop the file here.</p>
-                        <p className="info-view-desc">
-                            Up to 3MB per file</p>
+                        <UpIcon/>
+                        <p className="info-view-msg">Click or drop the file here.</p>
+                        <p className="info-view-desc">Up to 3MB per file</p>
                     </>
                 )
             }
         </label>
     );
-};
+}; //////////// AttachBox 컴포넌트 ////////////////
+
+/* 
+Object.keys(obj) – 객체의 키만 담은 배열을 반환합니다.
+Object.values(obj) – 객체의 값만 담은 배열을 반환합니다.
+Object.entries(obj) – [키, 값] 쌍을 담은 배열을 반환합니다.
+*/
+
+// 파일정보를 보여주는 파일정보 컴포넌트 만들기
+const FileInfo = ({uploadedInfo})=>(
+    <ul className="info-view-info">
+        {console.log(Object.entries(uploadedInfo))}
+        {
+            Object.entries(uploadedInfo).map(([key,value])=>(
+                <li key={key}>
+                    <span className="info-key">😀 {key} :</span>
+                    <span className="info-value">😀 {value} </span>
+                </li>
+            ))
+        }
+    </ul>
+); /////////// FileInfo컴포넌트 ///////
+
+/// 업로드 표시 아이콘 SVG 태그 리턴 컴포넌트 //////////////
+// 화살표 함수에 중괄호 안쓰고 JSX 태그를 바로 쓰면 리턴 키워드 생략
+const UpIcon = () => (
+    <svg className="icon" x="0px" y="0px" viewBox="0 0 99.09 122.88">
+        <path
+            fill="#000"
+            d="M64.64,13,86.77,36.21H64.64V13ZM42.58,71.67a3.25,3.25,0,0,1-4.92-4.25l9.42-10.91a3.26,3.26,0,0,1,4.59-.33,5.14,5.14,0,0,1,.4.41l9.3,10.28a3.24,3.24,0,0,1-4.81,4.35L52.8,67.07V82.52a3.26,3.26,0,1,1-6.52,0V67.38l-3.7,4.29ZM24.22,85.42a3.26,3.26,0,1,1,6.52,0v7.46H68.36V85.42a3.26,3.26,0,1,1,6.51,0V96.14a3.26,3.26,0,0,1-3.26,3.26H27.48a3.26,3.26,0,0,1-3.26-3.26V85.42ZM99.08,39.19c.15-.57-1.18-2.07-2.68-3.56L63.8,1.36A3.63,3.63,0,0,0,61,0H6.62A6.62,6.62,0,0,0,0,6.62V116.26a6.62,6.62,0,0,0,6.62,6.62H92.46a6.62,6.62,0,0,0,6.62-6.62V39.19Zm-7.4,4.42v71.87H7.4V7.37H57.25V39.9A3.71,3.71,0,0,0,61,43.61Z"
+        />
+    </svg>
+); ///////// UpIcon컴포넌트 //////////

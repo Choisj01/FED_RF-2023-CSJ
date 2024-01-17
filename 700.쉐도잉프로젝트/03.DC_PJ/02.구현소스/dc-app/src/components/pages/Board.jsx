@@ -3,6 +3,7 @@
 // 게시판용 CSS
 import { Fragment, useContext, useEffect, useRef, useState } from "react";
 import "../../css/board.css";
+import "../../css/board_file.css";
 
 // 컨텍스트 API 불러오기
 import { dcCon } from "../modules/dcContext";
@@ -274,8 +275,8 @@ export function Board() {
                         // 바출력조건:
                         // 페이징의 페이징에서 끝번호 전번호일때와
                         // 동시에 전체 한계값이 전체페이지끝 이전번호 보다 작을때
-                        (i < limitNum - 1 && i < limit - 1) ? 
-                        " | " : ""}
+                        i < limitNum - 1 && i < limit - 1 ? " | " : ""
+                    }
                 </Fragment>
             );
         } ////// for /////
@@ -290,22 +291,29 @@ export function Board() {
                     ""
                 ) : (
                     <Fragment key={-1}>
-                        <a href="#"
+                        <a
+                            href="#"
                             title="맨앞으로"
-                            style={{ marginRight: "10px"}}
+                            style={{ marginRight: "10px" }}
                             onClick={(e) => {
                                 e.preventDefault();
                                 goPaging(1, false);
-                            }}>«</a>
+                            }}
+                        >
+                            «
+                        </a>
 
-                        <a href="#"
+                        <a
+                            href="#"
                             onClick={(e) => {
                                 e.preventDefault();
                                 goPaging(-1, true);
                             }}
                             title="앞으로"
                             style={{ marginRight: "10px" }}
-                        >◀</a>
+                        >
+                            ◀
+                        </a>
                     </Fragment>
                 )
             );
@@ -318,22 +326,29 @@ export function Board() {
                     ""
                 ) : (
                     <Fragment key={-2}>
-                        <a href="#"
+                        <a
+                            href="#"
                             onClick={(e) => {
                                 e.preventDefault();
                                 goPaging(1, true);
                             }}
                             title="뒤로"
                             style={{ marginLeft: "10px" }}
-                        >▶</a>
+                        >
+                            ▶
+                        </a>
 
-                        <a href="#"
+                        <a
+                            href="#"
                             style={{ marginLeft: "10px" }}
                             title="맨뒤로"
                             onClick={(e) => {
                                 e.preventDefault();
                                 goPaging(pgLimit, false);
-                            }}>»</a>
+                            }}
+                        >
+                            »
+                        </a>
                     </Fragment>
                 )
             );
@@ -356,7 +371,7 @@ export function Board() {
         else newPgPgNum = dir; // dir에 첫번호/끝번호 옴!
 
         // 새 페이지번호 : (전 페이지 끝번호) +1
-        const newPgNum = ((newPgPgNum - 1) * pgPgBlock) + 1;
+        const newPgNum = (newPgPgNum - 1) * pgPgBlock + 1;
 
         // 페이징의 페이징번호 업데이트
         pgPgNum.current = newPgPgNum;
@@ -989,6 +1004,12 @@ export function Board() {
                                     <textarea className="content" cols="60" rows="10"></textarea>
                                 </td>
                             </tr>
+                            <tr>
+                                <td>Attachment</td>
+                                <td>
+                                    <AttachBox/>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 )
@@ -1162,3 +1183,39 @@ export function Board() {
         </>
     );
 } //////////// Board 컴포넌트 /////////////
+
+/////////////////////////////////////////////////////
+// 업로드 기능 서브컴포넌트 및 메서드 만들기 ////////
+/////////////////////////////////////////////////////
+
+// 업로드 모듈을 리턴하는 서브컴포넌트 //////////////
+const AttachBox = () => {
+    // [ 상태관리 변수 ]
+    // 1. 드래그 또는 파일을 첨부할 때 활성화 여부관리 변수
+    // 값 : true이면 활성화, false이면 비활성화
+    const [isOn, setIsOn] = useState(false);
+    // 2. 업로드 파일 정보 관리변수
+    const [uploadedInfo, setUploadedInfo] = useState(null);
+
+    // 리턴코드 ////////////////////////////////
+    return (
+        <label className="info-view">
+            <input type="file" className="file" />
+            {
+                // 업로드 정보가 null이 아니면 파일정보 출력
+            }
+            {
+                // 업로드정보가 null이면 안내 문자 출력
+                !uploadedInfo && (
+                    <>
+                        {/* 업로드 안내 아이콘 */}
+                        <p className="info-view-msg">
+                            Click or drop the file here.</p>
+                        <p className="info-view-desc">
+                            Up to 3MB per file</p>
+                    </>
+                )
+            }
+        </label>
+    );
+};

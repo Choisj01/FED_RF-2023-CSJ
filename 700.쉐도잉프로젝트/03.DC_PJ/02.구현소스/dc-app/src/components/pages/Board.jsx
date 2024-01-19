@@ -583,7 +583,8 @@ export function Board() {
                     idx: maxNum + 1,
                     tit: subEle.val().trim(),
                     cont: contEle.val().trim(),
-                    att: uploadFile.current.name, // 파일이름 업데이트
+                    att: uploadFile.current ? uploadFile.current.name : "",
+                    // 파일이름 업데이트
                     date: `${yy}-${addZero(mm)}-${addZero(dd)}`,
                     uid: logData.current.uid,
                     unm: logData.current.unm,
@@ -595,37 +596,38 @@ export function Board() {
                 // [선택파일 서버전송]
                 // [ 선택 파일 서버전송 ]
                 // 파일이 있을 때만 전송
-        if(uploadFile.current){
+                if (uploadFile.current) {
+                    // 원래는 form 태그로 싸여있어서 서버전송을 하지만
+                    // 없어도 form 전송을 서버에 할 수 있는 객체가 있다!
+                    // FormData() 클래스 객체임!
+                    const formData = new FormData();
+                    // 전송할 데이터 추가하기
+                    formData.append("file", uploadFile.current);
 
-            // 원래는 form 태그로 싸여있어서 서버전송을 하지만
-            // 없어도 form 전송을 서버에 할 수 있는 객체가 있다!
-            // FormData() 클래스 객체임!
-            const formData = new FormData();
-            // 전송할 데이터 추가하기
-            formData.append("file", uploadFile.current);
-    
-            // 폼데이터에는 키값이 있음 확인하자!
-            for (const key of formData) console.log(key);
-    
-            // 서버전송은 엑시오스로 하자!
-            // server.js에 서버에서 post방식으로 전송받는
-            // 셋팅이 익스프레스에서 되어 있어야함!
-            // 첫번째 셋팅값 전송url에는 서버에 셋팅된
-            // path값과 같은 upload라는 하위 경로를 써준다!
-            // 두번째 셋팅값은 서버로 전송될 파일정보를 써준다!
-            axios
-              .post("http://localhost:8080/upload", formData)
-              .then((res) => {
-                // res는 성공결과 리턴값 변수
-                const { fileName } = res.data;
-                console.log("전송성공!!!", fileName);
-              })
-              .catch((err) => {
-                // err은 에러발생시 에러정보 변수
-                console.log("에러발생:", err);
-              });
-    
-            } ///////////////// if ///////////////
+                    // 폼데이터에는 키값이 있음 확인하자!
+                    for (const key of formData) console.log(key);
+
+                    // 서버전송은 엑시오스로 하자!
+                    // server.js에 서버에서 post방식으로 전송받는
+                    // 셋팅이 익스프레스에서 되어 있어야함!
+                    // 첫번째 셋팅값 전송url에는 서버에 셋팅된
+                    // path값과 같은 upload라는 하위 경로를 써준다!
+                    // 두번째 셋팅값은 서버로 전송될 파일정보를 써준다!
+                    axios
+                        .post("http://localhost:8080/upload", formData)
+                        .then((res) => {
+                            // res는 성공결과 리턴값 변수
+                            const { fileName } = res.data;
+                            console.log("전송성공!!!", fileName);
+                        })
+                        .catch((err) => {
+                            // err은 에러발생시 에러정보 변수
+                            console.log("에러발생:", err);
+                        });
+
+                    // 파일 참조변수 초기화 필수!!
+                    uploadFile.current = null;
+                } ///////////////// if ///////////////
 
                 // 5. 원본임시변수에 배열데이터 값 push하기
                 orgTemp.push(temp);
@@ -1077,18 +1079,6 @@ export function Board() {
                                 </td>
                             </tr>
                             <tr>
-                                <td>Title</td>
-                                <td>
-                                    <input
-                                        type="text"
-                                        className="subject"
-                                        size="60"
-                                        readOnly
-                                        value={cData.current.tit}
-                                    />
-                                </td>
-                            </tr>
-                            <tr>
                                 <td>Content</td>
                                 <td>
                                     <textarea
@@ -1098,6 +1088,14 @@ export function Board() {
                                         readOnly
                                         value={cData.current.cont}
                                     ></textarea>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Attachment</td>
+                                <td>
+                                    <a href={"/uploads/" + cData.current.att} download={true}>
+                                        {cData.current.att}
+                                    </a>
                                 </td>
                             </tr>
                         </tbody>
@@ -1134,6 +1132,12 @@ export function Board() {
                                         defaultValue={cData.current.cont}
                                     ></textarea>
                                     {/* defaultValue로 써야 수정가능! */}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Attachment</td>
+                                <td>
+                                    <b>{cData.current.att}</b>
                                 </td>
                             </tr>
                         </tbody>
@@ -1239,7 +1243,8 @@ export function Board() {
 //////////////////////////////////////////////
 
 // 업로드 모듈을 리턴하는 서브컴포넌트 ////////
-const AttachBox = ({saveFile}) => { // saveFile은 프롭스펑션다운!!
+const AttachBox = ({ saveFile }) => {
+    // saveFile은 프롭스펑션다운!!
     // [상태관리변수] //////////////
     // 1.드래그 또는 파일을 첨부할때 활성화 여부관리 변수
     // 값: true 이면 활성화, false이면 비활성화

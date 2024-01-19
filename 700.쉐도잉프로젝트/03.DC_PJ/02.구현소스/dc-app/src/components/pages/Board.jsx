@@ -1214,7 +1214,7 @@ const AttachBox = () => {
         // 파일정보 읽어오기 /////////////////
         // 드롭된 파일로부터 전송된 파일정보는 아래와 같이 읽어온다!
         const fileInfo = e.dataTransfer.files[0];
-        // console.log('파일정보 읽어오기:',fileInfo);
+        console.log('파일정보 읽어오기:',fileInfo);
 
         // 파일정보 셋팅 메서드 호출!
         setFileInfo(fileInfo);
@@ -1290,7 +1290,7 @@ const FileInfo = ({uploadedInfo})=>(
             Object.entries(uploadedInfo).map(([key,value])=>(
                 <li key={key}>
                     <span className="info-key">😀 {key} :</span>
-                    <span className="info-value">😀 {value} </span>
+                    <span className="info-value"> {value} </span>
                 </li>
             ))
         }

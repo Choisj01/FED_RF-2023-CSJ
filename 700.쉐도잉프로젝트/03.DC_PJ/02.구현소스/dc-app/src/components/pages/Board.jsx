@@ -582,7 +582,7 @@ export function Board() {
                     idx: maxNum + 1,
                     tit: subEle.val().trim(),
                     cont: contEle.val().trim(),
-                    att: uploadFile.current,
+                    att: uploadFile.current.name, // 파일이름 업데이트
                     date: `${yy}-${addZero(mm)}-${addZero(dd)}`,
                     uid: logData.current.uid,
                     unm: logData.current.unm,
@@ -592,32 +592,36 @@ export function Board() {
                 // // console.log("입력전 준비데이터:", temp);
 
                 // [ 선택 파일 서버전송 ]
-                // 원래는 form 태그로 싸여있어서 서버전송을 하지만
-                // 없어도 form 전송을 서버에 할 수 있는 객체가 있다!
-                // FormData() 클래스 객체임!
-                const formData = new FormData();
-                // 전송할 데이터 추가하기
-                formData.append("file", fileInfo);
+                if(uploadFile.current){ // null이 아닌 할당 상태일때만!
+                    // 없어도 form 전송을 서버에 할 수 있는 객체가 있다!
+                    // FormData() 클래스 객체임!
+                    const formData = new FormData();
+                    // 전송할 데이터 추가하기
+                    formData.append("file", fileInfo);
+    
+                    // 폼데이터에는 키값이 있음 확인하자!
+                    for (const key of formData) console.log(key);
+                    // 서버전송은 엑시오스로 하자!(방법 중 하나)
+                    // server.js에 서버에서 post방식으로 전송받는
+                    // 셋팅이 익스프레스에서 되어있어야 함!
+                    // 첫번쨰 셋팅값 전송 url에는 서버에 셋팅된
+                    // path값고 같은 upload라는 하위경로를 써준다!
+                    // 두번째 셋팅값은 서버로 전송될 파일정보를 써준다!
+                    axios
+                        .post("http://localhost:8080/upload", formData)
+                        .then((res) => {
+                            //res 는 성공결과 리턴값 변수
+                            const { fileName } = res.data;
+                            console.log("전송성공", fileName);
+                        })
+                        .catch((err) => {
+                            // err은 에러발생시 에러정보 변수
+                            console.log("에러발생:", err);
+                        });
 
-                // 폼데이터에는 키값이 있음 확인하자!
-                for (const key of formData) console.log(key);
-                // 서버전송은 엑시오스로 하자!(방법 중 하나)
-                // server.js에 서버에서 post방식으로 전송받는
-                // 셋팅이 익스프레스에서 되어있어야 함!
-                // 첫번쨰 셋팅값 전송 url에는 서버에 셋팅된
-                // path값고 같은 upload라는 하위경로를 써준다!
-                // 두번째 셋팅값은 서버로 전송될 파일정보를 써준다!
-                axios
-                    .post("http://localhost:8080/upload", formData)
-                    .then((res) => {
-                        //res 는 성공결과 리턴값 변수
-                        const { fileName } = res.data;
-                        console.log("전송성공", fileName);
-                    })
-                    .catch((err) => {
-                        // err은 에러발생시 에러정보 변수
-                        console.log("에러발생:", err);
-                    });
+
+                } ////// if /////////
+                // 원래는 form 태그로 싸여있어서 서버전송을 하지만
 
                 // 5. 원본임시변수에 배열데이터 값 push하기
                 orgTemp.push(temp);
